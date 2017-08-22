@@ -85,7 +85,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Icon màu </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_mau" src="{{ old('icon_mau') ? Helper::showImage(old('icon_mau')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="80" >
+                    <img id="thumbnail_mau" src="{{ old('icon_mau') ? Helper::showImage(old('icon_mau')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="80" >
                     
                     <input type="file" id="file-mau" style="display:none" />
                  
@@ -96,7 +96,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Icon khuyến mãi </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_km" src="{{ old('icon_km') ? Helper::showImage(old('icon_km')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="80" >
+                    <img id="thumbnail_km" src="{{ old('icon_km') ? Helper::showImage(old('icon_km')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="80" >
                     
                     <input type="file" id="file-km" style="display:none" />
                  
@@ -108,7 +108,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Icon trắng </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_icon" src="{{ old('icon_url') ? Helper::showImage(old('icon_url')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="80">
+                    <img id="thumbnail_icon" src="{{ old('icon_url') ? Helper::showImage(old('icon_url')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="80">
                     
                     <input type="file" id="file-icon" style="display:none" />
                  
@@ -120,7 +120,7 @@
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Banner menu </label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_banner" src="{{ old('banner_menu') ? Helper::showImage(old('banner_menu')) : URL::asset('backend/dist/img/img.png') }}" class="img-thumbnail" width="120">
+                    <img id="thumbnail_banner" src="{{ old('banner_menu') ? Helper::showImage(old('banner_menu')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="120">
                     
                     <input type="file" id="file-banner" style="display:none" />
                  

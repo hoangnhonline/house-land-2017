@@ -39,7 +39,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/css/style.css') }}">
 	<!-- ===== Responsive CSS ===== -->
     <link href="{{ URL::asset('assets/css/responsive.css') }}" rel="stylesheet">
-      <link rel="stylesheet" href="{{ URL::asset('backend/dist/css/sweetalert2.min.css') }}">  
+      <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/sweetalert2.min.css') }}">  
     
     <!-- HTML5 Shim and Respond.js') }} IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js') }} doesn't work if you view the page via file:// -->
@@ -330,7 +330,7 @@ src="https://www.facebook.com/tr?id=252732271885321&ev=PageView
 									@if($landingList)
 										@foreach($landingList as $value)
 										<div class="large-item">
-			                                <a href="{{ route('detail-project', [$value->slug])}}" title="{!! $value->name !!}"><img src="{{ $value->image_url ? Helper::showImageThumb($value->image_url, 3, '306x194') : URL::asset('backend/dist/img/no-image.jpg') }}" alt="" /></a>
+			                                <a href="{{ route('detail-project', [$value->slug])}}" title="{!! $value->name !!}"><img src="{{ $value->image_url ? Helper::showImageThumb($value->image_url, 3, '306x194') : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="" /></a>
 			                                <h4><a href="{{ route('detail-project', [$value->slug])}}" title="{!! $value->name !!}">{!! $value->name !!}</a></h4>
 			                                <p>{{ $value->address }}</p>
 			                            </div>
@@ -342,7 +342,7 @@ src="https://www.facebook.com/tr?id=252732271885321&ev=PageView
 										@foreach($landing2List as $value)
 										<div class="item">
 											<div class="item-child">
-					                            <a data-slide-index="0" class="slide_title" onclick="location.href='{{ route('detail-project', [$value->slug])}}'" href="{{ route('detail-project', [$value->slug])}}" title=""><img class="avatar" src="{{ $value->image_url ? Helper::showImageThumb($value->image_url, 3, '308x190') : URL::asset('backend/dist/img/no-image.jpg') }}" alt="" /></a>
+					                            <a data-slide-index="0" class="slide_title" onclick="location.href='{{ route('detail-project', [$value->slug])}}'" href="{{ route('detail-project', [$value->slug])}}" title=""><img class="avatar" src="{{ $value->image_url ? Helper::showImageThumb($value->image_url, 3, '308x190') : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="" /></a>
 					                            <div class="slide_info">
 					                                <a  onclick="location.href='{{ route('detail-project', [$value->slug])}}'" href="{{ route('detail-project', [$value->slug])}}" title="">{{ $value->name }}</a>
 					                                <p>{{ $value->address }}</p>
@@ -460,7 +460,7 @@ src="https://www.facebook.com/tr?id=252732271885321&ev=PageView
 	<!-- ===== JS Bootstrap Select ===== -->
 	<script src="{{ URL::asset('assets/vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 	<!-- Js Common -->
-	<script src="{{ URL::asset('backend/dist/js/sweetalert2.min.js') }}"></script>
+	<script src="{{ URL::asset('public/admin/dist/js/sweetalert2.min.js') }}"></script>
 	<script src="{{ URL::asset('assets/js/common.js') }}"></script>	
 	@if(\Request::route()->getName() != "ky-gui")
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCedG6K88zgGTC746bf-qLgf1ZAG7FUj7Q&sensor=false&libraries=places"></script> 

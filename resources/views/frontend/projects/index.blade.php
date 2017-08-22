@@ -31,7 +31,7 @@
 				<div class="project-item">
 					<div class="project-img">
 					    <a href="{{ route('detail-project', [$value->slug])}}" title="{{ $value->name }}">
-					        <img src="{{ $value->image_url ? Helper::showImageThumb($value->image_url, 3, '306x194') : URL::asset('backend/dist/img/no-image.jpg') }}" alt="{!! $value->name !!}">
+					        <img src="{{ $value->image_url ? Helper::showImageThumb($value->image_url, 3, '306x194') : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{!! $value->name !!}">
 					    </a>
 					</div>
 					<div class="project-desc">

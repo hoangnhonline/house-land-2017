@@ -66,18 +66,12 @@ class ViewComposerServiceProvider extends ServiceProvider
 	        if($tinRandom->count() > 0){
 	        	$tinRandom = $tinRandom->limit(5)->get();
 	        }
-	        $customLink = CustomLink::where('block_id', 1)->orderBy('display_order', 'asc')->get();
-	        $landingList = LandingProjects::where('is_hot', 1)->orderBy('id', 'desc')->offset(0)->limit(2)->get();
-	        $landing2List = LandingProjects::where('is_hot', 1)->orderBy('id', 'desc')->offset(2)->limit(5)->get();
-	        $priceList = Price::where('type', 1)->get();
-        	$areaList = Area::all();
-        	$directionList = Direction::all();
+	        $customLink = CustomLink::where('block_id', 1)->orderBy('display_order', 'asc')->get();	        	        
         	$footerLink = CustomLink::where('block_id', 2)->orderBy('display_order', 'asc')->get();
         	$supportList = Support::orderBy('display_order', 'asc')->get();
         	$menuList = Menu::where('menu_id', 1)->orderBy('display_order', 'asc')->get();
 			$view->with( ['settingArr' => $settingArr, 
-			'banList' => $banList, 'thueList' => $thueList, 'articleCate' => $articleCate, 'districtList' => $districtList, 'tinRandom' => $tinRandom, 'customLink' => $customLink, 'landingList' => $landingList, 'landing2List' => $landing2List, 'priceList' => $priceList, 'areaList' => $areaList,
-			'directionList' => $directionList, 'footerLink' => $footerLink, 'supportList' => $supportList,
+			'banList' => $banList, 'thueList' => $thueList, 'articleCate' => $articleCate, 'districtList' => $districtList, 'tinRandom' => $tinRandom, 'customLink' => $customLink, 'footerLink' => $footerLink, 'supportList' => $supportList,
 			'menuList' => $menuList,
 			'cityList' => $cityList
 			] );
