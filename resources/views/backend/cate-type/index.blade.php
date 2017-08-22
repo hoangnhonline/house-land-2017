@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Dự án
+    Danh mục cha 
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'landing-projects.index' ) }}">Dự án</a></li>
+    <li><a href="{{ route( 'loai-sp.index' ) }}">Danh mục cha</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,38 +20,24 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('landing-projects.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Bộ lọc</h3>
-        </div>
-        <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('landing-projects.index') }}">          
-                       
-            <div class="form-group">
-              <label for="email">Tên :</label>
-              <input type="text" class="form-control" name="name" value="{{ $name }}">
-            </div>
-            <button type="submit" class="btn btn-default btn-sm">Lọc</button>
-          </form>         
-        </div>
-      </div>
+      <a href="{{ route('loai-sp.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="box">
 
         <div class="box-header with-border">
-          <h3 class="box-title">Danh sách ( <span class="value">{{ $items->total() }} bài viết )</span></h3>
+          <h3 class="box-title">Danh sách</h3>
         </div>
         
         <!-- /.box-header -->
         <div class="box-body">
-          <div style="text-align:center">
-            {{ $items->appends( ['name' => $name] )->links() }}
-          </div>  
           <table class="table table-bordered" id="table-list-data">
             <tr>
-              <th style="width: 1%">#</th>              
-              <th>Thumbnail</th>
-              <th>Tên dự án</th>
+              <th style="width: 1%">#</th>
+              <th style="width: 1%;white-space:nowrap">Thứ tự</th>
+              <th>Tên</th>
+              <th style="text-align:center">Danh mục con</th>
+              <th style="text-align:center">Icon</th>         
+              <th>Style hiển thị</th>
+              <th style="text-align:center">Màu nền</th>
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -60,26 +46,51 @@
               @foreach( $items as $item )
                 <?php $i ++; ?>
               <tr id="row-{{ $item->id }}">
-                <td><span class="order">{{ $i }}</span></td>       
-                <td width="150">
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
-                </td>        
+                <td><span class="order">{{ $i }}</span></td>
+                <td style="vertical-align:middle;text-align:center">
+                  <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
+                </td>
                 <td>                  
-                  <a href="{{ route( 'landing-projects.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
+                  <a href="{{ route( 'loai-sp.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
                   @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
                   @endif
-
+                   @if( $item->is_hover == 1 )
+                  <a href="{{ route('loai-sp.thuoc-tinh', [ 'loai_id' => $item->id ]) }}" style="float:right"><label style="cursor:pointer" class="label label-info">Thuộc tính hover</label></a>
+                  @endif
                   <p>{{ $item->description }}</p>
                 </td>
-                <td style="white-space:nowrap"> 
-                <a class="btn btn-info btn-sm" href="{{ route('banner.index', ['object_id' => $item->id, 'object_type' => 4 ]) }}"> </i> Banner</a>
-                  <a class="btn btn-success btn-sm" href="{{ route('pro-content.index', ['project_id' => $item->id ]) }}" target="_blank"></i> Nội dung</a>                 
-                  <a href="{{ route( 'landing-projects.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
-                  
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'landing-projects.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
-                  
+                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate.index', [$item->id])}}">{{ $item->cates->count() }}</a></td>
+                <td style="text-align:center">
+                  <img class="img-thumbnail" src="{{ $item->icon_mau ? config( 'icho.upload_url' ).$item->icon_mau  : 'http://placehold.it/60x60' }}" width="40" />
+                </td>               
+                <td>
+                 <?php
+                  if( $item->home_style == 1 ) echo "Banner lớn đứng ";
+                  elseif( $item->home_style == 2 ) echo "Banner nhỏ đứng ";
+                  elseif( $item->home_style == 3 ) echo "Banner ngang ";
+                  else echo "Không banner";
+                  ?>
+                </td>
+                <td style="text-align:center">
+                  @if( $item->bg_color )
+                    <span class="img-thumbnail" style="width:40px; height:40px;background-color:{{ $item->bg_color }};display:block;margin:auto">&nbsp;</span>
+                  @else
+                  Mặc định
+                  @endif
+                </td>
+                <td style="white-space:nowrap; text-align:right">
+                <a class="btn btn-default btn-sm" href="{{ route('danh-muc', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+                  @if($item->home_style > 0)
+                  <a class="btn btn-primary btn-sm" href="{{ route('banner.index', ['object_type' => 1, 'object_id' => $item->id]) }}" ><span class="badge">
+                    {{ $item->banners->count() }}
+                  </span> Banner </a>
+                  @endif
+                  <a href="{{ route( 'loai-sp.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                  @if( $item->cates->count() == 0)
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'loai-sp.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                  @endif
                 </td>
               </tr> 
               @endforeach
@@ -91,9 +102,6 @@
 
           </tbody>
           </table>
-          <div style="text-align:center">
-            {{ $items->appends( [ 'name' => $name] )->links() }}
-          </div>  
         </div>        
       </div>
       <!-- /.box -->     
@@ -105,7 +113,6 @@
 </div>
 @stop
 @section('javascript_page')
-
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({
@@ -122,22 +129,6 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
-  $('#parent_id').change(function(){
-    $.ajax({
-        url: $('#route_get_cate_by_parent').val(),
-        type: "POST",
-        async: false,
-        data: {          
-            parent_id : $(this).val(),
-            type : 'list'
-        },
-        success: function(data){
-            $('#cate_id').html(data).select2('refresh');                      
-        }
-    });
-  });
-  $('.select2').select2();
-
   $('#table-list-data tbody').sortable({
         placeholder: 'placeholder',
         handle: ".move",

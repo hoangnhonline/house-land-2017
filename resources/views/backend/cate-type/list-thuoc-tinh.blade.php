@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Chương trình khuyến mãi
+    Thuộc tính hiển thị
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'events.index' ) }}">Chương trình khuyến mãi</a></li>
+    <li><a href="{{ route( 'loai-sp.list-thuoc-tinh', [ 'loai_id' => $detailLoai->id ] ) }}">Thuộc tính hiển thị</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,24 +20,22 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('events.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('loai-sp.thuoc-tinh', ['loai_id' => $detailLoai->id]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+       <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('loai-sp.index')}}" style="margin-bottom:5px">Quay lại</a>
       <div class="box">
 
         <div class="box-header with-border">
-          <h3 class="box-title">Danh sách</h3>
+          <h3 class="box-title">Thông tin hiển thị khi hover : <span style="color:red">{{ $detailLoai->name }}</span></h3>
         </div>
         
         <!-- /.box-header -->
         <div class="box-body">
           <table class="table table-bordered" id="table-list-data">
             <tr>
-              <th style="width: 1%">#</th>              
+              <th style="width: 1%">#</th>
               <th style="width: 1%;white-space:nowrap">Thứ tự</th>
-              <th width="140">Banner</th>
-              <th>Tên</th>              
-              <th style="text-align:center">Ngày bắt đầu</th>
-              <th style="text-align:center">Ngày kết thúc</th>
-              <th>Sản phẩm</th>
+              <th>Text hiển thị</th>
+              <th>Thuộc tính hiển thị</th>             
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -50,26 +48,25 @@
                 <td style="vertical-align:middle;text-align:center">
                   <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
-                <td>
-                  <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->small_banner)}}" width="120">
-                </td> 
                 <td>                  
-                  <a href="{{ route( 'events.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>                
-                  <p>{{ $item->description }}</p>
-                </td>    
-                <td style="vertical-align:middle;text-align:center">{{ Carbon\Carbon::parse($item->from_date)->format('d-m-Y H:i') }}</td>
-                <td style="vertical-align:middle;text-align:center">{{ Carbon\Carbon::parse($item->to_date)->format('d-m-Y H:i') }}</td>            
+                  <a href="{{ route( 'loai-sp.edit', [ 'id' => $item->id ]) }}">{{ $item->text_hien_thi }}</a>
+                  
+                </td>
                 <td>
-                <a class="btn btn-primary btn-sm" href="{{ route('events.product-event', $item->id )}}">
-                Sản phẩm
-                </a>
-                </td>   
+                 <?php 
+                 $tmp = explode(',', $item->str_thuoctinh_id);
+                 foreach ($tmp as $key => $value) {
+                   echo $thuoctinh[$value];
+                   echo "<br>";
+                 }
+                 ?>
+                </td>
                 <td style="white-space:nowrap; text-align:right">
                  
-                  <a href="{{ route( 'events.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                  <a href="{{ route( 'loai-sp.edit-thuoc-tinh', [ 'loai_id' => $item->loai_id,'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
                   
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'events.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                  
+                  <a onclick="return callDelete('{{ $item->text_hien_thi }}','{{ route( 'loai-sp.destroyThuocTinh', ['loai_id' => $item->loai_id, 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                 
                 </td>
               </tr> 
               @endforeach
@@ -126,7 +123,7 @@ $(document).ready(function(){
                 strTemp = rows[i].id;
                 strOrder += strTemp.replace('row-','') + ";";
             }     
-            updateOrder("loai_sp", strOrder);
+            updateOrder("hover_info", strOrder);
         }
     });
 });
