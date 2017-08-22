@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
     <meta name="google-site-verification" content="IFz-d9V8jZLB1iDG8BfKsKwhPB-FkpsacHLqk5Mpyzk" />
     <meta name="wot-verification" content="b5ae556432dab929c4bb"/>
-    <meta property="article:author" content="https://www.facebook.com/thanhphuthinhland"/>
+    <meta property="article:author" content="https://www.facebook.com/HOUSELAND"/>
     <link rel="shortcut icon" href="@yield('favicon')" type="image/x-icon"/>
     <link rel="canonical" href="{{ url()->current() }}"/>        
     <meta property="og:locale" content="vi_VN" />
@@ -24,7 +24,7 @@
     <meta property="og:title" content="@yield('title')" />
     <meta property="og:description" content="@yield('site_description')" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:site_name" content="thanhphuthinhland.vn" />
+    <meta property="og:site_name" content="HOUSELAND.vn" />
     <?php $socialImage = isset($socialImage) ? $socialImage : $settingArr['banner']; ?>
     <meta property="og:image" content="{{ Helper::showImage($socialImage) }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -392,7 +392,7 @@ src="https://www.facebook.com/tr?id=252732271885321&ev=PageView
 											<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.3525122986316!2d106.61988931480019!3d10.707269992368479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x164cb8a894c6c123!2zQ8O0bmcgVHkgVE5ISCBEViBUxrAgVuG6pW4gQsSQUyBUaGFuaCBQaMO6IFRo4buLbmggTGFuZA!5e0!3m2!1svi!2s!4v1500519325027" width="100%" height="340" frameborder="0" style="border:0" allowfullscreen></iframe>
 										</div>
 										<div role="tabpanel" class="tab-pane" id="fanpage" style="text-align:center !important;">
-											<div class="fb-page" data-href="https://www.facebook.com/thanhphuthinhland/" data-tabs="timeline" data-width="478" data-height="345" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/thanhphuthinhland/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/thanhphuthinhland/">Thanh Phú Thịnh Land</a></blockquote></div>
+											<div class="fb-page" data-href="https://www.facebook.com/HOUSELAND/" data-tabs="timeline" data-width="478" data-height="345" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/HOUSELAND/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/HOUSELAND/">Thanh Phú Thịnh Land</a></blockquote></div>
 										</div>
 									</div>
 								</div>

@@ -3,14 +3,14 @@
 use Illuminate\Database\Eloquent\Model;
 
 
-class PriceUnit extends Model  {
+class CateParent extends Model  {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'price_unit';
+	protected $table = 'cate_parent';	
 
 	 /**
      * Indicates if the model should be timestamped.
@@ -23,5 +23,11 @@ class PriceUnit extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'type', 'status'];
+    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'type_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
+
+    public function cates()
+    {
+        return $this->hasMany('App\Models\Cate', 'parent_id');
+    }
+
 }

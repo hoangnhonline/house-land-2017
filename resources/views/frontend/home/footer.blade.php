@@ -13,7 +13,7 @@
     <div class="container">
     	<div class="block-footer row">
     		<div class="block-logo-footer col-sm-4">
-                <a href="{{ route('home') }}" title="logo thanhphuthinhland">
+                <a href="{{ route('home') }}" title="logo HOUSELAND">
                 	<img src="{{ Helper::showImage($settingArr['logo']) }}" alt="logo">
                 </a>
 

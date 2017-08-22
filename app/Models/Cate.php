@@ -23,15 +23,11 @@ class Cate extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'alias', 'loai_id', 'bg_color', 'is_hot', 'status', 'icon_url', 'display_order', 'description', 'home_style', 'meta_id', 'created_user', 'updated_user', 'menu_ngang', 'menu_doc'];
+    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'parent_id', 'type_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
 
     public function sanPham()
     {
-        return $this->hasMany('App\Models\SanPham', 'cate_id');
+        return $this->hasMany('App\Models\Product', 'cate_id');
     }
-
-    public function banners()
-    {
-        return $this->hasMany('App\Models\Banner', 'object_id')->where('object_type', 2);
-    }
+    
 }
