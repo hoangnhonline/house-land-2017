@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 22, 2017 at 04:03 PM
+-- Generation Time: Aug 23, 2017 at 04:09 PM
 -- Server version: 5.6.30-1+deb.sury.org~wily+2
 -- PHP Version: 5.6.11-1ubuntu3.4
 
@@ -168,24 +168,6 @@ INSERT INTO `articles_cate` (`id`, `name`, `slug`, `alias`, `description`, `imag
 -- --------------------------------------------------------
 
 --
--- Table structure for table `auto`
---
-
-CREATE TABLE `auto` (
-  `id` int(11) NOT NULL,
-  `date_auto` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `auto`
---
-
-INSERT INTO `auto` (`id`, `date_auto`) VALUES
-(1, '2016-03-22');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `banner`
 --
 
@@ -223,30 +205,6 @@ INSERT INTO `banner` (`id`, `image_url`, `ads_url`, `time_start`, `time_end`, `o
 (33, '2017/07/14/banner-slider-1500000310.gif', 'http://thanhphuthinhland.vn/du-an/kdc-an-thang-rach-kien', 0, 0, 3, 3, 2, 0, 1, '2017-07-09 22:24:31', '2017-07-16 09:15:27', 1, 1),
 (34, '2017/07/14/banner-top-an-thang-1500005035.jpg', 'http://thanhphuthinhland.vn/du-an/kdc-an-thang-rach-kien', 0, 0, 4, 3, 2, 0, 1, '2017-07-10 06:36:32', '2017-07-16 09:15:14', 1, 1),
 (35, '2017/07/14/banner-giua-1500001718.gif', 'http://thanhphuthinhland.vn/du-an/kdc-an-thang-rach-kien', 0, 0, 5, 3, 2, 0, 1, '2017-07-10 07:12:09', '2017-07-16 09:14:55', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `block`
---
-
-CREATE TABLE `block` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `block`
---
-
-INSERT INTO `block` (`id`, `name`, `status`) VALUES
-(3, 'BDS cho thuê', 1),
-(4, 'Dự án BĐS Mỹ Phú', 1),
-(5, 'BĐS Hưng Phước', 1),
-(6, 'Dự án Sky Garden', 1),
-(7, 'BDS Panorama', 1),
-(8, 'Dự án BĐS ParkView', 1);
 
 -- --------------------------------------------------------
 
@@ -404,37 +362,6 @@ INSERT INTO `custom_link` (`id`, `link_text`, `link_url`, `display_order`, `bloc
 (4, 'Tin tức', '#', 0, 2),
 (5, 'Quy chế hoạt động', '#', 0, 2),
 (6, 'Bảo mật thông tin', 'http://thanhphuthinhland.vn/chinh-sach-bao-mat.html', 0, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `direction`
---
-
-CREATE TABLE `direction` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `display_order` int(11) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `direction`
---
-
-INSERT INTO `direction` (`id`, `name`, `slug`, `status`, `display_order`, `created_at`, `updated_at`) VALUES
-(1, 'Đông', 'dong', 1, 1, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(2, 'Tây', 'tay', 1, 2, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(3, 'Nam', 'nam', 1, 3, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(4, 'Bắc', 'bac', 1, 4, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(5, 'Đông-Nam', 'dong-nam', 1, 5, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(6, 'Đông-Bắc', 'dong-bac', 1, 6, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(7, 'Tây-Nam', 'tay-nam', 1, 7, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(8, 'Tây-Bắc', 'tay-bac', 1, 8, '2017-04-01 00:00:00', '2017-04-01 00:00:00'),
-(9, 'KXĐ', 'kxd', 1, 9, '2017-04-01 00:00:00', '2017-04-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -753,6 +680,7 @@ CREATE TABLE `product` (
   `slug` varchar(255) DEFAULT NULL,
   `description` text NOT NULL,
   `type_id` int(11) NOT NULL,
+  `code` varchar(100) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `cate_id` int(11) DEFAULT NULL,
   `thong_so` text,
@@ -771,35 +699,6 @@ CREATE TABLE `product` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`id`, `title`, `slug`, `description`, `type_id`, `parent_id`, `cate_id`, `thong_so`, `thong_so_chi_tiet`, `tien_do`, `hoi_dap`, `content`, `thumbnail_id`, `video_url`, `status`, `is_hot`, `display_order`, `meta_id`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(2, 'Bán đất thổ cư Phan Văn Mảng Bến Lức Long An giá 300 triệu', 'ban-dat-tho-cu-phan-van-mang-ben-luc-long-an-300-trieu', '➡ Vị Tr&iacute;: Phan Văn Mảng, Bến Lức, Long An<br />\r\n➡ Diện T&iacute;ch: 5x20, 6x25, 10x20<br />\r\n➡ Gi&aacute; B&aacute;n: 300 triệu/ nền 100m2<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng<br />\r\n<br />\r\n↘&nbsp;TIỆN &Iacute;CH K&Egrave;M THEO&nbsp;↙<br />\r\n<br />\r\n➡ Giao Th&ocirc;ng: Đi Q8, Q7, Q6 rất gần qua QL50, c&oacute; tuyến xe bus đi Chợ Lớn , Chợ Đầu Mối<br />\r\n➡ Gần bệnh viện nhi đồng 3, bến xe miền t&acirc;y<br />\r\n➡ Gần bến xe Bến Lức<br />\r\n➡ Gần trường học, bệnh viện, si&ecirc;u thị', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 6, NULL, 1, 0, 1, 10, 2, 2, '2017-07-10 08:42:25', '2017-07-10 13:49:15'),
-(6, 'Bán đất nền dự án Gia Long River Town Cần Đước Long An giá 350 triệu', 'ban-dat-nen-du-an-gia-long-river-town-can-duoc-long-an-gia-350-trieu', '➡ Vị Tr&iacute;: Chợ Rạch Kiến, Cần Đước, Long An<br />\r\n➡ Diện T&iacute;ch: 4x15, 5x20, 6x25<br />\r\n➡ Gi&aacute; B&aacute;n: 350 triệu/ nền , 400 triệu/ nền. 450 triệu/ nền<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, 100% đ&atilde; l&ecirc;n thổ cư<br />\r\n<br />\r\n<strong>TIỆN &Iacute;CH K&Egrave;M THEO</strong><br />\r\n<br />\r\n➡ Giao Th&ocirc;ng: Gần tỉnh lộ 19, 826<br />\r\n➡ Gần chợ Rạch Kiến, gần c&ocirc;ng vi&ecirc;n c&acirc;y xanh<br />\r\n➡ Gần ng&acirc;n h&agrave;ng, khu vui chơi<br />\r\n➡ Gần khu c&ocirc;ng nghiệp, trung t&acirc;m thương mại<br />\r\n➡ Gần trường học, bệnh viện, si&ecirc;u thị<br />\r\n➡ Gần khu d&acirc;n cư Gia Long Riverside<br />\r\n➡ Cơ sở hạ tầng hiện đại', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 9, NULL, 1, 0, 1, 18, 2, 2, '2017-07-10 14:12:55', '2017-07-10 14:12:56'),
-(7, 'Bán đất thổ cư xã Mỹ Lộc Cần Giuộc Long An giá 400 triệu', 'ban-dat-tho-cu-xa-my-loc-can-giuoc-long-an-gia-400-trieu', '➡ Vị Tr&iacute;: X&atilde; Mỹ Lộc, Cần Giuộc, Long An<br />\r\n➡ Diện T&iacute;ch: 90m2<br />\r\n➡ Gi&aacute; B&aacute;n: 400 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, ch&iacute;nh chủ, c&ocirc;ng chứng trong ng&agrave;y<br />\r\n<br />\r\n↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖<br />\r\n<br />\r\n➡ Giao Th&ocirc;ng: Gần tỉnh lộ 835<br />\r\n➡ Gần chợ, gần ủy ban<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trường học, bệnh viện, si&ecirc;u thị', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 12, NULL, 1, 0, 1, 20, 2, 2, '2017-07-10 14:36:40', '2017-07-10 15:00:23'),
-(8, 'Bán đất mặt tiền xã Hòa Phú Châu Thành Long An giá 1 tỷ', 'ban-dat-mat-tien-xa-hoa-phu-chau-thanh-long-an-gia-1-ty', '➡ Vị Tr&iacute;: X&atilde; H&ograve;a Ph&uacute;, Ch&acirc;u Th&agrave;nh, Long An<br />\r\n➡ Diện T&iacute;ch: 140m2<br />\r\n➡ Gi&aacute; B&aacute;n: 1 tỷ<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, c&ocirc;ng chứng trong ng&agrave;y<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gi&aacute;p TP. T&acirc;n An<br />\r\n➡ Gần chợ, gần c&acirc;y xăng<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trường học, Khu vui chơi<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 15, NULL, 1, 0, 1, 22, 2, 2, '2017-07-10 14:57:16', '2017-07-10 15:01:18'),
-(9, 'Bán đất nền gần công viên Võ Văn Tần Đức Hòa Long An giá 200 triệu', 'ban-dat-nen-gan-cong-vien-vo-van-tan-duc-hoa-long-an', '➡ Vị Tr&iacute;: Gần c&ocirc;ng vi&ecirc;n V&otilde; Văn Tần, Đức H&ograve;a, Long An<br />\r\n➡ Diện T&iacute;ch: 100m2, 180m2, 280m2<br />\r\n➡ Gi&aacute; B&aacute;n: 200 triệu/ nền 100m2<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền c&aacute;ch đường tỉnh lộ 10 khoảng 200m<br />\r\n➡ Gần c&ocirc;ng văn v&otilde; văn tần<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trường học cấp 3<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;n', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 17, NULL, 1, 0, 1, 23, 2, 2, '2017-07-10 15:16:34', '2017-07-10 15:16:34'),
-(10, 'Bán đất KDC Tân Đức - Đức Huệ - Long An giá 1,5 triệu/m2', 'ban-dat-kdc-tan-duc-duc-hue-long-an-gia-15-trieum2', '➡ Vị Tr&iacute;: Khu d&acirc;n cư T&acirc;n Đức, Long An<br />\r\n➡ Diện T&iacute;ch: 120m2<br />\r\n➡ Gi&aacute; B&aacute;n: 1,5 triệu/m2<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Giao th&ocirc;ng thuận lợi, cơ sở hạ tầng đầy đủ, đường rải nhựa 12m&nbsp;<br />\r\n➡ Gần trung t&acirc;m y tế, c&ocirc;ng vi&ecirc;n, trường học<br />\r\n➡ Gần trung t&acirc;m thương mại, đại học quốc tế T&acirc;n Tạo<br />\r\n➡ Gần th&agrave;nh phố E. City T&acirc;n Đức<br />\r\n➡ Gần khu c&ocirc;ng nghiệp lớn T&acirc;n Đức, Khu c&ocirc;ng nghiệp Hải Sơn<br />\r\n➡ Thuận lợi x&acirc;y nh&agrave;, đầu tư kinh doanh, x&acirc;y ph&ograve;ng trọ', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 21, NULL, 1, 0, 1, 69, 2, 2, '2017-07-13 08:58:38', '2017-07-13 08:58:38'),
-(11, 'Bán đất nền mặt tiền QL62 - Tân Lập - Mộc Hóa -Long An giá 1,5 tỷ', 'ban-dat-nen-mat-tien-ql62-tan-lap-moc-hoa-long-an-gia-15-ty', '➡ Vị Tr&iacute;: Mặt tiền QL62, X&atilde; T&acirc;n Lập, Huyện Mộc H&oacute;a, Long An<br />\r\n➡ Diện T&iacute;ch: 900m2<br />\r\n➡ Gi&aacute; B&aacute;n: 1,5 tỷ<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, đất thổ to&agrave;n bộ<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Giao th&ocirc;ng thuận lợi<br />\r\n➡ Gần trung t&acirc;m y tế, trường học<br />\r\n➡ Gần chợ, si&ecirc;u thị mini<br />\r\n➡ Thuận lợi x&acirc;y nh&agrave;, đầu tư kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 23, NULL, 1, 0, 1, 70, 2, 2, '2017-07-13 09:14:51', '2017-07-13 09:36:16'),
-(12, 'Bán đất nền huyện Tân Hưng - Long An giá 450 triệu', 'ban-dat-nen-huyen-tan-hung-long-an-gia-450-trieu', '➡ Vị Tr&iacute;: Mặt tiền Huỳnh Ch&acirc;u Sổ, Huyện T&acirc;n Hưng, Long An<br />\r\n➡ Diện T&iacute;ch: 110m2<br />\r\n➡ Gi&aacute; B&aacute;n: 450 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, đất thổ 100%, x&acirc;y tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gần quốc lộ 62, c&aacute;ch th&agrave;nh phố T&acirc;n An 5 ph&uacute;t đi xe<br />\r\n➡ Gần si&ecirc;u thị Coopmart, Vincom<br />\r\n➡ Gần trung t&acirc;m h&agrave;nh ch&iacute;nh<br />\r\n➡ Thuận lợi x&acirc;y nh&agrave;, đầu tư kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 24, NULL, 1, 0, 1, 71, 2, 2, '2017-07-13 09:35:20', '2017-07-13 09:35:20'),
-(13, 'Bán đất mặt tiền tỉnh lộ 829, Tân Thạnh - Long An', 'ban-dat-mat-tien-tinh-lo-829-tan-thanh-long-an', '➡ Vị Tr&iacute;: Mặt tiền đường tỉnh lộ 829, Huyện T&acirc;n Thạnh, Long An<br />\r\n➡ Diện T&iacute;ch: 1500m2<br />\r\n➡ Gi&aacute; B&aacute;n: Thương lượng<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, đất thổ 100%<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gần quốc lộ 829, gần cầu Tan H&ograve;a<br />\r\n➡ Gần bệnh việc, chợ<br />\r\n➡ Gần trường học, c&ocirc;ng vi&ecirc;n<br />\r\n➡ Thuận lợi x&acirc;y nh&agrave;, đầu tư kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 26, NULL, 1, 0, 1, 72, 2, 2, '2017-07-13 10:04:10', '2017-07-13 10:04:10'),
-(14, 'Bán đất nền đường Nguyễn Hữu Trí, Xã An Thạnh, Huyện Bến Lức', 'ban-dat-nen-duong-nguyen-huu-tri-xa-an-thanh-huyen-ben-luc', 'B&aacute;n đất nền đường Nguyễn Hữu Tr&iacute;, X&atilde; An Thạnh, Huyện Bến Lức gi&aacute; 900 triệu.&nbsp;<a href="http://thanhphuthinhland.vn/tag/dat-nen-huyen-ben-luc">Đất nền huyện bến lức</a> đẹp nằm ngay trung t&acirc;m h&agrave;nh ch&iacute;nh thị x&atilde; Bến Lức. Đất thổ cư 100%, sổ hồng tri&ecirc;ng, ch&iacute;nh chủ.<br />\r\n<br />\r\nCơ sở hạ tầng ho&agrave;n thiện, d&acirc;n cư đ&ocirc;ng đảo hiện hữu l&acirc;u năm. Giao th&ocirc;ng thuận tiện, mặt tiền quốc lộ 1A đường Nguyễn Hữu Tr&iacute;, c&aacute;ch khu c&ocirc;ng nghiệp Vĩnh Lộc 2 v&agrave; Thuận Đạo tầm 7 ph&uacute;t<br />\r\n<br />\r\n➡ Vị Tr&iacute;: 100 Đường Nguyễn Hữu tr&iacute;, X&atilde; An Thạnh, Huyện Bến Lức<br />\r\n➡ Diện T&iacute;ch: 200m2<br />\r\n➡ Gi&aacute; B&aacute;n: 900 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền hướng quốc lộ 1A<br />\r\n➡ Gần khu c&ocirc;ng nghiệp<br />\r\n➡ Gần trường<br />\r\n➡ Gần bệnh viện<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;n<br />\r\n&nbsp;', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 28, NULL, 1, 0, 1, 153, 2, 2, '2017-07-26 14:52:44', '2017-07-26 14:54:22'),
-(15, 'Bán đất nền đường tỉnh lộ 826, Xã Long Trạch, Huyện Cần Đước', 'ban-dat-nen-duong-tinh-lo-826-xa-long-trach-huyen-can-duoc', 'B&aacute;n đất nền đường tỉnh lộ 826, X&atilde; Long Trạch, Huyện Cần Đước, tỉnh Long An gi&aacute; rẻ chỉ với 350 triệu/100m2. Được x&acirc;y dựng tự do v&agrave; c&oacute; sổ hồng ri&ecirc;ng. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">nh&agrave; đất long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua mảnh đất nền n&agrave;y. Rất th&iacute;ch hợp để đầu tư sinh lời.<br />\r\n<br />\r\nCơ sở hạ tầng đ&atilde; ho&agrave;n thiện, hệ thống điện nước đ&atilde; ho&agrave;n thiện. D&acirc;n cư quanh khu vực đ&ocirc;ng đ&uacute;c, dễ kinh doanh.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Đường tỉnh lộ 826, X&atilde; Long Trạch, Huyện Cần Đước<br />\r\n➡ Diện T&iacute;ch: 100m2<br />\r\n➡ Gi&aacute; B&aacute;n: 350 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường tỉnh lộ 826<br />\r\n➡ Gần khu c&ocirc;ng nghiệp<br />\r\n➡ Gần trường, khu h&agrave;nh ch&iacute;nh<br />\r\n➡ Gần trạm y tế, chợ<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;n', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 31, NULL, 1, 0, 1, 154, 2, 2, '2017-07-26 15:52:29', '2017-07-26 15:54:04'),
-(16, 'Bán đất gần ngã 3 Tân Kim, Huyện Cần Giuộc', 'ban-dat-gan-nga-3-tan-kim-huyen-can-giuoc', 'B&aacute;n đất gần ng&atilde; 3 T&acirc;n Kim, Huyện Cần Giuộc gi&aacute; rẻ chỉ 450triệu/100m2. Nếu qu&yacute; vị th&iacute;ch mặt tiền gần quốc lộ 50 th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội n&agrave;y. Hiện <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">đất nền long an</a> đang c&oacute; xu hướng tăng gi&aacute;, nếu qu&yacute; vị mua đầu tư th&igrave; đ&acirc;y chắc hẵn l&agrave; tiềm năng.<br />\r\n<br />\r\nVị tr&iacute; gần KCN T&acirc;n Kim, c&aacute;ch ng&atilde; tư QK50 v&agrave; Nguyễn Văn Linh tầm 9km, gần cao tốc Bến Lức Long Th&agrave;nh v&agrave; c&aacute;ch bến xe quận 8 tầm 9km.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Gần ng&atilde; 3 T&acirc;n Kim, Huyện Cần Đước<br />\r\n➡ Diện T&iacute;ch: 100m2<br />\r\n➡ Gi&aacute; B&aacute;n: 450 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường quốc lộ 50<br />\r\n➡ Gần khu c&ocirc;ng nghiệp, cao tốc<br />\r\n➡ Gần trường, c&ocirc;ng vi&ecirc;n<br />\r\n➡ Gần trạm y tế, chợ<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;n', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 34, NULL, 1, 0, 1, 155, 2, 2, '2017-07-26 16:10:58', '2017-07-26 16:10:58'),
-(17, 'Bán đất nền đường tỉnh 827B, Bình Quới, Huyện Châu Thành', 'ban-dat-nen-duong-tinh-827b-binh-quoi-huyen-chau-thanh', 'B&aacute;n đất nền đường tỉnh 827B, B&igrave;nh Quới, Huyện Ch&acirc;u Th&agrave;nh với gi&aacute; 420triệu/120m2. Đ&acirc;y l&agrave; cơ hội để mua <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">đất long an</a> gi&aacute; rẻ nhất từ trước đến giờ.&nbsp;Vị tr&iacute; c&aacute;ch chợ Kỳ Sơn tầm 1km, c&aacute;ch th&agrave;nh phố T&acirc;n An tầm 2km, c&aacute;ch bệnh viện đa khoa Long An 3km. Nếu c&oacute; &yacute; định đầu tư th&igrave; rất thuận tiện v&igrave; khu d&acirc;n cư đ&ocirc;ng đ&uacute;c v&agrave; hiện hữu l&acirc;u năm.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Đường tỉnh 827B, B&igrave;nh Quới, Huyện Ch&acirc;u Th&agrave;nh<br />\r\n➡ Diện T&iacute;ch: 120m2<br />\r\n➡ Gi&aacute; B&aacute;n: 420 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường tỉnh 827B<br />\r\n➡ Gần bệnh viện đa khoa<br />\r\n➡ Gần trường, c&ocirc;ng vi&ecirc;n<br />\r\n➡ Gần chợ, khu d&acirc;n cư<br />\r\n➡ Thuận tiện kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 37, NULL, 1, 0, 1, 156, 2, 2, '2017-07-26 16:26:06', '2017-07-26 16:26:06'),
-(18, 'Bán đất đường tỉnh lộ 10 gần KCN Tân Đức, Huyện Đức Hòa', 'ban-dat-duong-tinh-lo-10-gan-kcn-tan-duc-huyen-duc-hoa', 'B&aacute;n đất đường tỉnh lộ 10 gần KCN T&acirc;n Đức, Huyện Đức H&ograve;a với gi&aacute; 400triệu/110m2.&nbsp;Cần b&aacute;n lại đất nền liền kề hơn 110m2 nằm mặt tiền đường tỉnh 10, hạ tầng đ&atilde; ho&agrave;n thiện, c&oacute; c&acirc;y xanh. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an/ban-dat-nen-duong-tinh-827b-binh-quoi-huyen-chau-thanh-17.html">nh&agrave; đất long an</a> chắc hẵn sẽ kh&ocirc;ng bỏ lỡ cơ hội n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Đường tỉnh lộ 10 gần KCN T&acirc;n Đức, Huyện Đức H&ograve;a<br />\r\n➡ Diện T&iacute;ch: 120m2<br />\r\n➡ Gi&aacute; B&aacute;n: 400 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường tỉnh lộ 10<br />\r\n➡ Gần KCN T&acirc;n Đức<br />\r\n➡ Gần trường học, c&ocirc;ng vi&ecirc;n,&nbsp;<br />\r\n➡ Gần chợ, khu d&acirc;n cư, UBNN<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;n', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 40, NULL, 1, 0, 1, 157, 2, 2, '2017-07-26 17:09:27', '2017-07-26 17:09:27'),
-(19, 'Bán đất thổ cư xã Mỹ Thạnh Tây, Huyện Cần Đước', 'ban-dat-tho-cu-xa-my-thanh-tay-huyen-can-duoc', 'B&aacute;n đất thổ cư x&atilde; Mỹ Thạnh T&acirc;y, Huyện Cần Đước với gi&aacute; 350 triệu/110m2 c&oacute; giấy tờ sổ hồng r&otilde; r&agrave;ng, ch&iacute;nh chủ. Vị tr&iacute; thuận tiện, gần c&aacute;c khu c&ocirc;ng nghiệp, chợ. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">nh&agrave; đất long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ bỏ qua cơ hội n&agrave;y. Rất l&yacute; tưởng để đầu tư kinh doanh.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: X&atilde; Mỹ Thạnh T&acirc;y, Huyện Cần Đước, Long An<br />\r\n➡ Diện T&iacute;ch: 110m2<br />\r\n➡ Gi&aacute; B&aacute;n: 350 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gần c&ocirc;ng vi&ecirc;n, trường học<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trạm y tế, gần si&ecirc;u thị<br />\r\n➡ Thuận tiện kinh doanh, bu&ocirc;n b&aacute;n', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 43, NULL, 1, 0, 1, 158, 2, 2, '2017-07-27 10:43:20', '2017-07-27 10:43:20'),
-(20, 'Bán đất nền đường quốc lộ 62, xã Bình Thạnh, Huyện Mộc Hóa', 'ban-dat-nen-duong-quoc-lo-62-xa-binh-thanh-huyen-moc-hoa', 'B&aacute;n đất nền đường quốc lộ 62, x&atilde; B&igrave;nh Thạnh, Huyện Mộc H&oacute;a với gi&aacute; 280 triệu/100m2. Vị tr&iacute; kh&aacute; đẹp mặt tiền đường quốc lộ 62, c&aacute;ch l&agrave;ng nổi T&acirc;n Lập tầm 5km, c&aacute;ch trung t&acirc;m thị x&atilde; Kiến Tường tầm 4km, gần chợ, trường hợp v&agrave; nhiều tiện &iacute;ch kh&aacute;c trong b&aacute;n k&iacute;nh 0,5km. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">nha dat long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ lỡ cơ hội để đầu tư sinh lời cao n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Đường quốc lộ 62, x&atilde; B&igrave;nh Thạnh, Huyện Mộc H&oacute;a<br />\r\n➡ Diện T&iacute;ch: 100m2<br />\r\n➡ Gi&aacute; B&aacute;n: 280 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường quốc lộ 62,<br />\r\n➡ Gần l&agrave;ng nổi T&acirc;n Lập, thị x&atilde; Kiến Tường<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 46, NULL, 1, 0, 1, 159, 2, 2, '2017-07-27 11:01:36', '2017-07-27 11:03:42'),
-(21, 'Bán đất nền mặt tiền xã Bình Thạnh, Huyện Tân Hưng', 'ban-dat-nen-mat-tien-xa-binh-thanh-huyen-tan-hung', 'B&aacute;n đất nền mặt tiền x&atilde; B&igrave;nh Thạnh, Huyện T&acirc;n Hưng gi&aacute; rẻ chỉ 370 triệu/100m2 gi&aacute; hấp dẫn với c&aacute;c nh&agrave; đầu tư. Vị tr&iacute; thuận tiện th&iacute;ch hợp cho việc kinh doanh, bu&ocirc;n b&aacute;n. Giấy tờ ch&iacute;nh chủ, sổ hồng ri&ecirc;ng, sang t&ecirc;n nhanh ch&oacute;ng. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">đất nền long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội để sở hữu mảnh đất nền mặt tiền n&agrave;y tại x&atilde; B&igrave;nh Thạnh.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: x&atilde; B&igrave;nh Thạnh, Huyện T&acirc;n Hưng<br />\r\n➡ Diện T&iacute;ch: 110m2<br />\r\n➡ Gi&aacute; B&aacute;n: 370 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền<br />\r\n➡ Gần chợ, c&ocirc;ng vi&ecirc;n<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trường học, bệnh viện<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 49, NULL, 1, 0, 1, 160, 2, 2, '2017-07-27 11:36:03', '2017-07-27 11:36:04'),
-(22, 'Bán đất nền đường tỉnh 819 xã Tân Lập, Huyện Tân Thạnh', 'ban-dat-nen-xa-tan-lap-huyen-tan-thanh', 'B&aacute;n đất nền đường tỉnh 819 x&atilde; T&acirc;n Lập, Huyện T&acirc;n Thạnh với gi&aacute; 320 triệu, cơ sở hạ tầng đầy đủ, d&acirc;n cư đ&ocirc;ng đ&uacute;c, l&acirc;u năm. Gần trường học, gần chợ, bệnh viện, khu vui chơi cho trẻ em. Giấy tờ ph&aacute;p l&yacute; r&otilde; r&agrave;ng, ch&iacute;nh chủ bao sang t&ecirc;n nhanh ch&oacute;ng. Nếu qu&yacute; vị l&agrave; người đầu tư v&agrave; quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">đất nền dự &aacute;n long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội để đầu tư n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Đường tỉnh 819, x&atilde; T&acirc;n Lập, Huyện T&acirc;n Thạnh<br />\r\n➡ Diện T&iacute;ch: 140m2<br />\r\n➡ Gi&aacute; B&aacute;n: 320 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ, x&acirc;y dựng tự do<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường tỉnh 819,<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 52, NULL, 1, 0, 1, 162, 2, 2, '2017-07-27 14:44:25', '2017-07-27 14:44:25'),
-(23, 'Bán đất nền đường tỉnh 833, xã Mỹ Bình, Huyện Tân Trụ', 'ban-dat-nen-duong-tinh-833-xa-my-binh-huyen-tan-tru', 'B&aacute;n đất nền đường tỉnh 833, x&atilde; Mỹ B&igrave;nh, Huyện T&acirc;n Trụ, nằm c&aacute;ch quốc lộ 1A tầm 700m, nằm giữa 2 khu c&ocirc;ng nghiệp lớn. Hạ tầng đầy đủ, đường nhựa, th&iacute;ch hợp bu&ocirc;n b&aacute;n, kinh doanh nh&agrave; trọ. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">đất nền long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Đường tỉnh 833, x&atilde; Mỹ B&igrave;nh, Huyện T&acirc;n Trụ<br />\r\n➡ Diện T&iacute;ch: 160m2<br />\r\n➡ Gi&aacute; B&aacute;n: 380 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường tỉnh 833,<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c, KCN<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 55, NULL, 1, 0, 1, 170, 2, 2, '2017-07-31 09:23:11', '2017-07-31 09:23:11'),
-(24, 'Bán đất mặt tiền quốc lộ 62 tại thị trấn Thạnh Hóa', 'ban-dat-mat-tien-quoc-lo-62-tai-thi-tran-thanh-hoa', 'B&aacute;n đất mặt tiền quốc lộ 62 tại thị trấn Thạnh H&oacute;a với gi&aacute; 420 triệu, &nbsp;nằm mặt tiền quốc lộ 62 thị trấn thạnh h&oacute;a, gần khu c&ocirc;ng nghiệp. Hạ tầng đầy đủ, nằm gần bệnh viện, gần trạm dừng ch&acirc;n. Rất th&iacute;ch hợp để đầu tư kinh doanh, bu&ocirc;n b&aacute;n.&nbsp;<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Thị trấn thạnh ho&aacute; đường Quốc lộ 62, X&atilde; Thạnh H&oacute;a, Huyện Thạnh H&oacute;a<br />\r\n➡ Diện T&iacute;ch: 170m2<br />\r\n➡ Gi&aacute; B&aacute;n: 420 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Mặt tiền đường quốc lộ 62,<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c, KCN<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 58, NULL, 1, 0, 1, 171, 2, 2, '2017-08-02 10:42:01', '2017-08-02 10:42:01'),
-(25, 'Bán đất xã Tân Thành, Huyện Thủ Thừa giá 380 triệu', 'ban-dat-xa-tan-thanh-huyen-thu-thua-gia-380-trieu', 'B&aacute;n đất x&atilde; T&acirc;n Th&agrave;nh, Huyện Thủ Thừa gi&aacute; 380 triệu/130m2.&nbsp;Hạ tầng ho&agrave;n thiện, đường nhựa, c&acirc;y xanh, điện đường đầy đủ, nằm gần chợ, khu c&ocirc;ng nghiệp, th&iacute;ch hợp đầu tư bu&ocirc;n b&aacute;n. Giấy tờ ch&iacute;nh chủ, sang t&ecirc;n nhanh ch&oacute;ng. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">đất nền long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội để đầu tư sinh lời n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: X&atilde; T&acirc;n Th&agrave;nh, Huyện Thủ Thừa<br />\r\n➡ Diện T&iacute;ch: 120m2<br />\r\n➡ Gi&aacute; B&aacute;n: 380 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gần khu d&acirc;n cư đ&ocirc;ng đ&uacute;c, KCN<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 61, NULL, 1, 0, 1, 172, 2, 2, '2017-08-03 09:06:57', '2017-08-03 09:06:57'),
-(26, 'Bán đất nền tại 12 xã Vĩnh Bình huyện Vĩnh Hưng', 'ban-dat-nen-tai-12-xa-vinh-binh-huyen-vinh-hung', 'B&aacute;n đất nền tại 12 x&atilde; Vĩnh B&igrave;nh huyện Vĩnh Hưng với gi&aacute; 350 triệu/ 110m2 giấy tờ ch&iacute;nh chủ, sang t&ecirc;n nhanh ch&oacute;ng. Nằm&nbsp;trong khu trung t&acirc;m h&agrave;nh ch&iacute;nh tỉnh Long An, mặt tiền đường H&ugrave;ng Vương, đối diện sở c&ocirc;ng an tỉnh Long An, liền kề QL1A v&agrave; CT Trung Lương.&nbsp;Cơ sở hạ tầng đ&atilde; ho&agrave;n thiện, đường đ&atilde; trải nhựa bằng phẳng, c&acirc;y xanh to, ph&aacute;t triển xanh tốt. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/nha-dat-long-an.html">nh&agrave; đất long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội để đầu tư sinh lời n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: X12 x&atilde; vĩnh b&igrave;nh, huyện vĩnh hưng<br />\r\n➡ Diện T&iacute;ch: 110m2<br />\r\n➡ Gi&aacute; B&aacute;n: 350 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ, bao sang t&ecirc;n<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gần khu trung t&acirc;m h&agrave;nh ch&iacute;nh, gần cao tốc<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Thuận tiện bu&ocirc;n b&aacute;n, kinh doanh', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 64, NULL, 1, 0, 1, 173, 2, 2, '2017-08-04 10:54:24', '2017-08-04 10:54:24'),
-(27, 'Bán đất hẻm 386 phường 7 thành phố Tân An', 'ban-dat-hem-386-phuong-7-thanh-pho-tan-an', 'B&aacute;n đất hẻm 386, phường 7, th&agrave;nh phố T&acirc;n An với gi&aacute; 450/140m2, giấy tờ ch&iacute;nh chủ, sang t&ecirc;n nhanh ch&oacute;ng, đất thổ cư 100%. Nằm mặt đường c&aacute;ch Ch&acirc;u Thị Kim tầm 150m, c&aacute;ch bờ k&egrave; 100m. Tiện &iacute;ch đầy đủ trong b&aacute;n k&iacute;nh 0.5km, d&acirc;n cư đ&ocirc;ng đ&uacute;c. Nếu qu&yacute; vị quan t&acirc;m đến <a href="http://thanhphuthinhland.vn/">đất long an</a> th&igrave; kh&ocirc;ng n&ecirc;n bỏ qua cơ hội n&agrave;y.<br />\r\n<br />\r\n➡ Vị Tr&iacute;: Hẻm 386, phường 7, th&agrave;nh phố T&acirc;n An<br />\r\n➡ Diện T&iacute;ch: 140m2<br />\r\n➡ Gi&aacute; B&aacute;n: 450 triệu<br />\r\n➡ Ph&aacute;p L&yacute;: Sổ hồng ri&ecirc;ng ch&iacute;nh chủ, bao sang t&ecirc;n<br />\r\n<br />\r\n<strong>↗ TIỆN &Iacute;CH K&Egrave;M THEO ↖</strong><br />\r\n<br />\r\n➡ Gần trung t&acirc;m h&agrave;nh ch&iacute;nh<br />\r\n➡ Gần trường học, bệnh viện, chợ<br />\r\n➡ Giao th&ocirc;ng thuận tiện về SG, c&aacute;c tỉnh miền t&acirc;y', 1, NULL, NULL, '0', NULL, '0', '0', NULL, 67, NULL, 1, 0, 1, 174, 2, 2, '2017-08-09 09:37:25', '2017-08-09 09:37:25');
 
 -- --------------------------------------------------------
 
@@ -883,30 +782,6 @@ INSERT INTO `product_img` (`id`, `product_id`, `image_url`, `display_order`) VAL
 (67, 27, '2017/08/09/ban-dat-hem-386-phuong-7-thanh-pho-tan-an-1502246141.png', 1),
 (68, 27, '2017/08/09/ban-dat-hem-386-phuong-7-thanh-pho-tan-an-1-1502246141.png', 1),
 (69, 27, '2017/08/09/ban-dat-hem-386-phuong-7-thanh-pho-tan-an-2-1502246141.png', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `seo`
---
-
-CREATE TABLE `seo` (
-  `id` int(11) NOT NULL,
-  `page_name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `meta_title` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `meta_description` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `meta_keyword` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `seo_title` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `seo_text` text CHARACTER SET utf8
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `seo`
---
-
-INSERT INTO `seo` (`id`, `page_name`, `meta_title`, `meta_description`, `meta_keyword`, `seo_title`, `seo_text`) VALUES
-(1, 'Trang chủ', 'Bất động sản STH', 'Bất động sản STH', 'Bất động sản STH', 'Đồng hồ nam nữ chính hãng', '<div>\r\n	Tự h&agrave;o l&agrave; nh&agrave; cung cấp đồng hồ h&agrave;ng đầu.</div>\r\n'),
-(4, 'Tin tức', 'Tin tức', 'Tin tức', 'Tin tức', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -1320,30 +1195,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `role`, `leader_id`, `status`, `changed_password`, `remember_token`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@houseland.vn', '$2y$10$cuj..B4n2qP1JXrj6ahgs.tAyOlCuPmAycKIMNqf6bOBgD8F626Mu', 3, 1, 1, 0, '', 1, 1, '2017-06-28 00:00:00', '2017-06-28 00:00:00');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `video`
---
-
-CREATE TABLE `video` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `youtube_id` varchar(100) NOT NULL,
-  `display_order` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `video`
---
-
-INSERT INTO `video` (`id`, `name`, `youtube_id`, `display_order`, `status`) VALUES
-(1, 'Giới thiệu KDC An Thắng - Rạch Kiến', 'DIz-MDyzlIA', 1, 1),
-(2, '5 bước xử lý từ chối khách hàng', 'N4YjthBx0tc', 2, 1),
-(3, '5 bí mật phong thủy thầy tướng số không bao giờ tiết lộ cho bạn', '5nUJeguO1pA', 3, 1),
-(4, 'Xử lý từ chối', '6ZgLWYwr6g4', 4, 1);
-
 --
 -- Indexes for dumped tables
 --
@@ -1367,22 +1218,9 @@ ALTER TABLE `articles_cate`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `auto`
---
-ALTER TABLE `auto`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `date_auto` (`date_auto`);
-
---
 -- Indexes for table `banner`
 --
 ALTER TABLE `banner`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `block`
---
-ALTER TABLE `block`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1422,12 +1260,6 @@ ALTER TABLE `contact`
 -- Indexes for table `custom_link`
 --
 ALTER TABLE `custom_link`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `direction`
---
-ALTER TABLE `direction`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1484,12 +1316,6 @@ ALTER TABLE `product_img`
   ADD KEY `image_url` (`image_url`);
 
 --
--- Indexes for table `seo`
---
-ALTER TABLE `seo`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
@@ -1533,12 +1359,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `video`
---
-ALTER TABLE `video`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1558,20 +1378,10 @@ ALTER TABLE `articles`
 ALTER TABLE `articles_cate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT for table `auto`
---
-ALTER TABLE `auto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
 -- AUTO_INCREMENT for table `banner`
 --
 ALTER TABLE `banner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
---
--- AUTO_INCREMENT for table `block`
---
-ALTER TABLE `block`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `cate`
 --
@@ -1597,11 +1407,6 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `custom_link`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `direction`
---
-ALTER TABLE `direction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `info_seo`
 --
@@ -1631,17 +1436,12 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product_img`
 --
 ALTER TABLE `product_img`
   MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
---
--- AUTO_INCREMENT for table `seo`
---
-ALTER TABLE `seo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `settings`
 --
@@ -1672,11 +1472,6 @@ ALTER TABLE `thong_so`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `video`
---
-ALTER TABLE `video`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
