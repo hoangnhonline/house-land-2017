@@ -73,10 +73,10 @@
               </select>
             </div>          
             <div class="form-group">              
-              <input type="text" placeholder="Tên sản phẩm" class="form-control" name="title" value="{{ $arrSearch['title'] }}" style="width:140px">
+              <input type="text" placeholder="Tên sản phẩm" class="form-control" name="title" value="{{ $arrSearch['title'] }}" >
             </div>
             <div class="form-group">              
-              <input type="text" placeholder="Mã sản phẩm" class="form-control" name="code" value="{{ $arrSearch['code'] }}" style="width:60px">
+              <input type="text" placeholder="Mã sản phẩm" class="form-control" name="code" value="{{ $arrSearch['code'] }}" >
             </div>           
             <div class="form-group">
                 <div class="checkbox">
@@ -122,8 +122,7 @@
                 </td>
                 @endif
                 <th width="100px">Hình ảnh</th>
-                <th style="text-align:center">Thông tin sản phẩm</th>
-                <th width="120px">Trạng thái</th>                              
+                <th>Thông tin sản phẩm</th>                                          
                 <th width="1%;white-space:nowrap">Thao tác</th>
               </tr>
               <tbody>
@@ -135,7 +134,7 @@
                   ?>
                 <tr id="row-{{ $item->id }}">
                   <td><span class="order">{{ $i }}</span></td>
-                  <td style="text-align:center">{{ $item->id }}</td>
+                  <td style="text-align:center">{{ $item->code }}</td>
                   @if($arrSearch['is_hot'] == 1)
                   <td>
                     <input type="text" value="{{ $item->display_order }}" name="display_order[{{$item->id}}]" style="width:80px" class="form-control" />
@@ -146,45 +145,21 @@
                   </td>
                   <td>                  
                     <a style="color:{{ $item->cart_status == 1 ? "#444" : "red" }};font-weight:bold" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a> 
-                    @if( $item->is_hot == 1 )
+                  @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
-                  @endif <br />
-                    <strong style="color:#337ab7;font-style:italic"> {{ Helper::getName($item->type_id, 'estate_type') }}</strong>
-                    <p>
-                      @if($item->street_id > 0)
-                      {{ Helper::getName($item->street_id, 'street') }},&nbsp;
-                      @endif
-                      @if($item->ward_id > 0)
-                      {{ Helper::getName($item->ward_id, 'ward') }},&nbsp;
-                      @endif
-                      @if($item->cate_id > 0)
-                      {{ Helper::getName($item->cate_id, 'district') }},&nbsp;
-                      @endif
-                      @if($item->parent_id > 0)
-                      {{ Helper::getName($item->parent_id, 'city') }}
-                      @endif
-
-                    </p>
-                   <p style="margin-top:10px">
-                      
-                      <b style="color:red">                  
-                      {{ ($item->price) }} {{ Helper::getName($item->price_unit_id, 'price_unit') }}
-                     </b>                    
-                    </p>
+                  @endif 
+                  <br>
+                  <p style="color:#00acd6;font-weight:bold;margin-top:10px">{{ $item->cateType->name }} / {{ $item->cateParent->name }} / {{ $item->cate->name }}</p>
                     
                   </td>
-                  <td>                
-                    @if($item->type == 1)
-                      {{ $item->cart_status == 1 ? "Chưa bán" : "Đã bán" }}                  
-                    @else
-                      {{ $item->cart_status == 1 ? "Còn trống" : "Đã thuê" }}
-                    @endif
-                  </td>
+                 
                   <td style="white-space:nowrap; text-align:right">
-                    <a class="btn btn-default btn-sm" href="{{ route('chi-tiet', [$item->slug_loai, $item->slug, $item->id] ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
-                    <a href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                    <a class="btn btn-default btn-sm" href="{{ route('chi-tiet', [$item->slug_loai, $item->slug, $item->id] ) }}" target="_blank" title="Xem"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+                    <a href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm" title="Chỉnh sửa"><span class="glyphicon glyphicon-pencil"></span></a>                 
 
-                    <a onclick="return callDelete('{{ $item->name }}','{{ route( 'product.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a onclick="return callDelete('{{ $item->title }}','{{ route( 'product.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm" title="Xóa">
+                      <span class="glyphicon glyphicon-trash"></span>
+                      </a>
 
                   </td>
                 </tr> 
@@ -220,9 +195,9 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
-function callDelete(name, url){  
+function callDelete(title, url){  
   swal({
-    title: 'Bạn muốn xóa "' + name +'"?',
+    title: 'Bạn muốn xóa "' + title +'"?',
     text: "Dữ liệu sẽ không thể phục hồi.",
     type: 'warning',
     showCancelButton: true,

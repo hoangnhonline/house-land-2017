@@ -3,14 +3,14 @@
 use Illuminate\Database\Eloquent\Model;
 
 
-class CateType extends Model  {
+class ThongSo extends Model  {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'cate_type';	
+	protected $table = 'thong_so';	
 
 	 /**
      * Indicates if the model should be timestamped.
@@ -23,11 +23,6 @@ class CateType extends Model  {
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'slug', 'description', 'display_order', 'meta_id', 'status'];
-
-    public function cateParent()
-    {
-        return $this->hasMany('App\Models\CateParent', 'type_id');
-    }  
-
+    protected $fillable = ['type_id', 'name', 'display_order'];
+ 
 }

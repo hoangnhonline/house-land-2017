@@ -21,7 +21,7 @@
                     <div class="content">
                         <h4>NhaDat - Chợ Công Nghệ Giá Sỉ</h4>                        
                         <p>Hotline: <span class="tel">1900 63 69 75</span></p>                        
-                        <p>Email: <a href="mailto:muahang@icho.vn">muahang@icho.vn</a></p>
+                        <p>Email: <a href="mailto:muahang@houseland.vn">muahang@houseland.vn</a></p>
                     </div>
                     @if(Session::has('message'))
 	                <p class="alert alert-info" >{{ Session::get('message') }}</p>

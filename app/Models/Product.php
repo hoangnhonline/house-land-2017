@@ -25,7 +25,8 @@ class Product extends Model  {
      */
     protected $fillable = [
                             'code',
-                            'title', 
+                            'title',
+                            'alias',
                             'slug', 
                             'description', 
                             'type_id', 
@@ -43,7 +44,8 @@ class Product extends Model  {
                             'is_hot',
                             'display_order',
                             'created_user',
-                            'updated_user'
+                            'updated_user',
+                            'layout'
                         ];
 
     public static function productTag( $id )
@@ -62,5 +64,17 @@ class Product extends Model  {
             ->get();
         return $query;
    }
+   public function cateType()
+    {
+        return $this->belongsTo('App\Models\CateType', 'type_id');
+    }
+    public function cateParent()
+    {
+        return $this->belongsTo('App\Models\CateParent', 'parent_id');
+    }
+    public function cate()
+    {
+        return $this->belongsTo('App\Models\Cate', 'cate_id');
+    }
     
 }

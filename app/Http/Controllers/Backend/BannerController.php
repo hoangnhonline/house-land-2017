@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Models\LoaiSp;
+use App\Models\CateType;
 use App\Models\Cate;
 use App\Models\LandingProjects;
 use Helper, File, Session, Auth;
@@ -29,7 +29,7 @@ class BannerController extends Controller
         $arrSearch['object_type'] = $object_type = $request->object_type;
         $detail = (object) [];
         if( $object_type == 1){
-            $detail = LoaiSp::find( $object_id );
+            $detail = CateType::find( $object_id );
         }
         if( $object_type == 2){
             $detail = Cate::find( $object_id );
@@ -74,7 +74,7 @@ class BannerController extends Controller
         $object_id = $request->object_id;
         $object_type = $request->object_type;
         if( $object_type == 1){
-            $detail = LoaiSp::find( $object_id );
+            $detail = CateType::find( $object_id );
         }
         if( $object_type == 2){
             $detail = Cate::find( $object_id );
@@ -129,7 +129,7 @@ class BannerController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$destionation);
+            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             
             $dataArr['image_url'] = $destionation;
         }
@@ -168,7 +168,7 @@ class BannerController extends Controller
         $object_id = $request->object_id;
         $object_type = $request->object_type;
         if( $object_type == 1){
-            $detail = LoaiSp::find( $object_id );
+            $detail = CateType::find( $object_id );
         }
         if( $object_type == 2){
             $detail = Cate::find( $object_id );
@@ -204,7 +204,7 @@ class BannerController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$destionation);
+            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             
             $dataArr['image_url'] = $destionation;
         }

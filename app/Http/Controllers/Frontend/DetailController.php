@@ -272,7 +272,7 @@ class DetailController extends Controller
         {
             foreach ($hinhXoaArr as $image_id_xoa) {
                 $model = ProductImg::find($image_id_xoa);
-                $urlXoa = config('icho.upload_path')."/".$model->image_url;
+                $urlXoa = config('houseland.upload_path')."/".$model->image_url;
                 if(is_file($urlXoa)){
                     unlink($urlXoa);
                 }
@@ -302,11 +302,11 @@ class DetailController extends Controller
                         }
                         $destionation = date('Y/m/d'). '/'. end($tmp);
                         
-                        File::move(config('icho.upload_path').$image_url, config('icho.upload_path').$destionation);
+                        File::move(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);
 
-                        Image::make(config('icho.upload_path').$destionation)->resize(170, 105, function ($constraint) {
+                        Image::make(config('houseland.upload_path').$destionation)->resize(170, 105, function ($constraint) {
                                 $constraint->aspectRatio();
-                        })->save(config('icho.upload_thumbs_path').$destionation);
+                        })->save(config('houseland.upload_thumbs_path').$destionation);
                         $imageArr['name'][] = $destionation;
 
                         $imageArr['is_thumbnail'][] = $dataArr['thumbnail_id'] == $image_url  ? 1 : 0;

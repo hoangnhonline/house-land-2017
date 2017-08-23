@@ -104,8 +104,8 @@ class ArticlesController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$destionation);
-            $img = Image::make(config('icho.upload_path').$destionation);
+            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
+            $img = Image::make(config('houseland.upload_path').$destionation);
             $w_img = $img->width();
             $h_img = $img->height();
             $tile1 = 0.07697044;
@@ -113,13 +113,13 @@ class ArticlesController extends Controller
             $h_tile1 = $h_img/128;
          
             if($w_tile1- $h_tile1 <= $tile1){
-                Image::make(config('icho.upload_path').$destionation)->resize(203, null, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(203, null, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('icho.upload_thumbs_path_articles').$destionation);
+                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
             }else{
-                Image::make(config('icho.upload_path').$destionation)->resize(null, 128, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(null, 128, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('icho.upload_thumbs_path_articles').$destionation);
+                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
             }
 
             $tile2 = 0;
@@ -127,14 +127,14 @@ class ArticlesController extends Controller
             $h_tile2 = $h_img/200;
            
             if($w_tile2- $h_tile2 <= $tile2){
-                Image::make(config('icho.upload_path').$destionation)->resize(325, null, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(325, null, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('icho.upload_thumbs_path_articles').'325x200/'.$destionation);
+                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
             }else{
                 dd('123');
-                Image::make(config('icho.upload_path').$destionation)->resize(null, 200, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(null, 200, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('icho.upload_thumbs_path_articles').'325x200/'.$destionation);
+                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
             }
 
             $dataArr['image_url'] = $destionation;
@@ -272,9 +272,9 @@ class ArticlesController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['image_url'], config('icho.upload_path').$destionation);
+            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             
-            $img = Image::make(config('icho.upload_path').$destionation);
+            $img = Image::make(config('houseland.upload_path').$destionation);
             $w_img = $img->width();
             $h_img = $img->height();
             $tile1 = 0.07697044;
@@ -282,13 +282,13 @@ class ArticlesController extends Controller
             $h_tile1 = $h_img/128;
          
             if($w_tile1- $h_tile1 <= $tile1){
-                Image::make(config('icho.upload_path').$destionation)->resize(203, null, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(203, null, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('icho.upload_thumbs_path_articles').$destionation);
+                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
             }else{
-                Image::make(config('icho.upload_path').$destionation)->resize(null, 128, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(null, 128, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('icho.upload_thumbs_path_articles').$destionation);
+                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
             }
 
             $tile2 = 0;
@@ -296,13 +296,13 @@ class ArticlesController extends Controller
             $h_tile2 = $h_img/200;
            
             if($w_tile2- $h_tile2 <= $tile2){
-                Image::make(config('icho.upload_path').$destionation)->resize(325, null, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(325, null, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('icho.upload_thumbs_path_articles').'325x200/'.$destionation);
+                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
             }else{                
-                Image::make(config('icho.upload_path').$destionation)->resize(null, 200, function ($constraint) {
+                Image::make(config('houseland.upload_path').$destionation)->resize(null, 200, function ($constraint) {
                         $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('icho.upload_thumbs_path_articles').'325x200/'.$destionation);
+                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
             }
             $dataArr['image_url'] = $destionation;
         }

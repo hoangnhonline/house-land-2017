@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Cate;
-use App\Models\LoaiSp;
+use App\Models\CateType;
 use App\Models\MetaData;
 use Helper, File, Session, Auth;
 
@@ -22,14 +22,14 @@ class CateController extends Controller
     {        
         if( $request->loai_id ){
             $loai_id = $request->loai_id;
-            $loaiSp = LoaiSp::find($loai_id);
+            $loaiSp = CateType::find($loai_id);
         }else{
-            $loaiSp = LoaiSp::orderBy('id')->first();
+            $loaiSp = CateType::orderBy('id')->first();
             $loai_id = $loaiSp->id;    
         }
 
         $items = Cate::where('loai_id', '=', $loai_id)->where('status', 1)->orderBy('display_order')->get();
-        $loaiSpArr = LoaiSp::where('status', 1)->orderBy('display_order')->get();
+        $loaiSpArr = CateType::where('status', 1)->orderBy('display_order')->get();
         return view('backend.cate.index', compact( 'items', 'loaiSp' , 'loai_id', 'loaiSpArr'));
     }
 
@@ -42,7 +42,7 @@ class CateController extends Controller
     {
         $loai_id = isset($request->loai_id) ? $request->loai_id : 0;
         
-        $loaiSpArr = LoaiSp::where('status', 1)->orderBy('display_order')->get();
+        $loaiSpArr = CateType::where('status', 1)->orderBy('display_order')->get();
 
         return view('backend.cate.create', compact( 'loai_id', 'loaiSpArr'));
     }
@@ -84,7 +84,7 @@ class CateController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['icon_url'], config('icho.upload_path').$destionation);
+            File::move(config('houseland.upload_path').$dataArr['icon_url'], config('houseland.upload_path').$destionation);
             
             $dataArr['icon_url'] = $destionation;
         }
@@ -140,12 +140,12 @@ class CateController extends Controller
     public function edit($id)
     {
         $detail = Cate::find($id);
-        $loaiSpArr = LoaiSp::where('status', 1)->orderBy('display_order')->get();
+        $loaiSpArr = CateType::where('status', 1)->orderBy('display_order')->get();
         $meta = (object) [];
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
         }       
-        $loaiSp = LoaiSp::find($detail->loai_id); 
+        $loaiSp = CateType::find($detail->loai_id); 
         return view('backend.cate.edit', compact( 'detail', 'loaiSpArr', 'meta', 'loaiSp'));
     }
 
@@ -186,7 +186,7 @@ class CateController extends Controller
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
-            File::move(config('icho.upload_path').$dataArr['icon_url'], config('icho.upload_path').$destionation);
+            File::move(config('houseland.upload_path').$dataArr['icon_url'], config('houseland.upload_path').$destionation);
             
             $dataArr['icon_url'] = $destionation;
         }

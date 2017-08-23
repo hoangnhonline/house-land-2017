@@ -9,7 +9,7 @@
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
     <!-- Sidebar toggle button-->
-    @if(Auth::user()->email != "huongll@icho.vn")
+    @if(Auth::user()->email != "huongll@houseland.vn")
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>

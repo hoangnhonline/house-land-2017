@@ -21,7 +21,7 @@
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
       <a href="{{ route('loai-sp.thuoc-tinh', ['loai_id' => $detailLoai->id]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
-       <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('loai-sp.index')}}" style="margin-bottom:5px">Quay lại</a>
+       <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('cate-parent.index')}}" style="margin-bottom:5px">Quay lại</a>
       <div class="box">
 
         <div class="box-header with-border">
@@ -49,7 +49,7 @@
                   <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
-                  <a href="{{ route( 'loai-sp.edit', [ 'id' => $item->id ]) }}">{{ $item->text_hien_thi }}</a>
+                  <a href="{{ route( 'cate-parent.edit', [ 'id' => $item->id ]) }}">{{ $item->text_hien_thi }}</a>
                   
                 </td>
                 <td>
@@ -63,9 +63,9 @@
                 </td>
                 <td style="white-space:nowrap; text-align:right">
                  
-                  <a href="{{ route( 'loai-sp.edit-thuoc-tinh', [ 'loai_id' => $item->loai_id,'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                  <a href="{{ route( 'cate-parent.edit-thuoc-tinh', [ 'loai_id' => $item->loai_id,'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
                   
-                  <a onclick="return callDelete('{{ $item->text_hien_thi }}','{{ route( 'loai-sp.destroyThuocTinh', ['loai_id' => $item->loai_id, 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                  <a onclick="return callDelete('{{ $item->text_hien_thi }}','{{ route( 'cate-parent.destroyThuocTinh', ['loai_id' => $item->loai_id, 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                  
                 </td>
               </tr> 

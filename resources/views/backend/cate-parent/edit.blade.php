@@ -8,15 +8,15 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('loai-sp.index') }}">Danh mục cha</a></li>
+      <li><a href="{{ route('cate-parent.index') }}">Danh mục cha</a></li>
       <li class="active"><span class="glyphicon glyphicon-pencil"></span></li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default btn-sm" href="{{ route('loai-sp.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <a class="btn btn-primary btn-sm" href="{{ route('danh-muc', $detail->slug ) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+    <a class="btn btn-default btn-sm" href="{{ route('cate-parent.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <a class="btn btn-primary btn-sm" href="{{ route('cate-type', $detail->slug ) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
     <div class="row">
       <!-- left column -->
 
@@ -168,7 +168,7 @@
             <input type="hidden" name="banner_name" id="banner_name" value="{{ old('banner_name') }}"/>  
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
-              <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('loai-sp.index')}}">Hủy</a>
+              <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('cate-parent.index')}}">Hủy</a>
             </div>
             
         </div>

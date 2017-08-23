@@ -9,10 +9,10 @@
             <input type="hidden" name="search_tupe" id="search_type" value="{{ $search_type }}">
             <div class="form-group">
               <label for="email">Danh mục cha</label>
-              <select class="form-control" name="estate_type_id" id="estate_type_id_search">
+              <select class="form-control" name="type_id" id="type_id_search">
                 <option value="">--Chọn--</option>
                 @foreach( $estateTypeArr as $value )
-                <option value="{{ $value->id }}" {{ $value->id == $arrSearch['estate_type_id'] ? "selected" : "" }}>{{ $value->name }}</option>
+                <option value="{{ $value->id }}" {{ $value->id == $arrSearch['type_id'] ? "selected" : "" }}>{{ $value->name }}</option>
                 @endforeach
               </select>
             </div>
@@ -89,7 +89,7 @@
               @endforeach
             @else
             <tr>
-              <td colspan="9">{{ $arrSearch['estate_type_id'] == -1 ? "Vui lòng chọn danh mục để lọc" :  "Không có dữ liệu." }}</td>
+              <td colspan="9">{{ $arrSearch['type_id'] == -1 ? "Vui lòng chọn danh mục để lọc" :  "Không có dữ liệu." }}</td>
             </tr>
             @endif
 

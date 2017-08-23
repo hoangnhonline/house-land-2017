@@ -14,6 +14,7 @@ use App\Models\ProductImg;
 use App\Models\MetaData;
 use App\Models\Tag;
 use App\Models\TagObjects;
+use App\Models\ThongSo;
 
 use Helper, File, Session, Auth, Hash, URL, Image;
 
@@ -76,67 +77,7 @@ class ProductController extends Controller
         return view('backend.product.index', compact( 'items', 'arrSearch', 'cateTypeList', 'cateParentList', 'cateList'));        
     }
 
-    public function kygui(Request $request)
-    {
-
-        $arrSearch['status'] = $status = 2;   
-        $arrSearch['cart_status'] = $cart_status = isset($request->cart_status) ? $request->cart_status : 1;     
-        $arrSearch['type'] = $type = isset($request->type) ? $request->type : 1;
-        $arrSearch['estate_type_id'] = $estate_type_id = isset($request->estate_type_id) ? $request->estate_type_id : null;
-        $arrSearch['district_id'] = $district_id = isset($request->district_id) ? $request->district_id : null;
-        $arrSearch['city_id'] = $city_id = isset($request->city_id) ? $request->city_id : null;
-        $arrSearch['ward_id'] = $ward_id = isset($request->ward_id) ? $request->ward_id : null;
-        $arrSearch['project_id'] = $project_id = isset($request->project_id) ? $request->project_id : null;
-        $arrSearch['street_id'] = $street_id = isset($request->street_id) ? $request->street_id : null;
-
-        $arrSearch['name'] = $name = isset($request->name) && trim($request->name) != '' ? trim($request->name) : '';       
-
-
-        $query = Product::where('product.status', 2);
-        if( $type ){
-            $query->where('product.type', $type);
-        }
-        if( $estate_type_id ){
-            $query->where('product.estate_type_id', $estate_type_id);
-        }
-        if( $cart_status ){
-            $query->where('product.cart_status', $cart_status);
-        }
-        if( $city_id ){
-            $query->where('product.city_id', $city_id);
-        }
-        if( $district_id ){
-            $query->where('product.district_id', $district_id);
-        }
-        if( $ward_id ){
-            $query->where('product.ward_id', $ward_id);
-        }
-        if( $project_id ){
-            $query->where('product.project_id', $project_id);
-        }
-        if(Auth::user()->role == 1){
-            $query->where('product.created_user', Auth::user()->id);
-        }
-        if( $name != ''){
-            $query->where('product.title', 'LIKE', '%'.$name.'%');            
-        }
-        //$query->join('users', 'users.id', '=', 'product.created_user');
-        $query->join('city', 'city.id', '=', 'product.city_id');        
-        $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id'); 
-        $query->join('estate_type', 'product.estate_type_id', '=','estate_type.id'); 
-        $query->orderBy('product.cart_status', 'asc');
-        $query->orderBy('product.id', 'desc');   
-        $items = $query->select(['product_img.image_url as image_urls','product.*', 'estate_type.slug as slug_loai'])->paginate(50);
-
-        $cityList = City::all();  
-        $estateTypeArr = EstateType::where('type', $type)->get(); 
-        $districtList = District::where('city_id', $city_id)->where('status', 1)->get();
-       // var_dump($detail->district_id);die;
-        $wardList = Ward::where('district_id', $district_id)->get();
-        $streetList = Street::where('district_id', $district_id)->get();
-        $projectList = Project::where('district_id', $district_id)->get();
-        return view('backend.product.kygui', compact( 'items', 'arrSearch', 'cityList', 'estateTypeArr', 'districtList', 'wardList', 'streetList', 'projectList'));
-    }
+   
     public function ajaxGetTienIch(Request $request){
         $district_id = $request->district_id;
         $tienIchLists = Tag::where(['type' => 3])->get();
@@ -153,18 +94,18 @@ class ProductController extends Controller
         }
         Session::flash('message', 'Cập nhật thứ tự tin HOT thành công');
 
-        return redirect()->route('product.index', ['estate_type_id' => $data['estate_type_id'], 'type' => $data['type'], 'is_hot' => 1]);
+        return redirect()->route('product.index', ['type_id' => $data['type_id'], 'type' => $data['type'], 'is_hot' => 1]);
     }
     public function ajaxSearch(Request $request){    
         $search_type = $request->search_type;
-        $arrSearch['estate_type_id'] = $estate_type_id = isset($request->estate_type_id) ? $request->estate_type_id : -1;
+        $arrSearch['type_id'] = $type_id = isset($request->type_id) ? $request->type_id : -1;
         $arrSearch['cate_id'] = $cate_id = isset($request->cate_id) ? $request->cate_id : -1;
         $arrSearch['name'] = $name = isset($request->name) && trim($request->name) != '' ? trim($request->name) : '';
         
         $query = Product::whereRaw('1');
         
-        if( $estate_type_id ){
-            $query->where('product.estate_type_id', $estate_type_id);
+        if( $type_id ){
+            $query->where('product.type_id', $type_id);
         }
         if( $cate_id ){
             $query->where('product.cate_id', $cate_id);
@@ -174,14 +115,14 @@ class ProductController extends Controller
             $query->orWhere('name_extend', 'LIKE', '%'.$name.'%');
         }
         $query->join('users', 'users.id', '=', 'product.created_user');
-        $query->join('estate_type', 'estate_type.id', '=', 'product.estate_type_id');
+        $query->join('estate_type', 'estate_type.id', '=', 'product.type_id');
         $query->join('cate', 'cate.id', '=', 'product.cate_id');
         $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id');        
         $query->orderBy('product.id', 'desc');
         $items = $query->select(['product_img.image_url','product.*','product.id as product_id', 'full_name' , 'product.created_at as time_created', 'users.full_name', 'estate_type.name as ten_loai', 'cate.name as ten_cate'])
         ->paginate(1000);
 
-        $estateTypeArr = EstateType::all();  
+        $estateTypeArr = CateParent::all();  
         
 
         return view('backend.product.content-search', compact( 'items', 'arrSearch', 'estateTypeArr',  'search_type'));
@@ -195,32 +136,20 @@ class ProductController extends Controller
     */
     public function create(Request $request)
     {
-        $tagArr = Tag::where('type', 1)->get();
-        $directionArr = Direction::all();
-        $estate_type_id = $request->estate_type_id ? $request->estate_type_id : null;
-        $type = $request->type ? $request->type : 1;    
+        $tagList = Tag::where('type', 1)->get();
         
-        if( $type ){
-            
-            $estateTypeArr = EstateType::where('type', $type)->select('id', 'name')->orderBy('display_order', 'desc')->get();
-            $priceList = Price::where('type', $type)->get();     
-            
-        }       
-        $priceUnitList = PriceUnit::all();
-        $city_id = $request->city_id ? $request->city_id : 1;
-
-        $districtList = District::where('city_id', $city_id)->where('status', 1)->get();
-
-       // var_dump($detail->district_id);die;
-        $district_id = $request->district_id ? $request->district_id : 2;
-        $wardList = Ward::where('district_id', $district_id)->get();
-        $streetList = Street::where('district_id', $district_id)->get();
-        $projectList = Project::where('district_id', $district_id)->get();
-
-        $tienIchLists = Tag::where(['type' => 3])->get();
-        $areaList = Area::all();
-
-        return view('backend.product.create', compact('estateTypeArr',   'estate_type_id', 'type', 'district_id', 'districtList', 'wardList', 'streetList', 'projectList', 'priceUnitList', 'tagArr', 'tienIchLists', 'directionArr', 'priceList', 'areaList', 'city_id'));
+        $type_id = $request->type_id ? $request->type_id : null;        
+        $cateTypeList = CateType::orderBy('display_order')->get();
+        $cateParentList = CateParent::whereRaw('1=2')->get();
+        $cateList = Cate::whereRaw('1=2')->get();
+        if( $type_id ){            
+            $cateParentList = CateParent::where('type_id', $type_id)
+                            ->select('id', 'name')
+                            ->orderBy('display_order', 'asc')
+                            ->get();                        
+        }             
+        $thongsoList = ThongSo::orderBy('display_order')->get();
+        return view('backend.product.create', compact('cateTypeList',  'type_id', 'cateParentList', 'tagList', 'cateList', 'thongsoList'));
     }
 
     /**
@@ -234,31 +163,20 @@ class ProductController extends Controller
         $dataArr = $request->all();        
         
         $this->validate($request,[
-            'type' => 'required',
-            'estate_type_id' => 'required',
-            'district_id' => 'required',
-            'city_id' => 'required',
-            'ward_id' => 'required',     
+            'type_id' => 'required',
+            'parent_id' => 'required',
+            'cate_id' => 'required',   
+            'code' => 'required',              
             'title' => 'required',
-            'slug' => 'required',
-            'price' => 'required|numeric',
-            'price_unit_id' => 'required',
-            'area' => 'required|numeric',
-            'contact_name' => 'required',
-            'contact_mobile' => 'required'
+            'slug' => 'required'     
         ],
         [            
-            'estate_type_id.required' => 'Bạn chưa chọn loại bất động sản',
-            'district_id.required' => 'Bạn chưa chọn quận',
-            'ward_id.required' => 'Bạn chưa chọn phường',
-            'title.required' => 'Bạn chưa nhập tiêu đề',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'price.required' => 'Bạn chưa nhập giá',
-            'price.numeric' => 'Bạn nhập giá không hợp lệ',
-            'price_unit_id.required' => 'Bạn chưa chọn đơn vị giá',            
-            'area.required' => 'Bạn chưa nhập diện tích',
-            'contact_name.required' => 'Bạn chưa nhập tên liên hệ',            
-            'contact_mobile.required' => 'Bạn chưa nhập số di động liên hệ'
+            'type_id.required' => 'Bạn chưa chọn loại danh mục',
+            'parent_id.required' => 'Bạn chưa chọn danh mục cha',
+            'cate_id.required' => 'Bạn chưa chọn danh mục con',
+            'code.required' => 'Bạn chưa nhập mã sản phẩm',
+            'title.required' => 'Bạn chưa nhập tên sản phẩm',
+            'slug.required' => 'Bạn chưa nhập slug'           
         ]);
            
         $dataArr['slug'] = str_replace(".", "-", $dataArr['slug']);
@@ -269,47 +187,29 @@ class ProductController extends Controller
         $dataArr['status'] = 1;
         $dataArr['created_user'] = Auth::user()->id;
         $dataArr['updated_user'] = Auth::user()->id;              
-        
-        if($dataArr['price_id'] == ''){
-            $dataArr['price_id'] = Helper::getPriceId($dataArr['price'], $dataArr['price_unit_id'], $dataArr['type']);
-        }
+        $dataArr['thong_so_chi_tiet'] = json_encode($dataArr['thong_so_chi_tiet']);
 
-        if($dataArr['area_id'] == ''){
-            $dataArr['area_id'] = Helper::getAreaId($dataArr['area']);   
-        }
         $rs = Product::create($dataArr);
-
-        $product_id = $rs->id;
-        
+        $product_id = $rs->id;       
 
         $this->storeImage( $product_id, $dataArr);
         $this->storeMeta($product_id, 0, $dataArr);
         $this->processRelation($dataArr, $product_id);
-        Session::flash('message', 'Tạo mới tin thành công');
+        Session::flash('message', 'Tạo mới sản phẩm thành công');
 
-        return redirect()->route('product.index', ['estate_type_id' => $dataArr['estate_type_id'], 'type' => $dataArr['type'], 'city_id' => $dataArr['city_id']]);
+        return redirect()->route('product.index', ['type_id' => $dataArr['type_id'], 'parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
     }
     private function processRelation($dataArr, $object_id, $type = 'add'){
     
-        if( $type == 'edit'){
-          
+        if( $type == 'edit'){          
             TagObjects::deleteTags( $object_id, 1);
-            TagObjects::deleteTags( $object_id, 3);
-
         }
         // xu ly tags
         if( !empty( $dataArr['tags'] ) && $object_id ){
             foreach ($dataArr['tags'] as $tag_id) {
                 TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'type' => 1]);
             }
-        }
-
-        // xu ly tien ich
-        if( !empty( $dataArr['tien_ich'] ) && $object_id ){
-            foreach ($dataArr['tien_ich'] as $tag_id) {
-                TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'type' => 3]);
-            }
-        }
+        }      
       
     }
     public function storeMeta( $id, $meta_id, $dataArr ){
@@ -352,7 +252,7 @@ class ProductController extends Controller
         {
             foreach ($hinhXoaArr as $image_id_xoa) {
                 $model = ProductImg::find($image_id_xoa);
-                $urlXoa = config('icho.upload_path')."/".$model->image_url;
+                $urlXoa = config('houseland.upload_path')."/".$model->image_url;
                 if(is_file($urlXoa)){
                     unlink($urlXoa);
                 }
@@ -374,21 +274,21 @@ class ProductController extends Controller
 
                         $tmp = explode('/', $image_url);
 
-                        if(!is_dir('uploads/'.date('Y/m/d'))){
-                            mkdir('uploads/'.date('Y/m/d'), 0777, true);
+                        if(!is_dir('public/uploads/'.date('Y/m/d'))){
+                            mkdir('public/uploads/'.date('Y/m/d'), 0777, true);
                         }
-                        if(!is_dir('uploads/thumbs/'.date('Y/m/d'))){
-                            mkdir('uploads/thumbs/'.date('Y/m/d'), 0777, true);
+                        if(!is_dir('public/uploads/thumbs/'.date('Y/m/d'))){
+                            mkdir('public/uploads/thumbs/'.date('Y/m/d'), 0777, true);
                         }
 
                         $destionation = date('Y/m/d'). '/'. end($tmp);
-                        //var_dump(config('icho.upload_path').$image_url, config('icho.upload_path').$destionation);die;
-                        File::move(config('icho.upload_path').$image_url, config('icho.upload_path').$destionation);
+                        //var_dump(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);die;
+                        File::move(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);
 
                         $imageArr['is_thumbnail'][] = $is_thumbnail = $dataArr['thumbnail_id'] == $image_url  ? 1 : 0;
 
                         if($is_thumbnail == 1){
-                            $img = Image::make(config('icho.upload_path').$destionation);
+                            $img = Image::make(config('houseland.upload_path').$destionation);
                             $w_img = $img->width();
                             $h_img = $img->height();
                             $tile = 0.0140056;
@@ -396,13 +296,13 @@ class ProductController extends Controller
                             $h_tile = $h_img/105;
                          
                             if($w_tile - $h_tile <= 0.0140056){
-                                Image::make(config('icho.upload_path').$destionation)->resize(170, null, function ($constraint) {
+                                Image::make(config('houseland.upload_path').$destionation)->resize(170, null, function ($constraint) {
                                         $constraint->aspectRatio();
-                                })->crop(170, 105)->save(config('icho.upload_thumbs_path').$destionation);
+                                })->crop(170, 105)->save(config('houseland.upload_thumbs_path').$destionation);
                             }else{
-                                Image::make(config('icho.upload_path').$destionation)->resize(null, 105, function ($constraint) {
+                                Image::make(config('houseland.upload_path').$destionation)->resize(null, 105, function ($constraint) {
                                         $constraint->aspectRatio();
-                                })->crop(170, 105)->save(config('icho.upload_thumbs_path').$destionation);
+                                })->crop(170, 105)->save(config('houseland.upload_thumbs_path').$destionation);
                             }
 
                         }
@@ -446,34 +346,28 @@ class ProductController extends Controller
     */
     public function edit($id)
     {        
-        $tagArr = Tag::where('type', 1)->get();
+        $tagList = Tag::where('type', 1)->get();
         $hinhArr = (object) [];
         $detail = Product::find($id);
        // var_dump($detail->type);die;
         $hinhArr = ProductImg::where('product_id', $id)->lists('image_url', 'id');     
-        $estateTypeArr = EstateType::where('type', $detail->type)->get();
-        $priceList = Price::where('type', $detail->type)->get();
-        $estate_type_id = $detail->estate_type_id;             
-        $detailEstate = EstateType::find($estate_type_id);
-       
+        $cateTypeList = CateType::orderBy('display_order')->get();
+        $cateParentList = CateParent::where('type_id', $detail->type_id)
+                        ->orderBy('display_order')->get();
+        $cateList = Cate::where('parent_id', $detail->parent_id)->get();
+
         $meta = (object) [];
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
         }               
-        $priceUnitList = PriceUnit::all();
-        $districtList = District::where('city_id', 1)->where('status', 1)->get();
-       // var_dump($detail->district_id);die;
-        $wardList = Ward::where('district_id', $detail->district_id)->get();
-        $streetList = Street::where('district_id', $detail->district_id)->get();
-        $projectList = Project::where('district_id', $detail->district_id)->get();
-
-        $tagSelected = Product::productTag($id);
-        $tienIchSelected = Product::productTienIch($id);
         
-        $tienIchLists = Tag::where(['type' => 3])->get();
-        $directionArr = Direction::all();
-        $areaList = Area::all();
-        return view('backend.product.edit', compact( 'detail', 'hinhArr', 'estateTypeArr',  'meta', 'priceUnitList', 'districtList', 'wardList', 'streetList','projectList', 'detailEstate', 'tagSelected', 'tagArr', 'tienIchLists', 'tienIchSelected', 'directionArr', 'areaList', 'priceList'));
+        $tagSelected = Product::productTag($id);
+        
+        $thongsoList = ThongSo::orderBy('display_order')->get();
+
+        $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
+
+        return view('backend.product.edit', compact( 'detail', 'hinhArr', 'cateTypeList',  'meta', 'cateParentList', 'cateList', 'tagList', 'tagSelected', 'thongsoList', 'arrThongSo'));
     }
     public function ajaxDetail(Request $request)
     {       
@@ -492,48 +386,31 @@ class ProductController extends Controller
     {
         $dataArr = $request->all();
         
-        $this->validate($request,[
-            'type' => 'required',
-            'estate_type_id' => 'required',
-            'city_id' => 'required',
-            'district_id' => 'required',
-            'ward_id' => 'required',            
+         $this->validate($request,[
+            'type_id' => 'required',
+            'parent_id' => 'required',
+            'cate_id' => 'required',   
+            'code' => 'required',              
             'title' => 'required',
-            'slug' => 'required',
-            'price' => 'required|numeric',
-            'price_unit_id' => 'required',
-            'area' => 'required|numeric',
-            'contact_name' => 'required',
-            'contact_mobile' => 'required'
+            'slug' => 'required'     
         ],
         [            
-            'estate_type_id.required' => 'Bạn chưa chọn loại bất động sản',
-            'district_id.required' => 'Bạn chưa chọn quận',
-            'ward_id.required' => 'Bạn chưa chọn phường',
-            'title.required' => 'Bạn chưa nhập tiêu đề',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'price.required' => 'Bạn chưa nhập giá',
-            'price.numeric' => 'Bạn nhập giá không hợp lệ',
-            'price_unit_id.required' => 'Bạn chưa chọn đơn vị giá',            
-            'area.required' => 'Bạn chưa nhập diện tích',
-            'contact_name.required' => 'Bạn chưa nhập tên liên hệ',            
-            'contact_mobile.required' => 'Bạn chưa nhập số di động liên hệ'
+            'type_id.required' => 'Bạn chưa chọn loại danh mục',
+            'parent_id.required' => 'Bạn chưa chọn danh mục cha',
+            'cate_id.required' => 'Bạn chưa chọn danh mục con',
+            'code.required' => 'Bạn chưa nhập mã sản phẩm',
+            'title.required' => 'Bạn chưa nhập tên sản phẩm',
+            'slug.required' => 'Bạn chưa nhập slug'           
         ]);
-                  
+           
         $dataArr['slug'] = str_replace(".", "-", $dataArr['slug']);
         $dataArr['slug'] = str_replace("(", "-", $dataArr['slug']);
         $dataArr['slug'] = str_replace(")", "", $dataArr['slug']);
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);        
-        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
-        
-        if($dataArr['price_id'] == ''){
-            $dataArr['price_id'] = Helper::getPriceId($dataArr['price'], $dataArr['price_unit_id'], $dataArr['type']);
-            //var_dump($dataArr['price_id']);die;
-        }
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
+        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;                
+        $dataArr['updated_user'] = Auth::user()->id;              
+        $dataArr['thong_so_chi_tiet'] = json_encode($dataArr['thong_so_chi_tiet']);
 
-        if($dataArr['area_id'] == ''){
-            $dataArr['area_id'] = Helper::getAreaId($dataArr['area']);   
-        }
         $model = Product::find($dataArr['id']);
 
         $model->update($dataArr);
@@ -544,7 +421,7 @@ class ProductController extends Controller
         $this->storeImage( $product_id, $dataArr);
         $this->processRelation($dataArr, $product_id, 'edit');
 
-        Session::flash('message', 'Chỉnh sửa tin thành công');
+        Session::flash('message', 'Cập nhật sản phẩm thành công');
 
         return redirect()->route('product.edit', $product_id);
         
@@ -563,7 +440,7 @@ class ProductController extends Controller
         
         $product_id = $dataArr['id'];        
 
-        Session::flash('message', 'Chỉnh sửa tin thành công');
+        Session::flash('message', 'Chỉnh sửa sản phẩm thành công');
 
     }    
 
@@ -582,7 +459,7 @@ class ProductController extends Controller
         TagObjects::deleteTags( $id, 1);
         TagObjects::deleteTags( $id, 3);
         // redirect
-        Session::flash('message', 'Xóa tin thành công');
+        Session::flash('message', 'Xóa sản phẩm thành công');
         
         return redirect(URL::previous());//->route('product.short');
         
