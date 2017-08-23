@@ -23,7 +23,7 @@
         </a>       
       </li>
       @endif
-      <li class="treeview {{ in_array(\Request::route()->getName(), ['product.index', 'product.create', 'product.edit', 'estate-type.index', 'estate-type.edit', 'estate-type.create', 'cate.index', 'cate.edit', 'cate.create']) ? 'active' : '' }}">
+      <li class="treeview {{ in_array(\Request::route()->getName(), ['product.index', 'product.create', 'product.edit', 'cate-type.index', 'cate-type.edit', 'cate-type.create', 'cate.index', 'cate.edit', 'cate.create']) ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-opencart"></i> 
           <span>Bất động sản</span>
@@ -35,43 +35,13 @@
           <li {{ in_array(\Request::route()->getName(), ['product.index', 'product.edit']) ? "class=active" : "" }}><a href="{{ route('product.index') }}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
           <li {{ \Request::route()->getName() == "product.create" ? "class=active" : "" }}><a href="{{ route('product.create') }}"><i class="fa fa-circle-o"></i> Thêm BĐS</a></li>         
           @if(Auth::user()->role > 1)
-          <li {{ in_array(\Request::route()->getName(), ['estate-type.index', 'estate-type.edit', 'estate-type.create']) ? "class=active" : "" }}><a href="{{ route('estate-type.index') }}"><i class="fa fa-circle-o"></i> Danh mục</a></li>
+          <li {{ in_array(\Request::route()->getName(), ['cate-type.index', 'cate-type.edit', 'cate-type.create']) ? "class=active" : "" }}><a href="{{ route('cate-type.index') }}"><i class="fa fa-circle-o"></i> Danh mục</a></li>
           @endif
         </ul>
-      </li>
-      <li {{ in_array(\Request::route()->getName(), ['pro-content.index', 'pro-content.create', 'pro-content.edit', 'landing-projects.index', 'landing-projects.create', 'landing-projects.edit']) ? "class=active" : "" }}>
-        <a href="{{ route('landing-projects.index') }}">
-          <i class="fa fa-pencil-square-o"></i> 
-          <span>Dự án (Landing page)</span>         
-        </a>       
-      </li>
-      <li {{ in_array(\Request::route()->getName(), ['product.kygui']) ? "class=active" : "" }}>
-        <a href="{{ route('product.kygui') }}">
-          <i class="fa fa-pencil-square-o"></i> 
-          <span>Tin ký gửi</span>         
-        </a>       
-      </li>
-      <li {{ in_array(\Request::route()->getName(), ['cart.create', 'cart.edit', 'cart.index','cart-product.create', 'cart-product.edit', 'cart-product.index']) ? "class=active" : "" }}>
-        <a href="{{ route('cart.index') }}">
-          <i class="fa fa-pencil-square-o"></i> 
-          <span>Giỏ hàng</span>         
-        </a>       
-      </li>       
-      <li class="treeview {{ in_array(\Request::route()->getName(), ['work-group.create', 'work-group.edit', 'work-group.index', 'user-work.create', 'user-work.edit', 'user-work.index']) ? 'active' : '' }}">
-        <a href="#">
-          <i class="fa fa-twitch"></i> 
-          <span>Công việc</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li {{ in_array(\Request::route()->getName(), ['user-work.create', 'user-work.edit', 'user-work.index']) ? "class=active" : "" }}><a href="{{ route('user-work.index') }}"><i class="fa fa-circle-o"></i> Công việc </a></li>
-          @if(Auth::user()->role > 1)
-          <li {{ in_array(\Request::route()->getName(), ['work-group.create', 'work-group.edit', 'work-group.index']) ? "class=active" : "" }}><a href="{{ route('work-group.index') }}"><i class="fa fa-circle-o"></i> Nhóm công việc</a></li>          
-          @endif
-        </ul>
-      </li>
+      </li>      
+      
+     
+      
       @if(Auth::user()->role > 1)      
       <li {{ (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 1 )? "class=active" : "" }}>
         <a href="{{ route('custom-link.index', ['block_id' => 1 ]) }}">

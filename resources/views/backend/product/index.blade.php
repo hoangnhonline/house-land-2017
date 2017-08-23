@@ -1,4 +1,4 @@
-@extends('layout.backend')
+@extends('backend.layout')
 @section('content')
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -20,105 +20,72 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('product.create', ['estate_type_id' => $arrSearch['estate_type_id'], 'type' => $arrSearch['type'], 'city_id' => $arrSearch['city_id']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('product.create', ['type_id' => $arrSearch['type_id'], 'parent_id' => $arrSearch['parent_id'], 'cate_id' => $arrSearch['cate_id']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
         </div>
         <div class="panel-body">
           <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('product.index') }}">            
-            <div class="form-group">              
-              <select class="form-control" name="type" id="type">
-                  <option value="">--Loại--</option>
-                  <option value="1" {{ $arrSearch['type'] == 1 ? "selected" : "" }}>Bán</option>
-                  <option value="2" {{ $arrSearch['type'] == 2 ? "selected" : "" }}>Cho thuê</option>
+                       
+              
+              <div class="form-group">
+              <select class="form-control" name="type_id" id="type_id" style="width:150px;">
+                <option value="">--Loại danh mục--</option>
+                @foreach( $cateTypeList as $value )
+                  <option value="{{ $value->id }}"
+                  {{ $arrSearch['type_id'] == $value->id ? "selected" : "" }}                          
+
+                  >{{ $value->name }}</option>
+                  @endforeach
               </select>
             </div>
-            <div class="form-group">                            
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" name="cart_status[]" value="1" {{ in_array(1, $arrSearch['cart_status'])  ? "checked" : "" }}>
-                  {{ $arrSearch['type'] == 1 ? "Chưa bán" : "Còn trống" }}
-                </label>
-              </div>
-          
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" name="cart_status[]" value="2" {{ in_array(2, $arrSearch['cart_status'])  ? "checked" : "" }}>
-                  {{ $arrSearch['type'] == 1 ? "Đã bán" : "Đã thuê" }}
-                </label>
-              </div>
-          
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" name="cart_status[]" value="3" {{ in_array(3, $arrSearch['cart_status']) ? "checked" : "" }}>
-                  Đã cọc
-                </label>
-              </div>
-              
+            <div class="form-group">              
+              <select class="form-control" name="parent_id" id="parent_id">
+                <option value="">--Danh mục cha--</option>
+                  <?php 
+                  if($arrSearch['type_id']){
+                    $cateParentList = App\Models\CateParent::where('type_id', $arrSearch['type_id'])->get();
+                  }
+                  ?>
+                  @foreach( $cateParentList as $value )
+                    <option value="{{ $value->id }}"
+                    {{ $arrSearch['parent_id'] == $value->id ? "selected" : "" }}                        
+
+                    >{{ $value->name }}</option>
+                    @endforeach
+              </select>
             </div>
-              <div class="form-group">
+            <div class="form-group">              
+              <select class="form-control" name="cate_id" id="cate_id">
+                <option value="">--Danh mục con--</option>
+                  <?php 
+                  if($arrSearch['parent_id']){
+                    $cateList = App\Models\Cate::where('parent_id', $arrSearch['parent_id'])->get();
+                  }
+                  ?>
+                  @foreach( $cateList as $value )
+                    <option value="{{ $value->id }}"
+                    {{ $arrSearch['cate_id'] == $value->id ? "selected" : "" }}                        
+
+                    >{{ $value->name }}</option>
+                    @endforeach
+              </select>
+            </div>          
+            <div class="form-group">              
+              <input type="text" placeholder="Tên sản phẩm" class="form-control" name="title" value="{{ $arrSearch['title'] }}" style="width:140px">
+            </div>
+            <div class="form-group">              
+              <input type="text" placeholder="Mã sản phẩm" class="form-control" name="code" value="{{ $arrSearch['code'] }}" style="width:60px">
+            </div>           
+            <div class="form-group">
                 <div class="checkbox">
                   <label style="color:red; font-weight:bold">
                     <input type="checkbox" name="is_hot" id="is_hot" value="1" {{ $arrSearch['is_hot'] == 1 ? "checked" : "" }}>
-                    Tin HOT
+                     HOT
                   </label>
                 </div>               
               </div>
-              <div class="form-group">
-              <select class="form-control" name="estate_type_id" id="estate_type_id" style="width:150px;">
-                <option value="">--Danh mục--</option>
-                @foreach( $estateTypeArr as $value )
-                  <option value="{{ $value->id }}"
-                  {{ $arrSearch['estate_type_id'] == $value->id ? "selected" : "" }}                          
-
-                  >{{ $value->name }}</option>
-                  @endforeach
-              </select>
-            </div>
-            <div class="form-group">              
-              <select class="form-control" name="city_id" id="city_id">
-                <option value="">--Tỉnh/TP--</option>
-                  @foreach( $cityList as $value )
-                    <option value="{{ $value->id }}"
-                    {{ $arrSearch['city_id'] == $value->id ? "selected" : "" }}                        
-
-                    >{{ $value->name }}</option>
-                    @endforeach
-              </select>
-            </div>
-            <div class="form-group">              
-              <select class="form-control" name="district_id" id="district_id">
-                <option value="">--Quận--</option>
-                  <?php 
-                  $districtList = App\Models\District::where('city_id', $arrSearch['city_id'])->get();
-                  ?>
-                  @foreach( $districtList as $value )
-                    <option value="{{ $value->id }}"
-                    {{ $arrSearch['district_id'] == $value->id ? "selected" : "" }}                        
-
-                    >{{ $value->name }}</option>
-                    @endforeach
-              </select>
-            </div>
-            <div class="form-group">              
-              <select class="form-control" name="ward_id" id="ward_id" style="width:100px">
-                <option value="">--Phường--</option>
-                  @foreach( $wardList as $value )
-                  <option value="{{ $value->id }}"
-                  {{ $arrSearch['ward_id'] == $value->id ? "selected" : "" }}                       
-
-                  >{{ $value->name }}</option>
-                  @endforeach
-              </select>
-            </div>
-            <div class="form-group">              
-              <input type="text" placeholder="Tiêu đề" class="form-control" name="name" value="{{ $arrSearch['name'] }}" style="width:140px">
-            </div>
-            <div class="form-group">              
-              <input type="text" placeholder="Mã tin" class="form-control" name="id" value="{{ $arrSearch['id'] }}" style="width:60px">
-            </div>           
-            
             <button type="submit" class="btn btn-primary btn-sm">Lọc</button>
           </form>         
         </div>
@@ -141,8 +108,7 @@
             @if($items->count() > 0)
             <button type="submit" class="btn btn-warning btn-sm">Save thứ tự</button>
             @endif
-            <input type="hidden" name="estate_type_id" value="{{ $arrSearch['estate_type_id']}}">
-            <input type="hidden" name="type" value="{{ $arrSearch['type']}}">
+            <input type="hidden" name="type_id" value="{{ $arrSearch['type_id']}}">
             <input type="hidden" name="is_hot" value="1">
           @endif
 
@@ -183,7 +149,7 @@
                     @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
                   @endif <br />
-                    <strong style="color:#337ab7;font-style:italic"> {{ Helper::getName($item->estate_type_id, 'estate_type') }}</strong>
+                    <strong style="color:#337ab7;font-style:italic"> {{ Helper::getName($item->type_id, 'estate_type') }}</strong>
                     <p>
                       @if($item->street_id > 0)
                       {{ Helper::getName($item->street_id, 'street') }},&nbsp;
@@ -191,11 +157,11 @@
                       @if($item->ward_id > 0)
                       {{ Helper::getName($item->ward_id, 'ward') }},&nbsp;
                       @endif
-                      @if($item->district_id > 0)
-                      {{ Helper::getName($item->district_id, 'district') }},&nbsp;
+                      @if($item->cate_id > 0)
+                      {{ Helper::getName($item->cate_id, 'district') }},&nbsp;
                       @endif
-                      @if($item->city_id > 0)
-                      {{ Helper::getName($item->city_id, 'city') }}
+                      @if($item->parent_id > 0)
+                      {{ Helper::getName($item->parent_id, 'city') }}
                       @endif
 
                     </p>
@@ -279,7 +245,7 @@ $(document).ready(function(){
     obj.parent().parent().parent().submit(); 
   });
   
-  $('#estate_type_id, #city_id, #type, #district_id, #ward_id, #cart_status').change(function(){    
+  $('#type_id, #parent_id, #type, #cate_id, #ward_id, #cart_status').change(function(){    
     $('#searchForm').submit();
   });  
   $('#is_hot').change(function(){

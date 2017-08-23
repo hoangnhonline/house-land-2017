@@ -7,21 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\EstateType;
+use App\Models\CateType;
+use App\Models\CateParent;
 use App\Models\Cate;
 use App\Models\ProductImg;
 use App\Models\MetaData;
-use App\Models\City;
-use App\Models\District;
-use App\Models\Ward;
-use App\Models\Street;
-use App\Models\PriceUnit;
-use App\Models\Project;
 use App\Models\Tag;
 use App\Models\TagObjects;
-use App\Models\Direction;
-use App\Models\Area;
-use App\Models\Price;
 
 use Helper, File, Session, Auth, Hash, URL, Image;
 
@@ -35,74 +27,53 @@ class ProductController extends Controller
     public function index(Request $request)
     {        
         $arrSearch['status'] = $status = isset($request->status) ? $request->status : 1; 
-        $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;   
-        $arrSearch['cart_status'] = $cart_status = isset($request->cart_status) ? $request->cart_status : [1,2,3];     
-        $arrSearch['type'] = $type = isset($request->type) ? $request->type : 1;
-        $arrSearch['estate_type_id'] = $estate_type_id = isset($request->estate_type_id) ? $request->estate_type_id : null;
-        $arrSearch['city_id'] = $city_id = isset($request->city_id) ? $request->city_id : null;
-        $arrSearch['district_id'] = $district_id = isset($request->district_id) ? $request->district_id : null;
-        $arrSearch['ward_id'] = $ward_id = isset($request->ward_id) ? $request->ward_id : null;
-        $arrSearch['project_id'] = $project_id = isset($request->project_id) ? $request->project_id : null;
-        $arrSearch['street_id'] = $street_id = isset($request->street_id) ? $request->street_id : null;
+        $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;           
+        $arrSearch['type_id'] = $type_id = isset($request->type_id) ? $request->type_id : 1;
+        $arrSearch['parent_id'] = $parent_id = isset($request->parent_id) ? $request->parent_id : null;
+        $arrSearch['cate_id'] = $cate_id = isset($request->cate_id) ? $request->cate_id : null;
 
-        $arrSearch['name'] = $name = isset($request->name) && trim($request->name) != '' ? trim($request->name) : '';
-        $arrSearch['id'] = $id = isset($request->id) && trim($request->id) != '' ? trim($request->id) : '';
-        
-
+        $arrSearch['title'] = $title = isset($request->title) && trim($request->title) != '' ? trim($request->title) : '';
+        $arrSearch['code'] = $code = isset($request->code) && trim($request->code) != '' ? trim($request->code) : '';
 
         $query = Product::where('product.status', $status);
-        if( $type ){
-            $query->where('product.type', $type);
+        $cateTypeList = CateType::orderBy('display_order')->get();
+        $cateParentList = CateParent::whereRaw('1=2');        
+        $cateList = CateParent::whereRaw('1=2');
+        if( $type_id ){
+            $query->where('product.type_id', $type_id);
+            $cateParentList = CateParent::where('type_id', $type_id)->get();
         }
-        if( $estate_type_id ){
-            $query->where('product.estate_type_id', $estate_type_id);
-        }
-        if( $cart_status ){
-            $query->whereIn('product.cart_status', $cart_status);
-        }
-        if( $city_id ){
-            $query->where('product.city_id', $city_id);
-        }
-        if( $district_id ){
-            $query->where('product.district_id', $district_id);
-        }
-        if( $ward_id ){
-            $query->where('product.ward_id', $ward_id);
+        if( $parent_id ){
+            $query->where('product.parent_id', $parent_id);
+            $cateList = Cate::where('parent_id', $parent_id)->get();
+        }        
+        if( $cate_id ){
+            $query->where('product.cate_id', $cate_id);
         }
         if( $is_hot ){
             $query->where('product.is_hot', $is_hot);
-        }
-        if( $project_id ){
-            $query->where('product.project_id', $project_id);
-        }
+        }        
         if(Auth::user()->role == 1){
             $query->where('product.created_user', Auth::user()->id);
         }
-        if( $name != ''){
-            $query->where('product.title', 'LIKE', '%'.$name.'%');            
+        if( $title != ''){
+            $query->where('product.title', 'LIKE', '%'.$title.'%');            
         }
-        if( $id != ''){
-            $query->where('product.id', $id);            
+        if( $code != ''){
+            $query->where('product.code', $code);            
         }
-        //$query->join('users', 'users.id', '=', 'product.created_user');
-        $query->join('city', 'city.id', '=', 'product.city_id');        
+        //$query->join('users', 'users.id', '=', 'product.created_user');        
         $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id'); 
-        $query->join('estate_type', 'product.estate_type_id', '=','estate_type.id'); 
+        $query->join('cate_type', 'product.type_id', '=','cate_type.id'); 
+        $query->join('cate_parent', 'cate_parent.id', '=', 'product.parent_id');
+        $query->leftJoin('cate', 'cate.id', '=', 'product.cate_id');        
         if($is_hot == 1){
             $query->orderBy('product.display_order', 'asc'); 
-        }
-        $query->orderBy('product.cart_status', 'asc'); 
+        }        
         $query->orderBy('product.id', 'desc');   
-        $items = $query->select(['product_img.image_url as image_urls','product.*', 'estate_type.slug as slug_loai'])->paginate(50);
+        $items = $query->select(['product_img.image_url as image_urls','product.*', 'cate_type.slug as slugCateType'])->paginate(50);
 
-        $cityList = City::all();  
-        $estateTypeArr = EstateType::where('type', $type)->get(); 
-        $districtList = District::where('city_id', $city_id)->where('status', 1)->get();
-       // var_dump($detail->district_id);die;
-        $wardList = Ward::where('district_id', $district_id)->get();
-        $streetList = Street::where('district_id', $district_id)->get();
-        $projectList = Project::where('district_id', $district_id)->get();
-        return view('backend.product.index', compact( 'items', 'arrSearch', 'cityList', 'estateTypeArr', 'districtList', 'wardList', 'streetList', 'projectList'));        
+        return view('backend.product.index', compact( 'items', 'arrSearch', 'cateTypeList', 'cateParentList', 'cateList'));        
     }
 
     public function kygui(Request $request)
