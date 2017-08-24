@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Loại danh mục 
+    Danh mục con 
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'cate-type.index' ) }}">Loại danh mục</a></li>
+    <li><a href="{{ route( 'cate.index' ) }}">Danh mục con</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,7 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('cate-type.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('cate.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="box">
 
         <div class="box-header with-border">
@@ -34,7 +34,6 @@
               <th style="width: 1%">#</th>
               <th style="width: 1%;white-space:nowrap">Thứ tự</th>
               <th>Tên</th>
-              <th style="text-align:center">Danh mục cha</th>            
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -48,24 +47,24 @@
                   <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
-                  <a href="{{ route( 'cate-type.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
+                  <a href="{{ route( 'cate.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
                   @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
-                  @endif                  
+                  @endif                   
                   <p>{{ $item->description }}</p>
                 </td>
-                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate-parent.index', ['type_id' => $item->id])}}">{{ $item->cateParent->count() }}</a></td>                
+                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate.index', [$item->id])}}">{{ $item->cates->count() }}</a></td>
+                <td style="text-align:center">
+                  <img class="img-thumbnail" src="{{ $item->icon_mau ? config( 'houseland.upload_url' ).$item->icon_mau  : 'http://placehold.it/60x60' }}" width="40" />
+                </td>              
+                
                 <td style="white-space:nowrap; text-align:right">
-                <a class="btn btn-default btn-sm" href="{{ route('cate-type', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
-                  @if($item->home_style > 0)
-                  <a class="btn btn-primary btn-sm" href="{{ route('banner.index', ['object_type' => 1, 'object_id' => $item->id]) }}" ><span class="badge">
-                    {{ $item->banners->count() }}
-                  </span> Banner </a>
-                  @endif
-                  <a href="{{ route( 'cate-type.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
-                  @if( $item->cateParent->count() == 0)
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'cate-type.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                <a class="btn btn-default btn-sm" href="{{ route('cate-type', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>                
+                   
+                  <a href="{{ route( 'cate.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                  @if( $item->product->count() == 0)
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'cate.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                   @endif
                 </td>
               </tr> 

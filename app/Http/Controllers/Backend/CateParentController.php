@@ -21,7 +21,9 @@ class CateParentController  extends Controller
     */
     public function index(Request $request)
     {
-        $items = CateParent::where('status', 1)->orderBy('display_order', 'asc')->get();
+        $type_id = $request->type_id;
+     
+        $items = CateParent::where('status', 1)->where('type_id', $type_id)->orderBy('display_order', 'asc')->get();
         return view('backend.cate-parent.index', compact( 'items' ));
     }
 
