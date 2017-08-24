@@ -21,10 +21,9 @@ class CateParentController  extends Controller
     */
     public function index(Request $request)
     {
-        $type_id = $request->type_id;
-     
+        $type_id = $request->type_id ? $request->type_id : 1;    
         $items = CateParent::where('status', 1)->where('type_id', $type_id)->orderBy('display_order', 'asc')->get();
-        return view('backend.cate-parent.index', compact( 'items' ));
+        return view('backend.cate-parent.index', compact( 'items', 'type_id'));
     }
 
     /**
@@ -32,141 +31,13 @@ class CateParentController  extends Controller
     *
     * @return Response
     */
-    public function create()
-    {
-        return view('backend.cate-parent.create');
+    public function create(Request $request)
+    {        
+        $type_id = $request->type_id ? $request->type_id : null;
+        return view('backend.cate-parent.create', compact('type_id'));
     }
 
-    public function thuocTinh(Request $request){      
-
-        $loai_id = $request->loai_id;
-        
-        $detailLoai = CateParent::find( $loai_id );
-              
-        
-        $thuocTinhArr = [];
-        $loaiSpArr = CateParent::all();
-        
-        if( $loai_id ){            
-            
-            
-            $loaiThuocTinhArr = LoaiThuocTinh::where('loai_id', $loai_id)->orderBy('display_order')->get();
-
-            if( $loaiThuocTinhArr->count() > 0){
-                foreach ($loaiThuocTinhArr as $value) {
-
-                    $thuocTinhArr[$value->id]['id'] = $value->id;
-                    $thuocTinhArr[$value->id]['name'] = $value->name;
-
-                    $thuocTinhArr[$value->id]['child'] = ThuocTinh::where('loai_thuoc_tinh_id', $value->id)->select('id', 'name')->orderBy('display_order')->orderBy('id')->get()->toArray();
-                }
-                
-            }
-        }        
-        
-        return view('backend.cate-parent.thuoc-tinh', compact( 'detailLoai', 'loai_id', 'thuocTinhArr', 'thuocTinhArr'));
-    }
-
-    public function editThuocTinh(Request $request){      
-
-        $loai_id = $request->loai_id;
-        
-        $detailLoai = CateParent::find( $loai_id );
-        
-        $id = $request->id;
-        $detail = HoverInfo::find( $id );
-
-        $str_thuoctinh_id = $detail->str_thuoctinh_id;
-        $arrSelected = explode(",", $str_thuoctinh_id);      
-        
-        $thuocTinhArr = [];
-        $loaiSpArr = CateParent::all();
-        
-        if( $loai_id ){            
-            
-            
-            $loaiThuocTinhArr = LoaiThuocTinh::where('loai_id', $loai_id)->orderBy('display_order')->get();
-
-            if( $loaiThuocTinhArr->count() > 0){
-                foreach ($loaiThuocTinhArr as $value) {
-
-                    $thuocTinhArr[$value->id]['id'] = $value->id;
-                    $thuocTinhArr[$value->id]['name'] = $value->name;
-
-                    $thuocTinhArr[$value->id]['child'] = ThuocTinh::where('loai_thuoc_tinh_id', $value->id)->select('id', 'name')->orderBy('display_order')->get()->toArray();
-                }
-                
-            }
-        }        
-        
-        return view('backend.cate-parent.edit-thuoc-tinh', compact( 'detailLoai', 'loai_id', 'thuocTinhArr', 'thuocTinhArr', 'arrSelected', 'detail'));
-    }
-
-    public function storeThuocTinh(Request $request)
-    {
-        $dataArr = $request->all();
-        
-        $this->validate($request,[
-            'text_hien_thi' => 'required',
-            
-        ],
-        [
-            'text_hien_thi.required' => 'Bạn chưa nhập text hiển thị',            
-        ]);
-
-        if( !empty($dataArr['str_thuoc_tinh_id'])){
-            $dataArr['str_thuoctinh_id'] = implode(',', $dataArr['str_thuoc_tinh_id']);
-        }
-        $dataArr['display_order'] = 1;
-        HoverInfo::create( $dataArr );
-        Session::flash('message', 'Thêm mới danh sách thuộc tính hiển thị thành công');
-
-        return redirect()->route('cate-parent.list-thuoc-tinh', ['loai_id' => $dataArr['loai_id']]);
-    }
-
-    public function listThuocTinh( Request $request){
-        
-        $loai_id = $request->loai_id;
-        
-        $detailLoai = CateParent::find( $loai_id );
-        $str_thuoctinh_id = '';
-        $items = HoverInfo::where('loai_id', $loai_id)->orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();
-        if( $items){
-            foreach ($items as $key => $value) {
-                $str_thuoctinh_id .= $value->str_thuoctinh_id.",";
-            }
-        }
-        $str_thuoctinh_id = rtrim($str_thuoctinh_id, ",");
-        $tmpArr = explode(",",$str_thuoctinh_id);
-        foreach ($tmpArr as $key => $value) {            
-            $thuoctinh[$value] = ThuocTinh::find($value)->name;
-        }        
-        return view('backend.cate-parent.list-thuoc-tinh', compact('detail', 'detailLoai', 'items', 'thuoctinh'));
-
-    }
-    public function updateThuocTinh(Request $request)
-    {
-        $dataArr = $request->all();
-        
-        $this->validate($request,[
-            'text_hien_thi' => 'required',
-            
-        ],
-        [
-            'text_hien_thi.required' => 'Bạn chưa nhập text hiển thị',            
-        ]);
-  
-        if( !empty($dataArr['str_thuoc_tinh_id'])){
-            $dataArr['str_thuoctinh_id'] = implode(',', $dataArr['str_thuoc_tinh_id']);
-        }
-
-        $dataArr['display_order'] = 1;
-        $model = HoverInfo::find( $dataArr['id'] );
-        $model->update( $dataArr );
-        Session::flash('message', 'Cập nhật thuộc tính hiển thị thành công');
-
-        return redirect()->route('cate-parent.list-thuoc-tinh', ['loai_id' => $dataArr['loai_id']]);
-    }
+    
     /**
     * Store a newly created resource in storage.
     *
@@ -180,90 +51,24 @@ class CateParentController  extends Controller
         $this->validate($request,[
             'name' => 'required',
             'slug' => 'required',
-            'phi_dich_vu' => 'numeric',
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'phi_dich_vu.numeric' => 'Vui lòng nhập phí dịch vụ hợp lệ',
+            'slug.required' => 'Bạn chưa nhập slug',           
         ]);
 
-        $dataArr['bg_color'] = $dataArr['bg_color'] != '' ? $dataArr['bg_color'] : '#EE484F';
-        
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
-       
-        if($dataArr['icon_url'] && $dataArr['icon_name']){
-            
-            $tmp = explode('/', $dataArr['icon_url']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_url'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['icon_url'] = $destionation;
-        }  
-        if($dataArr['banner_menu'] && $dataArr['banner_name']){
-            
-            $tmp = explode('/', $dataArr['banner_menu']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_url'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['banner_menu'] = $destionation;
-        }
-        if($dataArr['icon_mau'] && $dataArr['image_name_mau']){
-            
-            $tmp = explode('/', $dataArr['icon_mau']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_mau'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['icon_mau'] = $destionation;
-        }  
-        if($dataArr['icon_km'] && $dataArr['image_name_km']){
-            
-            $tmp = explode('/', $dataArr['icon_km']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_km'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['icon_km'] = $destionation;
-        }  
-
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
-        $dataArr['menu_ngang'] = isset($dataArr['menu_ngang']) ? 1 : 0;    
-        $dataArr['menu_doc'] = isset($dataArr['menu_doc']) ? 1 : 0;    
-        $dataArr['is_hover'] = isset($dataArr['is_hover']) ? 1 : 0;    
+           
         $dataArr['created_user'] = Auth::user()->id;
-
         $dataArr['updated_user'] = Auth::user()->id;
         $rs = CateParent::create($dataArr);
         $id = $rs->id;
 
         $this->storeMeta( $id, 0, $dataArr);
 
-        Session::flash('message', 'Tạo mới danh mục thành công');
+        Session::flash('message', 'Tạo mới thành công');
 
-        return redirect()->route('cate-parent.index');
+        return redirect()->route('cate-parent.index', ['type_id' => $dataArr['type_id']]);
     }
 
     /**
@@ -290,8 +95,7 @@ class CateParentController  extends Controller
         $meta = (object) [];
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
-        }
-
+        }        
         return view('backend.cate-parent.edit', compact( 'detail', 'meta'));
     }
 
@@ -308,89 +112,25 @@ class CateParentController  extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required',
-            'phi_dich_vu' => 'numeric'
+            'slug' => 'required',           
         ],
         [
             'name.required' => 'Bạn chưa nhập tên danh mục',
-            'slug.required' => 'Bạn chưa nhập slug',
-            'phi_dich_vu.numeric' => 'Vui lòng nhập phí dịch vụ hợp lệ',
+            'slug.required' => 'Bạn chưa nhập slug',            
         ]);
 
-        $dataArr['bg_color'] = $dataArr['bg_color'] != '' ? $dataArr['bg_color'] : '#EE484F';
-
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
-        
-        if($dataArr['icon_url'] && $dataArr['icon_name']){
-            
-            $tmp = explode('/', $dataArr['icon_url']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_url'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['icon_url'] = $destionation;
-        }  
-        if($dataArr['icon_km'] && $dataArr['image_name_km']){
-            
-            $tmp = explode('/', $dataArr['icon_km']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_km'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['icon_km'] = $destionation;
-        } 
-        if($dataArr['banner_menu'] && $dataArr['banner_name']){
-            
-            $tmp = explode('/', $dataArr['banner_menu']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['banner_menu'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['banner_menu'] = $destionation;            
-        }
-        if($dataArr['icon_mau'] && $dataArr['image_name_mau']){
-            
-            $tmp = explode('/', $dataArr['icon_mau']);
-
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
-            }
-
-            $destionation = date('Y/m/d'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['icon_mau'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['icon_mau'] = $destionation;
-        }  
-        
+     
 
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
-        $dataArr['menu_ngang'] = isset($dataArr['menu_ngang']) ? 1 : 0;    
-        $dataArr['menu_doc'] = isset($dataArr['menu_doc']) ? 1 : 0;    
-        $dataArr['is_hover'] = isset($dataArr['is_hover']) ? 1 : 0;    
+       
 
         $model = CateParent::find($dataArr['id']);
         $model->update($dataArr);
 
         $this->storeMeta( $dataArr['id'], $dataArr['meta_id'], $dataArr);
 
-        Session::flash('message', 'Cập nhật danh mục thành công');
+        Session::flash('message', 'Cập nhật thành công');
 
         return redirect()->route('cate-parent.edit', $dataArr['id']);
     }
@@ -423,19 +163,8 @@ class CateParentController  extends Controller
         $model->delete();
 
         // redirect
-        Session::flash('message', 'Xóa danh mục thành công');
+        Session::flash('message', 'Xóa thành công');
         return redirect()->route('cate-parent.index');
     }
 
-    public function destroyThuocTinh($id)
-    {
-        // delete
-        $model = HoverInfo::find($id);
-        $loai_id = $model->loai_id;
-        $model->delete();
-
-        // redirect
-        Session::flash('message', 'Xóa danh mục thành công');
-        return redirect()->route('cate-parent.list-thuoc-tinh', ['loai_id' => $loai_id]);
-    }
 }
