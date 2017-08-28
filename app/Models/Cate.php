@@ -25,9 +25,13 @@ class Cate extends Model  {
      */
     protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'parent_id', 'type_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
 
-    public function sanPham()
+    public function product()
     {
         return $this->hasMany('App\Models\Product', 'cate_id');
+    }
+    public function cateParent()
+    {
+        return $this->belongTos('App\Models\CateParent', 'parent_id');
     }
     
 }

@@ -106,7 +106,7 @@
                                         <div class="checkbox">
                                             <label style="font-weight:bold;color:red">
                                             <input type="checkbox" name="is_hot" value="1" {{ old('is_hot', $detail->is_hot ) == 1 ? "checked" : "" }}>
-                                            Sản phẩm HOT
+                                            HOT
                                             </label>
                                         </div>
                                     </div>

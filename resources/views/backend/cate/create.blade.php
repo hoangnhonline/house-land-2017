@@ -39,7 +39,27 @@
                       </ul>
                   </div>
               @endif
-              
+                <div class="form-group col-md-6 none-padding">
+                    <label for="email">Loại danh mục<span class="red-star">*</span></label>
+                    <select class="form-control req" name="type_id" id="type_id">
+                        <option value="">--Chọn--</option>
+                        @foreach( $cateTypeList as $value )
+                        <option value="{{ $value->id }}"
+                        {{ old('type_id', $type_id) == $value->id ? "selected" : "" }} >{{ $value->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6  pleft-5">
+                    <label for="email">Danh mục cha <span class="red-star">*</span></label>
+                    <select class="form-control req" name="parent_id" id="parent_id">
+                        <option value="">-- chọn --</option>
+                        @foreach( $cateParentList as $value )
+                        <option value="{{ $value->id }}"
+                        {{ old('parent_id', $parent_id) == $value->id ? "selected" : "" }}                           
+                        >{{ $value->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                  <!-- text input -->
                 <div class="form-group">
                   <label>Tên danh mục <span class="red-star">*</span></label>
@@ -47,10 +67,10 @@
                 </div>
                 <div class="form-group">
                   <label>Slug <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
+                  <input type="text" class="form-control" readonly="readonly" name="slug" id="slug" value="{{ old('slug') }}">
                 </div>
                   <div class="clearfix"></div>
-                <div class="form-group" style="margin-top:15px;padding-bottom:25px !important;">
+                <div class="form-group">
                   <div class="checkbox col-md-3" >
                     <label>
                       <input type="checkbox" name="is_hot" value="1" {{ old('is_hot') == 1 ? "checked" : "" }}>
@@ -66,7 +86,7 @@
                 </div> 
                 
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Ảnh đại diện</label>    
+                  <label class="col-md-3 row">Ảnh đại diện (265 x 150px)</label>    
                   <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
                     

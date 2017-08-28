@@ -144,7 +144,7 @@
                     <img class="img-thumbnail lazy" width="80" data-original="{{ $item->image_urls ? Helper::showImage($item->image_urls) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="Nổi bật" title="Nổi bật" />
                   </td>
                   <td>                  
-                    <a style="color:{{ $item->cart_status == 1 ? "#444" : "red" }};font-weight:bold" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a> 
+                    <a style="color:#444;font-weight:bold" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a> 
                   @if( $item->is_hot == 1 )
                   <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
                   @endif 
@@ -220,7 +220,7 @@ $(document).ready(function(){
     obj.parent().parent().parent().submit(); 
   });
   
-  $('#type_id, #parent_id, #type, #cate_id, #ward_id, #cart_status').change(function(){    
+  $('#type_id, #parent_id, #type, #cate_id').change(function(){    
     $('#searchForm').submit();
   });  
   $('#is_hot').change(function(){

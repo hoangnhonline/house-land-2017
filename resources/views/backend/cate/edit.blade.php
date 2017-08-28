@@ -44,7 +44,27 @@
                       </ul>
                   </div>
               @endif
-              
+              <div class="form-group col-md-6 none-padding">
+                  <label for="email">Loại danh mục<span class="red-star">*</span></label>
+                  <select class="form-control req" name="type_id" id="type_id">
+                      <option value="">--Chọn--</option>
+                      @foreach( $cateTypeList as $value )
+                      <option value="{{ $value->id }}"
+                      {{ old('type_id', $detail->type_id) == $value->id ? "selected" : "" }} >{{ $value->name }}</option>
+                      @endforeach
+                  </select>
+              </div>
+              <div class="form-group col-md-6 pleft-5">
+                  <label for="email">Danh mục cha <span class="red-star">*</span></label>
+                  <select class="form-control req" name="parent_id" id="parent_id">
+                      <option value="">-- chọn --</option>
+                      @foreach( $cateParentList as $value )
+                      <option value="{{ $value->id }}"
+                      {{ old('parent_id', $detail->parent_id) == $value->id ? "selected" : "" }}                           
+                      >{{ $value->name }}</option>
+                      @endforeach
+                  </select>
+              </div>
                <!-- text input -->
               <div class="form-group">
                 <label>Tên danh mục <span class="red-star">*</span></label>
@@ -59,7 +79,7 @@
                   <div class="checkbox col-md-3" >
                     <label>
                       <input type="checkbox" name="is_hot" value="1" {{ $detail->is_hot == 1 ? "checked" : "" }}>
-                      Danh mục nổi bật
+                      HOT
                     </label>
                   </div>                  
                 </div>
@@ -79,7 +99,7 @@
                 </select>
               </div>                
               <div class="form-group" style="margin-top:10px">  
-                <label class="col-md-3 row">Ảnh đại diện</label>    
+                <label class="col-md-3 row">Ảnh đại diện (265 x 150px)</label>    
                 <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url ) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
                     

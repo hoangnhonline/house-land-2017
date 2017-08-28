@@ -80,7 +80,7 @@
                   
                   <p>{{ $item->description }}</p>
                 </td>
-                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate.index', [$item->id])}}">{{ $item->cates->count() }}</a></td>
+                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate.index', ['parent_id' => $item->id, 'type_id' => $item->type_id])}}">{{ $item->cates->count() }}</a></td>
                 
                 <td style="white-space:nowrap; text-align:right">
                 <a class="btn btn-default btn-sm" href="{{ route('cate-type', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>                 
