@@ -56,7 +56,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         	$supportList = Support::orderBy('display_order', 'asc')->get();
         	$menuList = Menu::where('menu_id', 1)->orderBy('display_order', 'asc')->get();
         	
-        	$cateTypeList = CateType::orderBy('display_order')->get();
+        	$cateTypeList = CateType::where('status', 1)->orderBy('display_order')->get();
 
 			$view->with( [
 					'settingArr' => $settingArr, 

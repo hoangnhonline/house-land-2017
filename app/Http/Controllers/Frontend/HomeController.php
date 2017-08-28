@@ -5,24 +5,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\EstateType;
 use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Location;
-use App\Models\City;
-use App\Models\District;
-use App\Models\Ward;
-use App\Models\Street;
-use App\Models\Project;
 use App\Models\Articles;
 use App\Models\ArticlesCate;
 use App\Models\Customer;
 use App\Models\Newsletter;
-use App\Models\PriceRange;
-use App\Models\Video;
-use App\Models\Price;
-use App\Models\Area;
 use App\Models\Settings;
+use App\Models\CateType;
+use App\Models\CateParent;
+use App\Models\Cate;
 
 use Helper, File, Session, Auth, Hash;
 
@@ -36,37 +29,7 @@ class HomeController extends Controller
         
        
 
-    }
-    public function getChild(Request $request){
-        $module = $request->mod;
-        $id = $request->id;
-        $column = $request->col;
-        return Helper::getChild($module, $column, $id);
-    }
-    /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
-    public function showLink(Request $request){
-        $site_id = $request->site_id;
-        $all = LinkSite::where('site_id', $site_id)->get();
-        $i = 0;
-        foreach($all as $data){
-            $i++;
-            echo $i."-"."<strong>".$data->link."</strong><br>";
-            if($data->images->count()){
-                foreach ($data->images as $value) {
-                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$value->image_url;
-                    echo "<br>";
-                }
-            }
-            echo "<hr>";
-        }
-        die;
-
-
-    }
+    }    
     public function loadSlider(){
         return view('frontend.home.ajax-slider');
     }
@@ -74,30 +37,19 @@ class HomeController extends Controller
     {         
         $productArr = [];
         $hoverInfo = [];
-        $loaiSp = EstateType::where('status', 1)->get();
+        $loaiSp = CateType::where('status', 1)->orderBy('display_order')->get();
         $bannerArr = [];          
         $articlesArr = Articles::where(['cate_id' => 1])->orderBy('id', 'desc')->get();
-        $hotProduct = Product::where('product.slug', '<>', '')
-                    ->where('product.type', 1)
+        $hotProduct = Product::where('product.slug', '<>', '')                    
                     ->where('product.status', 1)
                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')            
-                    ->join('estate_type', 'estate_type.id', '=','product.estate_type_id')      
-                    ->select('product_img.image_url as image_urls', 'product.*', 'estate_type.slug as slug_loai')
+                    ->join('cate_type', 'cate_type.id', '=','product.type_id')      
+                    ->join('cate_parent', 'cate_type.id', '=','product.type_id')      
+                    ->select('product_img.image_url as image_url', 'product.*', 'cate_type.slug as slug_type')
                     ->where('product_img.image_url', '<>', '')                                         
-                    ->orderBy('product.is_hot', 'desc')
-                    ->orderBy('product.cart_status', 'asc')                    
+                    ->orderBy('product.is_hot', 'desc')                  
                     ->orderBy('product.id', 'desc')->limit(5)->get();
-        $hotProduct2 = Product::where('product.slug', '<>', '')
-                    ->where('product.type', 2)
-                    ->where('product.status', 1)
-                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')            
-                    ->join('estate_type', 'estate_type.id', '=','product.estate_type_id')      
-                    ->select('product_img.image_url as image_urls', 'product.*', 'estate_type.slug as slug_loai')
-                    ->where('product_img.image_url', '<>', '')                                         
-                    ->orderBy('product.is_hot', 'desc')
-                    ->orderBy('product.cart_status', 'asc')                    
-                    ->orderBy('product.id', 'desc')                    
-                    ->limit(5)->get();
+
         
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $seo = $settingArr;
@@ -106,18 +58,8 @@ class HomeController extends Controller
         $seo['keywords'] = $settingArr['site_keywords'];
         $socialImage = $settingArr['banner'];
 
-        $tinThiTruong = Articles::where('cate_id', 7)->orderBy('id', 'desc')->limit(6)->get()->toArray();
-        $phongthuy = Articles::where('cate_id', 4)->orderBy('id', 'desc')->limit(6)->get()->toArray();
-        
-        $khonggiansong = Articles::where('cate_id', 1)->orderBy('id', 'desc')->limit(6)->get()->toArray();
-
-        $luat = Articles::where('cate_id', 5)->orderBy('id', 'desc')->limit(6)->get()->toArray();
-        $tuvan = Articles::where('cate_id', 6)->orderBy('id', 'desc')->limit(6)->get()->toArray();
-
-        $phantich = Articles::where('cate_id', 1)->orderBy('id', 'desc')->limit(6)->get()->toArray();
-        $videoList = Video::where('status', 1)->orderBy('display_order')->get();
-        $videoFirst = $videoList->first();     
-        return view('frontend.home.index', compact('bannerArr', 'articlesArr', 'socialImage', 'seo', 'countMess', 'hotProduct', 'tinThiTruong', 'luat', 'khonggiansong', 'phongthuy', 'tinRandom','hotProduct2', 'luat', 'tuvan', 'videoList', 'videoFirst'));
+     
+        return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo'));
 
     }
 
@@ -181,7 +123,7 @@ class HomeController extends Controller
         if(is_null($newsletter)) {
            $newsletter = new Newsletter;
            $newsletter->email = $email;
-           $newsletter->is_member = Customer::where('email', $email)->first() ? 1 : 0;
+           $newsletter->is_member = 0;
            $newsletter->save();
            $register = 1;
         }

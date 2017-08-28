@@ -1,156 +1,103 @@
-(function($){
-  "use strict";
-    
-    // ===== Scroll to Top ==== 
-    $(window).scroll(function() {
-        if ($(this).scrollTop() >= 200) {
-            $('#return-to-top').addClass('td-scroll-up-visible');
-        } else {
-            $('#return-to-top').removeClass('td-scroll-up-visible');
-        }
-    });
-    $('#return-to-top').click(function() {
-        $('body,html').animate({
-            scrollTop : 0
-        }, 'slow');
-    });
+/*
+ * ---------------------------------------------------
+ * 1. Slide Carousel
+ * 2. Scroll to Top
+ * 3. Sticky Menu
+ * 4. Accordion has icon
+ * 5. Hover tag a show ul page Product
+ * 6. POPUP order a product - check on info Payment
+ * 7. Scroll News Item Tablet & Mobile
+ */
 
-    // Slide Carousel
-    $(document).ready(function() {
-        $(".owl-carousel").each(function(index, el) {
-          var config = $(this).data();
-          config.navText = ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'];
-          config.smartSpeed="800";
-          if($(this).hasClass('owl-style2')){
-            config.animateOut="fadeOut";
-            config.animateIn="fadeIn";    
-          }
-          if($(this).hasClass('dotsData')){
-            config.dotsData="true";
-          }
-          $(this).owlCarousel(config);
-        });
-    });
+  (function($){
+    "use strict";
+  /* ==================================================== */
 
-    /** Menu, Menu Mega Responsive **/
-    $(document).ready(function(){
-        $('.menu>ul>li.parent').append('<span class="plus"></span>');
-        $('.menu ul li.parent .plus').click(function(){
-            $(this).toggleClass('open').siblings('.submenu').slideToggle();
-        });
+  /*
+   * 1. Slide Carousel
+  */
+  $(document).ready(function() {
+    $('.owl-carousel').each(function(index, el) {
+      var config = $(this).data();
+      config.navText = ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'];
+      config.smartSpeed="800";
+      
+      if($(this).hasClass('owl-style2')){
+        config.animateOut='fadeOut';
+        config.animateIn='fadeIn';    
+      }
+      if($(this).hasClass('dotsData')){
+        config.dotsData="true";
+      }
+      $(this).owlCarousel(config);
     });
+  });
 
-    /*  [ Main Menu ]
-    - - - - - - - - - - - - - - - - - - - - */
-    $(".navbar-toggle").on( 'click', function() {
-        $(this).toggleClass('has-open');
-        $("#main-menu .menu").toggleClass("has-open");
-        $("body").toggleClass("menu-open");
-    });
+  /*
+   * 2. Scroll to Top
+  */
+  $(window).scroll(function() {
+    if ($(this).scrollTop() >= 200) {
+      $('#return-to-top').addClass('td-scroll-up-visible');
+    } else {
+      $('#return-to-top').removeClass('td-scroll-up-visible');
+    }
+  });
+  $('#return-to-top').click(function() {
+    $('body,html').animate({
+      scrollTop : 0
+    }, 'slow');
+  });
 
-    // Input Page Post News
-    $('#hplSell').click(function () {
-        $('#hplSell').addClass('hplcate-active');
-        $('#hplRent').removeClass('hplcate-active');
-    });
-    $('#hplRent').click(function () {
-        $('#hplRent').addClass('hplcate-active');
-        $('#hplSell').removeClass('hplcate-active');
-    });
+  /*
+   * 3. Sticky Menu
+  */
+  $('.fixed').sticky({ topSpacing: 0 });
 
-    /*  [ Sticky Menu ] */
-    $('.fix-header ').sticky({ topSpacing: 0 });
+  /*
+   * 7. Main Menu
+  */
+  $(".nav-toogle").on( 'click', function() {
+    $(this).toggleClass('has-open');
+    $(".menu").toggleClass("has-open");
+    $("body").toggleClass("menu-open");
+  });
+  $(".btn-search-mb").on( 'click', function() {
+    $(this).toggleClass('has-open');
+    $(".nav-toogle").removeClass("has-open");
+    $(".menu").removeClass("has-open");
+    $("body").removeClass("menu-open");
+    $(".block-search-mb").toggleClass("has-open");
+  });
 
-    /*  Collapse */
-    $('.collapse.in').prev('.panel-heading').addClass('active');
-    $('#accordion, #bs-collapse')
-    .on('show.bs.collapse', function (a) {
-        $(a.target).prev('.panel-heading').addClass('active');
-    })
-    .on('hide.bs.collapse', function (a) {
-        $(a.target).prev('.panel-heading').removeClass('active');
+  /*
+   * 7. Main Menu
+  */
+  $(document).ready(function(){
+    $('.menu ul li.parent').append('<span class="plus"></span>');
+    $('.menu ul li.parent .plus').click(function(){
+      $(this).toggleClass('open').siblings('.submenu').slideToggle();
     });
+  });
 
-    // Adv
-    $(document).ready(function(){
-        if($('.owl-carousel').length >= 1){
-                setTimeout(ads, 3000);
-        }else{
-                setTimeout(ads, 200);
-        }
-        
-    });
+  //Hover Search Show Form
+  // $('.search-icon').hover(function(){
+  //   $('.top_search').addClass('hover');
+  // });
+  // $('.search-icon').click(function(){
+  //   $('.top_search').removeClass('hover');
+  // });
+  // $('.menu').hover(function(){
+  //   $('.top_search').removeClass('hover');
+  // });
+  // $(document).mouseup(function (e) {
+  //   var container = $(".top_search");
+  //   if (!container.is(e.target) // if the target of the click isn't the container...
+  //     && container.has(e.target).length === 0) // ... nor a descendant of the container
+  //   {
+  //     $('.top_search').removeClass('hover');
+  //   }
+  // });
+
 
 })(jQuery); // End of use strict
-    // ADV
-    function ads(){
-        var width_screen = $(window).width();
-        var Advscroll_left = $('#advLeft');
-        var Advscroll_right = $('#advRight');
-
-        var header = parseInt($("#header").height());
-        var nav = parseInt($("#mainNav").height());
-        // var slide_home = parseInt($(".block-slider-home").height());
-        // console.log(slide_home);
-        var abc = $("#site-main .container").width();
-
-        var Top1 = header + nav;
-        var Top2 = header + nav;
-        var position = ((width_screen - abc)/2) - 105;
-
-        var Top = $(".main").offset().top;
-        var Top_end  = $(".main").offset().top + $(".main").height();
-
-        if($("#slider-home").length == 1){
-            Advscroll_left.css({
-                "top": Top1,
-                "left":  position,
-            }).show();
-            Advscroll_right.css({
-                "top": Top1,
-                "right":  position,
-            }).show();
-        }else{
-            Advscroll_left.css({
-                "top": Top2,
-                "left":  position,
-            }).show();
-            Advscroll_right.css({
-                "top": Top2,
-                "right":  position,
-            }).show();
-        }
-    $(window).scroll(function() {
-            var scroll = $(window).scrollTop();
-            if (scroll >= Top1) {
-                Advscroll_left.css({
-                    "top": "45px",
-                    "left":  position,
-                });
-                Advscroll_right.css({
-                    "top": "45px",
-                    "right":  position,
-                });
-            }else{
-                if($(".page_home")){
-                    Advscroll_left.css({
-                        "top": Top1 - scroll,
-                        "left":  position,
-                    });
-                    Advscroll_right.css({
-                        "top": Top1 - scroll,
-                        "right":  position,
-                    });
-                }else{
-                    Advscroll_left.css({
-                        "top": Top2 - scroll,
-                        "left":  position,
-                    });
-                    Advscroll_right.css({
-                        "top": Top2 - scroll,
-                        "right":  position,
-                    });
-                }
-            }
-        });
-    }
