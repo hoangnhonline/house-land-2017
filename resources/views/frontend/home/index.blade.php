@@ -72,92 +72,39 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
 <div class="block block-news block-title-commom">
   <div class="container">
     <div class="block-content row">
+      @if($articlesCateHot->count() > 0)
+      @foreach($articlesCateHot as $cateHot)
       <div class="col-sm-6 col-xs-12 block-news-left">
         <div class="block block-title">
           <h2>
             <i class="fa fa-home"></i>
-            NHÀ PHỐ ĐẸP
+            {!! $cateHot->name !!}
           </h2> 
         </div>
+        @if(isset($articlesArr[$cateHot->id]) && $articlesArr[$cateHot->id]->count() > 0)
         <ul class="block-content">
-          <li class="first">
+          <?php $i = 0; ?>
+          @foreach($articlesArr[$cateHot->id] as $articles)
+          <?php $i++;?>
+          <li class="@if($i == 1) first @else item @endif">
             <div class="thumb">
-              <a href="news-detail.html" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here toda"><img src="{{ URL::asset('public/assets/images/news/large_1.jpg') }}" alt=""></a>
+              <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}"><img src="{{ Helper::showImage($articles->image_url) }}" alt="{!! $articles->title !!}"></a>
             </div>
             <div class="des">
-              <h2 class="title">
-                <a href="news-detail.htm" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today">Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today</a>
-              </h2>
-              <p class="date-post"><i class="fa fa-calendar"></i> 20/07/2017</p>
+              <h2 class="title"><a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}">{!! $articles->title !!}</a></h2>
+              <p class="date-post"><i class="fa fa-calendar"></i> {{ date('d/m/Y', strtotime($articles->created_at)) }}</p>
+              @if($i == 1) 
+              <p class="description">{!! $articles->description!!}</p>
+              @endif
             </div>
-          </li><!-- /first -->
-          <li class="item">
-            <div class="thumb">
-              <a href="news-detail.html" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here toda"><img src="{{ URL::asset('public/assets/images/news/thumb1.jpg') }}" alt=""></a>
-            </div>
-            <div class="des">
-              <h2 class="title">
-                <a href="news-detail.htm" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today">Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today</a>
-              </h2>
-              <p class="date-post"><i class="fa fa-calendar"></i> 20/07/2017</p>
-            </div>
-          </li><!-- /item -->
-          <li class="item">
-            <div class="thumb">
-              <a href="news-detail.html" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here toda"><img src="{{ URL::asset('public/assets/images/news/thumb2.jpg') }}" alt=""></a>
-            </div>
-            <div class="des">
-              <h2 class="title">
-                <a href="news-detail.htm" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today">Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today</a>
-              </h2>
-              <p class="date-post"><i class="fa fa-calendar"></i> 20/07/2017</p>
-            </div>
-          </li><!-- /item -->
+          </li><!-- /item -->          
+          @endforeach        
         </ul>
+        @endif
       </div><!-- /block-news-left -->
-      <div class="col-sm-6 col-xs-12 block-news-right">
-        <div class="block block-title">
-          <h2>
-            <i class="fa fa-home"></i>
-            NHÀ PHỐ ĐẸP
-          </h2> 
-        </div>
-        <ul class="block-content">
-          <li class="first">
-            <div class="thumb">
-              <a href="news-detail.html" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here toda"><img src="{{ URL::asset('public/assets/images/news/large_1.jpg') }}" alt=""></a>
-            </div>
-            <div class="des">
-              <h2 class="title">
-                <a href="news-detail.htm" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today">Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today</a>
-              </h2>
-              <p class="date-post"><i class="fa fa-calendar"></i> 20/07/2017</p>
-            </div>
-          </li><!-- /first -->
-          <li class="item">
-            <div class="thumb">
-              <a href="news-detail.html" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here toda"><img src="{{ URL::asset('public/assets/images/news/thumb1.jpg') }}" alt=""></a>
-            </div>
-            <div class="des">
-              <h2 class="title">
-                <a href="news-detail.htm" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today">Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today</a>
-              </h2>
-              <p class="date-post"><i class="fa fa-calendar"></i> 20/07/2017</p>
-            </div>
-          </li><!-- /item -->
-          <li class="item">
-            <div class="thumb">
-              <a href="news-detail.html" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here toda"><img src="{{ URL::asset('public/assets/images/news/thumb2.jpg') }}" alt=""></a>
-            </div>
-            <div class="des">
-              <h2 class="title">
-                <a href="news-detail.htm" title="Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today">Tiêu đề tin tức được viết bởi nhóm iMarketing trong hôm nay - The title of this news is writen here today</a>
-              </h2>
-              <p class="date-post"><i class="fa fa-calendar"></i> 20/07/2017</p>
-            </div>
-          </li><!-- /item -->
-        </ul>
-      </div><!-- /block-news-right -->
+      @endforeach
+      @endif
+      <div class="clearfix"></div>
     </div>
   </div>
 </div><!-- /block-news-->

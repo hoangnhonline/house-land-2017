@@ -37,20 +37,17 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     {         
-        $productArr = [];
-        $hoverInfo = [];
+        $articlesArr = [];
+        $articlesCateHot = (object) [];
         $loaiSp = CateType::where('status', 1)->orderBy('display_order')->get();
         $bannerArr = [];          
-        $articlesArr = Articles::where(['cate_id' => 1])->orderBy('id', 'desc')->get();
-        $hotProduct = Product::where('product.slug', '<>', '')                    
-                    ->where('product.status', 1)
-                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')            
-                    ->join('cate_type', 'cate_type.id', '=','product.type_id')      
-                    ->join('cate_parent', 'cate_type.id', '=','product.type_id')      
-                    ->select('product_img.image_url as image_url', 'product.*', 'cate_type.slug as slug_type')
-                    ->where('product_img.image_url', '<>', '')                                         
-                    ->orderBy('product.is_hot', 'desc')                  
-                    ->orderBy('product.id', 'desc')->limit(5)->get();
+        $articlesCateHot = ArticlesCate::where('is_hot', 1)->orderBy('display_order')->get();
+        foreach($articlesCateHot as $cateHot){
+            $articlesArr[$cateHot->id] = Articles::where('is_hot', 1)
+                                    ->where('cate_id', $cateHot->id)
+                                    ->orderBy('display_order')
+                                    ->orderBy('id', 'desc')->limit(5)->get();
+        }
 
         $cateParentHot = CateParent::where('is_hot', 1)->orderBy('display_order')->get();
         $cateHot = Cate::whereRaw('1=2')->get();
@@ -67,8 +64,7 @@ class HomeController extends Controller
         $seo['keywords'] = $settingArr['site_keywords'];
         $socialImage = $settingArr['banner'];
 
-     
-        return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot'));
+        return view('frontend.home.index', compact('articlesCateHot', 'articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot'));
 
     }
     public function pages(Request $request){
