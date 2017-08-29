@@ -42,11 +42,24 @@
 </div><!-- /block_big-title -->
 @endforeach
 @endif
-
+<?php 
+$bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
+?>
+@if($bannerArr)
+<?php $i = 0; ?>
+@foreach($bannerArr as $banner)
+<?php $i++; ?>
 <div class="block block-banner">
-  <img src="{{ URL::asset('public/assets/images/banner/1.jpg') }}" alt="">
-</div><!-- /block-banner -->
-
+  @if($banner->ads_url !='')
+  <a href="{{ $banner->ads_url }}" title="banner ads {{ $i }}">
+  @endif
+  <img src="{{ Helper::showImage($banner->image_url) }}" alt="banner ads {{ $i }}">
+  @if($banner->ads_url !='')
+  </a>
+  @endif
+</div><!-- item-slide -->
+@endforeach
+@endif
 <div class="block block_big-title">
   <div class="container">
     <h2>TIN TỨC BẤT ĐỘNG SẢN</h2>

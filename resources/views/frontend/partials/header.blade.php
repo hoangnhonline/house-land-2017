@@ -13,7 +13,7 @@
 				            </div><!-- /input-serach -->
 				            <div class="select-choice">
 				            	<div class="form-category">
-					                <select id="cid" class="cid" name="cid">
+					                <select id="cid" class="cid choice" name="cid">
 									    <option value="" >Tìm theo danh mục</option>
 									   	@foreach($cateTypeList as $value)
 									   	<option value="{{ $value->id }}">{!! $value->name !!}</option>>
@@ -121,7 +121,7 @@
 						            </div><!-- /input-serach -->
 						            <div class="form-group select-choice">
 						            	<div class="form-group form-category">
-							              <select id="cid" class="cid" name="cid">
+							              <select id="cid" class="cid choice" name="cid">
 										    <option value="" >Tìm theo danh mục</option>
 										   	@foreach($cateTypeList as $value)
 										   	<option value="{{ $value->id }}">{!! $value->name !!}</option>>

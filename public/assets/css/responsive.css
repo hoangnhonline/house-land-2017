@@ -384,6 +384,9 @@
   .block-news .block-news-left {
     margin-bottom: 20px;
   }
+  .block-search .input-serach {
+    width: 48%;
+  }
 }
 
 /*----------------
@@ -399,5 +402,14 @@
   }
   .block-ct-pro .col-xs-6 {
     width: 100%;
+  }
+  .block-search .select-choice {
+    width: auto;
+  }
+  .block-search .form-category {
+    display: none;
+  }
+  .block-search .input-serach {
+    width: 86%;
   }
 }
