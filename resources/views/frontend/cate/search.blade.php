@@ -1,63 +1,48 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
 @section('content')
-<article class="block-breadcrumb-page">
-	<ul class="breadcrumb">	
-		<li><a href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>		
-		<li class="active">Tìm kiếm</li>
-	</ul>
-</article>
-<section class="col-sm-8 col-xs-12 block-sitemain">
-	<article class="block block-news-new block-news-cate clearfix">
-		<div class="block-cate-title"><h1>Kết quả tìm kiếm</h1></div>
-		<div class="block-searchresult">			
-			<span class="block-countresult">Có <b>{{ number_format(count($productList)) }}</b> bất động sản</span>
+
+<div class="block block-breadcrumb">
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><a href="{{ route('home') }}">Trang chủ</a></li>			
+			<li class="active">Tìm kiếm</li>
+		</ul>
+	</div>
+</div><!-- /block-breadcrumb -->
+<div class="block block-title-commom">
+	<div class="container">
+		<div class="block block-title">
+			<h2>
+				<i class="fa fa-home"></i>
+				Tìm kiếm
+			</h2>
 		</div>
-		<div class="col-sm-12 col-xs-12">
+		<div class="block-content block-ct-pro">
+			<h2 class="tit-page3">HIỂN THỊ KẾT QUẢ CHO “{!! $tu_khoa !!}”</h2>
 			<div class="row">
-				<div class="block-title block-title-catenews">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs nav-tabs-cus" role="tablist">
-						<li role="presentation" class="active"><a href="#dsrt" aria-controls="dsrt" role="tab" data-toggle="tab"><i class="fa fa-list"></i> Danh sách kết quả</a></li>
-					</ul>
-				</div>
-				<div class="block-contents">
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="home">
-						@if(!empty( (array) $productList ))
-							<ul>
-								@foreach( $productList as $product )
-								<li class="news-new-item">
-									<div class="news-new-item-head"><a href="{{ route('chi-tiet', [$product->slug_loai, $product->slug, $product->id]) }}"><img title="{{ $product->title }}" src="{{ $product->image_urls ? Helper::showImageThumb($product->image_urls) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{!! $product->title !!}"></a></div>
-									<div class="news-new-item-description">
-										<h4>
-											<a class="description-title vip1" title="{{ $product->title }}" href="{{ route('chi-tiet', [$product->slug_loai, $product->slug, $product->id]) }}"><i class="vipdb fa fa-star"></i> {!! $product->title !!} @if( $product->is_hot == 1 )
-						                  <img src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
-						                  @endif</a>
-											
-											</h4>
-                						<div class="description-info">
-                							<div class="id-post"><i class="fa fa-rebel" aria-hidden="true"></i><label>Mã tin<span>:</span></label>{{ $product->id }}</div>
-                							<div class="price"><label>Giá<span>:</span></label>{{ $product->price }} {!! Helper::getName($product->price_unit_id, 'price_unit') !!}</div>
-				                            <div class="area"><label>Diện tích<span>:</span></label>{!! $product->area !!} m<sup>2</sup></div>
-				                            <div class="location"><label>Vị trí<span>:</span></label>{!! Helper::getName($product->district_id, 'district') !!} - {!! Helper::getName($product->city_id, 'city') !!}</div>
-                						</div>
-                						<span class="date">{{ date('d/m/Y', strtotime($product->created_at)) }}</span>
-									</div>
-								</li>
-								@endforeach
-								
-							</ul>
-							@endif
-							<div style="text-align:center">
-				            {{ $productList->links() }}
-				            </div> 
+				@if($productList->count() > 0)
+			  	@foreach($productList as $product)
+				<div class="col-sm-4 col-xs-12">
+					<div class="item">
+						<div class="thumb">
+							<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}"></a>
 						</div>
-					</div>
+						<div class="des">
+							<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">{!! $product->title !!}</a>
+							<p class="code"><span>Mã sản phẩm: </span>{!! $product->code !!}</p>
+						</div>
+					</div><!-- /item -->
 				</div>
+				@endforeach
+		  		@else
+		  		<p style="padding-left:15px">Không tìm thấy dữ liệu!</p>
+		  		@endif		  
 			</div>
+			<nav class="block-pagination">
+				{{ $productList->appends(['keyword' => $tu_khoa])->links() }} 
+			</nav><!-- /block-pagination -->
 		</div>
-	</article><!-- /block-news-new -->
-</section><!-- /block-site-left -->
+	</div>
+</div><!-- /block_big-title -->
 @endsection

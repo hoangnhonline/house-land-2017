@@ -107,23 +107,19 @@ class HomeController extends Controller
     */
     public function search(Request $request)
     {
-        $tu_khoa = $request->keyword;       
-
-        $productArr = Product::where('product.alias', 'LIKE', '%'.$tu_khoa.'%')->where('so_luong_ton', '>', 0)->where('price', '>', 0)->where('estate_type.status', 1)                        
-                        ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')                        
-                        ->join('estate_type', 'estate_type.id', '=', 'product.estate_type_id')
-                        ->select('product_img.image_url', 'product.*', 'thuoc_tinh')
-                        ->orderBy('id', 'desc')->paginate(20);
-        $seo['title'] = $seo['description'] =$seo['keywords'] = "Tìm kiếm sản phẩm theo từ khóa '".$tu_khoa."'";
-        $hoverInfo = [];
-        if($productArr->count() > 0){
-            $hoverInfoTmp = HoverInfo::orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();
-            foreach($hoverInfoTmp as $value){
-                $hoverInfo[$value->estate_type_id][] = $value;
+        $tu_khoa = $request->keyword;
+        $type_id = $request->cid ? $request->cid : null;
+        $query = Product::where('product.alias', 'LIKE', '%'.$tu_khoa.'%');
+            if($type_id > 0){
+                $query->where('type_id', $type_id);
             }
-        }
-        //var_dump("<pre>", $hoverInfo);die;
-        return view('frontend.search.index', compact('productArr', 'tu_khoa', 'seo', 'hoverInfo'));
+                    $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                    ->select('product_img.image_url', 'product.*')                                                  
+                    ->orderBy('product.id', 'desc');
+                   $productList = $query->paginate(15);
+        $seo['title'] = $seo['description'] =$seo['keywords'] = "Tìm kiếm sản phẩm theo từ khóa '".$tu_khoa."'";
+       
+        return view('frontend.cate.search', compact('productList', 'tu_khoa', 'seo', 'type_id'));
     }
     public function ajaxTab(Request $request){
         $table = $request->type ? $request->type : 'category';

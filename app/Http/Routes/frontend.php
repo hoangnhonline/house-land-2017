@@ -35,7 +35,7 @@ Route::group(['namespace' => 'Frontend'], function()
 
     Route::post('/dang-ki-newsletter', ['as' => 'register.newsletter', 'uses' => 'HomeController@registerNews']);    
     
-    Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'ProductController@search']);
+    Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
 
     Route::get('lien-he.html', ['as' => 'contact', 'uses' => 'HomeController@contact']);
     Route::get('dich-vu.html', ['as' => 'services', 'uses' => 'HomeController@services']);

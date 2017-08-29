@@ -16,7 +16,7 @@
 					                <select id="cid" class="cid choice" name="cid">
 									    <option value="" >Tìm theo danh mục</option>
 									   	@foreach($cateTypeList as $value)
-									   	<option value="{{ $value->id }}">{!! $value->name !!}</option>>
+									   	<option value="{{ $value->id }}" {{ isset($type_id) && $type_id == $value->id ? "selected" : "" }}>{!! $value->name !!}</option>>
 									   	@endforeach
 									</select>
 					            </div><!-- /form-category -->
@@ -124,7 +124,7 @@
 							              <select id="cid" class="cid choice" name="cid">
 										    <option value="" >Tìm theo danh mục</option>
 										   	@foreach($cateTypeList as $value)
-										   	<option value="{{ $value->id }}">{!! $value->name !!}</option>>
+										   	<option value="{{ $value->id }}" {{ isset($type_id) && $type_id == $value->id ? "selected" : "" }}>{!! $value->name !!}</option>>
 										   	@endforeach
 										</select>
 							            </div><!-- /form-category -->
