@@ -25,7 +25,10 @@ class UserController extends Controller
             'password' => Hash::make('matkhaucuatui'),
             'role' => 1,
             'status' => 1
-        ));*/       
+        ));*/      
+        if(Auth::check()){
+            return redirect()->route('product.index');
+        } 
         return view('backend.login');
     }
 
