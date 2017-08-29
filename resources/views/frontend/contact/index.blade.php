@@ -83,20 +83,14 @@
                         </div>
                         <div class="block-content">
                             <ul class="list">
-                                <li><a href="#" title="">Quy trình thiết kế kiến trúc</a></li>
-                                <li><a href="#" title="">Đơn giá thiết kế kiến trúc</a></li>
-                                <li><a href="#" title="">Hợp đồng thiết kế kiến trúc mẫu</a></li>
-                                <li><a href="#" title="">Quy trình thi công xây dựng</a></li>
-                                <li><a href="#" title="">Đơn giá thi công xây dựng</a></li>
-                                <li><a href="#" title="">Hợp đồng thi công mẫu</a></li>
-                                <li><a href="#" title="">Tại sao chọn Houseland</a></li>
-                                <li><a href="#" title="">Nội thất Houseland</a></li>
-                                <li><a href="#" title="">Phân phối sơn SPEC</a></li>
+                                @foreach($servicesList as $ser)
+                                <li><a @if(isset($detail) && $detail->id == $ser->id) class="active" @endif href="{{ route('services-detail', [ $ser->slug, $ser->id ]) }}" title="{!! $ser->title !!}">{!! $ser->title !!}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div><!-- /block-col-right -->
+            </div><!-- /block-col-right --> 
         </div>
     </div><!-- /block_big-title -->
 </div><!-- /wrapper-->

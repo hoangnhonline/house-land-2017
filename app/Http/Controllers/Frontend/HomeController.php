@@ -143,7 +143,8 @@ class HomeController extends Controller
         $seo['description'] = 'Liên hệ';
         $seo['keywords'] = 'Liên hệ';
         $socialImage = '';
-        return view('frontend.contact.index', compact('seo', 'socialImage'));
+        $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
+        return view('frontend.contact.index', compact('seo', 'socialImage', 'servicesList'));
     }
 
     
