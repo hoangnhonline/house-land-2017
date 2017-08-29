@@ -17,6 +17,7 @@ use App\Models\CateType;
 use App\Models\CateParent;
 use App\Models\Cate;
 use App\Models\Pages;
+use App\Models\Member;
 
 use Helper, File, Session, Auth, Hash;
 
@@ -80,15 +81,18 @@ class HomeController extends Controller
         }
         $seo['title'] = $detailPage->meta_title ? $detailPage->meta_title : $detailPage->title;
         $seo['description'] = $detailPage->meta_description ? $detailPage->meta_description : $detailPage->title;
-        $seo['keywords'] = $detailPage->meta_keywords ? $detailPage->meta_keywords : $detailPage->title;           
-        return view('frontend.pages.index', compact('detailPage', 'seo'));    
+        $seo['keywords'] = $detailPage->meta_keywords ? $detailPage->meta_keywords : $detailPage->title;      
+        
+        $memberList = Member::orderBy('display_order', 'asc')->get();
+
+        return view('frontend.pages.index', compact('detailPage', 'seo', 'memberList', 'slug'));    
     }
 
     public function services(Request $request){
         $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
         
         $seo['title'] =  $seo['description'] = $seo['keywords'] = "Dịch vụ";           
-        
+
         return view('frontend.pages.services', compact('servicesList', 'seo'));    
     }
 

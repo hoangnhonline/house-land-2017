@@ -43,13 +43,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'cate-type.update', 'uses' => 'CateTypeController@update']);
         Route::get('{id}/destroy', ['as' => 'cate-type.destroy', 'uses' => 'CateTypeController@destroy']);
     });
-    Route::group(['prefix' => 'support'], function () {
-        Route::get('/', ['as' => 'support.index', 'uses' => 'SupportController@index']);
-        Route::get('/create', ['as' => 'support.create', 'uses' => 'SupportController@create']);
-        Route::post('/store', ['as' => 'support.store', 'uses' => 'SupportController@store']);
-        Route::get('{id}/edit',   ['as' => 'support.edit', 'uses' => 'SupportController@edit']);
-        Route::post('/update', ['as' => 'support.update', 'uses' => 'SupportController@update']);
-        Route::get('{id}/destroy', ['as' => 'support.destroy', 'uses' => 'SupportController@destroy']);
+    Route::group(['prefix' => 'member'], function () {
+        Route::get('/', ['as' => 'member.index', 'uses' => 'MemberController@index']);
+        Route::get('/create', ['as' => 'member.create', 'uses' => 'MemberController@create']);
+        Route::post('/store', ['as' => 'member.store', 'uses' => 'MemberController@store']);
+        Route::get('{id}/edit',   ['as' => 'member.edit', 'uses' => 'MemberController@edit']);
+        Route::post('/update', ['as' => 'member.update', 'uses' => 'MemberController@update']);
+        Route::get('{id}/destroy', ['as' => 'member.destroy', 'uses' => 'MemberController@destroy']);
     });
     Route::group(['prefix' => 'work-group'], function () {
         Route::get('/', ['as' => 'work-group.index', 'uses' => 'WorkGroupController@index']);

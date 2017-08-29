@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\Support;
+use App\Models\Member;
 
 use Helper, File, Session, Auth, Image;
 
-class SupportController extends Controller
+class MemberController extends Controller
 {
     /**
     * Display a listing of the resource.
@@ -20,9 +20,9 @@ class SupportController extends Controller
     */
     public function index(Request $request)
     {
-        $items = Support::all();
+        $items = Member::whereRaw('1')->orderBy('display_order')->get();
         
-        return view('backend.support.index', compact( 'items' ));
+        return view('backend.member.index', compact( 'items' ));
     }
 
     /**
@@ -33,7 +33,7 @@ class SupportController extends Controller
     public function create(Request $request)
     {
 
-        return view('backend.support.create');
+        return view('backend.member.create');
     }
 
     /**
@@ -48,19 +48,19 @@ class SupportController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'phone' => 'required'
+            'chuc_vu' => 'required'
         ],
         [            
             'name.required' => 'Bạn chưa nhập tên',            
-            'phone.required' => 'Bạn chưa nhập số điện thoại'            
+            'chuc_vu.required' => 'Bạn chưa nhập chức danh'            
         ]); 
         
         if($dataArr['image_url'] && $dataArr['image_name']){
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/'.date('Y/m/d'))){
+                mkdir('public/uploads/'.date('Y/m/d'), 0777, true);
             }         
             $destionation = date('Y/m/d'). '/'. end($tmp);
             
@@ -68,14 +68,14 @@ class SupportController extends Controller
 
             $dataArr['image_url'] = $destionation;
         }        
-        $dataArr['display_order'] = Helper::getNextOrder('support');
-        $rs = Support::create($dataArr);
+        $dataArr['display_order'] = Helper::getNextOrder('member');
+        $rs = Member::create($dataArr);
 
         $object_id = $rs->id;
 
         Session::flash('message', 'Tạo mới thành công');
 
-        return redirect()->route('support.index');
+        return redirect()->route('member.index');
     }
    
     /**
@@ -98,9 +98,9 @@ class SupportController extends Controller
     public function edit($id)
     {
 
-        $detail = Support::find($id);        
+        $detail = Member::find($id);        
 
-        return view('backend.support.edit', compact( 'detail' ));
+        return view('backend.member.edit', compact( 'detail' ));
     }
 
     /**
@@ -116,19 +116,19 @@ class SupportController extends Controller
         
         $this->validate($request,[
             'name' => 'required',
-            'phone' => 'required'
+            'chuc_vu' => 'required'
         ],
         [            
             'name.required' => 'Bạn chưa nhập tên',            
-            'phone.required' => 'Bạn chưa nhập số điện thoại'            
-        ]);       
+            'chuc_vu.required' => 'Bạn chưa nhập chức danh'            
+        ]);        
         
         if($dataArr['image_url'] && $dataArr['image_name']){
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/'.date('Y/m/d'))){
+                mkdir('public/uploads/'.date('Y/m/d'), 0777, true);
             }           
 
             $destionation = date('Y/m/d'). '/'. end($tmp);
@@ -138,13 +138,13 @@ class SupportController extends Controller
             $dataArr['image_url'] = $destionation;
         }
         
-        $model = Support::find($dataArr['id']);
+        $model = Member::find($dataArr['id']);
 
         $model->update($dataArr);        
      
         Session::flash('message', 'Cập nhật thành công');        
 
-        return redirect()->route('support.index');
+        return redirect()->route('member.index');
     }
 
     /**
@@ -156,11 +156,11 @@ class SupportController extends Controller
     public function destroy($id)
     {
         // delete
-        $model = Support::find($id);
+        $model = Member::find($id);
         $model->delete();
 
         // redirect
         Session::flash('message', 'Xóa thành công');
-        return redirect()->route('support.index');
+        return redirect()->route('member.index');
     }
 }

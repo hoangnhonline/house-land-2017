@@ -42,44 +42,91 @@
               <p class="alert alert-info" >{{ Session::get('message') }}</p>
               @endif
                  <!-- text input -->
-                <div class="form-group">
+                <div class="form-group col-md-12">
                   <label>Tên site <span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="site_name" id="site_name" value="{{ $settingArr['site_name'] }}">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-md-6">
+                  <label>Hotline </label>
+                  <input type="text" class="form-control" name="hotline" id="hotline" value="{{ $settingArr['hotline'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Email </label>
+                  <input type="text" class="form-control" name="email_header" id="email_header" value="{{ $settingArr['email_header'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số năm kinh nghiệm </label>
+                  <input type="text" class="form-control" name="so_nam" id="so_nam" value="{{ $settingArr['so_nam'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số kiến trúc sư và kỹ sư <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="so_kien_truc_su" id="so_kien_truc_su" value="{{ $settingArr['so_kien_truc_su'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số công nhân</label>
+                  <input type="text" class="form-control" name="so_cong_nhan" id="so_cong_nhan" value="{{ $settingArr['so_cong_nhan'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số công trình <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="so_cong_trinh" id="so_cong_trinh" value="{{ $settingArr['so_cong_trinh'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số bài viết liên quan</label>
+                  <input type="text" class="form-control" name="articles_per_page" id="articles_per_page" value="{{ $settingArr['articles_per_page'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số sản phẩm 1 trang </label>
+                  <input type="text" class="form-control" name="product_per_page" id="product_per_page" value="{{ $settingArr['product_per_page'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số bài viết liên quan</label>
+                  <input type="text" class="form-control" name="so_tin_lien_quan" id="so_tin_lien_quan" value="{{ $settingArr['so_tin_lien_quan'] }}">
+                </div>        
+                <div class="clearfix"></div>      
+                <div class="form-group col-md-6">
                   <label>Facebook</label>
                   <input type="text" class="form-control" name="facebook_fanpage" id="facebook_fanpage" value="{{ $settingArr['facebook_fanpage'] }}">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-6">
                   <label>Facebook APP ID</label>
                   <input type="text" class="form-control" name="facebook_appid" id="facebook_appid" value="{{ $settingArr['facebook_appid'] }}">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-6">
                   <label>Google +</label>
                   <input type="text" class="form-control" name="google_fanpage" id="google_fanpage" value="{{ $settingArr['google_fanpage'] }}">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-6">
                   <label>Twitter</label>
                   <input type="text" class="form-control" name="twitter_fanpage" id="twitter_fanpage" value="{{ $settingArr['twitter_fanpage'] }}">
-                </div>
-                <div class="form-group">
-                  <label>Hotline</label>
-                  <input type="text" class="form-control" name="hotline" id="hotline" value="{{ $settingArr['hotline'] }}">
-                </div>
-                <div class="form-group">
-                  <label>Thông tin footer</label>
-                  <textarea class="form-control" rows="3" name="cty_info" id="cty_info">{{ $settingArr['cty_info'] }}</textarea>
-                </div>
-                <div class="form-group" style="display:none">
-                  <label>Email CC</label>
-                  <textarea class="form-control" rows="3" name="email_cc" id="email_cc">{{ $settingArr['email_cc'] }}</textarea>
-                </div>
-                <div class="form-group">
+                </div>                
+                <div class="form-group col-md-6">
+                  <label>Chi nhánh phía Nam</label>
+                  <textarea class="form-control" rows="3" name="chi_nhanh_phia_nam" id="chi_nhanh_phia_nam">{{ $settingArr['chi_nhanh_phia_nam'] }}</textarea>
+                </div>  
+                <div class="form-group col-md-6">
+                  <label>Chi nhánh phía Bắc</label>
+                  <textarea class="form-control" rows="3" name="chi_nhanh_phia_bac" id="chi_nhanh_phia_bac">{{ $settingArr['chi_nhanh_phia_bac'] }}</textarea>
+                </div>                
+                <div class="form-group col-md-6">
                   <label>Code google analystic </label>
-                  <input type="text" class="form-control" name="google_analystic" id="google_analystic" value="{{ $settingArr['google_analystic'] }}">
+                  <textarea name="google_analystic" id="google_analystic" rows="3" class="form-control">{{ $settingArr['google_analystic'] }}</textarea>
                 </div>   
-                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                <div class="clearfix"></div>
+                <div class="form-group col-md-6">
+                  <label>Nội dung giới thiệu trang chủ </label>
+                  <textarea name="gioi_thieu_chung" id="gioi_thieu_chung" rows="7" class="form-control">{{ $settingArr['gioi_thieu_chung'] }}</textarea>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Nội dung giới thiệu tin tức </label>
+                  <textarea name="gioi_thieu_tin_tuc" id="gioi_thieu_tin_tuc" rows="7" class="form-control">{{ $settingArr['gioi_thieu_tin_tuc'] }}</textarea>
+                </div>  
+                <div class="form-group col-md-12">
+                  <label>Chúng tôi là sự lựa chọn đúng đắn </label>
+                  <textarea name="su_lua_chon_dung_dan" id="su_lua_chon_dung_dan" rows="7" class="form-control">{{ $settingArr['su_lua_chon_dung_dan'] }}</textarea>
+                </div>   
+                <div class="clearfix"></div>
+                <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Logo </label>    
                   <div class="col-md-9">
                     <img id="thumbnail_logo" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-logo" width="150" >
@@ -91,7 +138,7 @@
                   <div style="clear:both"></div>
                 </div>
                 <div style="clear:both"></div> 
-                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Favicon </label>    
                   <div class="col-md-9">
                     <img id="thumbnail_favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="50">
@@ -103,7 +150,7 @@
                   <div style="clear:both"></div>
                 </div>
                 <div style="clear:both"></div> 
-                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Banner ( og:image ) </label>    
                   <div class="col-md-9">
                     <img id="thumbnail_banner" src="{{ $settingArr['banner'] ? Helper::showImage($settingArr['banner']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-banner" width="200">
@@ -175,15 +222,23 @@
 @section('javascript_page')
 <script type="text/javascript">
     $(document).ready(function(){
-      var editor = CKEDITOR.replace( 'cty_info',{
-          language : 'vi',
-          filebrowserBrowseUrl: "{{ URL::asset('/backend/dist/js/kcfinder/browse.php?type=files') }}",
-          filebrowserImageBrowseUrl: "{{ URL::asset('/backend/dist/js/kcfinder/browse.php?type=images') }}",
-          filebrowserFlashBrowseUrl: "{{ URL::asset('/backend/dist/js/kcfinder/browse.php?type=flash') }}",
-          filebrowserUploadUrl: "{{ URL::asset('/backend/dist/js/kcfinder/upload.php?type=files') }}",
-          filebrowserImageUploadUrl: "{{ URL::asset('/backend/dist/js/kcfinder/upload.php?type=images') }}",
-          filebrowserFlashUploadUrl: "{{ URL::asset('/backend/dist/js/kcfinder/upload.php?type=flash') }}",
-          height : 300
+      var editor = CKEDITOR.replace( 'chi_nhanh_phia_bac',{
+          language : 'vi',       
+          height : 200,
+          toolbarGroups : [            
+            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },          
+            { name: 'links', groups: [ 'links' ] },           
+            '/',            
+          ]
+      });
+      var editor2 = CKEDITOR.replace( 'chi_nhanh_phia_nam',{
+          language : 'vi',     
+          height : 200,
+          toolbarGroups : [            
+            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },          
+            { name: 'links', groups: [ 'links' ] },           
+            '/',            
+          ]
       });
       $('#btnUploadLogo').click(function(){        
         $('#file-logo').click();

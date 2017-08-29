@@ -121,7 +121,7 @@
               <span>Link Footer</span>         
             </a>       
           </li>
-          <li {{ in_array(\Request::route()->getName(), ['support.list', 'support.edit', 'support.create']) ? "class=active" : "" }}><a href="{{ route('support.index') }}"><i class="fa fa-circle-o"></i> Hỗ trợ khách hàng</a></li>
+          <li {{ in_array(\Request::route()->getName(), ['member.list', 'member.edit', 'member.create']) ? "class=active" : "" }}><a href="{{ route('member.index') }}"><i class="fa fa-circle-o"></i> Ban lãnh đạo</a></li>
          
          
           @endif

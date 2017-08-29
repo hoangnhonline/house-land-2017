@@ -8,7 +8,7 @@ use App\Models\ArticlesCate;
 use App\Models\Articles;
 use App\Models\District;
 use App\Models\CustomLink;
-use App\Models\Support;
+use App\Models\Member;
 use App\Models\Menu;
 use App\Models\CateType;
 
@@ -52,8 +52,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 	        	$tinRandom = $tinRandom->limit(5)->get();
 	        }
 	        $customLink = CustomLink::where('block_id', 1)->orderBy('display_order', 'asc')->get();	        	        
-        	$footerLink = CustomLink::where('block_id', 2)->orderBy('display_order', 'asc')->get();
-        	$supportList = Support::orderBy('display_order', 'asc')->get();
+        	$footerLink = CustomLink::where('block_id', 2)->orderBy('display_order', 'asc')->get();        	
         	$menuList = Menu::where('menu_id', 1)->orderBy('display_order', 'asc')->get();
         	
         	$cateTypeList = CateType::where('status', 1)->orderBy('display_order')->get();
@@ -63,8 +62,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 					'articleCate' => $articleCate, 
 					'tinRandom' => $tinRandom, 
 					'customLink' => $customLink, 
-					'footerLink' => $footerLink, 
-					'supportList' => $supportList,
+					'footerLink' => $footerLink, 					
 					'menuList' => $menuList,
 					'cateTypeList' => $cateTypeList		
 			] );

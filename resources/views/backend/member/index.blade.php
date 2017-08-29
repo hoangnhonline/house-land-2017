@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Hỗ trợ khách hàng
+    Ban lãnh đạo
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'support.index' ) }}">Support</a></li>
+    <li><a href="{{ route( 'member.index' ) }}">Ban lãnh đạo</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,7 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('support.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('member.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
@@ -39,11 +39,9 @@
               <th style="width: 1%">#</th>              
               <th>Hình ảnh</th>
               <th>Tên</th>
+              <th>Chức danh</th>
               <th>Điện thoại</th>
-              <th>Email</th>
-              <th>Facebook</th>
-              <th>Zalo</th>
-              <th>Skype</th>
+              <th>Email</th>             
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -60,25 +58,19 @@
                   {{ $item->name }}                  
                 </td>
                 <td>                  
+                  {{ $item->chuc_vu }}                  
+                </td>
+                <td>                  
                   {{ $item->phone }}                  
                 </td>
                 <td>                  
                   {{ $item->email }}                  
-                </td>
-                <td>                  
-                  {{ $item->facebook }}                  
-                </td>
-                <td>                  
-                  {{ $item->zalo }}                  
-                </td>
-                <td>                  
-                  {{ $item->skype }}                  
-                </td>
+                </td>                
                 <td style="white-space:nowrap"> 
                                
-                  <a href="{{ route( 'support.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
+                  <a href="{{ route( 'member.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
                   
-                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'support.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                  <a onclick="return callDelete('{{ $item->title }}','{{ route( 'member.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
                   
                 </td>
               </tr> 

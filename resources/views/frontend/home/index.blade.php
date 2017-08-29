@@ -196,10 +196,10 @@
           suffix : ''
         };
 
-        var mycountUp1 = new CountUp("mycountUp1", 0, 10, 0, 7, options);
-        var mycountUp2 = new CountUp("mycountUp2", 0, 60, 0, 7, options);
-        var mycountUp3 = new CountUp("mycountUp3", 0, 900, 0, 7, options);
-        var mycountUp4 = new CountUp("mycountUp4", 0, 800, 0, 7, options);
+        var mycountUp1 = new CountUp("mycountUp1", 0, {{ $settingArr['so_nam'] }}, 0, 7, options);
+        var mycountUp2 = new CountUp("mycountUp2", 0, {{ $settingArr['so_kien_truc_su'] }}, 0, 7, options);
+        var mycountUp3 = new CountUp("mycountUp3", 0, {{ $settingArr['so_cong_nhan'] }}, 0, 7, options);
+        var mycountUp4 = new CountUp("mycountUp4", 0, {{ $settingArr['so_cong_trinh'] }}, 0, 7, options);
         mycountUp1.start();
         mycountUp2.start();
         mycountUp3.start();

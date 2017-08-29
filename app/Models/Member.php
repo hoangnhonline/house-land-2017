@@ -4,14 +4,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Support extends Model  {
+class Member extends Model  {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'support';
+	protected $table = 'member';
 
 	 /**
      * Indicates if the model should be timestamped.
@@ -27,9 +27,7 @@ class Support extends Model  {
     protected $fillable = ['name', 
                             'phone', 
                             'email', 
-                            'facebook', 
-                            'zalo', 
-                            'skype', 
+                            'chuc_vu',
                             'image_url',                             
                             'display_order'
                             ];    

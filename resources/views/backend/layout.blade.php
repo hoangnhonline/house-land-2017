@@ -161,8 +161,7 @@ $(document).ready(function(){
           toolbarGroups : [            
             { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },          
             { name: 'links', groups: [ 'links' ] },           
-            '/',
-            
+            '/',            
           ]
       });
 });

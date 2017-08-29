@@ -4,19 +4,19 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Hỗ trợ khách hàng    
+      Ban lãnh đạo    
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('support.index') }}">Support</a></li>
-      <li class="active">Tạo mới</li>
+      <li><a href="{{ route('member.index') }}">Ban lãnh đạo</a></li>
+      <li class="active">Cập nhật</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
-    <a class="btn btn-default btn-sm" href="{{ route('support.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <form role="form" method="POST" action="{{ route('support.store') }}">
+    <a class="btn btn-default btn-sm" href="{{ route('member.index') }}" style="margin-bottom:5px">Quay lại</a>
+    <form role="form" method="POST" action="{{ route('member.update') }}">
     <div class="row">
       <!-- left column -->
 
@@ -24,7 +24,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Tạo mới</h3>
+            <h3 class="box-title">Cập nhật</h3>
           </div>
           <!-- /.box-header -->               
             {!! csrf_field() !!}
@@ -39,42 +39,32 @@
                       </ul>
                   </div>
               @endif                
-               
+                <input type="hidden" name="id" value="{{ $detail->id }}">
                 <div class="form-group" >
                   
                   <label> Tên <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                  <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $detail->name) }}">
+                </div>
+                <div class="form-group" >                  
+                  <label> Chức danh <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="chuc_vu" id="chuc_vu" value="{{ old('chuc_vu', $detail->chuc_vu) }}">
                 </div>
                 <div class="form-group" >
                   
-                  <label>Điện thoại<span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
+                  <label>Điện thoại</label>
+                  <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone', $detail->phone) }}">
                 </div>
                 <div class="form-group" >
                   
                   <label>Email</label>
-                  <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}">
+                  <input type="text" class="form-control" name="email" id="email" value="{{ old('email', $detail->email) }}">
                 </div>
-                <div class="form-group" >
-                  
-                  <label> Skype</label>
-                  <input type="text" class="form-control" name="skype" id="skype" value="{{ old('skype') }}">
-                </div>
-                <div class="form-group" >
-                  
-                  <label> Facebook </label>
-                  <input type="text" class="form-control" name="facebook" id="facebook" value="{{ old('facebook') }}">
-                </div>
-                <div class="form-group" >
-                  
-                  <label> Zalo</label>
-                  <input type="text" class="form-control" name="zalo" id="zalo" value="{{ old('zalo') }}">
-                </div>                
-                
+                               
+               
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Hình ảnh</label>    
+                  <label class="col-md-3 row">Hình ảnh ( 164 x 164 px - Hình tròn)</label>    
                   <div class="col-md-9">
-                    <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="120" height="120">
+                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url ) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="164" height="164">
                     
                     <input type="file" id="file-image" style="display:none" />
                  
@@ -82,13 +72,13 @@
                   </div>
                   <div style="clear:both"></div>
                 </div>
-                <div style="clear:both"></div>                
+                <div style="clear:both"></div>              
             </div>          
             <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>          
             <input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
-              <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('support.index')}}">Hủy</a>
+              <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('member.index')}}">Hủy</a>
             </div>
             
         </div>
@@ -111,12 +101,13 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
-$(document).ready(function(){
 
+  $(document).ready(function(){
+     
       $('#btnUploadImage').click(function(){        
         $('#file-image').click();
-      });      
-     
+      });  
+        
       var files = "";
       $('#file-image').change(function(e){
          files = e.target.files;
@@ -157,6 +148,7 @@ $(document).ready(function(){
           });
         }
       });
+      
       
     
     });
