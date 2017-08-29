@@ -123,7 +123,82 @@ class SettingsController  extends Controller
             File::move(config('houseland.upload_path').$dataArr['banner'], config('houseland.upload_path').$destionation);
             
             $dataArr['banner'] = $destionation;
-        }        
+        }
+
+        if($dataArr['icon_nam_hinh_thanh'] && $dataArr['icon_nam_hinh_thanh_name']){
+            
+            $tmp = explode('/', $dataArr['icon_nam_hinh_thanh']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('houseland.upload_path').$dataArr['icon_nam_hinh_thanh'], config('houseland.upload_path').$destionation);
+            
+            $dataArr['icon_nam_hinh_thanh'] = $destionation;
+        }
+
+        if($dataArr['icon_kien_truc_su'] && $dataArr['icon_kien_truc_su_name']){
+            
+            $tmp = explode('/', $dataArr['icon_kien_truc_su']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('houseland.upload_path').$dataArr['icon_kien_truc_su'], config('houseland.upload_path').$destionation);
+            
+            $dataArr['icon_kien_truc_su'] = $destionation;
+        }
+
+        if($dataArr['icon_cong_nhan'] && $dataArr['icon_cong_nhan_name']){
+            
+            $tmp = explode('/', $dataArr['icon_cong_nhan']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('houseland.upload_path').$dataArr['icon_cong_nhan'], config('houseland.upload_path').$destionation);
+            
+            $dataArr['icon_cong_nhan'] = $destionation;
+        }
+
+        if($dataArr['icon_cong_trinh'] && $dataArr['icon_cong_trinh_name']){
+            
+            $tmp = explode('/', $dataArr['icon_cong_trinh']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('houseland.upload_path').$dataArr['icon_cong_trinh'], config('houseland.upload_path').$destionation);
+            
+            $dataArr['icon_cong_trinh'] = $destionation;
+        }
+
+        if($dataArr['icon_tieu_de'] && $dataArr['icon_tieu_de_name']){
+            
+            $tmp = explode('/', $dataArr['icon_tieu_de']);
+
+            if(!is_dir('uploads/'.date('Y/m/d'))){
+                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            }
+
+            $destionation = date('Y/m/d'). '/'. end($tmp);
+            
+            File::move(config('houseland.upload_path').$dataArr['icon_tieu_de'], config('houseland.upload_path').$destionation);
+            
+            $dataArr['icon_tieu_de'] = $destionation;
+        }
 
         $dataArr['updated_user'] = Auth::user()->id;
 
