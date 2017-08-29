@@ -185,6 +185,13 @@
                     <input type="text" value="{{ $settingArr['mau_nen_menu'] }}" class="form-control" name="mau_nen_menu" />
                     <span class="input-group-addon"><i></i></span>
                 </div>
+              </div> 
+              <div class="form-group col-md-6">
+                <label>Màu menu hover</label>
+                <div  class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_menu_hover'] }}" class="form-control" name="mau_menu_hover" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
               </div>             
               <div class="form-group col-md-6">
                 <label>Màu nền footer </label>

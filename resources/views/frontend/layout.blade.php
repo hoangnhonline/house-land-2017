@@ -128,5 +128,6 @@
 		return re.test(email);
 	}
 	</script>
+	@include('frontend.partials.custom-css')
 </body>
 </html>
