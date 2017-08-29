@@ -36,7 +36,7 @@ class NewsController extends Controller
         $id = $request->id;
 
         $detail = Articles::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'image_url', 'content', 'meta_id', 'created_at', 'cate_id')
+                ->select('id', 'title', 'slug', 'description', 'image_url', 'content', 'meta_id', 'created_at', 'cate_id', 'type')
                 ->first();
         
         if( $detail ){           
@@ -52,7 +52,13 @@ class NewsController extends Controller
           
             $tagSelected = Articles::getListTag($id);
             $cateDetail = ArticlesCate::find($detail->cate_id);
-            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail'));
+           
+            if($detail->type == 1){
+                return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail'));
+            }else{
+                 $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
+                return view('frontend.pages.services-detail', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList'));
+            }
         }else{
             return view('erros.404');
         }

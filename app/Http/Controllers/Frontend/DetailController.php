@@ -19,7 +19,7 @@ use App\Models\TagObjects;
 use App\Models\Direction;
 use App\Models\PriceUnit;
 use App\Models\Articles;
-
+use App\Models\ThongSo;
 
 use Helper, File, Session, Auth, Image;
 
@@ -40,18 +40,15 @@ class DetailController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {   
-        $spThuocTinhArr = $productArr = [];
+    {  
         $slug = $request->slug;
-        $detail = Product::where('slug', $slug)->where('estate_type_id', '>', 0)->first();
+        $detail = Product::where('slug', $slug)->first();
         if(!$detail){
             return redirect()->route('home');
         }
-        $rsLoai = EstateType::find( $detail->estate_type_id );
-
         $hinhArr = ProductImg::where('product_id', $detail->id)->get()->toArray();
 
-        $district_id = $detail->district_id;
+      
         if( $detail->meta_id > 0){
            $meta = MetaData::find( $detail->meta_id )->toArray();
            $seo['title'] = $meta['title'] != '' ? $meta['title'] : $detail->title;
@@ -66,46 +63,23 @@ class DetailController extends Controller
         }
 
         $otherList = Product::where('product.slug', '<>', '')
-                    ->where('product.type', $detail->type)
-                    ->where('product.district_id', $detail->district_id)
-                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')            
-                    ->join('estate_type', 'estate_type.id', '=','product.estate_type_id')      
-                    ->select('product_img.image_url as image_urls', 'product.*', 'estate_type.slug as slug_loai')
-                    ->where('product_img.image_url', '<>', '')    
-                    ->where('product.id', '<>', $detail->id)                                     
-                    ->orderBy('product.cart_status', 'asc')
+                    ->where('product.cate_id', $detail->cate_id)                    
+                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                    ->select('product_img.image_url as image_url', 'product.*')
+                    
+                    ->where('product.id', '<>', $detail->id)  
                     ->orderBy('product.id', 'desc')->limit(6)->get();
 
-        $tagSelected = Product::getListTag($detail->id); 
-        $type = $detail->type;
-        $estate_type_id = $detail->estate_type_id;
-        $street_id = $detail->street_id;
-        $ward_id = $detail->ward_id;
-        $district_id = $detail->district_id;
-        $city_id = $detail->city_id;
-        $area_id = $detail->area_id;
-        $price_id = $detail->price_id;
-        $no_room = $detail->no_room;
-        $project_id = $detail->project_id;
-        $direction_id = $detail->direction_id;        
-        $tienIch = Product::productTienIch($detail->id);
+        $tagSelected = Product::getListTag($detail->id);
+        if($detail->layout == 1){
+            $thongsoList = ThongSo::orderBy('display_order')->get();
+
+            $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
+            return view('frontend.detail.index-thong-so-rieng', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'thongsoList', 'arrThongSo'));
+        }else{
+            return view('frontend.detail.index', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected'));    
+        }
         
-        $tienIchLists = Tag::where('type', 3)->get();
-        return view('frontend.detail.index', compact('detail', 'rsLoai', 'hinhArr', 'productArr', 'seo', 'socialImage', 'otherList', 'tagSelected',
-            'type',
-            'estate_type_id',
-            'street_id',
-            'city_id',
-            'ward_id',
-            'district_id',
-            'no_room',
-            'direction_id',
-            'area_id',
-            'project_id',
-            'price_id',
-            'tienIch', 
-            'tienIchLists'        
-            ));
     }
     public function tagDetail(Request $request){
         $slug = $request->slug;

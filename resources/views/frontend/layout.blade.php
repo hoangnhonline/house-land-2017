@@ -72,6 +72,7 @@
     <!-- Js Common -->
 	<script src="{{ URL::asset('public/assets/js/common.js') }}""></script>
 	<script src="{{ URL::asset('public/assets/js/sweetalert2.min.js') }}"></script>
+	<script src="{{ URL::asset('public/assets/js/lazy.js') }}"></script>
     <input type="hidden" id="route-newsletter" value="{{ route('register.newsletter') }}">
 	@yield('js')
 	

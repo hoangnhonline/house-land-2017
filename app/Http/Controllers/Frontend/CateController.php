@@ -5,18 +5,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\EstateType;
+use App\Models\CateType;
 use App\Models\Cate;
-use App\Models\SanPham;
-use App\Models\SpThuocTinh;
-use App\Models\SpHinh;
-use App\Models\ThuocTinh;
-use App\Models\LoaiThuocTinh;
-use App\Models\Banner;
-use App\Models\Location;
-use App\Models\TinhThanh;
-use App\Models\HoverInfo;
-use App\Models\Pages;
+use App\Models\CateParent;
+use App\Models\Product;
+use App\Models\ProductImg;
 use App\Models\MetaData;
 use Helper, File, Session, Auth, DB;
 
@@ -52,15 +45,15 @@ class CateController extends Controller
                 ->where('chieu_rong', '>', 0)
                 ->where('chieu_cao', '>', 0)
                 ->where('can_nang', '>', 0)
-                ->leftJoin('sp_hinh', 'sp_hinh.id', '=','product.thumbnail_id')
+                ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                 ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('sp_hinh.image_url', 'product.*', 'thuoc_tinh');
+                ->select('product_img.image_url', 'product.*', 'thuoc_tinh');
                 if($rs->price_sort == 0){
                     $query->where('price', '>', 0)->orderBy('product.price', 'asc');
                 }else{
                     $query->where('price', '>', 0)->orderBy('product.price', 'desc');
                 }
-                //->where('sp_hinh.image_url', '<>', '')
+                //->where('product_img.image_url', '<>', '')
                 $query->orderBy('product.id', 'desc');
 
                 $productList  = $query->paginate(2);
@@ -90,188 +83,105 @@ class CateController extends Controller
     public function getSeoInfo($meta_id){
 
     }
-   public function banChay(Request $request)
-    {
-
-        $productArr = [];
-        $slugEstateType = $request->slugEstateType;
-       
-        $rs = EstateType::where('slug', $slugEstateType)->first();
-        if(!$rs){
+    public function cateType(Request $request){
+        $cateArr = [];      
+        $parentList = (object)[];
+        $slugCateType = $request->slugCateType;
+        if(!$slugCateType){
             return redirect()->route('home');
         }
-        $estate_type_id = $rs->id;
-       
-
-        $cateArr = Cate::where('status', 1)->where('estate_type_id', $estate_type_id)->get();
-
+        $typeDetail = CateType::where('slug', $slugCateType)->first();
         
-        $query = SanPham::where('estate_type_id', $estate_type_id)->where('so_luong_ton', '>', 0)->where('price', '>', 0)
-                ->leftJoin('sp_hinh', 'sp_hinh.id', '=','product.thumbnail_id')
-                ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('sp_hinh.image_url', 'product.*', 'thuoc_tinh')              
-                ->orderBy('so_lan_mua', 'desc');
-                if($rs->price_sort == 0){
-                    $query->where('price', '>', 0)->orderBy('product.price', 'asc');
-                }else{
-                    $query->where('price', '>', 0)->orderBy('product.price', 'desc');
+        if($typeDetail){
+            $type_id = $typeDetail->id;
+
+            $parentList = CateParent::where('type_id', $type_id)->orderBy('display_order')->get();
+
+            if($parentList){
+                foreach($parentList as $parent){
+                    $cateArr[$parent->id] = Cate::where('parent_id', $parent->id)                             
+                                            ->orderBy('display_order')
+                                            ->get();
                 }
-                $query->orderBy('is_hot', 'desc')
-                ->orderBy('product.id', 'desc');
-                $productArr = $query->limit(24)->get();
-        $hoverInfo = HoverInfo::where('estate_type_id', $rs->id)->orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();  
-        $seo = Helper::seo();      
-        return view('frontend.cate.ban-chay', compact('productArr', 'cateArr', 'rs', 'rsCate', 'hoverInfo', 'seo'));
-    }  
-    public function sanPhamMoi(Request $request)
-    {
-
-        $productArr = [];
-        $slugEstateType = $request->slugEstateType;
-       
-        $rs = EstateType::where('slug', $slugEstateType)->first();
-        if(!$rs){
-            return redirect()->route('home');
+            }
+            if( $typeDetail->meta_id > 0){
+               $seo = MetaData::find( $typeDetail->meta_id )->toArray();
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = $typeDetail->name;
+            }  
+                return view('frontend.cate.type', compact('type_id', 'typeDetail', 'cateArr', 'seo', 'parentList'));
+            
+        }else{
+            return redirect()->route('home');   
         }
-        $estate_type_id = $rs->id;
-       
-
-        $cateArr = Cate::where('status', 1)->where('estate_type_id', $estate_type_id)->get();
-
-        
-        $query = SanPham::where('estate_type_id', $estate_type_id)->where('so_luong_ton', '>', 0)->where('price', '>', 0)
-                ->leftJoin('sp_hinh', 'sp_hinh.id', '=','product.thumbnail_id')
-                ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('sp_hinh.image_url', 'product.*', 'thuoc_tinh');
-               if($rs->price_sort == 0){
-                    $query->where('price', '>', 0)->orderBy('product.price', 'asc');
-                }else{
-                    $query->where('price', '>', 0)->orderBy('product.price', 'desc');
-                }
-                $query->orderBy('product.id', 'desc')
-
-                    ->orderBy('is_hot', 'desc');
-                $productArr = $query->limit(48)->paginate(24);
-        $hoverInfo = HoverInfo::where('estate_type_id', $rs->id)->orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();        
-        $seo['title'] = $seo['description'] = $seo['keywords'] = $rs->name ." sản phẩm mới";
-        return view('frontend.cate.san-pham-moi', compact('productArr', 'cateArr', 'rs', 'rsCate', 'hoverInfo', 'seo'));
-    } 
-    public function giamGia(Request $request)
-    {
-
-        $productArr = [];
-        $slugEstateType = $request->slugEstateType;
-       
-        $rs = EstateType::where('slug', $slugEstateType)->first();
-        if(!$rs){
-            return redirect()->route('home');
-        }
-        $estate_type_id = $rs->id;
-       
-
-        $cateArr = Cate::where('status', 1)->where('estate_type_id', $estate_type_id)->get();
-
-        
-        $productArr = SanPham::where('estate_type_id', $estate_type_id)->where('is_sale', 1)->where('so_luong_ton', '>', 0)->where('price', '>', 0)
-                ->leftJoin('sp_hinh', 'sp_hinh.id', '=','product.thumbnail_id')
-                ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('sp_hinh.image_url', 'product.*', 'thuoc_tinh')
-                //->where('sp_hinh.image_url', '<>', '')
-                ->orderBy('product.id', 'desc')
-                ->orderBy('is_hot', 'desc')
-                ->limit(48)->paginate(24);
-        $hoverInfo = HoverInfo::where('estate_type_id', $rs->id)->orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();        
-         $seo['title'] = $seo['description'] = $seo['keywords'] = $rs->name ." giảm giá";
-        return view('frontend.cate.giam-gia', compact('productArr', 'cateArr', 'rs', 'rsCate', 'hoverInfo', 'seo'));
-    } 
-    public function theoGia(Request $request)
-    {
-
-        $productArr = [];
-        $slugEstateType = $request->slugEstateType;
-        $slugGia = $request->slugGia; 
-        
-        
-        $rs = EstateType::where('slug', $slugEstateType)->first();
-        if(!$rs){
-            return redirect()->route('home');
-        }
-        $estate_type_id = $rs->id;
-        
-        $tmp = DB::table('price_range')->where('estate_type_id', $estate_type_id)->where('alias', $slugGia)->first();
-        $title = $tmp->name;
-        $from = $tmp->from;
-        $to = $tmp->to;        
-        $cateArr = Cate::where('status', 1)->where('estate_type_id', $estate_type_id)->get();
-
-        
-        $query = SanPham::where('estate_type_id', $estate_type_id)->where('so_luong_ton', '>', 0)->where('price', '>', 0)
-                ->leftJoin('sp_hinh', 'sp_hinh.id', '=','product.thumbnail_id')
-                ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('sp_hinh.image_url', 'product.*', 'thuoc_tinh')
-                ->where('price', '>=', $from)
-                ->where('price', '<=', $to);
-                if($rs->price_sort == 0){
-                    $query->where('price', '>', 0)->orderBy('product.price', 'asc');
-                }else{
-                    $query->where('price', '>', 0)->orderBy('product.price', 'desc');
-                }                
-                $query->orderBy('product.id', 'desc')
-                ->orderBy('is_hot', 'desc');
-                $productArr = $query->paginate(24);                
-        $hoverInfo = HoverInfo::where('estate_type_id', $rs->id)->orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();        
-        
-        $seo['title'] = $seo['description'] = $seo['keywords'] = $rs->name ." ".$title;
-
-        return view('frontend.cate.theo-gia', compact('productArr', 'cateArr', 'rs', 'rsCate', 'hoverInfo', 'title', 'seo'));
-    } 
-    function getGiaFromTo($slugGia){
-        switch ($slugGia) {
-            case 'duoi-1-trieu':
-                $from = 0;
-                $to = 1000000;
-                $title = "Dưới 1 triệu";
-                break;           
-            case 'tu-1-den-2-trieu':
-                $from = 1000001;
-                $to = 2000000;
-                $title = "Từ 1 - 2 triệu";
-                break;
-            case 'tu-2-den-4-trieu':
-                $from = 2000001;
-                $to = 4000000;
-                $title = "Từ 2 - 4 triệu";
-                break;
-            case 'tu-4-den-8-trieu':
-                $from = 4000001;
-                $to = 8000000;
-                $title = "Từ 4 - 8 triệu";
-                break;
-            case 'tu-8-den-16-trieu':
-                $from = 8000001;
-                $to = 16000000;
-                $title = "Từ 8 - 16 triệu";
-                break;
-            case 'tren-16-trieu':
-                $from = 16000001;
-                $to = 1000000000;
-                $title = "Trên 16 triệu";
-                break;         
-            default:
-                $from = 0;
-                $to = 100000000;
-                $title = "Trên 16 triệu";
-                break;
-        }
-        return ['from' => $from, 'to' => $to, 'title' => $title];
     }
-    public function ajaxTab(Request $request){
-        $table = $request->type ? $request->type : 'category';
-        $id = $request->id;
+    public function cateParent(Request $request){
+        $productArr = [];
+        $cateList = (object) [];
+        $slugCateType = $request->slugCateType;
+        if(!$slugCateType){
+            return redirect()->route('home');
+        }
+        $type_id = CateType::where('slug', $slugCateType)->first()->id;
+        if($type_id){
+            $slugCateParent = $request->slugCateParent;
+            if(!$slugCateParent){
+                return redirect()->route('home');       
+            }
+            $parentDetail = CateParent::where('slug', $slugCateParent)->first();
 
-        $arr = Film::getFilmHomeTab( $table, $id);
-
-        return view('frontend.index.ajax-tab', compact('arr'));
+            if($parentDetail){
+                $parent_id = $parentDetail->id;
+                $cateList = Cate::where('parent_id', $parent_id)->orderBy('display_order')->get();
+                if($cateList){
+                    foreach($cateList as $cate){
+                        $productArr[$cate->id] = Product::where('cate_id', $cate->id)
+                                                ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                                                ->select('product_img.image_url', 'product.*')                                                   
+                                                ->orderBy('product.id', 'desc')
+                                                ->get();
+                    }
+                }
+            if( $parentDetail->meta_id > 0){
+               $seo = MetaData::find( $parentDetail->meta_id )->toArray();
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
+            }  
+                return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo'));
+            }else{
+                return redirect()->route('home');       
+            }
+        }else{
+            return redirect()->route('home');   
+        }
+    }
+    public function cateChild(Request $request){
+        $productArr = [];
+        $cateList = (object) [];
+        $slugCateChild = $request->slugCateChild;
+        
+        if(!$slugCateChild){
+            return redirect()->route('home');
+        }
+        $cateDetail = Cate::where('slug', $slugCateChild)->first();
+        if($cateDetail){
+            $cate_id = $cateDetail->id;
+            
+            $productList = Product::where('cate_id', $cate_id)
+                                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                                    ->select('product_img.image_url', 'product.*')                                                   
+                                    ->orderBy('product.id', 'desc')
+                                    ->paginate(15);
+            if( $cateDetail->meta_id > 0){
+               $seo = MetaData::find( $cateDetail->meta_id )->toArray();
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = $cateDetail->name;
+            }  
+            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo'));
+            
+        }else{
+            return redirect()->route('home');   
+        }
     }
     /**
     * Show the form for creating a new resource.
@@ -316,9 +226,9 @@ class CateController extends Controller
 
         
         $query = SanPham::where('cate_id', $rsCate->id)->where('estate_type_id', $estate_type_id)->where('so_luong_ton', '>', 0)->where('price', '>', 0)
-                ->leftJoin('sp_hinh', 'sp_hinh.id', '=','product.thumbnail_id')
+                ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                 ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('sp_hinh.image_url', 'product.*', 'thuoc_tinh');
+                ->select('product_img.image_url', 'product.*', 'thuoc_tinh');
                     if($rs->price_sort == 0){
                         $query->where('price', '>', 0)->orderBy('product.price', 'asc');
                     }else{

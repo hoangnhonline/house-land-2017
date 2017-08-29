@@ -15,14 +15,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
-      @if(Auth::user()->role == 3)      
-      <li {{ \Request::route()->getName() == "settings.noti" ? "class=active" : "" }}>
-        <a href="{{ route('settings.noti') }}">
-          <i class="fa fa-pencil-square-o"></i> 
-          <span>Thông báo chung</span>         
-        </a>       
-      </li>
-      @endif
+     
       <li class="treeview {{ in_array(\Request::route()->getName(), ['product.index', 'product.create', 'product.edit', 'cate-type.index', 'cate-type.edit', 'cate-type.create', 'cate.index', 'cate.edit', 'cate.create', 'cate-parent.index', 'cate-parent.edit', 'cate-parent.create']) ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-opencart"></i> 
@@ -40,19 +33,13 @@
           <li {{ in_array(\Request::route()->getName(), ['cate.index', 'cate.edit', 'cate.create']) ? "class=active" : "" }}><a href="{{ route('cate.index') }}"><i class="fa fa-circle-o"></i> Danh mục con</a></li>
           @endif
         </ul>
-      </li>      
-      
-     
-      
-      @if(Auth::user()->role > 1)      
-      <li {{ (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 1 )? "class=active" : "" }}>
-        <a href="{{ route('custom-link.index', ['block_id' => 1 ]) }}">
-          <i class="fa fa-pencil-square-o"></i> 
-          <span>Liên kết nổi bật</span>         
-        </a>       
-      </li>
-      @endif
-      
+      </li>            
+      <li {{ in_array(\Request::route()->getName(), ['services.edit', 'services.index', 'services.create']) ? "class=active" : "" }}>
+          <a href="{{ route('services.index') }}">
+            <i class="fa fa-pencil-square-o"></i> 
+            <span>Dịch vụ</span>          
+          </a>       
+        </li>
       <li class="treeview {{ in_array(\Request::route()->getName(), ['pages.index', 'pages.create']) ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-twitch"></i> 
@@ -70,24 +57,25 @@
       <li class="treeview {{ in_array(\Request::route()->getName(), ['articles.index', 'articles.create', 'articles.edit','articles-cate.create', 'articles-cate.index', 'articles-cate.edit']) ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-pencil-square-o"></i> 
-          <span>Bài viết</span>
+          <span>Tin tức</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
-          <li {{ in_array(\Request::route()->getName(), ['articles.edit', 'articles.index']) ? "class=active" : "" }}><a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> Bài viết</a></li>
-          <li {{ in_array(\Request::route()->getName(), ['articles.create']) ? "class=active" : "" }} ><a href="{{ route('articles.create', ['cate_id' => 1]) }}"><i class="fa fa-circle-o"></i> Thêm bài viết</a></li>
+          <li {{ in_array(\Request::route()->getName(), ['articles.edit', 'articles.index']) ? "class=active" : "" }}><a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> Tin tức</a></li>
+          <li {{ in_array(\Request::route()->getName(), ['articles.create']) ? "class=active" : "" }} ><a href="{{ route('articles.create', ['cate_id' => 1]) }}"><i class="fa fa-circle-o"></i> Thêm tin tức</a></li>
           @if(Auth::user()->role == 3)
-        <li {{ in_array(\Request::route()->getName(), ['articles-cate.create', 'articles-cate.index', 'articles-cate.edit']) ? "class=active" : "" }} ><a href="{{ route('articles-cate.index') }}"><i class="fa fa-circle-o"></i> Danh mục bài viết</a></li>      
+        <li {{ in_array(\Request::route()->getName(), ['articles-cate.create', 'articles-cate.index', 'articles-cate.edit']) ? "class=active" : "" }} ><a href="{{ route('articles-cate.index') }}"><i class="fa fa-circle-o"></i> Danh mục tin tức</a></li>      
         @endif    
         </ul>
        
       </li>      
+       
         <li {{ in_array(\Request::route()->getName(), ['tag.edit', 'tag.index']) ? "class=active" : "" }}>
           <a href="{{ route('tag.index') }}">
             <i class="fa fa-pencil-square-o"></i> 
-            <span>Tags / Tiện ích</span>          
+            <span>Tags</span>          
           </a>       
         </li>
         
@@ -126,19 +114,18 @@
         <ul class="treeview-menu">
           @if(Auth::user()->role == 3)
         
-          <li {{ \Request::route()->getName() == "settings.index" ? "class=active" : "" }}><a href="{{ route('settings.index') }}"><i class="fa fa-circle-o"></i> Thông tin CTY</a></li>
+          <li {{ \Request::route()->getName() == "settings.index" ? "class=active" : "" }}><a href="{{ route('settings.index') }}"><i class="fa fa-circle-o"></i> Thông tin houseland</a></li>
           <li {{ (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 2 )? "class=active" : "" }}>
             <a href="{{ route('custom-link.index', ['block_id' => 2 ]) }}">
               <i class="fa fa-circle-o"></i>
               <span>Link Footer</span>         
             </a>       
           </li>
-          <li {{ in_array(\Request::route()->getName(), ['support.list', 'support.edit', 'support.create']) ? "class=active" : "" }}><a href="{{ route('support.index') }}"><i class="fa fa-circle-o"></i> Hỗ trợ khách hàng</a></li>  
-          <li {{ in_array(\Request::route()->getName(), ['video.index', 'video.edit', 'video.create']) ? "class=active" : "" }}><a href="{{ route('video.index') }}"><i class="fa fa-circle-o"></i> Video</a></li>      
-          <li {{ \Request::route()->getName() == "menu.index" ? "class=active" : "" }}><a href="{{ route('menu.index') }}"><i class="fa fa-circle-o"></i> Menu</a></li>
-          <li {{ \Request::route()->getName() == "info-seo.index" ? "class=active" : "" }}><a href="{{ route('info-seo.index') }}"><i class="fa fa-circle-o"></i> Cài đặt SEO</a></li>
+          <li {{ in_array(\Request::route()->getName(), ['support.list', 'support.edit', 'support.create']) ? "class=active" : "" }}><a href="{{ route('support.index') }}"><i class="fa fa-circle-o"></i> Hỗ trợ khách hàng</a></li>
+         
+         
           @endif
-          <li {{ \Request::route()->getName() == "account.index" ? "class=active" : "" }}><a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i> Users</a></li>          
+                
         </ul>
       </li>
       @endif

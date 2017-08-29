@@ -19,12 +19,13 @@ Route::group(['namespace' => 'Frontend'], function()
 {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);   
     
-   
+    Route::post('/send-contact', ['as' => 'send-contact', 'uses' => 'ContactController@store']);
     Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'DetailController@tagDetail']);
     Route::get('tin-tuc/{slug}', ['as' => 'news-list', 'uses' => 'NewsController@newsList']);
     Route::get('/tin-tuc/{slug}-p{id}.html', ['as' => 'news-detail', 'uses' => 'NewsController@newsDetail']);
+    Route::get('/dich-vu/{slug}-s{id}.html', ['as' => 'services-detail', 'uses' => 'NewsController@newsDetail']);
 
-    Route::get('san-pham/{slug}-{id}.html', ['as' => 'chi-tiet', 'uses' => 'DetailController@index']);
+    Route::get('san-pham/{slug}-{id}.html', ['as' => 'product', 'uses' => 'DetailController@index']);
     
     
     
@@ -37,10 +38,12 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('/tim-kiem.html', ['as' => 'search', 'uses' => 'ProductController@search']);
 
     Route::get('lien-he.html', ['as' => 'contact', 'uses' => 'HomeController@contact']);
+    Route::get('dich-vu.html', ['as' => 'services', 'uses' => 'HomeController@services']);
 
-    Route::get('{slugCateType}.html', ['as' => 'cate-type', 'uses' => 'CateController@cateType']);
-    Route::get('{slugCateType}/{slugCateParent}.html', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    
-    Route::get('{slugCateType}/{slugCateParent}/{slugCateChild}.html', ['as' => 'cate-child', 'uses' => 'CateController@cateChild']);
+    Route::get('{slug}.html', ['as' => 'pages', 'uses' => 'HomeController@pages']);
+    Route::get('{slugCateType}', ['as' => 'cate-type', 'uses' => 'CateController@cateType']);
+    Route::get('{slugCateType}/{slugCateParent}', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    
+    Route::get('{slugCateType}/{slugCateParent}/{slugCateChild}', ['as' => 'cate', 'uses' => 'CateController@cateChild']);
 
 
 });

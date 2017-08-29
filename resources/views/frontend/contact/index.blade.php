@@ -2,97 +2,103 @@
 
 @include('frontend.partials.meta')
 @section('content')
-<article class="block block-breadcrumb">
-  <ul class="breadcrumb">
-    <li><a href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>
-    <li class="active">Liên hệ</li>
-  </ul>
-</article><!-- /block-breadcrumb -->
-<section class="block-content">
-        <div class="block-common">  
-        <div id="contact" class="page-content page-contact">
-            <div id="message-box-conact"></div>
-            <div class="row">
-                
-                <div class="col-sm-8">	
-                    <h3 class="page-heading">
-                        <span class="page-heading-title2">THÔNG TIN Liên hệ</span>
-                    </h3>               
-                    <div class="content">
-                        <h4>NhaDat - Chợ Công Nghệ Giá Sỉ</h4>                        
-                        <p>Hotline: <span class="tel">1900 63 69 75</span></p>                        
-                        <p>Email: <a href="mailto:muahang@houseland.vn">muahang@houseland.vn</a></p>
-                    </div>
-                    @if(Session::has('message'))
-	                <p class="alert alert-info" >{{ Session::get('message') }}</p>
-	                @endif
-                    <form method="POST" action="{{ route('send-contact') }}">
-                     @if (count($errors) > 0)
-	                  <div class="alert alert-danger">
-	                    <ul>	                       
-	                        <li>Vui lòng nhập đầy đủ thông tin.</li>	                        
-	                    </ul>
-	                  </div>
-	                @endif	
-                    <div class="contact-form-box">
-                        <div class="form-selector">                            
-                            <textarea style="font-size:14px" class="form-control input-sm" rows="8" id="content" name="content" placeholder="Nhập nội dung bạn muốn liên hệ hoặc góp ý với NhaDat">{{ old('content') }}</textarea>
-
-                        </div>
-                        <input type="hidden" name="type" value="1">                        
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-selector col-md-4" style="padding-left:0px;padding-top:7px;height:45px">
-                            <input type="radio" name="gender" value="1" id="gender1" checked="checked"> <label for="gender1">Anh</label>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="gender" value="2" id="gender2"> <label for="gender2">Chị</label>
-                        </div>
-                        <div class="form-selector col-md-8" style="padding-right:0px;height:45px">                            
-                            <input type="text" placeholder="Họ và tên" class="form-control input-sm" id="full_name" name="full_name"  value="{{ old('full_name') }}" style="height:35px" />
-                        </div>
-                        <div class="form-selector col-md-4" style="padding-left:0px;height:45px">                            
-                            <input type="text" placeholder="Số điện thoại" class="form-control input-sm" id="phone" name="phone" value="{{ old('phone') }}" style="height:35px"/>
-                        </div>   
-                        <div class="form-selector col-md-8" style="padding-right:0px;height:45px">                           
-                            <input type="email" placeholder="Email của bạn" class="form-control input-sm" id="email" name="email" value="{{ old('email') }}" style="height:35px"/>
-                        </div>
-                        <div class="form-selector">
-                            <button type="submit" id="btn-send-contact" class="btn">GỬI LIÊN HỆ</button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-                <div class="col-xs-12 col-sm-4" id="contact_form_map">                    
-                    <div class="row">
-                        <div class="col-sm-12" style="margin-bottom:20px">
-                            <div class="introduce-title">Thông tin Công ty</div>
-                            <ul id="introduce-company"  class="introduce-list">
-                                <li><a href="{{ route('danh-muc', 'gioi-thieu') }}">Giới thiệu</a></li>
-                                <li><a href="{{ route('chuong-trinh-khuyen-mai') }}">Khuyến mãi</a></li>
-                                <li><a href="{{ route('contact') }}">Liên hệ</a></li>
-                            </ul>
-                        </div>                       
-                        <div class="col-sm-12">
-                            <div class="introduce-title">CHÍNH SÁCH</div>
-                            <ul id = "introduce-support"  class="introduce-list">
-                                <li><a href="{{ route('danh-muc', 'bao-mat-thong-tin') }}">Bảo mật thông tin</a></li>
-                                <li><a href="{{ route('danh-muc', 'thanh-toan') }}">Phương thức thanh toán</a></li>
-                                <li><a href="{{ route('danh-muc', 'hinh-thuc-van-chuyen') }}">Hình thức vận chuyển</a></li>
-                                <li><a href="{{ route('danh-muc', 'chinh-sach-bao-hanh') }}">Chính sách bảo hành</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="wrapper">
+    <div class="block block-breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="{{ route('home') }}">Trang chủ</a></li>
+                <li class="active">Liên hệ</li>
+            </ul>
         </div>
+    </div><!-- /block-breadcrumb -->
+    <div class="block block-two-col container">
+        <div class="row">
+            <div class="col-sm-9 col-xs-12 block-col-left">
+                <div class="block-title-commom block-quote clearfix">
+                    <div class="block block-title">
+                        <h2>
+                            <i class="fa fa-home"></i>
+                            LIÊN HỆ
+                        </h2>
+                    </div>
+                    <div class="block-content">
+                        <h2 class="tit-page2">CÔNG TY CỔ PHẦN THIẾT KẾ XÂY DỰNG HOUSELAND</h2>
+                        <div class="block-address">
+                            {!! $settingArr['chi_nhanh_phia_nam'] !!}
+                        </div>
+                        <div class="block block-map">
+                            <object data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126263.60819855973!2d-84.44808690325613!3d33.735934882617194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDQ0JzQ1LjQiTiA4NMKwMjMnMzUuMyJX!5e0!3m2!1svi!2s!4v1475105845390"></object>
+                        </div>
+                        @if(Session::has('message'))
+                        
+                        <p class="alert alert-info" >{{ Session::get('message') }}</p>
+                        
+                        @endif
+                        @if (count($errors) > 0)                        
+                          <div class="alert alert-danger ">
+                            <ul>                           
+                                <li>Vui lòng nhập đầy đủ thông tin.</li>                            
+                            </ul>
+                          </div>                        
+                        @endif  
+                        <form class="block-form" action="{{ route('send-contact') }}" method="POST">
+                        {{ csrf_field() }}
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Họ tên khách hàng">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-xs-12">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-xs-12">
+                                    <textarea name="content" id="content" rowspan="300" class="form-control" placeholder="Ghi chú"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-xs-12">
+                                    <button type="submit" class="btn btn-prmary btn-view">Gửi liên hệ</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /block-ct-news -->
+            </div><!-- /block-col-left -->
+            <div class="col-sm-3 col-xs-12 block-col-right">
+                <div class="block-sidebar">
+                    <div class="block-module block-links-sidebar">
+                        <div class="block-title">
+                            <h2>
+                                <i class="fa fa-home"></i>
+                                DANH MỤC DỊCH VỤ
+                            </h2>
+                        </div>
+                        <div class="block-content">
+                            <ul class="list">
+                                <li><a href="#" title="">Quy trình thiết kế kiến trúc</a></li>
+                                <li><a href="#" title="">Đơn giá thiết kế kiến trúc</a></li>
+                                <li><a href="#" title="">Hợp đồng thiết kế kiến trúc mẫu</a></li>
+                                <li><a href="#" title="">Quy trình thi công xây dựng</a></li>
+                                <li><a href="#" title="">Đơn giá thi công xây dựng</a></li>
+                                <li><a href="#" title="">Hợp đồng thi công mẫu</a></li>
+                                <li><a href="#" title="">Tại sao chọn Houseland</a></li>
+                                <li><a href="#" title="">Nội thất Houseland</a></li>
+                                <li><a href="#" title="">Phân phối sơn SPEC</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /block-col-right -->
+        </div>
+    </div><!-- /block_big-title -->
+</div><!-- /wrapper-->
 
-</section>
-<style type="text/css">
-    span.required{
-        color:red;
-    }
-    .contact-form-box input {
-        font-size: 14px;
-        border: 1px solid #ccc
-    }
-</style>
 @endsection

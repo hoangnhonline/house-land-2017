@@ -29,5 +29,9 @@ class CateParent extends Model  {
     {
         return $this->hasMany('App\Models\Cate', 'parent_id');
     }
+    public function type()
+    {
+        return $this->belongsTo('App\Models\CateType', 'type_id');
+    }
 
 }

@@ -19,7 +19,7 @@ class InfoSeoController extends Controller
     public function index(Request $request)
     {   
         if(Auth::user()->role == 1){
-            return redirect()->route('dashboard.index');
+            return redirect()->route('product.index');
         }
         $query = InfoSeo::whereRaw('1');
 

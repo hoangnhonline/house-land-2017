@@ -30,7 +30,7 @@ class Articles extends Model  {
                             'cate_id', 
                             'is_hot', 
                             'project_id', 
-                            'tab_id', 
+                            'type', 
                             'status', 
                             'display_order', 
                             'description', 

@@ -55,7 +55,7 @@ class UserController extends Controller
 
             if (Auth::attempt($dataArr)) {
               
-                return redirect()->route('dashboard.index');
+                return redirect()->route('product.index');
               
             }
 

@@ -18,7 +18,7 @@ class ArticlesCateController extends Controller
     */
     public function index(Request $request)
     {
-        $items = ArticlesCate::all()->sortBy('display_order');
+        $items = ArticlesCate::where('type', 1)->orderBy('display_order')->get();
         return view('backend.articles-cate.index', compact( 'items' ));
     }
 
@@ -57,7 +57,7 @@ class ArticlesCateController extends Controller
         $dataArr['created_user'] = Auth::user()->id;
 
         $dataArr['updated_user'] = Auth::user()->id;
-
+        $dataArr['type'] = 1;
         ArticlesCate::create($dataArr);
 
         Session::flash('message', 'Tạo mới danh mục thành công');
@@ -124,7 +124,7 @@ class ArticlesCateController extends Controller
             $dataArr['image_url'] = $destionation;
         }
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
-        
+        $dataArr['type'] = 1;
         $model = ArticlesCate::find($dataArr['id']);
         
         $dataArr['updated_user'] = Auth::user()->id;

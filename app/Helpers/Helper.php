@@ -67,7 +67,7 @@ class Helper
             }elseif($object_type == 2){
                 return config('houseland.upload_url') . 'thumbs/articles/'. $folder. '/' . $image_url;
             }else{
-                return config('houseland.upload_url') . 'thumbs/projects/'. $folder. '/' . $image_url;
+                return config('houseland.upload_url') . 'thumbs/cate/'. $folder. '/' . $image_url;
             }    
         }else{
             return $image_url;

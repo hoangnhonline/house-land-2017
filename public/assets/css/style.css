@@ -66,6 +66,11 @@ body {
 a {
   color: #000000;
   outline: none;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 a:hover,
 a:focus {
@@ -407,6 +412,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   text-align: center;
   margin-bottom: 30px;
+  text-transform: uppercase;
 }
 .block_big-title .desc {
   display: block;
@@ -423,13 +429,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 .block-title-commom .block-title h2 {
   line-height: 40px;
-  color: #fff;
   background: #ff6600;
+  color: #fff;
   padding-left: 20px;
   font-size: 15px;
   text-transform: uppercase;
   max-width: 360px;
   position: relative;
+}
+.block-title-commom .block-title h2 a {
+  color: #fff;
+}
+.block-title-commom .block-title h2 a:hover {
+  color: #eaeaea;
 }
 .block-title-commom .block-title h2 i {
   font-size: 18px;
@@ -1016,13 +1028,14 @@ footer .footer-bot .container {
   font-size: 13px;
 }
 .block-tags li.tags-link a {
-  width: 100px;
+  
   height: 25px;
   line-height: 25px;
   text-align: center;
   background: #ffe0cc;
   border-radius: 50px;
   display: block;
+  padding: 0 10px;
 }
 .block-tags li.tags-link.active a,
 .block-tags li.tags-link:hover a {
@@ -1116,7 +1129,8 @@ footer .footer-bot .container {
   color: #333;
   vertical-align: middle;
 }
-.block-links-sidebar .list li:hover a {
+.block-links-sidebar .list li:hover a,
+.block-links-sidebar .list li a.active {
   color: #ff6600;
 }
 
@@ -1229,6 +1243,19 @@ footer .footer-bot .container {
   color: #fff;
   width: 160px;
   padding: 9px 12px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.block-form .btn-view:hover {
+  background: #fb7c28;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 .block-form input::-webkit-input-placeholder {
   color: #333;

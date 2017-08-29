@@ -13,88 +13,35 @@
     </p>
   </div>
 </div><!-- /block_big-title -->
-
+@if($cateParentHot)
+@foreach($cateParentHot as $parent)
 <div class="block block-product block-title-commom">
   <div class="container">
     <div class="block block-title">
       <h2>
         <i class="fa fa-home"></i>
-        BIỆT THỰ ĐẸP
+        <a href="{{ route('cate-parent', [$parent->type->slug, $parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
       </h2>
     </div>
     <div class="block-content">
       <ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":4}}'>
+          @if($cateHot[$parent->id])
+          @foreach($cateHot[$parent->id] as $cate)
           <li class="item">
             <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/1.jpg') }}" alt=""></a>
+              <a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}"><img src="{{ Helper::showImageThumb($cate->image_url, 3) }}" alt=""></a>
             </div>
             <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
+              <h2><a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></h2>
             </div>
           </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/2.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/3.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/4.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/3.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/2.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/1.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
-          <li class="item">
-            <div class="thumb">
-              <a href="#" title=""><img src="{{ URL::asset('public/assets/images/product/4.jpg') }}" alt=""></a>
-            </div>
-            <div class="title">
-              <h2><a href="#" title="">Thiết kế biệt thự cổ điển Thiết kế biệt thự cổ điển Thiết kế biệt thự...</a></h2>
-            </div>
-          </li>
+          @endforeach
+          @endif
     </div>
   </div>
 </div><!-- /block_big-title -->
-
-
-
-
+@endforeach
+@endif
 
 <div class="block block-banner">
   <img src="{{ URL::asset('public/assets/images/banner/1.jpg') }}" alt="">

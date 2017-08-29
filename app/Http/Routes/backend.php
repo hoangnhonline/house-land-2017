@@ -249,5 +249,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'articles.update', 'uses' => 'ArticlesController@update']);
         Route::get('{id}/destroy', ['as' => 'articles.destroy', 'uses' => 'ArticlesController@destroy']);
     });    
-
+    Route::group(['prefix' => 'services'], function () {
+        Route::get('/', ['as' => 'services.index', 'uses' => 'ServicesController@index']);
+        Route::get('/create', ['as' => 'services.create', 'uses' => 'ServicesController@create']);
+        Route::post('/store', ['as' => 'services.store', 'uses' => 'ServicesController@store']);
+        Route::get('{id}/edit',   ['as' => 'services.edit', 'uses' => 'ServicesController@edit']);
+        Route::post('/update', ['as' => 'services.update', 'uses' => 'ServicesController@update']);
+        Route::get('{id}/destroy', ['as' => 'services.destroy', 'uses' => 'ServicesController@destroy']);
+    });   
 });

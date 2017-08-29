@@ -31,7 +31,11 @@ class Cate extends Model  {
     }
     public function cateParent()
     {
-        return $this->belongTos('App\Models\CateParent', 'parent_id');
+        return $this->belongsTo('App\Models\CateParent', 'parent_id');
+    }
+    public function cateType()
+    {
+        return $this->belongsTo('App\Models\CateType', 'type_id');
     }
     
 }

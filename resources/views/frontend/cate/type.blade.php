@@ -1,76 +1,48 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
 @section('content')
-<article class="block-breadcrumb-page">
-	<ul class="breadcrumb">	
-		<li><a href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>
-		<li  class="active">
-			{!! $name !!}
-		</li>		
-	</ul>
-</article>
-<section class="col-sm-8 col-xs-12 block-sitemain">
-	<article class="block block-news-new block-news-cate clearfix">
-		<div class="block-cate-title"><h1>{!! $name !!}</h1></div>
-		@if($seo['custom_text'])
-		<div class="col-sm-12 col-xs-12">
-			<div class="row">				
-				<div class="block-contents">
-					<?php echo $seo['custom_text'] ? $seo['custom_text'] : ""; ?>
-				</div>
-			</div>
-		</div>
-		@endif
-		<div class="clearfix"></div>
-		<div class="block-searchresult">			
-			<span class="block-countresult">Có <b>{{ number_format(count($productList)) }}</b> bất động sản</span>
-		</div>
-		<div class="col-sm-12 col-xs-12">
-			<div class="row">
-				<div class="block-title block-title-catenews">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs nav-tabs-cus" role="tablist">
-						<li role="presentation" class="active"><a href="#dsrt" aria-controls="dsrt" role="tab" data-toggle="tab"><i class="fa fa-list"></i> Danh sách kết quả</a></li>
-					</ul>
-				</div>
-				<div class="block-contents">
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="home">
-						@if(!empty( (array) $productList ))
-							<ul>
-								@foreach( $productList as $product )
-								<li class="news-new-item">
-									<div class="news-new-item-head"><a href="{{ route('chi-tiet', [$product->slug_loai, $product->slug, $product->id]) }}"><img title="{{ $product->title }}" src="{{ $product->image_urls ? Helper::showImageThumb($product->image_urls) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{!! $product->title !!}"></a></div>
-									<div class="news-new-item-description">
-										<h4>
-											<a class="description-title vip1" title="{{ $product->title }}" href="{{ route('chi-tiet', [$product->slug_loai, $product->slug, $product->id]) }}"><i class="vipdb fa fa-star"></i> {!! $product->title !!} @if( $product->is_hot == 1 )
-						                  <img src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
-						                  @endif</a>
 
-											
-											</h4>
-                						<div class="description-info">
-                							<div class="id-post"><i class="fa fa-rebel" aria-hidden="true"></i><label>Mã tin<span>:</span></label>{{ $product->id }}</div>
-                							<div class="price"><label>Giá<span>:</span></label>{{ $product->price }} {!! Helper::getName($product->price_unit_id, 'price_unit') !!}</div>
-				                            <div class="area"><label>Diện tích<span>:</span></label>{!! $product->area !!} m<sup>2</sup></div>
-				                            <div class="location"><label>Vị trí<span>:</span></label>{!! Helper::getName($product->district_id, 'district') !!} - {!! Helper::getName($product->city_id, 'city') !!}</div>
-                						</div>
-                						<span class="date">{{ date('d/m/Y', strtotime($product->created_at)) }}</span>
-									</div>
-								</li>
-								@endforeach
-								
-							</ul>
-							@endif
-							<div style="text-align:center">
-				            {{ $productList->links() }}
-				            </div> 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</article><!-- /block-news-new -->
-</section><!-- /block-site-left -->
+<div class="block block-breadcrumb">
+	<div class="container">
+		<ul class="breadcrumb">
+			<li><a href="{{ route('home') }}">Trang chủ</a></li>			
+			<li class="active">{!! $typeDetail->name !!}</li>
+		</ul>
+	</div>
+</div><!-- /block-breadcrumb -->
+<div class="block block_big-title">
+	<div class="container">
+		<h2>{!! $typeDetail->name !!}</h2>
+		<p class="desc">{!! $typeDetail->description !!}</p>
+	</div>
+</div><!-- /block_big-title -->
+@if($parentList)
+@foreach($parentList as $parent)
+<div class="block block-product block-title-commom">
+  <div class="container">
+    <div class="block block-title">
+      <h2>
+        <i class="fa fa-home"></i>
+        <a href="{{ route('cate-parent', [$parent->type->slug, $parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+      </h2>
+    </div>
+    <div class="block-content">
+      <ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":4}}'>
+          @if($cateArr[$parent->id])
+          @foreach($cateArr[$parent->id] as $cate)
+          <li class="item">
+            <div class="thumb">
+              <a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}"><img src="{{ Helper::showImageThumb($cate->image_url, 3) }}" alt=""></a>
+            </div>
+            <div class="title">
+              <h2><a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></h2>
+            </div>
+          </li>
+          @endforeach
+          @endif
+    </div>
+  </div>
+</div><!-- /block_big-title -->
+@endforeach
+@endif
 @endsection

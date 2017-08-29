@@ -23,11 +23,11 @@ class ArticlesController extends Controller
     */
     public function index(Request $request)
     {
-        $cate_id = isset($request->cate_id) ? $request->cate_id : 1;
+        $cate_id = isset($request->cate_id) ? $request->cate_id : null;
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         
-        $query = Articles::whereRaw('1');
+        $query = Articles::where('type', 1);
 
         if( $cate_id > 0){
             $query->where('cate_id', $cate_id);
@@ -42,7 +42,7 @@ class ArticlesController extends Controller
 
         $items = $query->orderBy('id', 'desc')->paginate(20);
         
-        $cateArr = ArticlesCate::all();
+        $cateArr = ArticlesCate::where('type', 1)->get();
         
         return view('backend.articles.index', compact( 'items', 'cateArr' , 'title', 'cate_id' ));
     }
@@ -55,7 +55,7 @@ class ArticlesController extends Controller
     public function create(Request $request)
     {
 
-        $cateArr = ArticlesCate::all();
+        $cateArr = ArticlesCate::where('type', 1)->get();
         
         $cate_id = $request->cate_id;
 
@@ -143,7 +143,7 @@ class ArticlesController extends Controller
         $dataArr['created_user'] = Auth::user()->id;
 
         $dataArr['updated_user'] = Auth::user()->id;
-        
+        $dataArr['type'] = 1;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
 
         $rs = Articles::create($dataArr);
@@ -209,10 +209,10 @@ class ArticlesController extends Controller
         $detail = Articles::find($id);
         if( Auth::user()->role < 3 ){
             if($detail->created_user != Auth::user()->id){
-                return redirect()->route('dashboard.index');
+                return redirect()->route('product.index');
             }
         }
-        $cateArr = ArticlesCate::all();        
+        $cateArr = ArticlesCate::where('type', 1)->get();    
 
         $tmpArr = TagObjects::where(['type' => 2, 'object_id' => $id])->get();
         
@@ -307,9 +307,10 @@ class ArticlesController extends Controller
             $dataArr['image_url'] = $destionation;
         }
 
+        $dataArr['type'] = 1;
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
-        //$dataArr['status'] = isset($dataArr['status']) ? 1 : 0;  
+         
         $model = Articles::find($dataArr['id']);
 
         $model->update($dataArr);

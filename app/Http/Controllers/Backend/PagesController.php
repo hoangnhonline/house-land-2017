@@ -130,7 +130,7 @@ class PagesController extends Controller
         $detail = Pages::find($id);
         if(Auth::user()->role == 1){
             if($detail->created_user != Auth::user()->id){        
-                return redirect()->route('dashboard.index');        
+                return redirect()->route('product.index');        
             }
         }
         return view('backend.pages.edit', compact('detail'));

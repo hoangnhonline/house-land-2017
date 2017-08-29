@@ -154,7 +154,7 @@
                   </td>
                  
                   <td style="white-space:nowrap; text-align:right">
-                    <a class="btn btn-default btn-sm" href="{{ route('chi-tiet', [$item->slug_loai, $item->slug, $item->id] ) }}" target="_blank" title="Xem"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+                    <a class="btn btn-default btn-sm" href="{{ route('product', [$item->slug_loai, $item->slug, $item->id] ) }}" target="_blank" title="Xem"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
                     <a href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm" title="Chỉnh sửa"><span class="glyphicon glyphicon-pencil"></span></a>                 
 
                     <a onclick="return callDelete('{{ $item->title }}','{{ route( 'product.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm" title="Xóa">

@@ -16,6 +16,7 @@ use App\Models\Settings;
 use App\Models\CateType;
 use App\Models\CateParent;
 use App\Models\Cate;
+use App\Models\Pages;
 
 use Helper, File, Session, Auth, Hash;
 
@@ -50,7 +51,14 @@ class HomeController extends Controller
                     ->orderBy('product.is_hot', 'desc')                  
                     ->orderBy('product.id', 'desc')->limit(5)->get();
 
-        
+        $cateParentHot = CateParent::where('is_hot', 1)->orderBy('display_order')->get();
+        $cateHot = Cate::whereRaw('1=2')->get();
+        if($cateParentHot){
+            foreach($cateParentHot as $parent)
+            {
+                $cateHot[$parent->id] = Cate::where('is_hot', 1)->where('parent_id', $parent->id)->orderBy('display_order')->get();
+            }
+        }
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $seo = $settingArr;
         $seo['title'] = $settingArr['site_title'];
@@ -59,10 +67,32 @@ class HomeController extends Controller
         $socialImage = $settingArr['banner'];
 
      
-        return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo'));
+        return view('frontend.home.index', compact('articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot'));
 
     }
+    public function pages(Request $request){
+        $slug = $request->slug;
 
+        $detailPage = Pages::where('slug', $slug)->first();
+         
+        if(!$detailPage){
+            return redirect()->route('home');
+        }
+        $seo['title'] = $detailPage->meta_title ? $detailPage->meta_title : $detailPage->title;
+        $seo['description'] = $detailPage->meta_description ? $detailPage->meta_description : $detailPage->title;
+        $seo['keywords'] = $detailPage->meta_keywords ? $detailPage->meta_keywords : $detailPage->title;           
+        return view('frontend.pages.index', compact('detailPage', 'seo'));    
+    }
+
+    public function services(Request $request){
+        $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
+        
+        $seo['title'] =  $seo['description'] = $seo['keywords'] = "Dịch vụ";           
+        
+        return view('frontend.pages.services', compact('servicesList', 'seo'));    
+    }
+
+    
     public function getNoti(){
         $countMess = 0;
         if(Session::get('userId') > 0){
