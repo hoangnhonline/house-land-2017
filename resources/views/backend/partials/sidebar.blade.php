@@ -102,6 +102,19 @@
         </a>       
       </li>      
       @endif
+      <li class="treeview {{ in_array(\Request::route()->getName(), ['thong-so.index', 'thong-so.create', 'thong-so.edit']) ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-twitch"></i> 
+          <span>Thông số sản phẩm</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li {{ in_array(\Request::route()->getName(), ['thong-so.index', 'thong-so.edit']) ? "class=active" : "" }}><a href="{{ route('thong-so.index') }}"><i class="fa fa-circle-o"></i> Thông số sản phẩm</a></li>
+          <li {{ in_array(\Request::route()->getName(), ['thong-so.create']) ? "class=active" : "" }}><a href="{{ route('thong-so.create') }}"><i class="fa fa-circle-o"></i> Thêm thông số</a></li>          
+        </ul>
+      </li>
       @if(Auth::user()->role > 1)
       <li class="treeview {{ in_array(\Request::route()->getName(), ['account.index', 'info-seo.index', 'settings.index', 'settings.noti', 'menu.index', 'video.index', 'video.edit', 'video.create']) || (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 2 ) ? 'active' : '' }}">
         <a href="#">

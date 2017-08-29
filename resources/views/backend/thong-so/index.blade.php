@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Thuộc tính 
+    Thông số sản phẩm
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-    <li><a href="{{ route( 'thuoc-tinh.index' ) }}">Thuộc tính</a></li>
+    <li><a href="{{ route( 'thong-so.index' ) }}">Thông số sản phẩm</a></li>
     <li class="active">Danh sách</li>
   </ol>
 </section>
@@ -20,35 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('thuoc-tinh.create') }}?loai_id={{ $loai_id }}&loai_thuoc_tinh_id={{ $loai_thuoc_tinh_id }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Bộ lọc</h3>
-        </div>
-        <div class="panel-body">
-          <form class="form-inline" role="form" method="GET" action="{{ route('thuoc-tinh.index') }}" id="searchForm">
-            <div class="form-group">
-              <label for="email">Danh mục</label>
-              <select class="form-control" name="loai_id" id="loai_id">
-                <option value="0">--Tất cả--</option>
-                @foreach( $loaiSp as $k => $v )
-                <option value="{{ $k }}" {{ $k == $loai_id ? "selected" : "" }}>{{ $v }}</option>
-                @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="email">Loại thuộc tính</label>
-              <select class="form-control" name="loai_thuoc_tinh_id" id='loai_thuoc_tinh_id'>
-                <option value="0">--Tất cả--</option>
-                @foreach( $loaiThuocTinh as $k => $v )
-                <option value="{{ $k }}" {{ $k == $loai_thuoc_tinh_id ? "selected" : "" }}>{{ $v }}</option>
-                @endforeach
-              </select>
-            </div>             
-            <button type="submit" class="btn btn-default btn-sm">Lọc</button>
-          </form>         
-        </div>
-      </div>
+      <a href="{{ route('thong-so.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="box">
 
         <div class="box-header with-border">
@@ -57,12 +29,12 @@
         
         <!-- /.box-header -->
         <div class="box-body">
-          <table class="table table-bordered" id="table-list-data">            <tr>
+          <table class="table table-bordered" id="table-list-data">
+            <tr>
               <th style="width: 1%">#</th>
               <th style="width: 1%;white-space:nowrap">Thứ tự</th>
-              <th>Tên</th>            
-              <th style="text-align:center">Danh mục</th>         
-              <th width="1%" style="white-space:nowrap">Thao tác</th>
+              <th>Tên</th>                                         
+              <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
             @if( $items->count() > 0 )
@@ -75,22 +47,20 @@
                   <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
-                  <a href="{{ route( 'thuoc-tinh.edit', [ 'id' => $item->id ]) }}">{{ $item->id }}-{{ $item->name }}</a>
-                </td>
-                
-                <td style="text-align:center">
-                  {{ $loaiSp[$item->loai_id] }}
-                </td>                               
-                <td style="white-space:nowrap">                  
-                  <a href="{{ route( 'thuoc-tinh.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                                   
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'thuoc-tinh.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
-                  
+                  <a href="{{ route( 'thong-so.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>                  
+                </td>                
+                <td style="white-space:nowrap">
+             
+                  <a href="{{ route( 'thong-so.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 
+              
+                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'thong-so.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>
+                 
                 </td>
               </tr> 
               @endforeach
             @else
             <tr>
-              <td colspan="5">Không có dữ liệu.</td>
+              <td colspan="9">Không có dữ liệu.</td>
             </tr>
             @endif
 
@@ -105,7 +75,6 @@
 </section>
 <!-- /.content -->
 </div>
-<input type="hidden" id="route-ajax-get-thuoc-tinh-by-id" value="{{ route('loai-thuoc-tinh.ajax-get-loai-thuoc-tinh-by-id') }}">
 @stop
 @section('javascript_page')
 <script type="text/javascript">
@@ -124,21 +93,6 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
-  $('#loai_id, #loai_thuoc_tinh_id').change(function(){
-    $('#searchForm').submit();
-  });
-  $('#loai_id').change(function(){
-    $.ajax({
-      url : $('#route-ajax-get-thuoc-tinh-by-id').val(),
-      data : {
-        loai_id : $(this).val()
-      },
-      type: "GET",
-      success : function(data){
-        $('#loai_thuoc_tinh_id').html(data);
-      }
-    })
-  });
   $('#table-list-data tbody').sortable({
         placeholder: 'placeholder',
         handle: ".move",
@@ -157,7 +111,7 @@ $(document).ready(function(){
                 strTemp = rows[i].id;
                 strOrder += strTemp.replace('row-','') + ";";
             }     
-            updateOrder("loai_thuoc-tinh", strOrder);
+            updateOrder("thong_so", strOrder);
         }
     });
 });

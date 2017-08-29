@@ -19,13 +19,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::get('/', ['as' => 'report.index', 'uses' => 'ReportController@index']);     
         Route::post('/search-price-other-site', ['as' => 'crawler.search-price-other-site', 'uses' => 'CompareController@search']);
     });
-    Route::group(['prefix' => 'video'], function () {
-        Route::get('/', ['as' => 'video.index', 'uses' => 'VideoController@index']);
-        Route::get('/create', ['as' => 'video.create', 'uses' => 'VideoController@create']);
-        Route::post('/store', ['as' => 'video.store', 'uses' => 'VideoController@store']);
-        Route::get('{id}/edit',   ['as' => 'video.edit', 'uses' => 'VideoController@edit']);       
-        Route::get('{id}/destroy', ['as' => 'video.destroy', 'uses' => 'VideoController@destroy']);
-        Route::post('/update', ['as' => 'video.update', 'uses' => 'VideoController@update']);
+    Route::group(['prefix' => 'thong-so'], function () {
+        Route::get('/', ['as' => 'thong-so.index', 'uses' => 'ThongSoController@index']);
+        Route::get('/create', ['as' => 'thong-so.create', 'uses' => 'ThongSoController@create']);
+        Route::post('/store', ['as' => 'thong-so.store', 'uses' => 'ThongSoController@store']);
+        Route::get('{id}/edit',   ['as' => 'thong-so.edit', 'uses' => 'ThongSoController@edit']);       
+        Route::get('{id}/destroy', ['as' => 'thong-so.destroy', 'uses' => 'ThongSoController@destroy']);
+        Route::post('/update', ['as' => 'thong-so.update', 'uses' => 'ThongSoController@update']);
     });
     Route::group(['prefix' => 'menu'], function () {
         Route::get('/', ['as' => 'menu.index', 'uses' => 'GeneralController@setupMenu']);
