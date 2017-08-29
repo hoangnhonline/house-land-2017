@@ -180,16 +180,51 @@
           <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group col-md-6">
-                <label>Màu nền menu <span class="red-star">*</span></label>
+                <label>Màu nền menu </label>
                 <div  class="input-group colorpicker-component mau">
                     <input type="text" value="{{ $settingArr['mau_nen_menu'] }}" class="form-control" name="mau_nen_menu" />
                     <span class="input-group-addon"><i></i></span>
                 </div>
               </div>             
               <div class="form-group col-md-6">
-                <label>Màu nền footer <span class="red-star">*</span></label>
+                <label>Màu nền footer </label>
                 <div class="input-group colorpicker-component mau">
                     <input type="text" value="{{ $settingArr['mau_nen_footer'] }}" class="form-control" name="mau_nen_footer" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div> 
+              <div class="form-group col-md-6">
+                <label>Màu nền khung tìm kiếm </label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nen_search'] }}" class="form-control" name="mau_nen_search" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu nền copyright </label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nen_copyright'] }}" class="form-control" name="mau_nen_copyright" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu nền tiêu đề danh mục </label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nen_block'] }}" class="form-control" name="mau_nen_block" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu nút đăng ký </label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nut_dang_ky'] }}" class="form-control" name="mau_nut_dang_ky" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu nút Back to top</label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nut_top'] }}" class="form-control" name="mau_nut_top" />
                     <span class="input-group-addon"><i></i></span>
                 </div>
               </div>  
