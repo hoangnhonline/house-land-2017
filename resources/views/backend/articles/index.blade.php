@@ -131,6 +131,9 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
+    $('#cate_id').change(function(){
+      $(this).parents('form').submit();
+    });
   $('#parent_id').change(function(){
     $.ajax({
         url: $('#route_get_cate_by_parent').val(),
