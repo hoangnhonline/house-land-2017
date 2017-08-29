@@ -48,7 +48,7 @@ class ThongSoController extends Controller
         [
             'name.required' => 'Bạn chưa nhập tên',               
         ]);
-
+        $dataArr['display_order'] = Helper::getNextOrder('thong_so');
         ThongSo::create($dataArr);
 
         Session::flash('message', 'Tạo mới thành công');
