@@ -40,7 +40,13 @@
                   </div>
               @endif              
                  <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Banner </label>    
+                  <label class="col-md-3 row">Banner <?php 
+                  if($object_id == 1){
+                    echo "( 1349 x 505 px)";
+                  }elseif($object_id == 5){
+                    echo "( 1349 x 200 px)";
+                  }
+                  ?></label>    
                   <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
                     

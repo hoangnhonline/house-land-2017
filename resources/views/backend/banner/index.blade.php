@@ -38,7 +38,7 @@
             <tr>
               <th style="width: 1%">#</th>
               <th style="width: 1%;white-space:nowrap">Thứ tự</th>
-              <th style="width:150px">Banner</th>
+              <th style="width:500px">Banner</th>
               <th>Liên kết</th>
   
               <th width="1%;white-space:nowrap">Thao tác</th>
@@ -54,7 +54,7 @@
                   <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                 </td>
                 <td>                  
-                  <img class="img-thumbnail banner" width="200" src="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" />
+                  <img class="img-thumbnail banner" width="500" src="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" />
                 </td>                                                             
                 <td>{{ $item->ads_url }}</td>
                 <td style="white-space:nowrap; text-align:right">                 
