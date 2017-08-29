@@ -29,7 +29,9 @@
           @foreach($cateHot[$parent->id] as $cate)
           <li class="item">
             <div class="thumb">
-              <a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}"><img src="{{ Helper::showImageThumb($cate->image_url, 3) }}" alt=""></a>
+              <a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}">
+                <img src="{{ Helper::showImageThumb($cate->image_url, 3) }}" alt="{!! $cate->name !!}">
+              </a>
             </div>
             <div class="title">
               <h2><a href="{{ route('cate', [$parent->type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></h2>
@@ -53,7 +55,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
   @if($banner->ads_url !='')
   <a href="{{ $banner->ads_url }}" title="banner ads {{ $i }}">
   @endif
-  <img src="{{ Helper::showImage($banner->image_url) }}" alt="banner ads {{ $i }}">
+  <img class="lazy" data-original="{{ Helper::showImage($banner->image_url) }}" alt="banner ads {{ $i }}">
   @if($banner->ads_url !='')
   </a>
   @endif
@@ -88,7 +90,9 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
           <?php $i++;?>
           <li class="@if($i == 1) first @else item @endif">
             <div class="thumb">
-              <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}"><img src="{{ Helper::showImage($articles->image_url) }}" alt="{!! $articles->title !!}"></a>
+              <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}">
+              <img class="lazy" data-original="{{ Helper::showImage($articles->image_url) }}" alt="{!! $articles->title !!}">
+              </a>
             </div>
             <div class="des">
               <h2 class="title"><a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}">{!! $articles->title !!}</a></h2>
