@@ -173,6 +173,30 @@
 
       </div>
       <div class="col-md-5">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Màu sắc</h3>
+          </div>
+          <!-- /.box-header -->
+            <div class="box-body">
+              <div class="form-group col-md-6">
+                <label>Màu nền menu <span class="red-star">*</span></label>
+                <div  class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nen_menu'] }}" class="form-control" name="mau_nen_menu" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>             
+              <div class="form-group col-md-6">
+                <label>Màu nền footer <span class="red-star">*</span></label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nen_footer'] }}" class="form-control" name="mau_nen_footer" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+        </div>
+        <!-- /.box -->     
+
+      </div>
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
@@ -203,6 +227,7 @@
         <!-- /.box -->     
 
       </div>
+      
       <!--/.col (left) -->      
     </div>
 <input type="hidden" name="logo" id="logo" value="{{ $settingArr['logo'] }}"/>          
@@ -231,6 +256,7 @@
             '/',            
           ]
       });
+      $('.mau').colorpicker();
       var editor2 = CKEDITOR.replace( 'chi_nhanh_phia_nam',{
           language : 'vi',     
           height : 200,

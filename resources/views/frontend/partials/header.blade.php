@@ -58,10 +58,7 @@
 	<div class="menu">
 		<div class="nav-toogle">
 			<i class="fa"></i>
-		</div>
-		<div class="btn-search-mb">
-			<i class="fa"></i>
-		</div>
+		</div>	
 		<nav class="menu-top">
 			<div class="container">
 				<ul class="nav-menu">
