@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/skins/_all-skins.min.css') }}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ URL::asset('public/admin/plugins/iCheck/flat/blue.css') }}">
+  <link rel="stylesheet" href="{{ URL::asset('public/admin/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/sweetalert2.min.css') }}">  
 
@@ -98,6 +99,7 @@
 
 <!-- Slimscroll -->
 <script src="{{ URL::asset('public/admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ URL::asset('public/admin/plugins/colorpicker/bootstrap-colorpicker.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::asset('public/admin/dist/js/app.min.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
