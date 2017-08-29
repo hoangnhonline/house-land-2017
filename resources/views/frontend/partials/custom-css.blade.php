@@ -23,4 +23,7 @@ footer .footer-bot{
 .nav-menu li > .submenu > li:hover, .nav-menu li > .submenu .submenu > li:hover{
 	background: {{ $settingArr['mau_menu_hover'] }};
 }
+.block-title-commom .block-title h2:before{
+	content: url({{ Helper::showImage($settingArr['icon_tieu_de']) }});
+}
 </style>
