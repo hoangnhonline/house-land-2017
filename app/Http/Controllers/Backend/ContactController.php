@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
-use App\Models\LandingProjects;
 use Helper, File, Session, Auth;
 use Maatwebsite\Excel\Facades\Excel;
 class ContactController extends Controller
@@ -24,7 +23,7 @@ class ContactController extends Controller
         $email = isset($request->email) && $request->email != '' ? $request->email : '';
         $phone = isset($request->phone) && $request->phone != '' ? $request->phone : '';
         $project_id = isset($request->project_id) && $request->project_id != '' ? $request->project_id : null;
-        $proList = LandingProjects::all();
+        
         $query = Contact::whereRaw('1')->orderBy('id', 'DESC');
 
         $status = 1;
