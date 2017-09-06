@@ -84,12 +84,11 @@ a:focus {
   transition: all 0.2s linear;
 }
 p { margin: 0; }
-select:focus, button:focus, input:focus { outline: none; background: none;}
+select:focus, button:focus, input:focus { outline: none; }
 .btn.focus, .btn:focus, .btn:hover {
   color: #333;
   text-decoration: none;
   outline: none;
-  
 }
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
   outline: 5px auto -webkit-focus-ring-color;
@@ -177,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
 .block-search .block-search-inner form {
   float: left;
   width: 100%;
-  background: #ff6600;
+  /*background: #ff6600;*/
 }
 .block-search .input-serach {
   float: left;

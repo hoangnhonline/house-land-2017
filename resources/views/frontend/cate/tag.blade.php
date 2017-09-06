@@ -6,7 +6,7 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="{{ route('home') }}">Trang chủ</a></li>			
-			<li class="active">Tìm kiếm</li>
+			<li class="active">Tags</li>
 		</ul>
 	</div>
 </div><!-- /block-breadcrumb -->
@@ -15,11 +15,11 @@
 		<div class="block block-title">
 			<h2>
 				<i class="fa fa-home"></i>
-				Tìm kiếm
+				Tags
 			</h2>
 		</div>
 		<div class="block-content block-ct-pro">
-			<h2 class="tit-page3">HIỂN THỊ KẾT QUẢ CHO “{!! $tu_khoa !!}”</h2>
+			<h2 class="tit-page3">HIỂN THỊ KẾT QUẢ CHO “{!! $detail->name !!}”</h2>
 			<div class="row">
 				@if($productList->count() > 0)
 			  	@foreach($productList as $product)
@@ -40,7 +40,7 @@
 		  		@endif		  
 			</div>
 			<nav class="block-pagination">
-				{{ $productList->appends(['keyword' => $tu_khoa])->links() }} 
+				{{ $productList->links() }} 
 			</nav><!-- /block-pagination -->
 		</div>
 	</div>

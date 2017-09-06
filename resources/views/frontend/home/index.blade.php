@@ -123,22 +123,22 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
       <div class="row">
         <ul class="list">
           <li class="col-sm-3 col-xs-12">
-            <p class="img"><img src="{{ URL::asset('public/assets/images/ascendant-bars-graphic.png') }}" alt=""></p>
+            <p class="img"><img src="{{ Helper::showImage($settingArr['icon_nam_hinh_thanh']) }}" alt="{!! $settingArr['so_nam'] !!} năm hình thành và phát triển"></p>
             <p class="number"><span id="mycountUp1"></span> năm</p>
             <p class="info">{!! $settingArr['so_nam'] !!} năm hình thành và phát triển</p>
           </li>
           <li class="col-sm-3 col-xs-12">
-            <p class="img"><img src="{{ URL::asset('public/assets/images/engineer.png') }}" alt=""></p>
+            <p class="img"><img src="{{ Helper::showImage($settingArr['icon_kien_truc_su']) }}" alt="{!! $settingArr['so_kien_truc_su'] !!} kiến trúc sư và kỹ sư"></p>
             <p class="number"><span id="mycountUp2"></span></p>
             <p class="info">{!! $settingArr['so_kien_truc_su'] !!} kiến trúc sư và kỹ sư</p>
           </li>
           <li class="col-sm-3 col-xs-12">
-            <p class="img"><img src="{{ URL::asset('public/assets/images/worker-of-construction-working-with-a-shovel-beside-material-pile.png') }}" alt=""></p>
+            <p class="img"><img src="{{ Helper::showImage($settingArr['icon_cong_nhan']) }}" alt="{!! $settingArr['so_cong_nhan'] !!} công nhân lành nghề"></p>
             <p class="number"><span id="mycountUp3"></span></p>
             <p class="info">{!! $settingArr['so_cong_nhan'] !!} công nhân lành nghề</p>
           </li>
           <li class="col-sm-3 col-xs-12">
-            <p class="img"><img src="{{ URL::asset('public/assets/images/skyline.png') }}" alt=""></p>
+            <p class="img"><img src="{{ Helper::showImage($settingArr['icon_cong_trinh']) }}" alt="{!! $settingArr['so_cong_trinh'] !!} công trình đã thực hiện"></p>
             <p class="number"><span id="mycountUp4"></span></p>
             <p class="info">{!! $settingArr['so_cong_trinh'] !!} công trình đã thực hiện</p>
           </li>
