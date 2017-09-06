@@ -153,9 +153,12 @@
                                 <!--end thong tin co ban--> 
                                 <div role="tabpanel" class="tab-pane" id="lien-he">
                                     @foreach($thongsoList as $ts)
+                                    <?php 
+                                    $thongso = isset($arrThongSo[$ts->id]) ? $arrThongSo[$ts->id]  : '';
+                                    ?>
                                     <div class="form-group col-md-12 " >                  
                                         <label>{{ $ts->name }}</label>
-                                        <input type="text" class="form-control" name="thong_so_chi_tiet[{{ $ts->id }}]" id="thong_so_chi_tiet{{ $ts->id}}" value="{{ old('thong_so_chi_tiet[$ts->id]', $arrThongSo[$ts->id]) }}">
+                                        <input type="text" class="form-control" name="thong_so_chi_tiet[{{ $ts->id }}]" id="thong_so_chi_tiet{{ $ts->id}}" value="{{ old('thong_so_chi_tiet[$ts->id]', $thongso) }}">
                                     </div>
                                     @endforeach
                                     <div class="clearfix"></div>
