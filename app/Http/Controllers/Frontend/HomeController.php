@@ -67,6 +67,12 @@ class HomeController extends Controller
         return view('frontend.home.index', compact('articlesCateHot', 'articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot'));
 
     }
+    public function getChild(Request $request){
+        $module = $request->mod;
+        $id = $request->id;
+        $column = $request->col;
+        return Helper::getChild($module, $column, $id);
+    }
     public function pages(Request $request){
         $slug = $request->slug;
 
