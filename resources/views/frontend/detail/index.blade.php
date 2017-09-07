@@ -42,8 +42,26 @@
 							</ul>
 						</div>
 					</div><!-- /block-slide-detail -->
-					<div class="block block-share">
-						Share
+					<div class="block block-share" id="share-buttons">
+						Share 
+					<!-- Facebook -->
+		              <a href="http://www.facebook.com/sharer.php?u={{ url()->current() }}" target="_blank">
+		                  <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+		              </a>
+		              
+		              <!-- Google+ -->
+		              <a href="https://plus.google.com/share?url={{ url()->current() }}" target="_blank">
+		                  <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+		              </a>                      
+		              <!-- Pinterest -->
+		              <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+		                  <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
+		              </a> 
+		               
+		              <!-- Twitter -->
+		              <a href="https://twitter.com/share?url={{ url()->current() }}&amp;text={{ $detail->name }}&amp;hashtags=houseland" target="_blank">
+		                  <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+		              </a>    
 					</div><!-- /block-share-->
 					<div class="block block-tabs">
 					 	<!-- Nav tabs -->

@@ -55,8 +55,26 @@
 					</ul>
 				</div>
 			</div>
-			<div class="block block-share">
-				Share
+			<div class="block block-share" id="share-buttons">
+				Share 
+				<!-- Facebook -->
+	              <a href="http://www.facebook.com/sharer.php?u={{ url()->current() }}" target="_blank">
+	                  <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+	              </a>
+	              
+	              <!-- Google+ -->
+	              <a href="https://plus.google.com/share?url={{ url()->current() }}" target="_blank">
+	                  <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+	              </a>                      
+	              <!-- Pinterest -->
+	              <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+	                  <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
+	              </a> 
+	               
+	              <!-- Twitter -->
+	              <a href="https://twitter.com/share?url={{ url()->current() }}&amp;text={{ $detail->name }}&amp;hashtags=houseland" target="_blank">
+	                  <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+	              </a>         
 			</div><!-- /block-share-->
 			<div class="block block-tabs">
 			 	<!-- Nav tabs -->
@@ -89,6 +107,7 @@
 			@endif
 		</div>
 	</div><!-- /block-detail -->
+	@if($otherList->count() > 0)
 	<div class="block-title-commom block-relative">
 		<div class="block block-title">
 			<h2>
@@ -98,81 +117,22 @@
 		</div>
 		<div class="block-content">
 			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-center="true" data-loop="true" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
+			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/1.jpg" alt=""></a>
+						<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}"></a>
 					</div>
 					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
+						<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">{!! $product->title !!}</a>
+						<p class="code"><span>Mã sản phẩm: </span>{!! $product->code !!}</p>
 					</div>
-		  		</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/2.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-			  	</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/3.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-			  	</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/4.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-			  	</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/5.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-			  	</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/6.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-			  	</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/1.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-		  		</li><!-- /item -->
-			  	<li class="item">
-			  		<div class="thumb">
-						<a href="#"><img src="images/pro_cate/2.jpg" alt=""></a>
-					</div>
-					<div class="des">
-						<a href="#" title="">Tên dự án công trình thi công xây dựng bất động sản Houseland Real Estate...</a>
-						<p class="code"><span>Mã sản phẩm: </span>CTXD-Houseland 01</p>
-					</div>
-			  	</li><!-- /item -->
+			  		
+		  		</li><!-- /item -->			  
+		  		@endforeach	
 			</ul>
 		</div>
 	</div><!-- /block-title-commom -->
+	@endif
 </div><!-- /block_big-title -->
 @stop
 @section('js')
