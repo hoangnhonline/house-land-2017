@@ -28,12 +28,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'thong-so.update', 'uses' => 'ThongSoController@update']);
     });
     Route::group(['prefix' => 'menu'], function () {
-        Route::get('/', ['as' => 'menu.index', 'uses' => 'GeneralController@setupMenu']);
-        Route::get('/create', ['as' => 'menu.create', 'uses' => 'GeneralController@create']);
-        Route::post('/store', ['as' => 'menu.store', 'uses' => 'GeneralController@storeMenu']);
-        Route::get('{id}/edit',   ['as' => 'menu.edit', 'uses' => 'GeneralController@edit']);
-        Route::post('/render-menu', ['as' => 'render-menu', 'uses' => 'GeneralController@renderMenu']);
-        Route::get('{id}/destroy', ['as' => 'menu.destroy', 'uses' => 'GeneralController@destroy']);
+        Route::get('/', ['as' => 'menu.index', 'uses' => 'MenuController@index']);
+        Route::get('/create', ['as' => 'menu.create', 'uses' => 'MenuController@create']);
+        Route::post('/store', ['as' => 'menu.store', 'uses' => 'MenuController@store']);
+        Route::post('/store-order', ['as' => 'menu.store-order', 'uses' => 'MenuController@storeOrder']);
+        Route::get('{id}/edit',   ['as' => 'menu.edit', 'uses' => 'MenuController@edit']); 
+         Route::get('load-create',   ['as' => 'menu.load-create', 'uses' => 'MenuController@loadCreate']);       
+        Route::get('{id}/destroy', ['as' => 'menu.destroy', 'uses' => 'MenuController@destroy']);
     });
     Route::group(['prefix' => 'cate-type'], function () {
         Route::get('/', ['as' => 'cate-type.index', 'uses' => 'CateTypeController@index']);

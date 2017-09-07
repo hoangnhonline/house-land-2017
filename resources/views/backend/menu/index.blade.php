@@ -16,190 +16,106 @@
   <!-- Main content -->
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('menu.index') }}" style="margin-bottom:5px">Quay lại</a>    
+    
     <div class="row">
       <!-- left column -->
-
-      <div class="col-md-4">
-        <!-- general form elements -->
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Tạo mới</h3>
-          </div>
-          <!-- /.box-header -->               
-            {!! csrf_field() !!}
-
-            <div class="box-body">
-              @if (count($errors) > 0)
-                  <div class="alert alert-danger">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-              @endif
-              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">              
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingTwo">
-                    <h4 class="panel-title">
-                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        Danh mục bài viết
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                      <ul>
-                        @foreach($articlesCateList as $value)
-                        <li>
-                          <label>
-                          <input type="checkbox" data-parent="cho-thue" data-cap="1" data-value="{{ $value->id }}" name="cap1[]" value="{{ $value->id }}" data-type="3"> {{ $value->name }}
-                          </label>
-                          <input type="hidden" name="cap1_type[{{ $value->id }}]" value="1">
-                          <input type="hidden" name="cap1_title[{{ $value->id }}]" value="{{ $value->name }}">
-                          <input type="hidden" name="slug[{{ $value->id }}]" value="{{ $value->slug }}">
-                          <input type="hidden" name="object_id[{{ $value->id }}]" value="{{ $value->id }}">
-                        </li>
-                        @endforeach
-                      </ul>
-                      <button type="button" class="btnSelectAll btn btn-sm btn-default" style="float:left" data-parent="collapseTwo">Chọn tất cả</button>
-                      <button type="button" class="btnAddToMenu btn btn-sm btn-info" style="float:right" data-parent="collapseTwo">Thêm vào menu</button>
+      <div class="col-md-12">
+        <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Danh sách</h3>
                     </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Trang
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                     <ul>
-                        @foreach($pageList as $value)
-                        <li>
-                        <label>
-                          <input type="checkbox" data-parent="cho-thue" data-cap="1" name="cap1[]" data-value="{{ $value->id }}" data-type="3" value="{{ $value->id }}"> {{ $value->title }}
-                          <input type="hidden" name="cap1_type[]" value="2">
-                          <input type="hidden" name="cap1_title[]" value="{{ $value->title }}">
-                          <input type="hidden" name="slug[]" value="{{ $value->slug }}">
-                          <input type="hidden" name="object_id[]" value="{{ $value->id }}">
-                        </label>
-                        </li>
-                        @endforeach
-                      </ul>
-                      <button type="button" class="btnSelectAll btn btn-sm btn-default" style="float:left" data-parent="collapseThree">Chọn tất cả</button>
-                      <button type="button" class="btnAddToMenu btn btn-sm btn-info" style="float:right" data-parent="collapseThree">Thêm vào menu</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading" id="">
-                    <h4 class="panel-title">
-                      <a>
-                        Tùy chỉnh
-                      </a>
-                    </h4>
-                  </div>
-                  <div>
-                    <div class="panel-body" id="collapseFour">
-                      <div class="form-group">
-                        <label>Text hiển thị <span class="red-star">*</span></label>
-                        <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
-                      </div>
-                      <input type="hidden" name="type" value="3">
-                      <input type="hidden" name="custom" value="1">
-                       <div class="form-group">
-                        <label>URL <span class="red-star">*</span></label>
-                        <input type="text" class="form-control" name="url" id="url" value="{{ old('url') }}">
-                      </div>
-                      <button type="button" class="btnAddToMenuCustom btn btn-sm btn-info" style="float:right" data-parent="collapseFour">Thêm vào menu</button>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>         
-            </div>                        
-            
-        </div>
-        <!-- /.box -->     
-
-      </div>
-      <div class="col-md-8">
-        <!-- general form elements -->
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">MENU</h3>
-          </div>
-          <!-- /.box-header -->
-          <form action="{{ route('menu.store')}}" method="POST">
-            {{ csrf_field() }}
-            <div class="box-body">
-                <div class="panel-group">
-                  <ul class="loadMenu" id="menuDefault">
-                      <li class="first">
-                        <div class="col-sm-11">Trang chủ</div>
-                        <div class="col-sm-1">
-                          
-                        </div>
-                       
-                      </li> 
-                      <li>
-                        <div class="col-sm-11">BĐS bán</div>
-                        <div class="col-sm-1">
-                          
-                        </div>
+                    <!-- /.box-header -->
+                    <button class="btn btn-info btn-sm btnAddMenu" data-parent="0" >Thêm menu cha</button>
+                    <form action="{{ route('menu.store-order') }}" method="POST">
+                      {!! csrf_field() !!}
+                      <div class="box-body">
+                        <button type="submit" class="btn btn-warning btn-sm">Cập nhật thứ tự</button>
                         
-                      </li>  
-                      <li>
-                        <div class="col-sm-11">BĐS cho thuê</div>
-                        <div class="col-sm-1">
-                          
-                        </div>                        
-                      </li>   
-                      <li>
-                        <div class="col-sm-11">Dự án</div>
-                        <div class="col-sm-1">
-                          
-                        </div>                        
-                      </li>
-                      
-                  </ul>
-                  <ul class="loadMenu" id="loadMenu">
-                    @if($menuList->count() > 0)
-                    @foreach($menuList as $value)                      
-                      <li>
-                        <div class="col-sm-11">{{ $value->title }}</div>
-                        <div class="col-sm-1">
-                          <p><span class="glyphicon glyphicon-remove rm-div" aria-hidden="true"></span></p>
-                        </div>
-                          <input type="hidden" name="title[]" value="{!! $value->title !!}">
-                          <input type="hidden" name="type[]" value="{!! $value->type !!}">
-                          <input type="hidden" name="url[]" value="{!! $value->url !!}">
-                          <input type="hidden" name="slug[]" value="{!! $value->slug !!}">
-                          <input type="hidden" name="object_id[]" value="{!! $value->object_id !!}">
-                      </li>
-                    @endforeach
-                    @endif
-                  </ul>
 
+                          <table class="table table-bordered table-hover" id="table-list-data">
+                              <tr>                                
+                                  <th>Menu</th>
+                                  <th width="1%;white-space:nowrap">Thao tác</th>
+                              </tr>
+                              <tbody>                              
+                                  @foreach($menuLists as $menu)
+                                  
+                                  <tr>                                                                    
+                                    <td><input type="text" name="display_order[]" value="{{ $menu->display_order }}" class="form-control" style="width:40px; float:left;margin-right:10px">
+                                    <input type="hidden" name="id[]" value="{{ $menu->id }}">
+                                        <p style="font-weight:bold;padding-top:5px;margin-left:10px;">{{ $menu->title }}</p></td>
+                                    <td width="1%" style="white-space:nowrap">
+                                      <button class="btn btn-info btn-sm btnAddMenu" data-parent="{{ $menu->id }}" >Thêm menu con</button>               
+                                      <a onclick="return callDelete('{{ $menu->title }}','{{ route( 'menu.destroy', [ 'id' => $menu->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                    </td>
+                                  </tr>  
+                                      <?php
+                                      $menuCap1List = DB::table('menu')->where('parent_id', $menu->id)->orderBy('display_order')->get();
+                                      ?>
+                                      @if($menuCap1List)                                    
+                                        @foreach($menuCap1List as $cap1)
+                                      <tr>                                                                            
+                                        <td>
+                                      <p style="padding-left:100px"> <input type="text" name="display_order[]" value="{{ $cap1->display_order }}" class="form-control" style="width:40px; float:left;margin-right:10px;">
+                                            <input type="hidden" name="id[]" value="{{ $cap1->id }}"> <span style="padding-top:5px;display:block">{{ $cap1->title }}</span></p></td>
+                                        <td width="1%" style="white-space:nowrap">
+                                          <button class="btn btn-info btn-sm btnAddMenu" data-parent="{{ $cap1->id }}" >Thêm menu con</button>               
+                                          <a onclick="return callDelete('{{ $cap1->title }}','{{ route( 'menu.destroy', [ 'id' => $cap1->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                      </tr>  
+                                                                     
+
+                                      <?php
+                                      $menuCap2List = DB::table('menu')->where('parent_id', $cap1->id)->orderBy('display_order')->get(); 
+                                      ?>
+                                      @if($menuCap2List)                                    
+                                        @foreach($menuCap2List as $cap2)
+                                      <tr>                                                                            
+                                        <td><p style="padding-left:200px">
+                                          <input type="text" name="display_order[]" value="{{ $cap2->display_order }}" class="form-control" style="width:40px; float:left;margin-right:10px">
+                                            <input type="hidden" name="id[]" value="{{ $cap2->id }}">
+                                         <span style="padding-top:5px;display:block">{{ $cap2->title }}</span></p></td>
+                                        <td width="1%" style="white-space:nowrap;text-align:right">                                                     
+                                          <a onclick="return callDelete('{{ $cap2->title }}','{{ route( 'menu.destroy', [ 'id' => $cap2->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                      </tr>  
+                                      @endforeach
+                                      @endif
+                                      @endforeach    
+
+                                      @endif
+
+                                  @endforeach
+                              </tbody>
+                          </table>
+                      </div>
+                    </form>
                 </div>
-                 <button type="submit" class="btn btn-primary btn-sm" style="float:right">Lưu</button>              
-            </div>
-          </form>
-        <!-- /.box -->     
-
-      </div>
-      <!--/.col (left) -->      
-    </div>
+      </div>      
 
     <!-- /.row -->
   </section>
   <!-- /.content -->
 </div>
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thêm menu</h4>
+        </div>
+        <div class="modal-body" id="load-content-menu">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <style type="text/css">
   #menuDefault li{
     cursor: no-drop;
@@ -224,11 +140,57 @@
     background-color: #28AA4A;
     color:#FFF;
   }
+  #table-list-data tr td{    
+    padding-bottom: 2px;
+  }
 </style>
 @stop
 @section('javascript_page')
 <script type="text/javascript">
-    $(document).ready(function(){    
+  $(document).on('click', 'input.menu_select', function(){
+    var obj = $(this);
+    $('#formMenu #title').val(obj.data('title'));
+    $('#formMenu #url').val(obj.data('link'));  
+    $('#formMenu #type').val(obj.data('type'));    
+    $('#formMenu #object_id').val(obj.data('value'));
+  });
+  $(document).on('click', '.btnAddToMenuCustom', function(){
+    var obj = $(this);
+    $('#formMenu #title').val($('#title_custom').val());
+    $('#formMenu #url').val($('#url_custom').val());  
+    $('#formMenu #type').val(6);    
+    $('#formMenu #object_id').val(0);
+  });
+  function callDelete(name, url){  
+      swal({
+        title: 'Bạn muốn xóa "' + name +'"?',
+        text: "Dữ liệu sẽ không thể phục hồi.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then(function() {
+        location.href= url;
+      })
+      return flag;
+    }
+    $(document).ready(function(){ 
+
+      $('.btnAddMenu').click(function(){
+        var parent_id = $(this).data('parent');
+        $.ajax({
+          url : "{{ route('menu.load-create') }}",
+          type : 'GET',
+          data : {
+            parent_id : parent_id
+          },
+          success : function(data){
+            $('#load-content-menu').html(data);
+            $('#myModal').modal('show');
+          }
+        });
+      });   
        $( "#loadMenu" ).sortable({
           start: function (event, ui) {
                   ui.item.toggleClass("highlight");
@@ -250,7 +212,7 @@
       $('.btnAddToMenu').click(function(){
         var obj = $(this);
         $.ajax({
-          url:  "{{ route('render-menu') }}",
+          url:  "",
           type : 'POST',
           data : $('#' + obj.data('parent') + ' :input').serialize(),
           success : function(data){
@@ -267,7 +229,7 @@
         if($.trim($('#title').val()) != '' && $.trim($('#url').val()) != ''){
           var obj = $(this);
           $.ajax({
-            url:  "{{ route('render-menu') }}",
+            url:  "",
             type : 'POST',
             data : $('#' + obj.data('parent') + ' :input').serialize(),
             success : function(data){

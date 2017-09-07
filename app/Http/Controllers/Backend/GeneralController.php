@@ -46,8 +46,7 @@ class GeneralController extends Controller
     	}
     	return response()->json( ['str' => $strReturn] );
     }
-    public function setupMenu(Request $request){
-        $landingList = LandingProjects::where('status', 1)->orderBy('id', 'desc')->get();        
+    public function setupMenu(Request $request){        
         $articlesCateList = ArticlesCate::where('status', 1)->orderBy('display_order', 'asc')->get();
         $pageList = Pages::where('status', 1)->get();
         return view('backend.menu.index', compact( 'landingList', 'articlesCateList', 'pageList'));
