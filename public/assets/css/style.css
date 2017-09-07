@@ -1688,8 +1688,8 @@ h2.tit-page3 {
   z-index: -1;
 }
 .ft-contact address p a {
-  color: #fff;
+  color: #ff6600 !important;
 }
-.ft-contact address p a:hover {
+/*.ft-contact address p a:hover {
   color: #ff6600;
-}
+}*/
