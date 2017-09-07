@@ -47,10 +47,12 @@
 					<h2 class="tit-page3">THÔNG SỐ DỰ ÁN</h2>
 					<ul class="block-detail-info">
 						@foreach($thongsoList as $ts)                        
+						@if(isset($arrThongSo[$ts->id) && $arrThongSo[$ts->id] != '')
                         <li>
 							<span>{!! $ts->name !!}:</span>
 							<strong>{!! isset($arrThongSo[$ts->id]) ? $arrThongSo[$ts->id] : "" !!}</strong>
 						</li>
+						@endif
                         @endforeach
 					</ul>
 				</div>
