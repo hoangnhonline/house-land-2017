@@ -412,7 +412,7 @@
             contentType: false,
             success: function (response) {
               if(response.image_path){
-                obj.parents('.div-upload').find('img.show_thumbnail').attr('src',$('#upload_url').val() + response.image_path);
+                obj.parents('.div-upload').find('img.show_thumbnail').attr('src', $('#upload_url').val() + response.image_path);
                 $( '#' + valueObj ).val( response.image_path );
                 $( '#' + valueObj + '_name' ).val( response.image_name );
               }             

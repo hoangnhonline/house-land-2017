@@ -1693,3 +1693,10 @@ h2.tit-page3 {
 /*.ft-contact address p a:hover {
   color: #ff6600;
 }*/
+#share-buttons img {
+    width: 45px;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0;
+    display: inline;
+}

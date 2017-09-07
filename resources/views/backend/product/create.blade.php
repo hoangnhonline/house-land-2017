@@ -100,7 +100,12 @@
                                         <label>Slug <span class="red-star">*</span></label>                  
                                         <input type="text" class="form-control req" readonly="readonly" name="slug" id="slug" value="{{ old('slug') }}">
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    <div class="col-md-6 none-padding">
+                                      <div class="checkbox">
+                                          <label><input type="checkbox" name="is_slider" value="1" {{ old('is_slider', 1) == 1 ? "checked" : "" }}> Hiện slider </label>
+                                      </div>                          
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         <div class="checkbox">
                                             <label style="font-weight:bold;color:red">
                                             <input type="checkbox" name="is_hot" value="1" {{ old('is_hot') == 1 ? "checked" : "" }}>

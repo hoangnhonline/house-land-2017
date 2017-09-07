@@ -45,7 +45,8 @@ class Product extends Model  {
                             'display_order',
                             'created_user',
                             'updated_user',
-                            'layout'
+                            'layout',
+                            'is_slider'
                         ];
 
     public static function productTag( $id )
