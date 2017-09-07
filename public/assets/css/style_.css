@@ -22,7 +22,6 @@
 @import url(../lib/font-awesome/font-awesome.min.css);
 @import url(../lib/carousel/owl.carousel.min.css);
 @import url(../lib/flexslider/flexslider.css);
-/*@import url(../lib/lightbox2/css/lightbox.min.css);*/
 
 /* Fonts */
 @font-face {
@@ -476,7 +475,6 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 .block-product .item {
-  overflow: hidden;
   padding: 1px;
   background: #fff;
   text-align: center;
@@ -504,20 +502,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .block-product .item .thumb {
   margin-bottom: 15px;
-  overflow: hidden;
-}
-.block-product .item .thumb img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-.block-product .item:hover .thumb img {
-  -webkit-transform: scale(1.2);
-  -moz-webkit-transform: scale(1.2);
-  -ms-webkit-transform: scale(1.2);
-  -o-webkit-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
 }
 .block-product .item .title {
   padding: 0 15px 15px;
@@ -592,20 +576,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .block-news .first .thumb {
   margin-bottom: 20px;
-  overflow: hidden;
-}
-.block-news .first .thumb img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-.block-news li:hover:hover .thumb img {
-  -webkit-transform: scale(1.1);
-  -moz-webkit-transform: scale(1.1);
-  -ms-webkit-transform: scale(1.1);
-  -o-webkit-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
 }
 .block-news .first .des h2 {
   color: #333333;
@@ -624,15 +594,7 @@ h1, h2, h3, h4, h5, h6 {
   float: left;
   width: 107px;
   margin-right: 10px;
-  overflow: hidden;
 }
-.block-news .item .thumb img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-
 .block-news .item .des {
   float: left;
   width: calc(100% - 117px);
@@ -973,24 +935,11 @@ footer .footer-bot .container {
   -moz-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
+.block-ct-pro .item:last-child {
+  
+}
 .block-ct-pro .item:hover {
   border: 2px solid #ff6600;
-}
-.block-ct-pro .item .thumb {
-  overflow: hidden;
-}
-.block-ct-pro .item .thumb img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-.block-ct-pro .item:hover .thumb img {
-  -webkit-transform: scale(1.2);
-  -moz-webkit-transform: scale(1.2);
-  -ms-webkit-transform: scale(1.2);
-  -o-webkit-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
 }
 .block-ct-pro .item .des {
   padding: 15px 10px;
@@ -1027,20 +976,6 @@ footer .footer-bot .container {
   float: left;
   width: 300px;
   margin-right: 30px;
-  overflow: hidden;
-}
-.block-ct-news .thumb img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-.block-ct-news .item:hover .thumb img {
-  -webkit-transform: scale(1.1);
-  -moz-webkit-transform: scale(1.1);
-  -ms-webkit-transform: scale(1.1);
-  -o-webkit-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
 }
 .block-ct-news .des {
   float: left;
@@ -1152,20 +1087,6 @@ footer .footer-bot .container {
 }
 .block-news-sidebar .list .thumb {
   margin-bottom: 10px;
-  overflow: hidden;
-}
-.block-news-sidebar .list .thumb img {
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 1s;
-  transition: all 1s;
-}
-.block-news-sidebar .list .item:hover .thumb img {
-  -webkit-transform: scale(1.2);
-  -moz-webkit-transform: scale(1.2);
-  -ms-webkit-transform: scale(1.2);
-  -o-webkit-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
 }
 .block-news-sidebar .list .description h2 {
   color: #333;
@@ -1688,8 +1609,15 @@ h2.tit-page3 {
   z-index: -1;
 }
 .ft-contact address p a {
-  color: #fff;
+  color: #ff6600;
 }
 .ft-contact address p a:hover {
   color: #ff6600;
+}
+#share-buttons img {
+    width: 45px;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0;
+    display: inline;
 }
