@@ -65,11 +65,11 @@ class DetailController extends Controller
         $otherList = Product::where('product.slug', '<>', '')
                     ->where('product.cate_id', $detail->cate_id)                    
                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
-                    ->select('product_img.image_url as image_url', 'product.*')
-                    
+                    ->select('product_img.image_url as image_url', 'product.*')                    
                     ->where('product.id', '<>', $detail->id)  
-                    ->orderBy('product.id', 'desc')->limit(6)->get();
-
+                    ->orderBy('product.id', 'desc')
+                    ->limit(6)
+                    ->get();
         $tagSelected = Product::getListTag($detail->id);
         if($detail->layout == 1){
             $thongsoList = ThongSo::orderBy('display_order')->get();
