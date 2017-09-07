@@ -116,7 +116,7 @@
         </ul>
       </li>
       @if(Auth::user()->role > 1)
-      <li class="treeview {{ in_array(\Request::route()->getName(), ['account.index', 'info-seo.index', 'settings.index', 'settings.noti', 'menu.index', 'video.index', 'video.edit', 'video.create']) || (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 2 ) ? 'active' : '' }}">
+      <li class="treeview {{ in_array(\Request::route()->getName(), ['menu.index', 'account.index', 'info-seo.index', 'settings.index', 'settings.noti', 'menu.index', 'video.index', 'video.edit', 'video.create']) || (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 2 ) ? 'active' : '' }}">
         <a href="#">
           <i class="fa  fa-gears"></i>
           <span>Cài đặt</span>
@@ -134,6 +134,7 @@
               <span>Link Footer</span>         
             </a>       
           </li>
+          <li {{ \Request::route()->getName() == "menu.index" ? "class=active" : "" }}><a href="{{ route('menu.index') }}"><i class="fa fa-circle-o"></i> Menu</a></li>
           <li {{ in_array(\Request::route()->getName(), ['member.list', 'member.edit', 'member.create']) ? "class=active" : "" }}><a href="{{ route('member.index') }}"><i class="fa fa-circle-o"></i> Ban lãnh đạo</a></li>
          
          

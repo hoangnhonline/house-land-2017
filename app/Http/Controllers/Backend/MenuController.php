@@ -20,7 +20,7 @@ class MenuController extends Controller
         return view('backend.menu.index', compact('menuLists'));
     }
     public function loadCreate(Request $request){
-        $articlesCateList = ArticlesCate::where('status', 1)->orderBy('display_order', 'asc')->get();
+        $articlesCateList = ArticlesCate::where('status', 1)->where('type', 1)->orderBy('display_order', 'asc')->get();
         $pageList = Pages::where('status', 1)->get();
         $parent_id = $request->parent_id ? $request->parent_id : 0;
         return view('backend.menu.ajax-create', compact('menuList', 'articlesCateList', 'pageList', 'parent_id'));   

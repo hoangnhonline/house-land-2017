@@ -62,31 +62,32 @@
 		<nav class="menu-top">
 			<div class="container">
 				<ul class="nav-menu">
-					<li class="level0 active"><a href="{{ route('home') }}" title="Trang Chủ">Trang Chủ</a></li>
-					<li class="level0"><a href="{{ route('pages', 'gioi-thieu') }}" title="Giới Thiệu">Giới Thiệu</a></li>
-					@foreach($cateTypeList as $type)
 					<?php 
-					$parentList = DB::table('cate_parent')->where('type_id', $type->id)->orderBy('display_order')->get();
-
+					$menuLists = DB::table('menu')->where('parent_id', 0)->orderBy('display_order')->get();
 					?>
-					<li class="level0 @if($parentList) parent @endif">
-						<a href="{{ route('cate-type', $type->slug) }}" title="{!! $type->name !!}">{!! $type->name !!}</a>
-						
-						@if($parentList)
+					@foreach($menuLists as $menu)
+
+					<?php
+                  	$menuCap1List = DB::table('menu')->where('parent_id', $menu->id)->orderBy('display_order')->get();
+                  	?>
+                                      
+					<li class="level0 @if($menuCap1List)  parent @endif "><a href="{{ $menu->url }}" title="{{ $menu->title }}">{{ $menu->title }}</a>
+
+						@if($menuCap1List)
 						
 						<ul class="level0 submenu">			
-							@foreach($parentList as $parent)
+							@foreach($menuCap1List as $cap1)
 							<?php 
-							$cateList = DB::table('cate')->where('parent_id', $parent->id)->orderBy('display_order')->get();
+							$menuCap2List = DB::table('menu')->where('parent_id', $cap1->id)->orderBy('display_order')->get(); 
 
 							?>
-							<li class="level1 @if($cateList) parent @endif">
-								<a href="{{ route('cate-parent', [$type->slug, $parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+							<li class="level1 @if($menuCap2List) parent @endif">
+								<a href="{{ $cap1->url }}" title="{!! $cap1->title !!}">{!! $cap1->title !!}</a>
 								
-								@if($cateList)
+								@if($menuCap2List)
 								<ul class="level1 submenu">
-									@foreach($cateList as $cate)
-									<li class="level2"><a href="{{ route('cate', [$type->slug, $parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></li>
+									@foreach($menuCap2List as $cap2)
+									<li class="level2"><a href="{{ $cap2->url }}" title="{!! $cap2->title !!}">{!! $cap2->title !!}</a></li>
 									@endforeach
 								</ul>
 								@endif
@@ -95,23 +96,9 @@
 						</ul>
 						
 						@endif
-					</li>
-					@endforeach					
-					<li class="level0"><a href="{{ route('services') }}" title="Dịch Vụ">Dịch Vụ</a></li>
-					<li class="level0 parent"><a href="javascript:void(0)" title="Tin Tức">Tin Tức</a>
-						<ul class="level0 submenu">			
-						<?php 
-						$articleCateList = DB::table('articles_cate')->where('type', 1)->orderBy('display_order')->get();
-						?>
-						@foreach($articleCateList as $type)
-						
-						<li class="level0">
-							<a href="{{ route('news-list', $type->slug) }}" title="{!! $type->name !!}">{!! $type->name !!}</a>
-						</li>
-						@endforeach	
-						</ul>
-					</li>
-					<li class="level0"><a href="{{ route('contact') }}" title="Liên Hệ">Liên Hệ</a></li>
+					</li>					
+
+					@endforeach
 					<li class="search-mb">
 						<div class="block-search">
 							<div class="block-search-inner clearfix">
