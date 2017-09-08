@@ -129,5 +129,6 @@
 	}
 	</script>
 	@include('frontend.partials.custom-css')
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59b215c2a2658a8a"></script> 
 </body>
 </html>

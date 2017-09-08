@@ -51,7 +51,7 @@ html {
 body {
   background-color: #fff;
   color: #414141;
-  font: 13px Tahoma, Helvetica, sans-serif;
+  font: 14px Tahoma, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   overflow-x: hidden;
@@ -297,12 +297,11 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 .nav-menu>li>a {
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
   display: block;
-  padding: 0;
+  padding: 0px 12px;
   line-height: 40px;
-  min-width: 105px;
   text-align: center;
   color: #fff;
   -webkit-transition: all 0.2s linear;
@@ -321,8 +320,8 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu > li.parent > a:after {
   font-family: 'Fontawesome';
   color: #fff;
-  font-size: 10px;
-  content: "\f0dd";
+  font-size: 12px;
+  content: "\f107";
   display: inline-block;
   height: 3px;
   width: 5px;
@@ -365,6 +364,14 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.1s;
   position: relative;
   color: #333333;
+}
+.nav-menu .submenu li.parent > a:before {
+  content: "\f105";
+  font-family: "FontAwesome";
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 12px;
 }
 .nav-menu .submenu .submenu {
   left: 100%;
@@ -426,7 +433,7 @@ h1, h2, h3, h4, h5, h6 {
 .block_big-title .desc {
   display: block;
   color: #666;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
   line-height: 1.6;
 }
@@ -523,12 +530,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 15px 15px;
 }
 .block-product .item .title h2 {
-  font-size: 13px;
+  font-size: 14px;
 }
 .block-product .item .title h2 a {
   color: #333333;
   line-height: 1.6;
-  font-size: 13px;
+  font-size: 14px;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -ms-transition: all 0.2s linear;
@@ -640,7 +647,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .block-news .item .des h2 {
   color: #333333;
-  font-size: 13px;
+  font-size: 14px;
   max-height: 40px;
   line-height: 1.6;
   margin-bottom: 20px;
@@ -702,7 +709,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   color: #fff;
   line-height: 1.6;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
   margin-bottom: 30px;
 }
@@ -771,7 +778,7 @@ footer .footer-top {
   content: "\f18e";
   font-family: "FontAwesome";
   color: #ff6600;
-  font-size: 13px;
+  font-size: 14px;
   position: absolute;
   top: 50%;
   -webkit-transform: translate(0, -50%);
@@ -784,7 +791,7 @@ footer .footer-top {
 }
 .ft-link .list li a {
   color: #eaeaea;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.4;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
@@ -819,7 +826,7 @@ footer .footer-top {
   line-height: 40px;
   text-align: center;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   background: #ff6600;
   border: none;
   float: left;
@@ -841,7 +848,7 @@ footer .footer-top {
 /* Footer Contact */
 .ft-contact address p {
   color: #eaeaea;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   margin-bottom: 3px;
 }
@@ -887,7 +894,7 @@ footer .footer-bot .container {
   margin-bottom: 20px;
 }
 .block-article .description {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   line-height: 1.6;
   margin-bottom: 30px;
@@ -925,13 +932,13 @@ footer .footer-bot .container {
   filter: grayscale(100%);
 }
 .block-members li.item .name {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   margin-bottom: 18px;
   font-weight: bold;
 }
 .block-members li.item .position {
-  font-size: 13px;
+  font-size: 14px;
   color: #666666;
   margin-bottom: 18px;
 }
@@ -998,7 +1005,7 @@ footer .footer-bot .container {
 }
 .block-ct-pro .item .des a {
   color: #ff6600;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   max-height: 40px;
   overflow: hidden;
@@ -1008,7 +1015,7 @@ footer .footer-bot .container {
 }
 .block-ct-pro .item .des .code {
   color: #666666;
-  font-size: 13px;
+  font-size: 14px;
 }
 .block-ct-pro .item .des .code span {
   color: #333333;
@@ -1047,7 +1054,7 @@ footer .footer-bot .container {
   width: calc(100% - 330px);
 }
 .block-ct-news .des a {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   color: #333333;
   line-height: 1.6;
@@ -1062,7 +1069,7 @@ footer .footer-bot .container {
   margin-bottom: 10px;
 }
 .block-ct-news .des .description {
-  font-size: 13px;
+  font-size: 14px;
   color: #666666;
   line-height: 1.6;
   max-height: 80px;
@@ -1079,7 +1086,7 @@ footer .footer-bot .container {
   margin-bottom: 30px;
 }
 .block-dt-news p.text {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   line-height: 1.6;
   margin-bottom: 25px;
@@ -1098,7 +1105,7 @@ footer .footer-bot .container {
 .block-tags .tags-first {
   font-weight: bold;
   color: #3a3a3c;
-  font-size: 13px;
+  font-size: 14px;
 }
 .block-tags li.tags-link a {
   height: 25px;
@@ -1201,7 +1208,7 @@ footer .footer-bot .container {
 .block-links-sidebar .list li:before {
   content: "\f18e";
   font-family: "FontAwesome";
-  font-size: 13px;
+  font-size: 14px;
   color: #ff6600;
   position: absolute;
   top: 50%;
@@ -1211,7 +1218,7 @@ footer .footer-bot .container {
   transform: translate(0, -50%);
 }
 .block-links-sidebar .list li a {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   vertical-align: middle;
 }
@@ -1295,12 +1302,12 @@ footer .footer-bot .container {
   width: calc(100% - 60px);
 }
 .block-service .item .des .title {
-  font-size: 13px;
+  font-size: 14px;
   color: #ff6600;
   margin-bottom: 10px;
 }
 .block-service .item .des .description {
-  font-size: 13px;
+  font-size: 14px;
   color: #666;
   line-height: 1.6;
 }
@@ -1528,7 +1535,7 @@ h2.tit-page3 {
   line-height: 1.2;
 }
 .block-tabs .text {
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   line-height: 1.6;
   margin-bottom: 25px;
@@ -1553,7 +1560,7 @@ h2.tit-page3 {
 }
 .block-relative .item .des a {
   color: #ff6600;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   max-height: 40px;
   overflow: hidden;
@@ -1563,7 +1570,7 @@ h2.tit-page3 {
 }
 .block-relative .item .des .code {
   color: #666666;
-  font-size: 13px;
+  font-size: 14px;
 }
 .block-relative .item .des .code span {
   color: #333333;
