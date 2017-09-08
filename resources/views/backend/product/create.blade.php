@@ -49,17 +49,7 @@
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                    <div class="form-group col-md-4 none-padding">
-                                        <label for="email">Loại danh mục<span class="red-star">*</span></label>
-                                        <select class="form-control req" name="type_id" id="type_id">
-                                            <option value="">--Chọn--</option>
-                                            @foreach( $cateTypeList as $value )
-                                            <option value="{{ $value->id }}"
-                                            {{ old('type_id', $type_id) == $value->id ? "selected" : "" }} >{{ $value->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <div role="tabpanel" class="tab-pane active" id="home">                                   
                                     <div class="form-group col-md-4  pleft-5">
                                         <label for="email">Danh mục cha <span class="red-star">*</span></label>
                                         <select class="form-control req" name="parent_id" id="parent_id">

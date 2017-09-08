@@ -25,16 +25,7 @@
                         <h3 class="panel-title">Bộ lọc</h3>
                       </div>
                       <div class="panel-body">
-                        <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('cate.index') }}">
-                            <div class="form-group">
-                                <select class="form-control" name="type_id" id="type_id" style="width:150px;">                                   
-                                    @foreach( $cateTypeList as $value )
-                                    <option value="{{ $value->id }}"
-                                    {{ $type_id == $value->id ? "selected" : "" }}                          
-                                    >{{ $value->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('cate.index') }}">                           
                             <div class="form-group">
                                 <select class="form-control" name="parent_id" id="parent_id">
                                     <option value="">--Danh mục cha--</option>

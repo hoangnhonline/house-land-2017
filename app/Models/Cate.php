@@ -23,7 +23,7 @@ class Cate extends Model  {
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'parent_id', 'type_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
+    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'parent_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
 
     public function product()
     {
@@ -33,9 +33,4 @@ class Cate extends Model  {
     {
         return $this->belongsTo('App\Models\CateParent', 'parent_id');
     }
-    public function cateType()
-    {
-        return $this->belongsTo('App\Models\CateType', 'type_id');
-    }
-    
 }

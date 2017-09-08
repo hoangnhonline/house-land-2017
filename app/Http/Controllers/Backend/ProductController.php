@@ -28,22 +28,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {        
         $arrSearch['status'] = $status = isset($request->status) ? $request->status : 1; 
-        $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;           
-        $arrSearch['type_id'] = $type_id = isset($request->type_id) ? $request->type_id : 1;
+        $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;                   
         $arrSearch['parent_id'] = $parent_id = isset($request->parent_id) ? $request->parent_id : null;
         $arrSearch['cate_id'] = $cate_id = isset($request->cate_id) ? $request->cate_id : null;
 
         $arrSearch['title'] = $title = isset($request->title) && trim($request->title) != '' ? trim($request->title) : '';
         $arrSearch['code'] = $code = isset($request->code) && trim($request->code) != '' ? trim($request->code) : '';
 
-        $query = Product::where('product.status', $status);
-        $cateTypeList = CateType::orderBy('display_order')->get();
-        $cateParentList = CateParent::whereRaw('1=2');        
-        $cateList = CateParent::whereRaw('1=2');
-        if( $type_id ){
-            $query->where('product.type_id', $type_id);
-            $cateParentList = CateParent::where('type_id', $type_id)->get();
-        }
+        $query = Product::where('product.status', $status);        
+        $cateParentList = CateParent::orderBy('display_order')->get();        
+        $cateList = Cate::whereRaw('1=2');
         if( $parent_id ){
             $query->where('product.parent_id', $parent_id);
             $cateList = Cate::where('parent_id', $parent_id)->get();
@@ -64,8 +58,7 @@ class ProductController extends Controller
             $query->where('product.code', $code);            
         }
         //$query->join('users', 'users.id', '=', 'product.created_user');        
-        $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id'); 
-        $query->join('cate_type', 'product.type_id', '=','cate_type.id'); 
+        $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id');         
         $query->join('cate_parent', 'cate_parent.id', '=', 'product.parent_id');
         $query->leftJoin('cate', 'cate.id', '=', 'product.cate_id');        
         if($is_hot == 1){
@@ -74,7 +67,7 @@ class ProductController extends Controller
         $query->orderBy('product.id', 'desc');   
         $items = $query->select(['product_img.image_url as image_urls','product.*', 'cate_type.slug as slugCateType'])->paginate(50);
 
-        return view('backend.product.index', compact( 'items', 'arrSearch', 'cateTypeList', 'cateParentList', 'cateList'));        
+        return view('backend.product.index', compact( 'items', 'arrSearch', 'cateParentList', 'cateList'));        
     }
 
    
@@ -97,16 +90,12 @@ class ProductController extends Controller
         return redirect()->route('product.index', ['type_id' => $data['type_id'], 'type' => $data['type'], 'is_hot' => 1]);
     }
     public function ajaxSearch(Request $request){    
-        $search_type = $request->search_type;
-        $arrSearch['type_id'] = $type_id = isset($request->type_id) ? $request->type_id : -1;
+        $search_type = $request->search_type;        
         $arrSearch['cate_id'] = $cate_id = isset($request->cate_id) ? $request->cate_id : -1;
         $arrSearch['name'] = $name = isset($request->name) && trim($request->name) != '' ? trim($request->name) : '';
         
-        $query = Product::whereRaw('1');
+        $query = Product::whereRaw('1');        
         
-        if( $type_id ){
-            $query->where('product.type_id', $type_id);
-        }
         if( $cate_id ){
             $query->where('product.cate_id', $cate_id);
         }
@@ -136,18 +125,14 @@ class ProductController extends Controller
     */
     public function create(Request $request)
     {
-        $tagList = Tag::where('type', 1)->get();
+        $tagList = Tag::where('type', 1)->get();        
         
-        $type_id = $request->type_id ? $request->type_id : null;        
-        $cateTypeList = CateType::orderBy('display_order')->get();
-        $cateParentList = CateParent::whereRaw('1=2')->get();
         $cateList = Cate::whereRaw('1=2')->get();
-        if( $type_id ){            
-            $cateParentList = CateParent::where('type_id', $type_id)
-                            ->select('id', 'name')
-                            ->orderBy('display_order', 'asc')
-                            ->get();                        
-        }             
+        
+        $cateParentList = CateParent::select('id', 'name')
+                        ->orderBy('display_order', 'asc')
+                        ->get();                        
+        
         $thongsoList = ThongSo::orderBy('display_order')->get();
         return view('backend.product.create', compact('cateTypeList',  'type_id', 'cateParentList', 'tagList', 'cateList', 'thongsoList'));
     }
@@ -162,16 +147,14 @@ class ProductController extends Controller
     {
         $dataArr = $request->all();        
         
-        $this->validate($request,[
-            'type_id' => 'required',
+        $this->validate($request,[            
             'parent_id' => 'required',
             'cate_id' => 'required',   
             'code' => 'required',              
             'title' => 'required',
             'slug' => 'required'     
         ],
-        [            
-            'type_id.required' => 'Bạn chưa chọn loại danh mục',
+        [   
             'parent_id.required' => 'Bạn chưa chọn danh mục cha',
             'cate_id.required' => 'Bạn chưa chọn danh mục con',
             'code.required' => 'Bạn chưa nhập mã sản phẩm',
@@ -196,7 +179,7 @@ class ProductController extends Controller
         $this->storeImage( $product_id, $dataArr);
         $this->storeMeta($product_id, 0, $dataArr);
         $this->processRelation($dataArr, $product_id);
-        Session::flash('message', 'Tạo mới sản phẩm thành công');
+        Session::flash('message', 'Tạo mới thành công');
 
         return redirect()->route('product.index', ['type_id' => $dataArr['type_id'], 'parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
     }
@@ -346,11 +329,9 @@ class ProductController extends Controller
         $tagList = Tag::where('type', 1)->get();
         $hinhArr = (object) [];
         $detail = Product::find($id);
-       // var_dump($detail->type);die;
-        $hinhArr = ProductImg::where('product_id', $id)->lists('image_url', 'id');     
-        $cateTypeList = CateType::orderBy('display_order')->get();
-        $cateParentList = CateParent::where('type_id', $detail->type_id)
-                        ->orderBy('display_order')->get();
+       
+        $hinhArr = ProductImg::where('product_id', $id)->lists('image_url', 'id');             
+        $cateParentList = CateParent::orderBy('display_order')->get();
         $cateList = Cate::where('parent_id', $detail->parent_id)->get();
 
         $meta = (object) [];
@@ -364,7 +345,7 @@ class ProductController extends Controller
 
         $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
 
-        return view('backend.product.edit', compact( 'detail', 'hinhArr', 'cateTypeList',  'meta', 'cateParentList', 'cateList', 'tagList', 'tagSelected', 'thongsoList', 'arrThongSo'));
+        return view('backend.product.edit', compact( 'detail', 'hinhArr',  'meta', 'cateParentList', 'cateList', 'tagList', 'tagSelected', 'thongsoList', 'arrThongSo'));
     }
     public function ajaxDetail(Request $request)
     {       
@@ -383,16 +364,14 @@ class ProductController extends Controller
     {
         $dataArr = $request->all();
         
-         $this->validate($request,[
-            'type_id' => 'required',
+         $this->validate($request,[            
             'parent_id' => 'required',
             'cate_id' => 'required',   
             'code' => 'required',              
             'title' => 'required',
             'slug' => 'required'     
         ],
-        [            
-            'type_id.required' => 'Bạn chưa chọn loại danh mục',
+        [   
             'parent_id.required' => 'Bạn chưa chọn danh mục cha',
             'cate_id.required' => 'Bạn chưa chọn danh mục con',
             'code.required' => 'Bạn chưa nhập mã sản phẩm',
@@ -419,7 +398,7 @@ class ProductController extends Controller
         $this->storeImage( $product_id, $dataArr);
         $this->processRelation($dataArr, $product_id, 'edit');
 
-        Session::flash('message', 'Cập nhật sản phẩm thành công');
+        Session::flash('message', 'Cập nhật thành công');
 
         return redirect()->route('product.edit', $product_id);
         
@@ -438,7 +417,7 @@ class ProductController extends Controller
         
         $product_id = $dataArr['id'];        
 
-        Session::flash('message', 'Chỉnh sửa sản phẩm thành công');
+        Session::flash('message', 'Chỉnh sửa thành công');
 
     }    
 
@@ -457,7 +436,7 @@ class ProductController extends Controller
         TagObjects::deleteTags( $id, 1);
         TagObjects::deleteTags( $id, 3);
         // redirect
-        Session::flash('message', 'Xóa sản phẩm thành công');
+        Session::flash('message', 'Xóa thành công');
         
         return redirect(URL::previous());//->route('product.short');
         

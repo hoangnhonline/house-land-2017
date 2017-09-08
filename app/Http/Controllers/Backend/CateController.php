@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Cate;
-use App\Models\CateType;
 use App\Models\MetaData;
 use App\Models\CateParent;
 use Helper, File, Session, Auth, Image;
@@ -62,19 +61,15 @@ class CateController extends Controller
     */
     public function create(Request $request)
     {
-        $parent_id = isset($request->parent_id) ? $request->parent_id : 0;
-        $type_id = isset($request->type_id) ? $request->type_id : 0;       
+        $parent_id = isset($request->parent_id) ? $request->parent_id : 0;               
         
-        $cateTypeList = CateType::where('status', 1)->orderBy('display_order')->get();        
-        $cateParentList = CateParent::whereRaw('1=2')->get();
         $cateList = Cate::whereRaw('1=2')->get();
-        if( $type_id ){            
-            $cateParentList = CateParent::where('type_id', $type_id)
-                            ->select('id', 'name')
-                            ->orderBy('display_order', 'asc')
-                            ->get();                        
-        }             
-        return view('backend.cate.create', compact( 'parent_id', 'cateTypeList', 'cateParentList', 'parent_id', 'type_id'));
+        
+        $cateParentList = CateParent::select('id', 'name')
+                        ->orderBy('display_order', 'asc')
+                        ->get();                        
+                    
+        return view('backend.cate.create', compact( 'parent_id', 'cateParentList', 'parent_id'));
     }
 
     /**
@@ -178,17 +173,14 @@ class CateController extends Controller
     */
     public function edit($id)
     {
-        $detail = Cate::find($id);
-        $cateTypeDetailArr = CateType::where('status', 1)->orderBy('display_order')->get();
-        $cateTypeList = CateType::orderBy('display_order')->get();
-        $cateParentList = CateParent::where('type_id', $detail->type_id)
-                        ->orderBy('display_order')->get();
+        $detail = Cate::find($id);                
+        $cateParentList = CateParent::orderBy('display_order')->get();
         $meta = (object) [];
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
         }       
         $cateTypeDetail = CateType::find($detail->parent_id); 
-        return view('backend.cate.edit', compact( 'detail', 'cateTypeList', 'meta', 'cateTypeDetail', 'cateParentList'));
+        return view('backend.cate.edit', compact( 'detail', 'meta', 'cateParentList'));
     }
 
     /**
@@ -202,8 +194,7 @@ class CateController extends Controller
     {
         $dataArr = $request->all();
         
-        $this->validate($request,[
-            'type_id' => 'required',
+        $this->validate($request,[            
             'parent_id' => 'required',
             'name' => 'required',
             'slug' => 'required',            

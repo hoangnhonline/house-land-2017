@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\CateParent;
-use App\Models\CateType;
 use App\Models\MetaData;
 
 use Helper, File, Session, Auth;
@@ -20,10 +19,9 @@ class CateParentController  extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {
-        $type_id = $request->type_id ? $request->type_id : 1;    
-        $items = CateParent::where('status', 1)->where('type_id', $type_id)->orderBy('display_order', 'asc')->get();
-        return view('backend.cate-parent.index', compact( 'items', 'type_id'));
+    {        
+        $items = CateParent::where('status', 1)->orderBy('display_order', 'asc')->get();
+        return view('backend.cate-parent.index', compact( 'items'));
     }
 
     /**
@@ -32,9 +30,8 @@ class CateParentController  extends Controller
     * @return Response
     */
     public function create(Request $request)
-    {        
-        $type_id = $request->type_id ? $request->type_id : null;
-        return view('backend.cate-parent.create', compact('type_id'));
+    {   
+        return view('backend.cate-parent.create');
     }
 
     

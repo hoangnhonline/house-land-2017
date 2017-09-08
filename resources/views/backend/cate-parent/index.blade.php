@@ -24,31 +24,7 @@
 
         <div class="box-header with-border">
           <h3 class="box-title">Danh sách</h3>
-        </div>
-          <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Bộ lọc</h3>
-        </div>
-        <div class="panel-body">
-          <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('cate-parent.index') }}">            
-                       
-              
-              <div class="form-group">
-              <select class="form-control" name="type_id" id="type_id" style="width:150px;">
-                <option value="">--Loại danh mục--</option>
-                @foreach( $cateTypeList as $value )
-                  <option value="{{ $value->id }}"
-                  {{ $type_id == $value->id ? "selected" : "" }}                          
-
-                  >{{ $value->name }}</option>
-                  @endforeach
-              </select>
-            </div>
-            
-            <button type="submit" class="btn btn-primary btn-sm">Lọc</button>
-          </form>         
-        </div>
-      </div> 
+        </div>          
         <!-- /.box-header -->
         <div class="box-body">
 

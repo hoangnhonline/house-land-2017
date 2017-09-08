@@ -38,17 +38,7 @@
                           @endforeach
                       </ul>
                   </div>
-              @endif
-                <div class="form-group">
-                    <label for="email">Loại danh mục<span class="red-star">*</span></label>
-                    <select class="form-control req" name="type_id" id="type_id">
-                        <option value="">--Chọn--</option>
-                        @foreach( $cateTypeList as $value )
-                        <option value="{{ $value->id }}"
-                        {{ old('type_id', $type_id) == $value->id ? "selected" : "" }} >{{ $value->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+              @endif                
                  <!-- text input -->
                 <div class="form-group">
                   <label>Tên danh mục cha<span class="red-star">*</span></label>

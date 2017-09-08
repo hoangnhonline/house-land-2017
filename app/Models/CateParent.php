@@ -23,15 +23,12 @@ class CateParent extends Model  {
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'type_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
+    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
 
     public function cates()
     {
         return $this->hasMany('App\Models\Cate', 'parent_id');
     }
-    public function type()
-    {
-        return $this->belongsTo('App\Models\CateType', 'type_id');
-    }
+    
 
 }

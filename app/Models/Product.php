@@ -28,8 +28,7 @@ class Product extends Model  {
                             'title',
                             'alias',
                             'slug', 
-                            'description', 
-                            'type_id', 
+                            'description',
                             'parent_id', 
                             'cate_id', 
                             'thong_so', 
@@ -64,11 +63,7 @@ class Product extends Model  {
             ->join('tag', 'tag.id', '=', 'tag_objects.tag_id')            
             ->get();
         return $query;
-   }
-   public function cateType()
-    {
-        return $this->belongsTo('App\Models\CateType', 'type_id');
-    }
+    }   
     public function cateParent()
     {
         return $this->belongsTo('App\Models\CateParent', 'parent_id');
