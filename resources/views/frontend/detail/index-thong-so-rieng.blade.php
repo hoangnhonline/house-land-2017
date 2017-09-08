@@ -23,6 +23,7 @@
 		<div class="block-content">
 			<div class="row">
 				<div class="col-sm-7">
+					@if($detail->is_slider == 1)
 					<div class="block block-slide-detail">
 						<!-- Place somewhere in the <body> of your page -->
 						<div id="slider" class="flexslider">
@@ -42,6 +43,7 @@
 							</ul>
 						</div>
 					</div><!-- /block-slide-detail -->
+					@endif
 				</div>
 				<div class="col-sm-5">
 					<h2 class="tit-page3">THÔNG SỐ DỰ ÁN</h2>

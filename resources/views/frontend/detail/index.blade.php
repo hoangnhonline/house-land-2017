@@ -25,6 +25,7 @@
 				<div class="block-content">
 					<div class="block block-slide-detail">
 						<!-- Place somewhere in the <body> of your page -->
+						@if($detail->is_slider == 1)
 						<div id="slider" class="flexslider">
 							<ul class="slides">
 								@foreach( $hinhArr as $hinh )
@@ -41,6 +42,7 @@
 								@endforeach
 							</ul>
 						</div>
+						@endif
 					</div><!-- /block-slide-detail -->
 					<div class="block block-share" id="share-buttons">
 						<div class="addthis_inline_share_toolbox"></div>
