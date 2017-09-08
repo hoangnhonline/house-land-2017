@@ -10,7 +10,7 @@ use App\Models\District;
 use App\Models\CustomLink;
 use App\Models\Member;
 use App\Models\Menu;
-use App\Models\CateType;
+use App\Models\CateParent;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -53,10 +53,8 @@ class ViewComposerServiceProvider extends ServiceProvider
 	        }
 	        $customLink = CustomLink::where('block_id', 1)->orderBy('display_order', 'asc')->get();	        	        
         	$footerLink = CustomLink::where('block_id', 2)->orderBy('display_order', 'asc')->get();        	
-        	$menuList = Menu::where('menu_id', 1)->orderBy('display_order', 'asc')->get();
-        	
-        	$cateTypeList = CateType::where('status', 1)->orderBy('display_order')->get();
-
+	       	$menuList = Menu::where('menu_id', 1)->orderBy('display_order', 'asc')->get();
+	       	$cateParentList = CateParent::orderBy('display_order')->get();
 			$view->with( [
 					'settingArr' => $settingArr, 
 					'articleCate' => $articleCate, 
@@ -64,7 +62,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 					'customLink' => $customLink, 
 					'footerLink' => $footerLink, 					
 					'menuList' => $menuList,
-					'cateTypeList' => $cateTypeList		
+					'cateParentList' => $cateParentList		
 			] );
 			
 		});

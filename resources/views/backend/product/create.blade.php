@@ -192,7 +192,7 @@
                     <div class="box-footer">             
                         <button type="button" class="btn btn-default btn-sm" id="btnLoading" style="display:none"><i class="fa fa-spin fa-spinner"></i></button>
                         <button type="submit" class="btn btn-primary btn-sm" id="btnSave">Lưu</button>
-                        <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('product.index', ['type_id' => $type_id])}}">Hủy</a>
+                        <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('product.index', ['parent_id' => $parent_id])}}">Hủy</a>
                     </div>
                 </div>
                 <!-- /.box -->     

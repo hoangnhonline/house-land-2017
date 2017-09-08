@@ -20,7 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('product.create', ['type_id' => $arrSearch['type_id'], 'parent_id' => $arrSearch['parent_id'], 'cate_id' => $arrSearch['cate_id']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('product.create', ['parent_id' => $arrSearch['parent_id'], 'cate_id' => $arrSearch['cate_id']]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
@@ -30,12 +30,7 @@
               
             <div class="form-group">              
               <select class="form-control" name="parent_id" id="parent_id">
-                <option value="">--Danh mục cha--</option>
-                  <?php 
-                  if($arrSearch['type_id']){
-                    $cateParentList = App\Models\CateParent::where('type_id', $arrSearch['type_id'])->get();
-                  }
-                  ?>
+                <option value="">--Danh mục cha--</option>                  
                   @foreach( $cateParentList as $value )
                     <option value="{{ $value->id }}"
                     {{ $arrSearch['parent_id'] == $value->id ? "selected" : "" }}                        
@@ -96,7 +91,7 @@
             @if($items->count() > 0)
             <button type="submit" class="btn btn-warning btn-sm">Save thứ tự</button>
             @endif
-            <input type="hidden" name="type_id" value="{{ $arrSearch['type_id']}}">
+            <input type="hidden" name="parent_id" value="{{ $arrSearch['parent_id']}}">
             <input type="hidden" name="is_hot" value="1">
           @endif
 
@@ -208,7 +203,7 @@ $(document).ready(function(){
     obj.parent().parent().parent().submit(); 
   });
   
-  $('#type_id, #parent_id, #type, #cate_id').change(function(){    
+  $('#parent_id, #type, #cate_id').change(function(){    
     $('#searchForm').submit();
   });  
   $('#is_hot').change(function(){

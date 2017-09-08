@@ -19,7 +19,7 @@
                 @if(Session::has('message'))
                 <p class="alert alert-info" >{{ Session::get('message') }}</p>
                 @endif
-                <a href="{{ route('cate.create', ['parent_id' => $parent_id, 'type_id' => $type_id]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+                <a href="{{ route('cate.create', ['parent_id' => $parent_id]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
                 <div class="panel panel-default">
                       <div class="panel-heading">
                         <h3 class="panel-title">Bộ lọc</h3>
@@ -28,12 +28,7 @@
                         <form class="form-inline" id="searchForm" role="form" method="GET" action="{{ route('cate.index') }}">                           
                             <div class="form-group">
                                 <select class="form-control" name="parent_id" id="parent_id">
-                                    <option value="">--Danh mục cha--</option>
-                                    <?php 
-                                        if($type_id){
-                                          $cateParentList = App\Models\CateParent::where('type_id', $type_id)->get();
-                                        }
-                                        ?>
+                                    <option value="">--Danh mục cha--</option>                                   
                                     @foreach( $cateParentList as $value )
                                     <option value="{{ $value->id }}"
                                     {{ $parent_id == $value->id ? "selected" : "" }}                        

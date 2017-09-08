@@ -19,7 +19,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
-      <a href="{{ route('cate-parent.create', ['type_id' => $type_id]) }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
+      <a href="{{ route('cate-parent.create') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Tạo mới</a>
       <div class="box">
 
         <div class="box-header with-border">
@@ -56,7 +56,7 @@
                   
                   <p>{{ $item->description }}</p>
                 </td>
-                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate.index', ['parent_id' => $item->id, 'type_id' => $item->type_id])}}">{{ $item->cates->count() }}</a></td>
+                <td style="text-align:center"><a class="btn btn-info btn-sm" href="{{ route('cate.index', ['parent_id' => $item->id])}}">{{ $item->cates->count() }}</a></td>
                 
                 <td style="white-space:nowrap; text-align:right">
                 <a class="btn btn-default btn-sm" href="{{ route('cate-type', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>                 
@@ -101,10 +101,7 @@ function callDelete(name, url){
   })
   return flag;
 }
-$(document).ready(function(){
-  $('#type_id').change(function(){
-    $('#searchForm').submit();
-  });
+$(document).ready(function(){  
   $('#table-list-data tbody').sortable({
         placeholder: 'placeholder',
         handle: ".move",
