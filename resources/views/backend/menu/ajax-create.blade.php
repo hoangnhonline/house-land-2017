@@ -10,35 +10,27 @@
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
         <ul>
-          @foreach($cateTypeList as $type)
-          <?php 
-          $parentList = DB::table('cate_parent')->where('type_id', $type->id)->orderBy('display_order')->get();
+        <?php 
+          $parentList = DB::table('cate_parent')->orderBy('display_order')->get();
 
           ?>
-          <li>
-            <label>
-            <input type="radio" name="menu_select" data-title="{{ $type->name }}" data-link="{{ route('cate-type', $type->slug) }}" data-value="{{ $type->id }}" data-type="1" class="menu_select"> {{ $type->name }}
-            </label>       
-              @if($parentList)
-
-            <ul class="level0 submenu">     
-              @foreach($parentList as $parent)
-              <?php 
+          @foreach($parentList as $parent)
+          <?php 
               $cateList = DB::table('cate')->where('parent_id', $parent->id)->orderBy('display_order')->get();
 
               ?>
-              <li class="level1 @if($cateList) parent @endif">
-               <label> <input type="radio" name="menu_select" data-title="{{ $parent->name }}" data-link="{{ route('cate-parent', [$type->slug, $parent->slug]) }}" data-value="{{ $parent->id }}" data-type="2" class="menu_select">{!! $parent->name !!}</label>
-                
-                @if($cateList)
-                <ul class="level1 submenu">
-                  @foreach($cateList as $cate)
-                  <li class="level2">                                
-                    <label><input type="radio" name="menu_select" data-link="{{ route('cate', [$type->slug, $parent->slug, $cate->slug]) }}" data-value="{{ $parent->id }}" data-type="3" data-title="{{ $cate->name }}" class="menu_select">{!! $cate->name !!}</label>
-                  </li>
-                  @endforeach
-                </ul>
-                @endif
+          <li>
+            <label>
+            <input type="radio" name="menu_select" data-title="{{ $parent->name }}" data-link="{{ route('cate-parent', $parent->slug) }}" data-value="{{ $parent->id }}" data-type="1" class="menu_select"> {{ $parent->name }}
+            </label>       
+              @if($cateList)
+
+            <ul class="level0 submenu">     
+              @foreach($cateList as $cate)
+              
+              <li class="level1">
+               <label> <input type="radio" name="menu_select" data-title="{{ $cate->name }}" data-link="{{ route('cate', [$parent->slug, $cate->slug]) }}" data-value="{{ $cate->id }}" data-type="2" class="menu_select">{!! $cate->name !!}</label>                
+               
               </li>
               @endforeach
             </ul>

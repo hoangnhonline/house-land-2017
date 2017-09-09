@@ -64,4 +64,14 @@ class MenuController extends Controller
             $model->save();
         }
     }
+    public function destroy($id)
+    {
+        // delete
+        $model = Menu::find($id);
+        $model->delete();
+
+        // redirect
+        Session::flash('message', 'Xóa thành công');
+        return redirect()->route('menu.index');
+    }
 }

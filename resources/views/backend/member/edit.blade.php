@@ -74,7 +74,7 @@
                 </div>
                 <div style="clear:both"></div>              
             </div>          
-            <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>          
+            <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url', $detail->image_url) }}"/>          
             <input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
