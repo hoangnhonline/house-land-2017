@@ -67,17 +67,25 @@
 	<script src="{{ URL::asset('public/assets/lib/carousel/owl.carousel.min.js') }}""></script>
 	<!-- sticky -->
     <script src="{{ URL::asset('public/assets/lib/sticky/jquery.sticky.js') }}""></script>
-    <!-- countUp -->    
-	<script src="{{ URL::asset('public/assets/lib/countUp/countUp.js') }}""></script>
+    <!-- countUp -->    	
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+	<script src="{{ URL::asset('public/assets/lib/counterUp/jquery.counterup.min.js') }}"></script>
     <!-- Js Common -->
 	<script src="{{ URL::asset('public/assets/js/common.js') }}""></script>
 	<script src="{{ URL::asset('public/assets/js/sweetalert2.min.js') }}"></script>
 	<script src="{{ URL::asset('public/assets/js/lazy.js') }}"></script>
     <input type="hidden" id="route-newsletter" value="{{ route('register.newsletter') }}">
-	@yield('js')
+	
 	
 	<script type="text/javascript">
+	
 	$(document).ready(function() {
+		jQuery(document).ready(function($) {
+	        $('.counter').counterUp({
+	            delay: 10,
+	            time: 1000
+	        });
+	    });
 	    $.ajaxSetup({
 	        headers: {
 	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -129,6 +137,7 @@
 	}
 	</script>
 	@include('frontend.partials.custom-css')
+	@yield('js')
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59b215c2a2658a8a"></script> 
 </body>
 </html>

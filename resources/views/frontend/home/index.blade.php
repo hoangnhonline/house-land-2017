@@ -124,22 +124,22 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
         <ul class="list">
           <li class="col-sm-3 col-xs-12">
             <p class="img"><img src="{{ Helper::showImage($settingArr['icon_nam_hinh_thanh']) }}" alt="{!! $settingArr['so_nam'] !!} năm hình thành và phát triển"></p>
-            <p class="number"><span id="mycountUp1"></span> năm</p>
+            <p class="number"><span class="counter">{!! $settingArr['so_nam'] !!}</span> năm</p>
             <p class="info">{!! $settingArr['so_nam'] !!} năm hình thành và phát triển</p>
           </li>
           <li class="col-sm-3 col-xs-12">
             <p class="img"><img src="{{ Helper::showImage($settingArr['icon_kien_truc_su']) }}" alt="{!! $settingArr['so_kien_truc_su'] !!} kiến trúc sư và kỹ sư"></p>
-            <p class="number"><span id="mycountUp2"></span></p>
+            <p class="number"><span class="counter">{!! $settingArr['so_kien_truc_su'] !!}</span></p>
             <p class="info">{!! $settingArr['so_kien_truc_su'] !!} kiến trúc sư và kỹ sư</p>
           </li>
           <li class="col-sm-3 col-xs-12">
             <p class="img"><img src="{{ Helper::showImage($settingArr['icon_cong_nhan']) }}" alt="{!! $settingArr['so_cong_nhan'] !!} công nhân lành nghề"></p>
-            <p class="number"><span id="mycountUp3"></span></p>
+            <p class="number"><span class="counter">{!! $settingArr['so_cong_nhan'] !!}</span></p>
             <p class="info">{!! $settingArr['so_cong_nhan'] !!} công nhân lành nghề</p>
           </li>
           <li class="col-sm-3 col-xs-12">
             <p class="img"><img src="{{ Helper::showImage($settingArr['icon_cong_trinh']) }}" alt="{!! $settingArr['so_cong_trinh'] !!} công trình đã thực hiện"></p>
-            <p class="number"><span id="mycountUp4"></span></p>
+            <p class="number"><span class="counter">{!! $settingArr['so_cong_trinh'] !!}</span></p>
             <p class="info">{!! $settingArr['so_cong_trinh'] !!} công trình đã thực hiện</p>
           </li>
         </ul>
@@ -147,26 +147,4 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
     </div>
   </div>
 </div><!-- /block-number -->
-@stop
-@section('js')
-<script type="text/javascript">
-                    
-        var options = {
-          useEasing : true,
-          useGrouping : true,
-          separator : '',
-          decimal : '',
-          prefix : '',
-          suffix : ''
-        };
-
-        var mycountUp1 = new CountUp("mycountUp1", 0, {{ $settingArr['so_nam'] }}, 0, 7, options);
-        var mycountUp2 = new CountUp("mycountUp2", 0, {{ $settingArr['so_kien_truc_su'] }}, 0, 7, options);
-        var mycountUp3 = new CountUp("mycountUp3", 0, {{ $settingArr['so_cong_nhan'] }}, 0, 7, options);
-        var mycountUp4 = new CountUp("mycountUp4", 0, {{ $settingArr['so_cong_trinh'] }}, 0, 7, options);
-        mycountUp1.start();
-        mycountUp2.start();
-        mycountUp3.start();
-        mycountUp4.start();
-    </script>
 @stop
