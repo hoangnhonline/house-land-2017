@@ -63,6 +63,9 @@ class MenuController extends Controller
             $model->display_order = $display_orderArr[$key];
             $model->save();
         }
+        Session::flash('message', 'Cập nhật thứ tự thành công.');
+
+        return redirect()->route('menu.index');
     }
     public function destroy($id)
     {
