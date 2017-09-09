@@ -6,8 +6,8 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="{{ route('home') }}">Trang chủ</a></li>			
-			<li><a href="{{ route('cate-parent', [$detail->cateType->slug, $detail->cateParent->slug]) }}">{!! $detail->cateParent->name !!}</a></li>
-			<li><a href="{{ route('cate', [$detail->cateType->slug, $detail->cateParent->slug, $detail->cate->slug]) }}">{!! $detail->cate->name !!}</a></li>
+			<li><a href="{{ route('cate-parent', [$detail->cateParent->slug]) }}">{!! $detail->cateParent->name !!}</a></li>
+			<li><a href="{{ route('cate', [$detail->cateParent->slug, $detail->cate->slug]) }}">{!! $detail->cate->name !!}</a></li>
 			<li class="active">{!! $detail->title !!}</li>
 		</ul>
 	</div>
@@ -17,7 +17,7 @@
 		<div class="block block-title">
 			<h2>
 				<i class="fa fa-home"></i>
-				{!! $detail->title !!}
+				{!! $detail->cate->name !!}
 			</h2>
 		</div>
 		<div class="block-content">
@@ -65,18 +65,30 @@
 			<div class="block block-tabs">
 			 	<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
+					@if($detail->content != '')
 					<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Mô tả chi tiết</a></li>
+					@endif
+					@if($detail->tien_do != '')
 					<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Tiến độ xây dựng</a></li>
+					@endif
+					@if($detail->hoi_dap != '')
 					<li role="presentation"><a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">Hỏi - Đáp</a></li>
+					@endif
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
+					@if($detail->content != '')
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<h3 class="title">{!! $detail->title !!}</h3>
 						<p class="text">{!! $detail->content !!}</p>
-					</div>					
+					</div>
+					@endif
+					@if($detail->tien_do != '')					
 					<div role="tabpanel" class="tab-pane" id="tab3">{!! $detail->tien_do !!}</div>
+					@endif
+					@if($detail->hoi_dap != '')
 					<div role="tabpanel" class="tab-pane" id="tab4">{!! $detail->hoi_dap !!}</div>
+					@endif
 				</div>
 			</div><!-- /block-tabs-->
 			@if($tagSelected->count() > 0)
@@ -106,7 +118,7 @@
 			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">
-						<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}"></a>
+						<a href="{{ route('product', [$product->slug, $product->id ])}}"><img src="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}"></a>
 					</div>
 					<div class="des">
 						<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">{!! $product->title !!}</a>

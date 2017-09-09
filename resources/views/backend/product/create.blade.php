@@ -14,7 +14,7 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    <a class="btn btn-default btn-sm" href="{{ route('product.index', ['type_id' => $type_id]) }}" style="margin-bottom:5px">Quay lại</a>    
+    <a class="btn btn-default btn-sm" href="{{ route('product.index') }}" style="margin-bottom:5px">Quay lại</a>    
     <form role="form" method="POST" action="{{ route('product.store') }}" id="dataForm">
         <div class="row">
             <!-- left column -->      
@@ -78,11 +78,11 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-3 none-padding" >                  
+                                    <div class="form-group col-md-4 none-padding" >                  
                                         <label>Mã sản phẩm <span class="red-star">*</span></label>
                                         <input type="text" class="form-control req" name="code" id="code" value="{{ old('code') }}">
                                     </div>
-                                    <div class="form-group col-md-9" >                  
+                                    <div class="form-group  " >                  
                                         <label>Tên sản phẩm<span class="red-star">*</span></label>
                                         <input type="text" class="form-control req" name="title" id="title" value="{{ old('title') }}">
                                     </div>
@@ -352,23 +352,26 @@
             
             $('#btnSave').hide();
             $('#btnLoading').show();
-          });
-          
+          });          
           var editor1 = CKEDITOR.replace( 'content',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar             
           });
           var editor2 = CKEDITOR.replace( 'tien_do',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar            
           });
           var editor3 = CKEDITOR.replace( 'hoi_dap',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar              
           });
           var editor4 = CKEDITOR.replace( 'thong_so',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar
           });
           $('#btnUploadImage').click(function(){        
             $('#file-image').click();
@@ -446,24 +449,6 @@
                 dataType : 'html',
                 success : function(data){
                   $('#cate_id').html(data);              
-                }
-              })
-            
-          });
-          $('#type_id').change(function(){         
-    
-              $.ajax({
-                url : '{{ route('get-child') }}',
-                data : {
-                  mod : 'cate_parent',
-                  col : 'type_id',
-                  id : $('#type_id').val()
-                },
-                type : 'POST',
-                dataType : 'html',
-                success : function(data){
-                  $('#parent_id').html(data);
-                  $('#cate_id').html('');
                 }
               })
             

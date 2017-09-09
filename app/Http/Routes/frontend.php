@@ -40,10 +40,9 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('lien-he.html', ['as' => 'contact', 'uses' => 'HomeController@contact']);
     Route::get('dich-vu.html', ['as' => 'services', 'uses' => 'HomeController@services']);
 
-    Route::get('{slug}.html', ['as' => 'pages', 'uses' => 'HomeController@pages']);
-    Route::get('{slugCateType}', ['as' => 'cate-type', 'uses' => 'CateController@cateType']);
-    Route::get('{slugCateType}/{slugCateParent}', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    
-    Route::get('{slugCateType}/{slugCateParent}/{slugCateChild}', ['as' => 'cate', 'uses' => 'CateController@cateChild']);
+    Route::get('{slug}.html', ['as' => 'pages', 'uses' => 'HomeController@pages']);    
+    Route::get('{slugCateParent}', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    
+    Route::get('{slugCateParent}/{slugCateChild}', ['as' => 'cate', 'uses' => 'CateController@cateChild']);
 
 
 });

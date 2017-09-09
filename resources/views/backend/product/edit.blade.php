@@ -80,11 +80,11 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-3 none-padding" >                  
+                                    <div class="form-group col-md-4 none-padding" >                  
                                         <label>Mã sản phẩm <span class="red-star">*</span></label>
                                         <input type="text" class="form-control req" name="code" id="code" value="{{ old('code', $detail->code) }}">
                                     </div>
-                                    <div class="form-group col-md-9" >                  
+                                    <div class="form-group" >                  
                                         <label>Tên sản phẩm<span class="red-star">*</span></label>
                                         <input type="text" class="form-control req" name="title" id="title" value="{{ old('title', $detail->title) }}">
                                     </div>
@@ -376,19 +376,23 @@
           
           var editor1 = CKEDITOR.replace( 'content',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar     
           });
           var editor2 = CKEDITOR.replace( 'tien_do',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar   
           });
           var editor3 = CKEDITOR.replace( 'hoi_dap',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar     
           });
           var editor4 = CKEDITOR.replace( 'thong_so',{
               language : 'vi',
-              height : 400,         
+              height : 400,
+              toolbar : toolbar     
           });
           $('#btnUploadImage').click(function(){        
             $('#file-image').click();

@@ -62,7 +62,7 @@
                             <tr>
                                 <th style="width: 1%">#</th>
                                 <th style="width: 1%;white-space:nowrap">Thứ tự</th>
-                                <th width="280">Hình ảnh</th>
+                                <th width="150">Hình ảnh</th>
                                 <th>Tên</th>
                                 <th width="1%;white-space:nowrap">Thao tác</th>
                             </tr>
@@ -77,7 +77,7 @@
                                         <img src="{{ URL::asset('public/admin/dist/img/move.png')}}" class="move img-thumbnail" alt="Cập nhật thứ tự"/>
                                     </td>
                                     <td>
-                                      <img class="img-thumbnail lazy" width="265" data-original="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="Nổi bật" title="Nổi bật" />
+                                      <img class="img-thumbnail lazy" width="100" data-original="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="Nổi bật" title="Nổi bật" />
                                     </td>
                                     <td>
                                         <a href="{{ route( 'cate.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
@@ -87,7 +87,7 @@
                                         <p>{{ $item->description }}</p>
                                     </td>                                   
                                     <td style="white-space:nowrap; text-align:right">
-                                        <a class="btn btn-default btn-sm" href="{{ route('cate-type', $item->slug ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>                
+                                        <a class="btn btn-default btn-sm" href="{{ route('cate', [$item->cateParent->slug, $item->slug] ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>                
                                         <a href="{{ route( 'cate.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>                 
                                         @if( $item->product->count() == 0)
                                         <a onclick="return callDelete('{{ $item->name }}','{{ route( 'cate.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>

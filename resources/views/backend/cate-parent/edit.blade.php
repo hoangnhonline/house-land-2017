@@ -9,14 +9,14 @@
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li><a href="{{ route('cate-parent.index') }}">Danh mục cha</a></li>
-      <li class="active"><span class="glyphicon glyphicon-pencil"></span></li>
+      <li class="active">Chỉnh sửa</li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('cate-parent.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <a class="btn btn-primary btn-sm" href="{{ route('cate-type', $detail->slug ) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+    <a class="btn btn-primary btn-sm" href="{{ route('cate-parent', $detail->slug ) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
     <div class="row">
       <!-- left column -->
 

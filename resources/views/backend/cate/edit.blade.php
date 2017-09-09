@@ -9,14 +9,14 @@
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li><a href="{{ route('cate.index') }}">Danh mục cha</a></li>
-      <li class="active"><span class="glyphicon glyphicon-pencil"></span></li>
+      <li class="active">Chỉnh sửa </li>
     </ol>
   </section>
 
   <!-- Main content -->
   <section class="content">
     <a class="btn btn-default btn-sm" href="{{ route('cate.index') }}" style="margin-bottom:5px">Quay lại</a>
-    <a class="btn btn-primary btn-sm" href="{{ route('cate-type', $detail->slug ) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
+    <a class="btn btn-primary btn-sm" href="{{ route('cate', [$detail->cateParent->slug, $detail->slug] ) }}" target="_blank" style="margin-top:-6px"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>
     <div class="row">
       <!-- left column -->
 
@@ -44,7 +44,7 @@
                       </ul>
                   </div>
               @endif              
-              <div class="form-group col-md-6 pleft-5">
+              <div class="form-group">
                   <label for="email">Danh mục cha <span class="red-star">*</span></label>
                   <select class="form-control req" name="parent_id" id="parent_id">
                       <option value="">-- chọn --</option>

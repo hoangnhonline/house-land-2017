@@ -39,7 +39,7 @@
                       </ul>
                   </div>
               @endif               
-                <div class="form-group col-md-6  pleft-5">
+                <div class="form-group">
                     <label for="email">Danh mục cha <span class="red-star">*</span></label>
                     <select class="form-control req" name="parent_id" id="parent_id">
                         <option value="">-- chọn --</option>

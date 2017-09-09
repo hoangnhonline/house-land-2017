@@ -20,10 +20,7 @@ class CateController extends Controller
     */
     public function index(Request $request)
     {     
-
-              
-        $is_hot = isset($request->is_hot) ? $request->is_hot : null;           
-        $type_id = isset($request->type_id) ? $request->type_id : 1;
+        $is_hot = isset($request->is_hot) ? $request->is_hot : null;                   
         $parent_id = isset($request->parent_id) ? $request->parent_id : null;        
         if( $parent_id ){
             $parent_id = $request->parent_id;
@@ -41,17 +38,12 @@ class CateController extends Controller
         if( $name != ''){
             $query->where('name', 'LIKE', '%'.$name.'%');            
         }       
-        
-        if( $type_id ){
-            $query->where('type_id', $type_id);
-            $cateParentList = CateParent::where('type_id', $type_id)->get();
-        }
+
         if( $parent_id ){
             $query->where('parent_id', $parent_id);           
         }        
-        $items = $query->orderBy('display_order')->get();
-        $cateTypeList = CateType::where('status', 1)->orderBy('display_order')->get();
-        return view('backend.cate.index', compact( 'items', 'cateTypeDetail' , 'parent_id', 'cateTypeList', 'type_id', 'name', 'is_hot'));
+        $items = $query->orderBy('display_order')->get();        
+        return view('backend.cate.index', compact( 'items', 'parent_id', 'type_id', 'name', 'is_hot'));
     }
 
     /**
@@ -127,7 +119,7 @@ class CateController extends Controller
         } 
         
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
-        $dataArr['display_order'] = Helper::getNextOrder('cate', ['type_id' => $dataArr['type_id'], 'parent_id' => $dataArr['parent_id']]);
+        $dataArr['display_order'] = Helper::getNextOrder('cate', ['parent_id' => $dataArr['parent_id']]);
 
         $rs = Cate::create($dataArr);        
         $id = $rs->id;
@@ -136,7 +128,7 @@ class CateController extends Controller
 
         Session::flash('message', 'Tạo mới thành công');
 
-        return redirect()->route('cate.index',['parent_id' => $dataArr['parent_id'], 'type_id' => $dataArr['type_id']]);
+        return redirect()->route('cate.index',['parent_id' => $dataArr['parent_id']]);
     }
 
     /**
@@ -178,8 +170,7 @@ class CateController extends Controller
         $meta = (object) [];
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
-        }       
-        $cateTypeDetail = CateType::find($detail->parent_id); 
+        }        
         return view('backend.cate.edit', compact( 'detail', 'meta', 'cateParentList'));
     }
 

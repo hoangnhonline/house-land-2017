@@ -5,8 +5,7 @@
 <div class="block block-breadcrumb">
 	<div class="container">
 		<ul class="breadcrumb">
-			<li><a href="{{ route('home') }}">Trang chủ</a></li>
-			<li><a href="{{ route('cate-type', $parentDetail->type->slug) }}">{!! $parentDetail->type->name !!}</a></li>
+			<li><a href="{{ route('home') }}">Trang chủ</a></li>		
 			<li class="active">{!! $parentDetail->name !!}</li>
 		</ul>
 	</div>
@@ -24,7 +23,7 @@
 		<div class="block block-title">
 			<h2>
 				<i class="fa fa-home"></i>
-				<a href="{{ route('cate', [$parentDetail->type->slug, $parentDetail->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a>
+				<a href="{{ route('cate', [$parentDetail->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a>
 			</h2>	
 		</div>
 		<div class="block-content">
@@ -34,7 +33,7 @@
 			  	<li class="item">
 			  		<div class="thumb">
 			  			<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">
-			  				<img src="{{ Helper::showImageThumb($cate->image_url, 3) }}" alt="{!! $product->title !!}">
+			  				<img src="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}">
 			  			</a>
 			  		</div>
 			  		<div class="title">

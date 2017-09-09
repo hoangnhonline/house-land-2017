@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\CateType;
 use App\Models\Cate;
 use App\Models\CateParent;
 use App\Models\Product;
@@ -82,78 +81,39 @@ class CateController extends Controller
     }
     public function getSeoInfo($meta_id){
 
-    }
-    public function cateType(Request $request){
-        $cateArr = [];      
-        $parentList = (object)[];
-        $slugCateType = $request->slugCateType;
-        if(!$slugCateType){
-            return redirect()->route('home');
-        }
-        $typeDetail = CateType::where('slug', $slugCateType)->first();
-        
-        if($typeDetail){
-            $type_id = $typeDetail->id;
-
-            $parentList = CateParent::where('type_id', $type_id)->orderBy('display_order')->get();
-
-            if($parentList){
-                foreach($parentList as $parent){
-                    $cateArr[$parent->id] = Cate::where('parent_id', $parent->id)                             
-                                            ->orderBy('display_order')
-                                            ->get();
-                }
-            }
-            if( $typeDetail->meta_id > 0){
-               $seo = MetaData::find( $typeDetail->meta_id )->toArray();
-            }else{
-                $seo['title'] = $seo['description'] = $seo['keywords'] = $typeDetail->name;
-            }  
-                return view('frontend.cate.type', compact('type_id', 'typeDetail', 'cateArr', 'seo', 'parentList'));
-            
-        }else{
-            return redirect()->route('home');   
-        }
-    }
+    }   
     public function cateParent(Request $request){
         $productArr = [];
         $cateList = (object) [];
-        $slugCateType = $request->slugCateType;
-        if(!$slugCateType){
-            return redirect()->route('home');
+        
+        $slugCateParent = $request->slugCateParent;
+        if(!$slugCateParent){
+            return redirect()->route('home');       
         }
-        $type_id = CateType::where('slug', $slugCateType)->first()->id;
-        if($type_id){
-            $slugCateParent = $request->slugCateParent;
-            if(!$slugCateParent){
-                return redirect()->route('home');       
-            }
-            $parentDetail = CateParent::where('slug', $slugCateParent)->first();
+        $parentDetail = CateParent::where('slug', $slugCateParent)->first();
 
-            if($parentDetail){
-                $parent_id = $parentDetail->id;
-                $cateList = Cate::where('parent_id', $parent_id)->orderBy('display_order')->get();
-                if($cateList){
-                    foreach($cateList as $cate){
-                        $productArr[$cate->id] = Product::where('cate_id', $cate->id)
-                                                ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
-                                                ->select('product_img.image_url', 'product.*')                                                   
-                                                ->orderBy('product.id', 'desc')
-                                                ->get();
-                    }
+        if($parentDetail){
+            $parent_id = $parentDetail->id;
+            $cateList = Cate::where('parent_id', $parent_id)->orderBy('display_order')->get();
+            if($cateList){
+                foreach($cateList as $cate){
+                    $productArr[$cate->id] = Product::where('cate_id', $cate->id)
+                                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                                    ->select('product_img.image_url', 'product.*')                                                   
+                                    ->orderBy('product.id', 'desc')
+                                    ->limit(15)->get();
                 }
-            if( $parentDetail->meta_id > 0){
-               $seo = MetaData::find( $parentDetail->meta_id )->toArray();
-            }else{
-                $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
-            }  
-                return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo'));
-            }else{
-                return redirect()->route('home');       
             }
+        if( $parentDetail->meta_id > 0){
+           $seo = MetaData::find( $parentDetail->meta_id )->toArray();
         }else{
-            return redirect()->route('home');   
+            $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
+        }  
+            return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo'));
+        }else{
+            return redirect()->route('home');       
         }
+        
     }
     public function cateChild(Request $request){
         $productArr = [];

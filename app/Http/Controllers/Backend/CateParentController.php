@@ -65,7 +65,7 @@ class CateParentController  extends Controller
 
         Session::flash('message', 'Tạo mới thành công');
 
-        return redirect()->route('cate-parent.index', ['type_id' => $dataArr['type_id']]);
+        return redirect()->route('cate-parent.index');
     }
 
     /**

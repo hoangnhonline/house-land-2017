@@ -13,7 +13,7 @@ use App\Models\ArticlesCate;
 use App\Models\Customer;
 use App\Models\Newsletter;
 use App\Models\Settings;
-use App\Models\CateType;
+
 use App\Models\CateParent;
 use App\Models\Cate;
 use App\Models\Pages;
@@ -24,7 +24,6 @@ use Helper, File, Session, Auth, Hash;
 class HomeController extends Controller
 {
     
-    public static $loaiSp = []; 
     public static $loaiSpArrKey = [];    
 
     public function __construct(){
@@ -39,7 +38,7 @@ class HomeController extends Controller
     {         
         $articlesArr = [];
         $articlesCateHot = (object) [];
-        $loaiSp = CateType::where('status', 1)->orderBy('display_order')->get();
+        $productCateHot = $productParentHot = [];
         $bannerArr = [];          
         $articlesCateHot = ArticlesCate::where('is_hot', 1)->orderBy('display_order')->get();
         foreach($articlesCateHot as $cateHot){
@@ -50,11 +49,27 @@ class HomeController extends Controller
         }
 
         $cateParentHot = CateParent::where('is_hot', 1)->orderBy('display_order')->get();
-        $cateHot = Cate::whereRaw('1=2')->get();
+        $cateHot = Cate::where('is_hot', 1)->orderBy('display_order')->get();
         if($cateParentHot){
             foreach($cateParentHot as $parent)
             {
-                $cateHot[$parent->id] = Cate::where('is_hot', 1)->where('parent_id', $parent->id)->orderBy('display_order')->get();
+                $productParentHot[$parent->id] =Product::where('parent_id', $parent->id)
+                                    ->where('is_hot', 1)
+                                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                                    ->select('product_img.image_url', 'product.*')        
+                                    ->orderBy('product.display_order')
+                                    ->limit(10)->get();
+            }
+        }
+        if($cateHot){
+            foreach($cateHot as $cate)
+            {
+                $productCateHot[$cate->id] =Product::where('cate_id', $cate->id)
+                                    ->where('is_hot', 1)
+                                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                                    ->select('product_img.image_url', 'product.*')        
+                                    ->orderBy('product.display_order')
+                                    ->limit(10)->get();
             }
         }
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
@@ -64,7 +79,7 @@ class HomeController extends Controller
         $seo['keywords'] = $settingArr['site_keywords'];
         $socialImage = $settingArr['banner'];
 
-        return view('frontend.home.index', compact('articlesCateHot', 'articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot'));
+        return view('frontend.home.index', compact('articlesCateHot', 'articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot', 'productParentHot', 'productCateHot'));
 
     }
     public function getChild(Request $request){

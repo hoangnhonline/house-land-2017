@@ -44,3 +44,9 @@ $(function () {
   });
 
 });
+var toolbar = [
+    { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
+    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: ['Image', 'Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', 'NumberedList', 'BulletedList', 'Link', 'Unlink' ] },                             
+    { name: 'styles', items: [ 'Format' ] },
+    { name: 'tools', items: [ 'Maximize' ] },                      
+];

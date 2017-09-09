@@ -65,7 +65,7 @@ class ProductController extends Controller
             $query->orderBy('product.display_order', 'asc'); 
         }        
         $query->orderBy('product.id', 'desc');   
-        $items = $query->select(['product_img.image_url as image_urls','product.*', 'cate_type.slug as slugCateType'])->paginate(50);
+        $items = $query->select(['product_img.image_url as image_urls','product.*'])->paginate(50);
 
         return view('backend.product.index', compact( 'items', 'arrSearch', 'cateParentList', 'cateList'));        
     }
@@ -87,7 +87,7 @@ class ProductController extends Controller
         }
         Session::flash('message', 'Cập nhật thứ tự tin HOT thành công');
 
-        return redirect()->route('product.index', ['type_id' => $data['type_id'], 'type' => $data['type'], 'is_hot' => 1]);
+        return redirect()->route('product.index', ['is_hot' => 1]);
     }
     public function ajaxSearch(Request $request){    
         $search_type = $request->search_type;        
@@ -128,13 +128,13 @@ class ProductController extends Controller
         $tagList = Tag::where('type', 1)->get();        
         
         $cateList = Cate::whereRaw('1=2')->get();
-        
+        $parent_id = $request->parent_id ? $request->parent_id : null;
         $cateParentList = CateParent::select('id', 'name')
                         ->orderBy('display_order', 'asc')
                         ->get();                        
         
         $thongsoList = ThongSo::orderBy('display_order')->get();
-        return view('backend.product.create', compact('cateTypeList',  'type_id', 'cateParentList', 'tagList', 'cateList', 'thongsoList'));
+        return view('backend.product.create', compact('cateTypeList', 'cateParentList', 'tagList', 'cateList', 'thongsoList', 'parent_id'));
     }
 
     /**
@@ -181,7 +181,7 @@ class ProductController extends Controller
         $this->processRelation($dataArr, $product_id);
         Session::flash('message', 'Tạo mới thành công');
 
-        return redirect()->route('product.index', ['type_id' => $dataArr['type_id'], 'parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
+        return redirect()->route('product.index', ['parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
     }
     private function processRelation($dataArr, $object_id, $type = 'add'){
     
