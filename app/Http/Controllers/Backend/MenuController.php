@@ -15,6 +15,8 @@ use DB, Session;
 class MenuController extends Controller
 {    
     public function index(Request $request){
+        $dirs = array_filter(glob(public_path()."/uploads/*"), 'is_dir');
+        print_r( $dirs);
         $menuLists = Menu::where('parent_id', 0)->orderBy('display_order')->get();
         
         return view('backend.menu.index', compact('menuLists'));
