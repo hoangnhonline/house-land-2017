@@ -22,7 +22,6 @@
 @import url(../lib/font-awesome/font-awesome.min.css);
 @import url(../lib/carousel/owl.carousel.min.css);
 @import url(../lib/flexslider/flexslider.css);
-/*@import url(../lib/lightbox2/css/lightbox.min.css);*/
 
 /* Fonts */
 @font-face {
@@ -1542,10 +1541,10 @@ h2.tit-page3 {
   text-align: justify;
 }
 .block-tabs .tab-content ul {
-  padding-left: 15px;
+  padding-left: 30px;
 }
 .block-tabs .tab-content ul li {
-  list-style-type: circle;
+  list-style-type: disc;
 }
 .block-tabs p.image {
   margin: 0 auto;
