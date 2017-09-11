@@ -392,11 +392,20 @@
 /*----------------
 [Styles for devices max 375px
 */
-@media (max-width: 375px) {
+@media (max-width: 414px) {
   .block-info .hotline, .block-info .email {
     margin: 0;
     width: 100%;
   }
+  .block-info .hotline {
+    margin-bottom: 25px;
+  }
+}
+
+/*----------------
+[Styles for devices max 375px
+*/
+@media (max-width: 375px) {
   .block-info .hotline {
     margin-bottom: 25px;
   }

@@ -112,10 +112,10 @@ ol {
   margin: 0;
   padding: 0;
 }
-ul li,
+/*ul li,
 ol li {
   list-style: none;
-}
+}*/
 img {
   display: block;
   max-width: 100%;
@@ -583,6 +583,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Block News 
   ========================================================================== */
 .block-news li {
+  list-style: none;
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 20px;
   margin-bottom: 20px;
@@ -713,6 +714,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 30px;
 }
 .block-number .list li {
+  list-style: none;
   text-align: center;
   position: relative;
 }
@@ -1070,7 +1072,7 @@ footer .footer-bot .container {
 .block-ct-news .des .description {
   font-size: 14px;
   color: #666666;
-  line-height: 1.6;
+  line-height: 1.4;
   max-height: 80px;
   overflow: hidden;
 }
@@ -1095,6 +1097,7 @@ footer .footer-bot .container {
 }
 
 .block-tags ul li {
+  list-style: none;
   display: inline-block;
   margin-right: 10px;
 }
@@ -1147,6 +1150,7 @@ footer .footer-bot .container {
   margin-bottom: 0;
 }
 .block-news-sidebar .list .item {
+  list-style: none;
   padding-bottom: 15px;
   border-bottom: 1px solid #d8d8d8;
   margin-bottom: 15px;
@@ -1197,6 +1201,7 @@ footer .footer-bot .container {
   margin-bottom: 0px;
 }
 .block-links-sidebar .list li {
+  list-style-type: none;
   padding-left: 20px;
   position: relative;
   margin-bottom: 15px;
@@ -1462,6 +1467,7 @@ h2.tit-page3 {
   color: rgba(255, 255, 255, 0.8);
 }
 .block-detail-info li {
+  list-style: none;
   padding-left: 20px;
   position: relative;
   margin-bottom: 15px;
@@ -1553,6 +1559,7 @@ h2.tit-page3 {
 /* Block Relative 
   ========================================================================== */
 .block-relative ul li.item {
+  list-style: none;
   border: 2px solid transparent;
   padding: 5px;
   -webkit-box-shadow: 8px 8px 12px -6px rgba(0,0,0,0.2);
