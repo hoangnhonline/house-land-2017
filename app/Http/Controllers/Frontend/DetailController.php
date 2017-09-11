@@ -69,7 +69,7 @@ class DetailController extends Controller
                     ->where('product.id', '<>', $detail->id)  
                     ->orderBy('product.id', 'desc')
                     ->limit(6)
-                    ->get();
+                    ->get();        
         $tagSelected = Product::getListTag($detail->id);
         if($detail->layout == 1){
             $thongsoList = ThongSo::orderBy('display_order')->get();

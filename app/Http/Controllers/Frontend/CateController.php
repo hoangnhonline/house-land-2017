@@ -143,30 +143,7 @@ class CateController extends Controller
             return redirect()->route('home');   
         }
     }
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-    public function search(Request $request)
-    {
-
-        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
-        
-        $layout_name = "main-category";
-        
-        $page_name = "page-category";
-
-        $cateArr = $cateActiveArr = $moviesActiveArr = [];
-
-        $tu_khoa = $request->k;
-        
-        $is_search = 1;
-
-        $moviesArr = Film::where('alias', 'LIKE', '%'.$tu_khoa.'%')->orderBy('id', 'desc')->paginate(20);
-
-        return view('frontend.cate', compact('settingArr', 'moviesArr', 'tu_khoa',  'is_search', 'layout_name', 'page_name' ));
-    }
+    
 
     public function cate(Request $request)
     {

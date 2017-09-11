@@ -114,7 +114,7 @@
 			</h2>
 		</div>
 		<div class="block-content">
-			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-center="true" data-loop="true" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
+			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-center="true" data-loop="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
 			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">

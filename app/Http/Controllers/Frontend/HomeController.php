@@ -129,10 +129,10 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $tu_khoa = $request->keyword;
-        $type_id = $request->cid ? $request->cid : null;
+        $parent_id = $request->cid ? $request->cid : null;
         $query = Product::where('product.alias', 'LIKE', '%'.$tu_khoa.'%');
-            if($type_id > 0){
-                $query->where('type_id', $type_id);
+            if($parent_id > 0){
+                $query->where('parent_id', $parent_id);
             }
                     $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                     ->select('product_img.image_url', 'product.*')                                                  
@@ -140,7 +140,7 @@ class HomeController extends Controller
                    $productList = $query->paginate(15);
         $seo['title'] = $seo['description'] =$seo['keywords'] = "Tìm kiếm sản phẩm theo từ khóa '".$tu_khoa."'";
        
-        return view('frontend.cate.search', compact('productList', 'tu_khoa', 'seo', 'type_id'));
+        return view('frontend.cate.search', compact('productList', 'tu_khoa', 'seo', 'parent_id'));
     }
     public function ajaxTab(Request $request){
         $table = $request->type ? $request->type : 'category';
