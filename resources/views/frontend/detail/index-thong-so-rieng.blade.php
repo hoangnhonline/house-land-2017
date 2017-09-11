@@ -63,7 +63,7 @@
 				<div class="share-item">
 					<div class="fb-like" data-href="{{ url()->current() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
 				</div>
-				<div class="share-item">
+				<div class="share-item" style="max-width: 65px;">
 					<div class="g-plus" data-action="share"></div>
 				</div>
 				<div class="share-item">
