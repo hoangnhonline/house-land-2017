@@ -63,7 +63,7 @@
 				<div class="fb-like" data-href="{{ url()->current() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
 				<div class="g-plus" data-action="share"></div>
 				<a class="twitter-share-button"
-				  href="https://twitter.com/intent/tweet?text=Hello%20world">
+				  href="https://twitter.com/intent/tweet?text={!! $detail->title !!}">
 				Tweet</a>
 				<div class="addthis_inline_share_toolbox"></div>
 			</div><!-- /block-share-->
