@@ -60,12 +60,20 @@
 				</div>
 			</div>
 			<div class="block block-share" id="share-buttons">
-				<div class="fb-like" data-href="{{ url()->current() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-				<div class="g-plus" data-action="share"></div>
-				<a class="twitter-share-button"
+				<div class="share-item">
+					<div class="fb-like" data-href="{{ url()->current() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+				</div>
+				<div class="share-item">
+					<div class="g-plus" data-action="share"></div>
+				</div>
+				<div class="share-item">
+					<a class="twitter-share-button"
 				  href="https://twitter.com/intent/tweet?text={!! $detail->title !!}">
 				Tweet</a>
-				<div class="addthis_inline_share_toolbox"></div>
+				</div>
+				<div class="share-item">
+					<div class="addthis_inline_share_toolbox"></div>
+				</div>
 			</div><!-- /block-share-->
 			<div class="block block-tabs">
 			 	<!-- Nav tabs -->

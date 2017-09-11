@@ -1126,6 +1126,11 @@ footer .footer-bot .container {
   background: #ff6600;
   color: #fff
 }
+.block-share .share-item {
+  display: inline-block;
+  vertical-align: top;
+  line-height: initial;
+}
 
 /* Block Sidebar
   ========================================================================== */
