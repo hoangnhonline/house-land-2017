@@ -1630,7 +1630,7 @@ h2.tit-page3 {
 .td-scroll-up {
   cursor: pointer;
   position: fixed;
-  bottom: 4px;
+  bottom: 0;
   right: 5px;
   width: 40px;
   height: 40px;
