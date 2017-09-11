@@ -57,6 +57,7 @@ class ContactController extends Controller
             $contents[] = [
                 'STT' => $i,
                 'Email' => $data->email,
+                'Nội dung' => $data->content,
                 'Ngày ĐK' => date('d-m-Y H:i', strtotime($data->created_at))
             ];
         }        

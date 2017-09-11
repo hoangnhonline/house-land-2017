@@ -72,7 +72,7 @@
                   {{ $item->full_name }}</br>
                   @endif
                   @if($item->email != '')
-                  <a href="{{ route( 'contact.edit', [ 'id' => $item->id ]) }}">{{ $item->email }}</a> -
+                  {{ $item->email }} -
                   @endif
                   @if($item->phone != '')
                   {{ $item->phone }}</br>
