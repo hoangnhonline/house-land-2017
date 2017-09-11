@@ -6,10 +6,11 @@
                     <div class="block-title">THÔNG TIN CÔNG TY</div>
                     <div class="block-cotent">
                         <ul class="list">
-                            <li><a href="#" title="">Lịch sử hình thành</a></li>
-                            <li><a href="#" title="">Dịch vụ</a></li>
-                            <li><a href="#" title="">Đối tác</a></li>
-                            <li><a href="#" title="">Khách hàng</a></li>
+                            @if($footerLink1)
+                            @foreach($footerLink1 as $link)
+                            <li><a href="{{ $link->link_url }}" title="{!! $link->link_text !!}">{!! $link->link_text !!}</a></li>
+                            @endforeach
+                            @endif                          
                         </ul>
                     </div>
                 </div><!-- /ft-information-->
@@ -18,11 +19,11 @@
                         <div class="block-title">DỊCH VỤ BẤT ĐỘNG SẢN</div>
                         <div class="block-cotent">
                             <ul class="list">
-                                <li><a href="#" title="">Thiết kế kiến trúc</a></li>
-                                <li><a href="#" title="">Thi công xây dựng</a></li>
-                                <li><a href="#" title="">Thiết kế nội thất</a></li>
-                                <li><a href="#" title="">Kho nhà mẫu</a></li>
-                                <li><a href="#" title="">Bảng giá</a></li>
+                                @if($footerLink2)
+                                @foreach($footerLink2 as $link)
+                                <li><a href="{{ $link->link_url }}" title="{!! $link->link_text !!}">{!! $link->link_text !!}</a></li>
+                                @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div><!-- /item-->
