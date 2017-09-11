@@ -72,6 +72,8 @@
 
   return t;
 }(document, "script", "twitter-wjs"));</script>
+
+
 	@include('frontend.partials.header')
 
 	<div class="wrapper">	
@@ -101,13 +103,24 @@
 	
 	
 	<script type="text/javascript">
-	
-	$(document).ready(function() {
-		jQuery(document).ready(function($) {
-	        $('.counter').counterUp({
+	var eventFired = false,
+	    objectPositionTop = $('.block-number').offset().top;
+
+	$(window).on('scroll', function() {
+
+	 var currentPosition = $(document).scrollTop();
+	 if (currentPosition > objectPositionTop && eventFired === false) {
+	   eventFired = true;
+	   $('.counter').counterUp({
 	            delay: 10,
 	            time: 1000
 	        });
+	 }
+
+	});
+	$(document).ready(function() {
+		jQuery(document).ready(function($) {
+	        
 	    });
 	    $.ajaxSetup({
 	        headers: {
