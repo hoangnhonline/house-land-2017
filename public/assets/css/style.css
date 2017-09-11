@@ -875,18 +875,11 @@ footer .footer-bot .container {
 
 /* Chat
   ========================================================================== */
-.chat {
-  color: #ffffff;
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 40px;
-  width: 160px;
-  text-align: center;
-  line-height: 40px;
-  background: #512000;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+.fbchatbox {
+  position: fixed;
+  right: 50px;
+  bottom: 0;
+  z-index: 9999;
 }
 
 /* About
@@ -1551,7 +1544,7 @@ h2.tit-page3 {
   font-size: 14px;
   color: #333;
   line-height: 1.6;
-  margin-bottom: 25px;
+  /*margin-bottom: 25px;*/
   text-align: justify;
 }
 .block-tabs .tab-content ul {

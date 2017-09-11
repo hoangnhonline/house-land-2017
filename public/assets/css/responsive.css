@@ -71,6 +71,16 @@
 }
 
 /*----------------
+[Styles for devices max 899px
+*/
+@media all and (max-width: 899px) {
+  #closefbchat{display:none}
+  .detail ul li {
+  width:100%;
+      padding: 10px 20px!important
+}
+
+/*----------------
 [Styles for devices max 800px
 */
 @media (max-width: 800px) {
@@ -100,8 +110,8 @@
     float: none;
     display: block;
     position: fixed !important;
-    left: -80% !important;
-    width: 80%;
+    left: -85% !important;
+    width: 85%;
     top: 0;
     bottom: 0;
     z-index: 9999;
@@ -137,6 +147,7 @@
     width: 100%;
   }
   .nav-menu>li>a {
+    font-size: 13px;
     text-align: left;
     padding-left: 15px;
     border-bottom: 1px solid rgba(232, 232, 232, 0.34);
@@ -406,6 +417,12 @@
 [Styles for devices max 375px
 */
 @media (max-width: 375px) {
+  .nav-menu .submenu li a {
+    padding-left: 10px;
+  }
+  .nav-menu .submenu .submenu li a {
+    padding-left: 15px;
+  }
   .block-info .hotline {
     margin-bottom: 25px;
   }

@@ -119,9 +119,17 @@
 
 	});
 	$(document).ready(function() {
-		jQuery(document).ready(function($) {
-	        
-	    });
+		jQuery('.fb-page1').toggleClass('hide');
+			jQuery('#closefbchat').html('<i class="fa fa-comments fa-2x"></i> Chat Tư Vấn').css({'bottom':0});
+		jQuery('#closefbchat').click(function(){
+			jQuery('.fb-page1').toggleClass('hide');
+			if(jQuery('.fb-page1').hasClass('hide')){
+				jQuery('#closefbchat').html('<i class="fa fa-comments fa-2x"></i> Chat Tư Vấn').css({'bottom':0});
+			}
+			else{
+				jQuery('#closefbchat').text('Tắt Chat').css({'bottom':299});
+			}
+		});
 	    $.ajaxSetup({
 	        headers: {
 	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
