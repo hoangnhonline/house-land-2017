@@ -189,6 +189,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 38px;
   line-height: 38px;
 }
+.block-search .select-choice .choice {
+  background: #fff;
+}
 .block-search .input-serach input {
   padding: 0 10px 0 20px;
   height: 38px;
