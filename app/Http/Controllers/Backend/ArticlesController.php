@@ -86,59 +86,7 @@ class ArticlesController extends Controller
             'slug.unique' => 'Slug đã được sử dụng.'
         ]);       
         
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
-        
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('uploads/'.date('Y'))){
-                mkdir('uploads/'.date('Y'), 0777, true);
-            }
-            if(!is_dir('uploads/thumbs/articles/'.date('Y'))){
-                mkdir('uploads/thumbs/articles/'.date('Y'), 0777, true);
-            }
-            if(!is_dir('uploads/thumbs/articles/325x200/'.date('Y'))){
-                mkdir('uploads/thumbs/articles/325x200/'.date('Y'), 0777, true);
-            }
-
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
-            $img = Image::make(config('houseland.upload_path').$destionation);
-            $w_img = $img->width();
-            $h_img = $img->height();
-            $tile1 = 0.07697044;
-            $w_tile1 = $w_img/203;
-            $h_tile1 = $h_img/128;
-         
-            if($w_tile1- $h_tile1 <= $tile1){
-                Image::make(config('houseland.upload_path').$destionation)->resize(203, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
-            }else{
-                Image::make(config('houseland.upload_path').$destionation)->resize(null, 128, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
-            }
-
-            $tile2 = 0;
-            $w_tile2 = $w_img/325;
-            $h_tile2 = $h_img/200;
-           
-            if($w_tile2- $h_tile2 <= $tile2){
-                Image::make(config('houseland.upload_path').$destionation)->resize(325, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
-            }else{
-                dd('123');
-                Image::make(config('houseland.upload_path').$destionation)->resize(null, 200, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
-            }
-
-            $dataArr['image_url'] = $destionation;
-        }        
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);      
         
         $dataArr['created_user'] = Auth::user()->id;
 
@@ -256,57 +204,6 @@ class ArticlesController extends Controller
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
         
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('uploads/'.date('Y'))){
-                mkdir('uploads/'.date('Y'), 0777, true);
-            }
-            if(!is_dir('uploads/thumbs/articles/'.date('Y'))){
-                mkdir('uploads/thumbs/articles/'.date('Y'), 0777, true);
-            }
-            if(!is_dir('uploads/thumbs/articles/325x200/'.date('Y'))){
-                mkdir('uploads/thumbs/articles/325x200/'.date('Y'), 0777, true);
-            }
-
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
-            
-            $img = Image::make(config('houseland.upload_path').$destionation);
-            $w_img = $img->width();
-            $h_img = $img->height();
-            $tile1 = 0.07697044;
-            $w_tile1 = $w_img/203;
-            $h_tile1 = $h_img/128;
-         
-            if($w_tile1- $h_tile1 <= $tile1){
-                Image::make(config('houseland.upload_path').$destionation)->resize(203, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
-            }else{
-                Image::make(config('houseland.upload_path').$destionation)->resize(null, 128, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(203, 128)->save(config('houseland.upload_thumbs_path_articles').$destionation);
-            }
-
-            $tile2 = 0;
-            $w_tile2 = $w_img/325;
-            $h_tile2 = $h_img/200;
-           
-            if($w_tile2- $h_tile2 <= $tile2){
-                Image::make(config('houseland.upload_path').$destionation)->resize(325, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
-            }else{                
-                Image::make(config('houseland.upload_path').$destionation)->resize(null, 200, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(325, 200)->save(config('houseland.upload_thumbs_path_articles').'325x200/'.$destionation);
-            }
-            $dataArr['image_url'] = $destionation;
-        }
-
         $dataArr['type'] = 1;
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  

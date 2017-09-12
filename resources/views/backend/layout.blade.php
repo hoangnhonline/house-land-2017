@@ -78,6 +78,7 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <input type="hidden" id="upload_url" value="{{ config('houseland.upload_url') }}">
+<input type="hidden" id="app_url" value="{{ env('APP_URL') }}">
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->

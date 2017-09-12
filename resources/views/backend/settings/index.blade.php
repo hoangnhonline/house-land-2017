@@ -129,11 +129,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Logo ( 250 x 70 px )</label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-logo" width="150" >
+                    <img class="show_thumbnail logo" src="{{ $settingArr['logo'] ? Helper::showImage($settingArr['logo']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-logo" width="150" >
                     
                     <input type="file" data-value="logo" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload" data-choose="file-logo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload" data-value="logo"  data-choose="file-logo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -141,11 +141,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Favicon </label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="50">
+                    <img class="show_thumbnail favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="50">
                     
                     <input type="file" id="file-favicon" data-value="favicon" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload" data-value="favicon"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -153,11 +153,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Banner ( og:image ) </label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['banner'] ? Helper::showImage($settingArr['banner']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-banner" width="200">
+                    <img class="show_thumbnail banner" src="{{ $settingArr['banner'] ? Helper::showImage($settingArr['banner']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-banner" width="200">
                     
                     <input type="file" data-value="banner" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload" data-value="banner" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -167,11 +167,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Icon số năm hình thành và phát triển ( 60 x 60 px )</label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['icon_nam_hinh_thanh'] ? Helper::showImage($settingArr['icon_nam_hinh_thanh']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
+                    <img class="show_thumbnail icon_nam_hinh_thanh" src="{{ $settingArr['icon_nam_hinh_thanh'] ? Helper::showImage($settingArr['icon_nam_hinh_thanh']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
                     
                     <input type="file" data-value="icon_nam_hinh_thanh" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload"  data-value="icon_nam_hinh_thanh" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div> 
@@ -180,11 +180,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Icon số kiến trúc sư và kỹ sư ( 60 x 60 px )</label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['icon_kien_truc_su'] ? Helper::showImage($settingArr['icon_kien_truc_su']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
+                    <img class="show_thumbnail icon_kien_truc_su" src="{{ $settingArr['icon_kien_truc_su'] ? Helper::showImage($settingArr['icon_kien_truc_su']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
                     
                     <input type="file" data-value="icon_kien_truc_su" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload" data-value="icon_kien_truc_su"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -193,11 +193,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Icon số công nhân lành nghề ( 60 x 60 px )</label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['icon_cong_nhan'] ? Helper::showImage($settingArr['icon_cong_nhan']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
+                    <img class="show_thumbnail icon_cong_nhan" src="{{ $settingArr['icon_cong_nhan'] ? Helper::showImage($settingArr['icon_cong_nhan']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
                     
                     <input type="file" data-value="icon_cong_nhan" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload" data-value="icon_cong_nhan" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -206,11 +206,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Icon số công trình đã thực hiện ( 60 x 60 px )</label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['icon_cong_trinh'] ? Helper::showImage($settingArr['icon_cong_trinh']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
+                    <img class="show_thumbnail icon_cong_trinh" src="{{ $settingArr['icon_cong_trinh'] ? Helper::showImage($settingArr['icon_cong_trinh']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="60">
                     
                     <input type="file" data-value="icon_cong_trinh" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload"   data-value="icon_cong_trinh" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -219,11 +219,11 @@
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Icon tiêu đề danh mục ( 10 x 50 px )</label>    
                   <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail" src="{{ $settingArr['icon_tieu_de'] ? Helper::showImage($settingArr['icon_tieu_de']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="10">
+                    <img class="show_thumbnail icon_tieu_de" src="{{ $settingArr['icon_tieu_de'] ? Helper::showImage($settingArr['icon_tieu_de']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="10">
                     
                     <input type="file" data-value="icon_tieu_de" class="click-choose-file" style="display:none" />
                  
-                    <button class="btn btn-default btn-sm btnUpload"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                    <button class="btn btn-default btn-sm btnUpload"  data-value="icon_tieu_de" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
                 </div>
@@ -336,24 +336,14 @@
       
       <!--/.col (left) -->      
     </div>
-<input type="hidden" name="logo" id="logo" value="{{ $settingArr['logo'] }}"/>          
-<input type="hidden" name="logo_name" id="logo_name" value="{{ old('logo_name') }}"/>
-<input type="hidden" name="favicon" id="favicon" value="{{ $settingArr['favicon'] }}"/>          
-<input type="hidden" name="favicon_name" id="favicon_name" value="{{ old('favicon_name') }}"/>
-<input type="hidden" name="banner" id="banner" value="{{ $settingArr['banner'] }}"/>          
-<input type="hidden" name="banner_name" id="banner_name" value="{{ old('banner_name') }}"/>
-
+<input type="hidden" name="logo" id="logo" value="{{ $settingArr['logo'] }}"/> 
+<input type="hidden" name="favicon" id="favicon" value="{{ $settingArr['favicon'] }}"/>
+<input type="hidden" name="banner" id="banner" value="{{ $settingArr['banner'] }}"/>   
 <input type="hidden" name="icon_nam_hinh_thanh" id="icon_nam_hinh_thanh" value="{{ $settingArr['icon_nam_hinh_thanh'] }}"/>          
-<input type="hidden" name="icon_nam_hinh_thanh_name" id="icon_nam_hinh_thanh_name" value="{{ old('icon_nam_hinh_thanh_name') }}"/>
 <input type="hidden" name="icon_kien_truc_su" id="icon_kien_truc_su" value="{{ $settingArr['icon_kien_truc_su'] }}"/>          
-<input type="hidden" name="icon_kien_truc_su_name" id="icon_kien_truc_su_name" value="{{ old('icon_kien_truc_su_name') }}"/>
 <input type="hidden" name="icon_cong_nhan" id="icon_cong_nhan" value="{{ $settingArr['icon_cong_nhan'] }}"/>
-<input type="hidden" name="icon_cong_nhan_name" id="icon_cong_nhan_name" value="{{ old('icon_cong_nhan_name') }}"/>
 <input type="hidden" name="icon_cong_trinh" id="icon_cong_trinh" value="{{ $settingArr['icon_cong_trinh'] }}"/>          
-<input type="hidden" name="icon_cong_trinh_name" id="icon_cong_trinh_name" value="{{ old('icon_cong_trinh_name') }}"/>
-<input type="hidden" name="icon_tieu_de" id="icon_tieu_de" value="{{ $settingArr['icon_tieu_de'] }}"/>          
-<input type="hidden" name="icon_tieu_de_name" id="icon_tieu_de_name" value="{{ old('icon_tieu_de_name') }}"/>
-
+<input type="hidden" name="icon_tieu_de" id="icon_tieu_de" value="{{ $settingArr['icon_tieu_de'] }}"/>
 
     </form>
     <!-- /.row -->
@@ -364,6 +354,19 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
+var h = screen.height;
+var w = screen.width;
+var left = (screen.width/2)-((w-300)/2);
+var top = (screen.height/2)-((h-100)/2);
+function openKCFinder_singleFile(obj_str) {
+      window.KCFinder = {};
+      window.KCFinder.callBack = function(url) {
+         $('#' + obj_str).val(url);
+         $('.show_thumbnail.' + obj_str).attr('src', $('#app_url').val() + url);
+          window.KCFinder = null;
+      };
+      window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+  }
     $(document).ready(function(){
       var editor = CKEDITOR.replace( 'chi_nhanh_phia_bac',{
           language : 'vi',       
@@ -385,7 +388,8 @@
           ]
       });
       $('.btnUpload').click(function(){
-        $(this).parents('.div-upload').find('.click-choose-file').click();
+        openKCFinder_singleFile($(this).data('value'));
+        //$(this).parents('.div-upload').find('.click-choose-file').click();
       });
       
       var files = "";

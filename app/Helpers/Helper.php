@@ -55,19 +55,20 @@ class Helper
     public static function showImage($image_url, $type = 'original'){
 
         //return strpos($image_url, 'http') === false ? config('houseland.upload_url') . $type . '/' . $image_url : $image_url;        
-        return strpos($image_url, 'http') === false ? config('houseland.upload_url') . $image_url : $image_url;        
+        return strpos($image_url, 'http') === false ? env('APP_URL') . $image_url : $image_url;        
 
     }
     public static function showImageThumb($image_url, $object_type = 1, $folder = ''){             
         // type = 1 : original 2 : thumbs
-        //object_type = 1 : product, 2 :article  3: project             
+        //object_type = 1 : product, 2 :article  3: project 
+         $image_url = str_replace('/uploads/images/', '/uploads/images/thumbs/', $image_url);            
         if(strpos($image_url, 'http') === false){
             if($object_type == 1){
-                return config('houseland.upload_url') . 'thumbs/' . $folder. '/' . $image_url;
+                return env('APP_URL') . $folder. '/' . $image_url;
             }elseif($object_type == 2){
-                return config('houseland.upload_url') . 'thumbs/articles/'. $folder. '/' . $image_url;
+                return env('APP_URL') . $folder. '/' . $image_url;
             }else{
-                return config('houseland.upload_url') . 'thumbs/cate/'. $folder. '/' . $image_url;
+                return env('APP_URL') . $folder. '/' . $image_url;
             }    
         }else{
             return $image_url;

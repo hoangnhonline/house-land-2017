@@ -253,41 +253,31 @@ class ProductController extends Controller
             if( !empty( $dataArr['image_tmp_url'] )){
 
                 foreach ($dataArr['image_tmp_url'] as $k => $image_url) {
-
-                    if( $image_url && $dataArr['image_tmp_name'][$k] ){
-
-                        $tmp = explode('/', $image_url);
-
-                        if(!is_dir('public/uploads/images/'.date('Y'))){
-                            mkdir('public/uploads/images/'.date('Y'), 0777, true);
-                        }
-                        if(!is_dir('public/uploads/images/thumbs/'.date('Y'))){
-                            mkdir('public/uploads/images/thumbs/'.date('Y'), 0777, true);
-                        }
-
-                        $destionation = date('Y'). '/'. end($tmp);
-                        //var_dump(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);die;
-                        File::move(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);
+                    
+                    $origin_img = base_path().$image_url;
+                    if( $image_url ){
 
                         $imageArr['is_thumbnail'][] = $is_thumbnail = $dataArr['thumbnail_id'] == $image_url  ? 1 : 0;
 
-                      
-                        $img = Image::make(config('houseland.upload_path').$destionation);
+                        $img = Image::make($origin_img);
                         $w_img = $img->width();
                         $h_img = $img->height();
-                        $tile1 = 353/195;                          
-                     
+                        $tile1 = 353/195;        
+                        //dd('b', $origin_img);                  
+                        $new_img = str_replace('/uploads/images/', '/uploads/images/thumbs/', $origin_img);
+                       
                         if($w_img/$h_img <= $tile1){
-                            Image::make(config('houseland.upload_path').$destionation)->resize(353, null, function ($constraint) {
+
+                            Image::make($origin_img)->resize(353, null, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(353, 195)->save(config('houseland.upload_thumbs_path').$destionation);
+                            })->crop(353, 195)->save($new_img);
                         }else{
-                            Image::make(config('houseland.upload_path').$destionation)->resize(null, 195, function ($constraint) {
+                            Image::make($origin_img)->resize(null, 195, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(353, 195)->save(config('houseland.upload_thumbs_path').$destionation);
+                            })->crop(353, 195)->save($new_img);
                         }                                        
 
-                        $imageArr['name'][] = $destionation;
+                        $imageArr['name'][] = $image_url;
                         
                     }
                 }

@@ -103,6 +103,7 @@
 	
 	
 	<script type="text/javascript">
+	@if(\Request::route()->getName() == "home")
 	var eventFired = false,
 	    objectPositionTop = $('.block-number').offset().top;
 
@@ -118,6 +119,7 @@
 	 }
 
 	});
+	@endif
 	$(document).ready(function() {
 		jQuery('.fb-page1').toggleClass('hide');
 			jQuery('#closefbchat').html('<i class="fa fa-comments fa-2x"></i> Chat Tư Vấn').css({'bottom':0});
@@ -152,6 +154,7 @@
 		    $('#btnNewsletter').click();
 		}
 	});
+		
 	$('#btnNewsletter').click(function() {
 	    var email = $.trim($('#txtNewsletter').val());        
 	    if(validateEmail(email)) {

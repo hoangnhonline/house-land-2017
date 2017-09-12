@@ -250,8 +250,42 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
-    $(document).ready(function(){
-    
+var h = screen.height;
+var w = screen.width;
+var left = (screen.width/2)-((w-300)/2);
+var top = (screen.height/2)-((h-100)/2);
+function openKCFinder_singleFile() {
+        window.KCFinder = {};
+        window.KCFinder.callBack = function(url) {
+            console.log(url);
+            window.KCFinder = null;
+        };
+        window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+    }
+ 
+function openKCFinder_multipleFiles() {
+    window.KCFinder = {};
+    window.KCFinder.callBackMultiple = function(files) {
+        var strHtml = '';
+        for (var i = 0; i < files.length; i++) {
+             strHtml += '<div class="col-md-3">';
+
+        strHtml += '<img class="img-thumbnail" src="' + '{{ env('APP_URL') }}' + files[i]  + '" style="width:100%">';
+         strHtml += '<div class="checkbox">';
+         strHtml += '<input type="hidden" name="image_tmp_url[]" value="' + files[i]  + '">';
+        
+        strHtml += '<label><input type="radio" name="thumbnail_id" class="thumb" value="' + files[i]  + '"> &nbsp;  Ảnh đại diện </label>';
+        strHtml += '<button class="btn btn-danger btn-sm remove-image" type="button" data-value="' + '{{ env('APP_URL') }}' + files[i]  + '" data-id="" ><span class="glyphicon glyphicon-trash"></span></button></div></div>';      
+        }
+        $('#div-image').append(strHtml);
+            if( $('#div-image input.thumb:checked').length == 0){
+              $('#div-image input.thumb').eq(0).prop('checked', true);
+            }
+        window.KCFinder = null;
+    };
+      window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_multiple','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+}
+    $(document).ready(function(){   
     
       $('#btnAddTag').click(function(){
           $('#tagModal').modal('show');
@@ -397,8 +431,10 @@
               filebrowserImageUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=images') }}",
               filebrowserFlashUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=flash') }}"      
           });
+      
           $('#btnUploadImage').click(function(){        
-            $('#file-image').click();
+            //$('#file-image').click();
+            openKCFinder_multipleFiles();
           }); 
          
           var files = "";
