@@ -91,13 +91,13 @@ class CateController extends Controller
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('public/uploads/images/'.date('Y/m/d'))){
-                mkdir('public/uploads/images/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/images/'.date('Y'))){
+                mkdir('public/uploads/images/'.date('Y'), 0777, true);
             }
-            if(!is_dir('public/uploads/images/thumbs/cate/'.date('Y/m/d'))){
-                mkdir('public/uploads/images/thumbs/cate/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/images/thumbs/cate/'.date('Y'))){
+                mkdir('public/uploads/images/thumbs/cate/'.date('Y'), 0777, true);
             }       
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             $img = Image::make(config('houseland.upload_path').$destionation);
@@ -203,13 +203,13 @@ class CateController extends Controller
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('public/uploads/images/'.date('Y/m/d'))){
-                mkdir('public/uploads/images/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/images/'.date('Y'))){
+                mkdir('public/uploads/images/'.date('Y'), 0777, true);
             }
-            if(!is_dir('public/uploads/images/thumbs/cate/'.date('Y/m/d'))){
-                mkdir('public/uploads/images/thumbs/cate/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/images/thumbs/cate/'.date('Y'))){
+                mkdir('public/uploads/images/thumbs/cate/'.date('Y'), 0777, true);
             }       
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             $img = Image::make(config('houseland.upload_path').$destionation);

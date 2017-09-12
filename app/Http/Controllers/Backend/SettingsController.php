@@ -84,11 +84,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['logo']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['logo'], config('houseland.upload_path').$destionation);
             
@@ -99,11 +99,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['favicon']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['favicon'], config('houseland.upload_path').$destionation);
             
@@ -114,11 +114,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['banner']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['banner'], config('houseland.upload_path').$destionation);
             
@@ -129,11 +129,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['icon_nam_hinh_thanh']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['icon_nam_hinh_thanh'], config('houseland.upload_path').$destionation);
             
@@ -144,11 +144,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['icon_kien_truc_su']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['icon_kien_truc_su'], config('houseland.upload_path').$destionation);
             
@@ -159,11 +159,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['icon_cong_nhan']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['icon_cong_nhan'], config('houseland.upload_path').$destionation);
             
@@ -174,11 +174,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['icon_cong_trinh']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['icon_cong_trinh'], config('houseland.upload_path').$destionation);
             
@@ -189,11 +189,11 @@ class SettingsController  extends Controller
             
             $tmp = explode('/', $dataArr['icon_tieu_de']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['icon_tieu_de'], config('houseland.upload_path').$destionation);
             

@@ -258,14 +258,14 @@ class ProductController extends Controller
 
                         $tmp = explode('/', $image_url);
 
-                        if(!is_dir('public/uploads/images/'.date('Y/m/d'))){
-                            mkdir('public/uploads/images/'.date('Y/m/d'), 0777, true);
+                        if(!is_dir('public/uploads/images/'.date('Y'))){
+                            mkdir('public/uploads/images/'.date('Y'), 0777, true);
                         }
-                        if(!is_dir('public/uploads/images/thumbs/'.date('Y/m/d'))){
-                            mkdir('public/uploads/images/thumbs/'.date('Y/m/d'), 0777, true);
+                        if(!is_dir('public/uploads/images/thumbs/'.date('Y'))){
+                            mkdir('public/uploads/images/thumbs/'.date('Y'), 0777, true);
                         }
 
-                        $destionation = date('Y/m/d'). '/'. end($tmp);
+                        $destionation = date('Y'). '/'. end($tmp);
                         //var_dump(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);die;
                         File::move(config('houseland.upload_path').$image_url, config('houseland.upload_path').$destionation);
 

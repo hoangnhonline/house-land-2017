@@ -65,11 +65,11 @@ class InfoSeoController extends Controller
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             
@@ -133,11 +133,11 @@ class InfoSeoController extends Controller
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('uploads/'.date('Y/m/d'))){
-                mkdir('uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('uploads/'.date('Y'))){
+                mkdir('uploads/'.date('Y'), 0777, true);
             }
 
-            $destionation = date('Y/m/d'). '/'. end($tmp);
+            $destionation = date('Y'). '/'. end($tmp);
             
             File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
             
