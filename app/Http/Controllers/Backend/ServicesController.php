@@ -88,8 +88,8 @@ class ServicesController extends Controller
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('public/uploads/'.date('Y/m/d'))){
-                mkdir('public/uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/images/'.date('Y/m/d'))){
+                mkdir('public/uploads/images/'.date('Y/m/d'), 0777, true);
             }
             
             $destionation = date('Y/m/d'). '/'. end($tmp);
@@ -234,8 +234,8 @@ class ServicesController extends Controller
             
             $tmp = explode('/', $dataArr['image_url']);
 
-            if(!is_dir('public/uploads/'.date('Y/m/d'))){
-                mkdir('public/uploads/'.date('Y/m/d'), 0777, true);
+            if(!is_dir('public/uploads/images/'.date('Y/m/d'))){
+                mkdir('public/uploads/images/'.date('Y/m/d'), 0777, true);
             }
                         
             $destionation = date('Y/m/d'). '/'. end($tmp);
