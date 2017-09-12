@@ -231,14 +231,15 @@ $(document).on('click', '#btnSaveTagAjax', function(){
 $(document).ready(function(){
       $(".select2").select2();
       var editor = CKEDITOR.replace( 'content',{
-          language : 'vi',
+         language : 'vi',
+          height : 500,
+          toolbar : toolbar,
           filebrowserBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=files') }}",
           filebrowserImageBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=images') }}",
           filebrowserFlashBrowseUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=flash') }}",
           filebrowserUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=files') }}",
           filebrowserImageUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=images') }}",
-          filebrowserFlashUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=flash') }}",
-          height : 500
+          filebrowserFlashUploadUrl: "{{ URL::asset('public/admin/dist/js/kcfinder/upload.php?type=flash') }}"
       });
       $('#btnUploadImage').click(function(){        
         //$('#file-image').click();
