@@ -53,21 +53,8 @@ class MemberController extends Controller
         [            
             'name.required' => 'Bạn chưa nhập tên',            
             'chuc_vu.required' => 'Bạn chưa nhập chức danh'            
-        ]); 
+        ]);         
         
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('public/uploads/images/'.date('Y'))){
-                mkdir('public/uploads/images/'.date('Y'), 0777, true);
-            }         
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);           
-
-            $dataArr['image_url'] = $destionation;
-        }        
         $dataArr['display_order'] = Helper::getNextOrder('member');
         $rs = Member::create($dataArr);
 
@@ -122,22 +109,7 @@ class MemberController extends Controller
             'name.required' => 'Bạn chưa nhập tên',            
             'chuc_vu.required' => 'Bạn chưa nhập chức danh'            
         ]);        
-        
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('public/uploads/images/'.date('Y'))){
-                mkdir('public/uploads/images/'.date('Y'), 0777, true);
-            }           
-
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);            
-           
-            $dataArr['image_url'] = $destionation;
-        }
-        
+                
         $model = Member::find($dataArr['id']);
 
         $model->update($dataArr);        

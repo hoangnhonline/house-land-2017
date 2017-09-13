@@ -86,37 +86,6 @@ class CateController extends Controller
         $dataArr['created_user'] = Auth::user()->id;
 
         $dataArr['updated_user'] = Auth::user()->id;
-
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('public/uploads/images/'.date('Y'))){
-                mkdir('public/uploads/images/'.date('Y'), 0777, true);
-            }
-            if(!is_dir('public/uploads/images/thumbs/cate/'.date('Y'))){
-                mkdir('public/uploads/images/thumbs/cate/'.date('Y'), 0777, true);
-            }       
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
-            $img = Image::make(config('houseland.upload_path').$destionation);
-            $w_img = $img->width();
-            $h_img = $img->height();
-            $tile = 265/150;
-         
-            if($w_img/$h_img <= $tile){
-                Image::make(config('houseland.upload_path').$destionation)->resize(265, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(265, 150)->save(config('houseland.upload_thumbs_path_cate').$destionation);
-            }else{
-                Image::make(config('houseland.upload_path').$destionation)->resize(null, 150, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(265, 150)->save(config('houseland.upload_thumbs_path_cate').$destionation);
-            }
-           
-            $dataArr['image_url'] = $destionation;
-        } 
         
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
         $dataArr['display_order'] = Helper::getNextOrder('cate', ['parent_id' => $dataArr['parent_id']]);
@@ -199,37 +168,7 @@ class CateController extends Controller
         $model = Cate::find($dataArr['id']);
 
         $dataArr['updated_user'] = Auth::user()->id;
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('public/uploads/images/'.date('Y'))){
-                mkdir('public/uploads/images/'.date('Y'), 0777, true);
-            }
-            if(!is_dir('public/uploads/images/thumbs/cate/'.date('Y'))){
-                mkdir('public/uploads/images/thumbs/cate/'.date('Y'), 0777, true);
-            }       
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
-            $img = Image::make(config('houseland.upload_path').$destionation);
-            $w_img = $img->width();
-            $h_img = $img->height();
-            $tile = 265/150;
-         
-            if($w_img/$h_img <= $tile){
-                Image::make(config('houseland.upload_path').$destionation)->resize(265, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(265, 150)->save(config('houseland.upload_thumbs_path_cate').$destionation);
-            }else{
-                Image::make(config('houseland.upload_path').$destionation)->resize(null, 150, function ($constraint) {
-                        $constraint->aspectRatio();
-                })->crop(265, 150)->save(config('houseland.upload_thumbs_path_cate').$destionation);
-            }
-           
-            $dataArr['image_url'] = $destionation;
-        }
-
+        
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
        
         $model->update($dataArr);

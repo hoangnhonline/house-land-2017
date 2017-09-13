@@ -4,11 +4,11 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Danh mục cha     
+      Danh mục con     
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{ route('cate.index') }}">Danh mục cha</a></li>
+      <li><a href="{{ route('cate.index') }}">Danh mục con</a></li>
       <li class="active">Chỉnh sửa </li>
     </ol>
   </section>
@@ -102,8 +102,7 @@
             </div>         
             <!-- /.box-body -->    
 
-            <input type="hidden" name="image_url" id="image_url" value="{{ $detail->image_url }}"/>          
-            <input type="hidden" name="image_name" id="image_name" value="{{ $detail->image_name }}"/>
+            <input type="hidden" name="image_url" id="image_url" value="{{ $detail->image_url }}"/>                      
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
               <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('cate.index')}}">Hủy</a>
@@ -157,10 +156,25 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
+var h = screen.height;
+var w = screen.width;
+var left = (screen.width/2)-((w-300)/2);
+var top = (screen.height/2)-((h-100)/2);
+function openKCFinder_singleFile() {
+      window.KCFinder = {};
+      window.KCFinder.callBack = function(url) {
+         $('#image_url').val(url);
+         $('#thumbnail_image').attr('src', $('#app_url').val() + url);
+          window.KCFinder = null;
+      };
+      window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+  }
+
     $(document).ready(function(){
       
       $('#btnUploadImage').click(function(){        
-        $('#file-image').click();
+        //('#file-image').click();
+        openKCFinder_singleFile();
       });       
       var files = "";
       $('#file-image').change(function(e){

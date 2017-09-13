@@ -18,6 +18,7 @@
 </div><!-- /block_big-title -->
 @if($cateList)
 @foreach($cateList as $cate)
+@if(isset($productArr[$cate->id]) && count($productArr[$cate->id]) > 0 )
 <div class="block block-product block-title-commom">
 	<div class="container">
 		<div class="block block-title">
@@ -28,7 +29,7 @@
 		</div>
 		<div class="block-content">
 			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":4}}'>
-			  	@if(isset($productArr[$cate->id]))
+			  	
 			  	@foreach($productArr[$cate->id] as $product)
 			  	<li class="item">
 			  		<div class="thumb">
@@ -40,12 +41,11 @@
 			  			<h2>{!! $product->title !!}</h2>
 			  		</div>
 		  		</li>
-		  		@endforeach
-		  		@endif
-			  	
+		  		@endforeach	  		
 		</div>
 	</div>
 </div><!-- /block-product -->	
+@endif
 @endforeach
 @endif
 @endsection

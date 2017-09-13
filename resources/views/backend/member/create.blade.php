@@ -47,18 +47,10 @@
                 <div class="form-group" >                  
                   <label> Chức danh <span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="chuc_vu" id="chuc_vu" value="{{ old('chuc_vu') }}">
-                </div>
-                <div class="form-group" >                  
-                  <label>Điện thoại</label>
-                  <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone') }}">
-                </div>
-                <div class="form-group" >                  
-                  <label>Email</label>
-                  <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}">
-                </div>              
+                </div>             
                 
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-3 row">Hình ảnh ( 164 x 164 px - Hình tròn)</label>    
+                  <label class="col-md-3 row">Hình ảnh ( 164 x 164 px )</label>    
                   <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="164" height="164">
                     
@@ -70,8 +62,7 @@
                 </div>
                 <div style="clear:both"></div>                
             </div>          
-            <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>          
-            <input type="hidden" name="image_name" id="image_name" value="{{ old('image_name') }}"/>
+            <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
               <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('member.index')}}">Hủy</a>
@@ -97,10 +88,24 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
+var h = screen.height;
+var w = screen.width;
+var left = (screen.width/2)-((w-300)/2);
+var top = (screen.height/2)-((h-100)/2);
+function openKCFinder_singleFile() {
+      window.KCFinder = {};
+      window.KCFinder.callBack = function(url) {
+         $('#image_url').val(url);
+         $('#thumbnail_image').attr('src', $('#app_url').val() + url);
+          window.KCFinder = null;
+      };
+      window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+  }
 $(document).ready(function(){
 
       $('#btnUploadImage').click(function(){        
-        $('#file-image').click();
+        //$('#file-image').click();
+        openKCFinder_singleFile();
       });      
      
       var files = "";

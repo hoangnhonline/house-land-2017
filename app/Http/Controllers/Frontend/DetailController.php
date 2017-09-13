@@ -85,6 +85,9 @@ class DetailController extends Controller
         $slug = $request->slug;
         $detail = Tag::where('slug', $slug)->first();
         //dd($detail->type);
+        if(!$detail){
+            return redirect()->route('home');
+        }
         if($detail->type == 1 || $detail->type == 3){        
             $productList = (object)[];
             $listId = [];

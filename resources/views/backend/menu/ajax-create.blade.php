@@ -137,7 +137,7 @@
     <!-- /.box-body -->                
     <div class="box-footer">
       <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
-      <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('cate.index')}}">Hủy</a>
+      <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" data-dismiss="modal">Hủy</a>
     </div>
     
 </div>

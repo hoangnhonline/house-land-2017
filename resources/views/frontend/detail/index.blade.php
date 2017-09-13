@@ -60,6 +60,7 @@
 							<div class="addthis_inline_share_toolbox"></div>
 						</div>
 					</div><!-- /block-share-->
+					@if($detail->content != '' || $detail->thong_so_chung != '' || $detail->tien_do != '' || $detail->hoi_dap != '')
 					<div class="block block-tabs">
 					 	<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
@@ -82,19 +83,27 @@
 							<div role="tabpanel" class="tab-pane active" id="tab1">
 								<h3 class="title">{!! $detail->title !!}</h3>
 								<p class="text">{!! $detail->content !!}</p>
+								<div class="clearfix"></div>
 							</div>
 							@endif
 							@if($detail->thong_so_chung != '')
-							<div role="tabpanel" class="tab-pane" id="tab2">{!! $detail->thong_so_chung !!}</div>
+							<div role="tabpanel" class="tab-pane" id="tab2">{!! $detail->thong_so_chung !!}
+								<div class="clearfix"></div>
+							</div>
 							@endif
 							@if($detail->tien_do != '')
-							<div role="tabpanel" class="tab-pane" id="tab3">{!! $detail->tien_do !!}</div>
+							<div role="tabpanel" class="tab-pane" id="tab3">{!! $detail->tien_do !!}
+								<div class="clearfix"></div>
+							</div>
 							@endif
 							@if($detail->hoi_dap != '')
-							<div role="tabpanel" class="tab-pane" id="tab4">{!! $detail->hoi_dap !!}</div>
+							<div role="tabpanel" class="tab-pane" id="tab4">{!! $detail->hoi_dap !!}
+								<div class="clearfix"></div>
+							</div>
 							@endif
 						</div>
 					</div><!-- /block-tabs-->
+					@endif
 					@if($tagSelected->count() > 0)
 					<div class="block-tags">
 						<ul>

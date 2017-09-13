@@ -77,22 +77,7 @@ class PagesController extends Controller
             'slug.unique' => 'Slug đã được sử dụng.'
         ]);       
         
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
-        
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('uploads/images/'.date('Y'))){
-                mkdir('uploads/images/'.date('Y'), 0777, true);
-            }
-
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['image_url'] = $destionation;
-        }        
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);      
         
         $dataArr['created_user'] = Auth::user()->id;
 
@@ -102,7 +87,7 @@ class PagesController extends Controller
 
         $object_id = $rs->id;
 
-        Session::flash('message', 'Tạo mới trang thành công');
+        Session::flash('message', 'Tạo mới thành công');
 
         return redirect()->route('pages.index');
     }
@@ -159,30 +144,15 @@ class PagesController extends Controller
             'slug.unique' => 'Slug đã được sử dụng.'
         ]);       
         
-        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
-        
-        if($dataArr['image_url'] && $dataArr['image_name']){
-            
-            $tmp = explode('/', $dataArr['image_url']);
-
-            if(!is_dir('uploads/images/'.date('Y'))){
-                mkdir('uploads/images/'.date('Y'), 0777, true);
-            }
-
-            $destionation = date('Y'). '/'. end($tmp);
-            
-            File::move(config('houseland.upload_path').$dataArr['image_url'], config('houseland.upload_path').$destionation);
-            
-            $dataArr['image_url'] = $destionation;
-        }
-
+        $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);        
+       
         $dataArr['updated_user'] = Auth::user()->id;
 
         $model = Pages::find($dataArr['id']);
 
         $model->update($dataArr);
        
-        Session::flash('message', 'Cập nhật thông tin trang thành công');        
+        Session::flash('message', 'Cập nhật thành công');        
 
         return redirect()->route('pages.edit', $dataArr['id']);
     }
@@ -200,7 +170,7 @@ class PagesController extends Controller
         $model->delete();
 
         // redirect
-        Session::flash('message', 'Xóa trang thành công');
+        Session::flash('message', 'Xóa thành công');
         return redirect()->route('pages.index');
     }
 }

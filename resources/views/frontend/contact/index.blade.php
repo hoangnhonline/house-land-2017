@@ -29,6 +29,7 @@
                         <div class="block block-map">
                             <object data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126263.60819855973!2d-84.44808690325613!3d33.735934882617194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDQ0JzQ1LjQiTiA4NMKwMjMnMzUuMyJX!5e0!3m2!1svi!2s!4v1475105845390"></object>
                         </div>
+                        <div id="showmess" class="clearfix"></div>
                         @if(Session::has('message'))
                         
                         <p class="alert alert-info" >{{ Session::get('message') }}</p>
@@ -96,3 +97,14 @@
 </div><!-- /wrapper-->
 
 @endsection
+@if (count($errors) > 0 || Session::has('message'))      
+@section('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('html, body').animate({
+            scrollTop: $("#showmess").offset().top
+        });
+    });
+</script>
+@stop
+@endif

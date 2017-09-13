@@ -47,7 +47,7 @@
                 <span class=""></span>
                 <div class="form-group">                  
                   <label>Slug <span class="red-star">*</span></label>                  
-                  <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}">
+                  <input type="text" class="form-control" readonly="readonly" name="slug" id="slug" value="{{ old('slug') }}">
                 </div>
                 
                 <div class="form-group" style="margin-top:10px;margin-bottom:10px">  

@@ -18,6 +18,7 @@
 </div><!-- /block_big-title -->
 @if($parentList)
 @foreach($parentList as $parent)
+@if($cateArr[$parent->id])
 <div class="block block-product block-title-commom">
   <div class="container">
     <div class="block block-title">
@@ -43,6 +44,7 @@
     </div>
   </div>
 </div><!-- /block_big-title -->
+@endif
 @endforeach
 @endif
 @endsection

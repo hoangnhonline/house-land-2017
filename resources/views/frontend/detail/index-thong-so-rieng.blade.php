@@ -75,6 +75,7 @@
 					<div class="addthis_inline_share_toolbox"></div>
 				</div>
 			</div><!-- /block-share-->
+			@if($detail->content != '' || $detail->tien_do != '' || $detail->hoi_dap != '')
 			<div class="block block-tabs">
 			 	<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
@@ -94,16 +95,18 @@
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<h3 class="title">{!! $detail->title !!}</h3>
 						<p class="text">{!! $detail->content !!}</p>
+						<div class="clearfix"></div>
 					</div>
 					@endif
 					@if($detail->tien_do != '')					
-					<div role="tabpanel" class="tab-pane" id="tab3">{!! $detail->tien_do !!}</div>
+					<div role="tabpanel" class="tab-pane" id="tab3">{!! $detail->tien_do !!}<div class="clearfix"></div></div>
 					@endif
 					@if($detail->hoi_dap != '')
-					<div role="tabpanel" class="tab-pane" id="tab4">{!! $detail->hoi_dap !!}</div>
+					<div role="tabpanel" class="tab-pane" id="tab4">{!! $detail->hoi_dap !!}<div class="clearfix"></div></div>
 					@endif
 				</div>
 			</div><!-- /block-tabs-->
+			@endif
 			@if($tagSelected->count() > 0)
 			<div class="block-tags">
 				<ul>
@@ -127,7 +130,7 @@
 			</h2>
 		</div>
 		<div class="block-content">
-			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-center="true" data-loop="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
+			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-loop="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
 			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">
