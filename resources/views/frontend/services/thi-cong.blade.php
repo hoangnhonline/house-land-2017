@@ -30,10 +30,15 @@
 							<div class="form-group col-sm-6 col-xs-12">
 								<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại...(*)">
 							</div>
-						</div>						
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-12 col-xs-12">
+								<input type="text" class="form-control" name="address" id="address" placeholder="Địa chỉ...(*)">
+							</div>							
+						</div>		
 						<div class="row">
 							<div class="form-group col-sm-6 col-xs-12">
-								<input type="text" class="form-control" id="email" name="email" placeholder="Email">
+								<input type="text" class="form-control" id="email" name="email" placeholder="Email...(*)">
 							</div>
 							<div class="form-group col-sm-6 col-xs-12">
 				              	<select class="form-control" name="kien_truc_thiet_ke" id="kien_truc_thiet_ke">
@@ -65,16 +70,10 @@
 					
 						<div class="row">
 							<div class="form-group col-sm-6 col-xs-12">
-								<input type="text" class="form-control" name="chieu_dai" id="chieu_dai" placeholder="Tổng diện tích xây dựng...(*)">
+								<input type="text" class="form-control" name="tong_dien_tich" id="tong_dien_tich" placeholder="Tổng diện tích xây dựng...(*)">
 							</div>
 							<div class="form-group col-sm-6 col-xs-12">
-
-								<select class="form-control" name="so_tang_thiet_ke">
-								    <option value="">Số tầng ...</option>
-								    @foreach($arrSetting['so_tang_thiet_ke'] as $value)
-								    <option value="{!! $value->id !!}">{!! $value->name !!}</option>
-								    @endforeach
-								</select>
+								<input type="text" class="form-control" name="so_tang" id="so_tang" placeholder="Số tầng...(*)">
 							</div>
 						</div>
 						<div class="row">
@@ -84,12 +83,7 @@
 							<div class="form-group col-sm-6 col-xs-12">
 								<input type="text" class="form-control" id="chieu_rong" name="chieu_rong" placeholder="Chiều rộng...(*)">
 							</div>
-						</div>
-						<div class="row">						
-							<div class="form-group col-sm-12 col-xs-12">
-								<input type="file" class="form-control" id="file_upload" placeholder="Thêm hình ảnh thiết kế bạn mong muốn">
-							</div>
-						</div>		
+						</div>						
 						<div class="row">
 							<div class="form-group col-sm-12 col-xs-12">
 								<textarea name="" rows="4" class="form-control" placeholder="Ghi chú"></textarea>

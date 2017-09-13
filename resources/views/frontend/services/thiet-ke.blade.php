@@ -76,12 +76,9 @@
 							</div>
 						</div>						
 						<div class="row">
-							<div class="form-group col-sm-6 col-xs-12">
+							<div class="form-group col-sm-12 col-xs-12">
 								<input type="text" class="form-control" id="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group col-sm-6 col-xs-6">
-								<input type="file" class="form-control" id="file_upload" placeholder="Thêm hình ảnh thiết kế bạn mong muốn">
-							</div>
+							</div>							
 						</div>		
 						<div class="row">
 							<div class="form-group col-sm-12 col-xs-12">
