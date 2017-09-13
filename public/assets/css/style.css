@@ -426,10 +426,10 @@ h1, h2, h3, h4, h5, h6 {
 .block-side .owl-nav .owl-next {
   position: absolute;
   top: 50%;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+  /* width: 40px; */
+  /* height: 40px; */
+  /* text-align: center; */
+  /* background: rgba(0, 0, 0, 0.5); */
   opacity: 0;
   visibility: hidden;
   -webkit-transform: translate(0, -50%);
@@ -438,9 +438,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .block-side .owl-nav .owl-prev i,
 .block-side .owl-nav .owl-next i {
-  font-size: 20px;
+  font-size: 90px;
   color: #fff;
-  line-height: 30px;
+  /* line-height: 40px; */
 }
 .block-side .owl-nav .owl-prev {
   transition: all 0.3s;
@@ -1756,7 +1756,9 @@ h2.tit-page3 {
 .block-hotline-mb {
   position: fixed;
   bottom: 0;
-  right: 100px;
+  right: 50px;
+  border: 2px solid #f60;
+  border-bottom: none;
   background: #fff;
   padding: 10px;
   display: none;
@@ -1766,9 +1768,10 @@ h2.tit-page3 {
   content: "\f095";
   font-family: "FontAwesome";
   color: #f60;
-  font-size: 30px;
+  border: 2px solid #f60;
+  font-size: 25px;
   position: absolute;
-  top: -25px;
+  top: -30px;
   left: -10px;
   width: 40px;
   height: 40px;

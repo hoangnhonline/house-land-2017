@@ -4,7 +4,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
 ?>
 @if($bannerArr)
 <div class="block block-side">
-	<div class="owl-carousel owl-style2" data-nav="false" data-margin="0" data-items='1' data-autoplayTimeout="1000" data-autoplay="true" data-loop="true" data-navcontainer="true">
+	<div class="owl-carousel owl-style2" data-nav="true" data-margin="0" data-items='1' data-autoplayTimeout="1000" data-autoplay="true" data-loop="true" data-navcontainer="true">
 		<?php $i = 0; ?>
 		@foreach($bannerArr as $banner)
 		<?php $i++; ?>
