@@ -63,14 +63,14 @@ class NewsController extends Controller
                     foreach($settingBaogia as $value){
                         $arrSetting[$value->type][] = $value;
                     }                   
-                    return view('frontend.services.thiet-ke', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList', 'arrSetting'));    
+                    return view('frontend.services.thiet-ke', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList', 'arrSetting', 'id'));    
                  }
                  if($id == 103){
                     $settingBaogia = SettingBaogia::orderBy('type')->orderBy('display_order')->get();
                     foreach($settingBaogia as $value){
                         $arrSetting[$value->type][] = $value;
                     }                   
-                    return view('frontend.services.thi-cong', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList', 'arrSetting'));    
+                    return view('frontend.services.thi-cong', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList', 'arrSetting', 'id'));    
                  }
                 return view('frontend.pages.services-detail', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList'));
             }
