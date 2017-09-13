@@ -422,6 +422,46 @@ h1, h2, h3, h4, h5, h6 {
 .block-members {
   overflow: hidden;
 }
+.block-side .owl-nav .owl-prev,
+.block-side .owl-nav .owl-next {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+.block-side .owl-nav .owl-prev i,
+.block-side .owl-nav .owl-next i {
+  font-size: 20px;
+  color: #fff;
+  line-height: 30px;
+}
+.block-side .owl-nav .owl-prev {
+  transition: all 0.3s;
+  left: -100%;
+}
+.block-side:hover .owl-nav .owl-prev {
+  transition: all 0.3s;
+  left: 10%;
+  opacity: 1;
+  visibility: visible;
+}
+.block-side .owl-nav .owl-next {
+  transition: all 0.3s;
+  right: -100%;
+}
+.block-side:hover .owl-nav .owl-next {
+  transition: all 0.3s;
+  right: 10%;
+  opacity: 1;
+  visibility: visible;
+}
 
 /* Block Big Title
   ========================================================================== */
@@ -1720,4 +1760,20 @@ h2.tit-page3 {
   background: #fff;
   padding: 10px;
   display: none;
+  z-index: 99;
+}
+.block-hotline-mb:before {
+  content: "\f095";
+  font-family: "FontAwesome";
+  color: #f60;
+  font-size: 30px;
+  position: absolute;
+  top: -25px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 40px;
 }

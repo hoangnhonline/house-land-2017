@@ -65,4 +65,7 @@
     <a id="return-to-top" class="td-scroll-up" href="javascript:void(0)">
         <i class="fa fa-angle-up" aria-hidden="true"></i>
     </a><!-- return to top -->
+    <div class="block-hotline-mb" href="javascript:void(0)">
+            <p><a href="tel:{{ $settingArr['hotline'] }}">{{ $settingArr['hotline'] }}</p>
+        </div><!-- return to top -->
     </footer><!-- footer -->
