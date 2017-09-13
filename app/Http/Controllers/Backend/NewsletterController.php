@@ -40,7 +40,7 @@ class NewsletterController extends Controller
     public function download()
     {
         $contents = [];
-        $query = Newsletter::whereRaw('1')->orderBy('id', 'DESC')->get();
+        $query = Newsletter::orderBy('id', 'desc')->get();
         $i = 0;
         foreach ($query as $data) {
             $i++;
@@ -50,7 +50,6 @@ class NewsletterController extends Controller
                 'Ngày ĐK' => date('d-m-Y H:i', strtotime($data->created_at))
             ];
         }        
-        
         Excel::create('newsletter_' . date('YmdHi'), function ($excel) use ($contents) {
             // Set sheets
             $excel->sheet('Email', function ($sheet) use ($contents) {
