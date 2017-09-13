@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\ArticlesCate;
 use App\Models\Articles;
+use App\Models\SettingBaogia;
 use Helper, File, Session, Auth;
 use Mail;
 
@@ -57,6 +58,20 @@ class NewsController extends Controller
                 return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail'));
             }else{
                  $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
+                 if($id == 100){
+                    $settingBaogia = SettingBaogia::orderBy('type')->orderBy('display_order')->get();
+                    foreach($settingBaogia as $value){
+                        $arrSetting[$value->type][] = $value;
+                    }                   
+                    return view('frontend.services.thiet-ke', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList', 'arrSetting'));    
+                 }
+                 if($id == 103){
+                    $settingBaogia = SettingBaogia::orderBy('type')->orderBy('display_order')->get();
+                    foreach($settingBaogia as $value){
+                        $arrSetting[$value->type][] = $value;
+                    }                   
+                    return view('frontend.services.thi-cong', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList', 'arrSetting'));    
+                 }
                 return view('frontend.pages.services-detail', compact('title', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail', 'servicesList'));
             }
         }else{
