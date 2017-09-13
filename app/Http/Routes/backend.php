@@ -36,6 +36,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
          Route::get('load-create',   ['as' => 'menu.load-create', 'uses' => 'MenuController@loadCreate']);       
         Route::get('{id}/destroy', ['as' => 'menu.destroy', 'uses' => 'MenuController@destroy']);
     });
+    Route::group(['prefix' => 'bao-gia'], function () {
+        Route::get('/', ['as' => 'bao-gia.index', 'uses' => 'BaoGiaController@index']);
+        Route::get('/create', ['as' => 'bao-gia.create', 'uses' => 'BaoGiaController@create']);
+        Route::post('/store', ['as' => 'bao-gia.store', 'uses' => 'BaoGiaController@store']);      
+        Route::get('{id}/edit',   ['as' => 'bao-gia.edit', 'uses' => 'BaoGiaController@edit']);       
+        Route::get('{id}/destroy', ['as' => 'bao-gia.destroy', 'uses' => 'BaoGiaController@destroy']);
+    });
     Route::group(['prefix' => 'cate-type'], function () {
         Route::get('/', ['as' => 'cate-type.index', 'uses' => 'CateTypeController@index']);
         Route::get('/create', ['as' => 'cate-type.create', 'uses' => 'CateTypeController@create']);

@@ -77,7 +77,12 @@
             <span>Tags</span>          
           </a>       
         </li>
-        
+        <li {{ in_array(\Request::route()->getName(), ['bao-gia.edit', 'bao-gia.index']) ? "class=active" : "" }}>
+          <a href="{{ route('bao-gia.index') }}">
+            <i class="fa fa-pencil-square-o"></i> 
+            <span>Yêu cầu báo giá</span>          
+          </a>       
+        </li>
       @if(Auth::user()->role > 1)
       <li {{ in_array(\Request::route()->getName(), ['newsletter.edit', 'newsletter.index']) ? "class=active" : "" }}>
         <a href="{{ route('newsletter.index') }}">
