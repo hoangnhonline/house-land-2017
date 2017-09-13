@@ -292,6 +292,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu-top {
   background: #ff6600;
+  border-bottom: 2px solid #b94a00;
 }
 .nav-menu>li {
   float: left;
@@ -1096,6 +1097,7 @@ footer .footer-bot .container {
   list-style: none;
   display: inline-block;
   margin-right: 10px;
+  margin-bottom: 5px;
 }
 .block-tags ul li:last-child {
   margin-right: 0;
@@ -1547,7 +1549,8 @@ h2.tit-page3 {
   /*margin-bottom: 25px;*/
   text-align: justify;
 }
-.block-tabs .tab-content ul {
+.block-tabs .tab-content ul,
+.block-tabs .tab-content ol {
   padding-left: 30px;
 }
 .block-tabs .tab-content ul li {
@@ -1710,6 +1713,11 @@ h2.tit-page3 {
 .ft-contact address p a {
   color: #ff6600 !important;
 }
-/*.ft-contact address p a:hover {
-  color: #ff6600;
-}*/
+.block-hotline-mb {
+  position: fixed;
+  bottom: 0;
+  right: 100px;
+  background: #fff;
+  padding: 10px;
+  display: none;
+}
