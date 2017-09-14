@@ -17,7 +17,7 @@ class ContactController extends Controller
    
     public function store(Request $request)
     {
-        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+       
 
         $dataArr = $request->all();
         
@@ -34,7 +34,7 @@ class ContactController extends Controller
             'phone.required' => 'Bạn chưa nhập số điện thoại.',
             'content.required' => 'Bạn chưa nhập nội dung.'            
         ]);       
-
+         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $rs = Contact::create($dataArr);
         Mail::send('frontend.contact.email',
             [                   
@@ -68,6 +68,7 @@ class ContactController extends Controller
             'chieu_dai' => 'required',
             'chieu_rong' => 'required',
         ]);       
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $detail = Articles::find($dataArr['id'] );
         $dataArr['type'] = 2;
         $rs = BaoGia::create($dataArr);
@@ -101,7 +102,8 @@ class ContactController extends Controller
             'mat_tien' => 'required',           
             'chieu_dai' => 'required',
             'chieu_rong' => 'required',
-        ]);       
+        ]);      
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name'); 
         $detail = Articles::find($dataArr['id'] );
         $dataArr['type'] = 1;
         $rs = BaoGia::create($dataArr);
