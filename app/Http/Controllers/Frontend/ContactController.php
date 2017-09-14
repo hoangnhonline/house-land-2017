@@ -40,7 +40,7 @@ class ContactController extends Controller
             [                   
                 'dataArr'             => $rs
             ],
-            function($message) use ($dataArr) {                    
+            function($message) use ($dataArr, $settingArr) {                    
                 $message->subject('Khách hàng gửi liên hệ');
                 $message->to([$settingArr['admin_email']]);
                 $message->from('web.0917492306@gmail.com', 'Admin Website Houseland');
@@ -77,7 +77,7 @@ class ContactController extends Controller
                 [                   
                     'dataArr'             => $rs
                 ],
-                function($message) use ($dataArr) {                    
+                function($message) use ($dataArr, $settingArr) {                    
                     $message->subject('Khách hàng yêu cầu báo giá: Thi công xây dựng');
                     $message->to([$settingArr['admin_email']]);
                     $message->from('web.0917492306@gmail.com', 'Admin Website Houseland');
@@ -112,7 +112,7 @@ class ContactController extends Controller
                 [                   
                     'dataArr'             => $rs
                 ],
-                function($message) use ($dataArr) {                    
+                function($message) use ($dataArr, $settingArr) {                    
                     $message->subject('Khách hàng yêu cầu báo giá: thiết kế kiến trúc');
                     $message->to([$settingArr['admin_email']]);
                     $message->from('web.0917492306@gmail.com', 'Admin Website Houseland');
