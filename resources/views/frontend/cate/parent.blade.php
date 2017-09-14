@@ -34,7 +34,7 @@
 			  	<li class="item">
 			  		<div class="thumb">
 			  			<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">
-			  				<img src="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}">
+			  				<img src="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}">
 			  			</a>
 			  		</div>
 			  		<div class="title">

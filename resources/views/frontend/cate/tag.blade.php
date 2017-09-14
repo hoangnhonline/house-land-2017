@@ -26,7 +26,7 @@
 				<div class="col-sm-4 col-xs-12">
 					<div class="item">
 						<div class="thumb">
-							<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}"></a>
+							<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
 						</div>
 						<div class="des">
 							<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">{!! $product->title !!}</a>
