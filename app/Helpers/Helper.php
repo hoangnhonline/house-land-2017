@@ -26,6 +26,11 @@ class Helper
             }
         }
     }
+    public static function xml_entities($string) {
+        return str_replace(
+                array("&", "<", ">", '"', "'"), array("&amp;", "&lt;", "&gt;", "&quot;", "&apos;"), $string
+        );
+    }
     public static function getNextOrder($table, $where = []){
         return DB::table($table)->where($where)->max('display_order') + 1;
     }

@@ -19,7 +19,7 @@ use App\Models\Cate;
 use App\Models\Pages;
 use App\Models\Member;
 
-use Helper, File, Session, Auth, Hash;
+use Helper, File, Session, Auth, Hash, Response;
 
 class HomeController extends Controller
 {
@@ -31,9 +31,13 @@ class HomeController extends Controller
        
 
     }    
-    public function loadSlider(){
-        return view('frontend.home.ajax-slider');
+    public function rss(Request $request){
+        $productList = Product::where('status', 1)->orderBy('id', 'desc')->get();  
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        $articlesList = Articles::where('status', 1)->where('cate_id', '<>', 7)->orderBy('id', 'desc')->get();  
+        return Response::view('frontend.home.rss', compact('productList', 'settingArr', 'articlesList'))->header('Content-Type', 'text/xml');
     }
+    
     public function index(Request $request)
     {         
         $articlesArr = [];
