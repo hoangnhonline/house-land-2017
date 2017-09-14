@@ -91,7 +91,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
           <li class="@if($i == 1) first @else item @endif">
             <div class="thumb">
               <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}">
-              <img class="lazy" data-original="{{ Helper::showImage($articles->image_url) }}" alt="{!! $articles->title !!}">
+              <img class="lazy" data-original="{{ $articles->image_url ? Helper::showImage($articles->image_url) : URL::asset('public/assets/images/no-image.jpg') }}" alt="{!! $articles->title !!}">
               </a>
             </div>
             <div class="des">
