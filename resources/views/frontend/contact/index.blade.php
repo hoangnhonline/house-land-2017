@@ -46,27 +46,27 @@
                         {{ csrf_field() }}
                             <div class="row">
                                 <div class="form-group col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Họ tên khách hàng">
+                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Họ tên khách hàng" value="{{ old('full_name') }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại">
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" value="{{ old('phone') }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-xs-12">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-xs-12">
-                                    <textarea name="content" id="content" rowspan="300" class="form-control" placeholder="Ghi chú"></textarea>
+                                    <textarea name="content" id="content" rowspan="300" class="form-control" placeholder="Ghi chú">{{ old('content') }}</textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-xs-12">
-                                    <button type="submit" class="btn btn-prmary btn-view">Gửi liên hệ</button>
+                                    <button type="submit" id="btnSave" class="btn btn-prmary btn-view">Gửi liên hệ</button>
                                 </div>
                             </div>
                         </form>
@@ -97,14 +97,22 @@
 </div><!-- /wrapper-->
 
 @endsection
-@if (count($errors) > 0 || Session::has('message'))      
+
+
 @section('js')
 <script type="text/javascript">
+    @if (count($errors) > 0 || Session::has('message'))      
     $(document).ready(function(){
         $('html, body').animate({
             scrollTop: $("#showmess").offset().top
         });
     });
+    @endif
+    $(document).ready(function(){
+        $('#btnSave').click(function(){
+            $(this).parents('form').submit();
+            $('#btnSave').attr('disabled', 'disabled').html('<i class="fa fa-spin fa-spinner"></i>');
+        });
+    });
 </script>
 @stop
-@endif

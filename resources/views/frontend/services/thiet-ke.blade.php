@@ -156,7 +156,8 @@
 	          }, 500);
 	          return false;
 	        }	        
-
+	        $('#dataForm').submit();
+	        $('#btnSave').attr('disabled', 'disabled').html('<i class="fa fa-spin fa-spinner"></i>');
 	      });
 		$('#dataForm .req').blur(function(){    
 	        if($(this).val() != ''){
