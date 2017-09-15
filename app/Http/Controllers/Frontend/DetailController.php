@@ -92,10 +92,11 @@ class DetailController extends Controller
                     ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
         }
         $tagSelected = Product::getListTag($detail->id);
-        if($detail->layout == 2){
-            $thongsoList = ThongSo::orderBy('display_order')->get();
+         $thongsoList = ThongSo::orderBy('display_order')->get();
 
             $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
+        if($detail->layout == 2){
+           
             return view('frontend.detail.index-thong-so-rieng', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'thongsoList', 'arrThongSo', 'widgetProduct'));
         }else{
             return view('frontend.detail.index', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'widgetProduct'));    
