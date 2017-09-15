@@ -418,9 +418,7 @@ function openKCFinder_multipleFiles() {
           var editor3 = CKEDITOR.replace( 'hoi_dap',{
               height : 400        
           });
-          var editor4 = CKEDITOR.replace( 'thong_so',{
-              height : 400  
-          });
+          
           $('#btnUploadImage').click(function(){        
             //$('#file-image').click();
             openKCFinder_multipleFiles();
