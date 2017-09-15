@@ -72,7 +72,7 @@
                   <input type="text" class="form-control" name="so_cong_trinh" id="so_cong_trinh" value="{{ $settingArr['so_cong_trinh'] }}">
                 </div>
                 <div class="form-group col-md-6">
-                  <label>Số bài viết liên quan</label>
+                  <label>Số bài viết 1 trang</label>
                   <input type="text" class="form-control" name="articles_per_page" id="articles_per_page" value="{{ $settingArr['articles_per_page'] }}">
                 </div>
                 <div class="form-group col-md-6">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Số sản phẩm liên quan </label>
-                  <input type="text" class="form-control" name="product_per_page" id="product_per_page" value="{{ $settingArr['product_per_page'] }}">
+                  <input type="text" class="form-control" name="product_related" id="product_related" value="{{ $settingArr['product_related'] }}">
                 </div>
                 <div class="form-group col-md-6">
                   <label>Số tin liên quan </label>
