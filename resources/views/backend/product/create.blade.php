@@ -43,7 +43,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin</a></li>
-                                <li role="presentation" class="div_thong_so_rieng"><a href="#lien-he" aria-controls="tien-ich" role="tab" data-toggle="tab">Thông số chi tiết</a></li>
+                                <li role="presentation" class=""><a href="#lien-he" aria-controls="tien-ich" role="tab" data-toggle="tab">Thông số chi tiết</a></li>
                                 <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Hình ảnh</a></li>
                                 <li role="presentation"><a href="#tien-ich" aria-controls="tien-ich" role="tab" data-toggle="tab">Thông tin SEO</a></li>
                             </ul>
@@ -128,11 +128,7 @@
                                     <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
                                         <label>Mô tả chi tiết</label>
                                         <textarea class="form-control" rows="5" name="content" id="content">{{ old('content') }}</textarea>
-                                    </div>
-                                    <div class="form-group form-group col-md-6" style="margin-top:10px;padding-left:5px" id="div_thong_so_chung">
-                                        <label>Thông số chung</label>
-                                        <textarea class="form-control" rows="6" name="thong_so" id="thong_so">{{ old('thong_so') }}</textarea>
-                                    </div>
+                                    </div>                                    
                                     <div class="clearfix"></div>
                                     <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
                                         <label>Tiến độ</label>
@@ -145,7 +141,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <!--end thong tin co ban-->   
-                                <div role="tabpanel" class="tab-pane div_thong_so_rieng" id="lien-he">
+                                <div role="tabpanel" class="tab-pane" id="lien-he">
                                     @foreach($thongsoList as $ts)
                                     <div class="form-group col-md-12 " >                  
                                         <label>{{ $ts->name }}</label>
@@ -286,17 +282,7 @@ function openKCFinder_multipleFiles() {
     };
       window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_multiple','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
 }
-    $(document).ready(function(){   
-        $('.div_thong_so_rieng').hide();
-        $('#layout').change(function(){
-            if($(this).val() == 1){
-                $('#div_thong_so_chung').show();
-                $('.div_thong_so_rieng').hide();
-            }else{
-                $('#div_thong_so_chung').hide();
-                $('.div_thong_so_rieng').show();
-            }
-        });
+    $(document).ready(function(){        
       $('#btnAddTag').click(function(){
           $('#tagModal').modal('show');
       });
@@ -405,10 +391,7 @@ function openKCFinder_multipleFiles() {
           });
           var editor3 = CKEDITOR.replace( 'hoi_dap',{
               height : 400        
-          });
-          var editor4 = CKEDITOR.replace( 'thong_so',{
-              height : 400  
-          });
+          });      
       
           $('#btnUploadImage').click(function(){        
             //$('#file-image').click();

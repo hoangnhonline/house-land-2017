@@ -26,7 +26,7 @@
           @foreach( $articlesArr as $articles )
           <div class="item">
             <div class="thumb">
-              <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}"><img title="{!! $articles->title !!}" src="{{ $articles->image_url ? Helper::showImageThumb($articles->image_url, 2) : URL::asset('public/assets/images/no-image.jpg') }}" alt="{!! $articles->title !!}"></a>
+              <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}"><img title="{!! $articles->title !!}" src="{{ $articles->image_url ? Helper::showImageThumb($articles->image_url, 2) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $articles->title !!}"></a>
             </div>
             <div class="des">
               <a href="{{ route('news-detail', ['slug' => $articles->slug, 'id' => $articles->id]) }}" title="{!! $articles->title !!}">{!! $articles->title !!}</a>

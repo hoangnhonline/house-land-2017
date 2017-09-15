@@ -45,7 +45,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin</a></li>
-                                <li role="presentation" class="div_thong_so_rieng"><a href="#lien-he" aria-controls="tien-ich" role="tab" data-toggle="tab">Thông số chi tiết</a></li>
+                                <li role="presentation" class=""><a href="#lien-he" aria-controls="tien-ich" role="tab" data-toggle="tab">Thông số chi tiết</a></li>
                                 <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Hình ảnh</a></li>
                                 <li role="presentation"><a href="#tien-ich" aria-controls="tien-ich" role="tab" data-toggle="tab">Thông tin SEO</a></li>
                             </ul>
@@ -130,11 +130,8 @@
                                     <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
                                         <label>Mô tả chi tiết</label>
                                         <textarea class="form-control" rows="5" name="content" id="content">{{ old('content', $detail->content ) }}</textarea>
-                                    </div>
-                                    <div class="form-group form-group col-md-6" style="margin-top:10px;padding-left:5px" id="div_thong_so_chung">
-                                        <label>Thông số chung</label>
-                                        <textarea class="form-control" rows="6" name="thong_so" id="thong_so">{{ old('thong_so', $detail->thong_so ) }}</textarea>
-                                    </div>
+                                    </div>              
+                                    <div class="clearfix"></div>                     
                                     <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
                                         <label>Tiến độ</label>
                                         <textarea class="form-control" rows="6" name="tien_do" id="tien_do">{{ old('tien_do', $detail->tien_do ) }}</textarea>

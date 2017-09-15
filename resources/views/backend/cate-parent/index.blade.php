@@ -41,7 +41,9 @@
             @if( $items->count() > 0 )
               <?php $i = 0; ?>
               @foreach( $items as $item )
-                <?php $i ++; ?>
+                <?php $i ++;
+
+                 ?>
               <tr id="row-{{ $item->id }}">
                 <td><span class="order">{{ $i }}</span></td>
                 <td style="vertical-align:middle;text-align:center">
@@ -51,7 +53,10 @@
                   <a href="{{ route( 'cate-parent.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
                   @if( $item->is_hot == 1 )
-                  <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
+                  <label class="label label-danger">HOT</label>
+                  @endif
+                  @if($item->is_widget == 1)
+                  <label class="label label-primary">WIDGET</label>
                   @endif
                   
                   <p>{{ $item->description }}</p>

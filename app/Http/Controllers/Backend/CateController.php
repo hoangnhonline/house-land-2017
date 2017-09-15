@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cate;
 use App\Models\MetaData;
 use App\Models\CateParent;
-use Helper, File, Session, Auth, Image;
+use Helper, File, Session, Auth, Image, DB;
 
 class CateController extends Controller
 {
@@ -90,7 +90,10 @@ class CateController extends Controller
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;
         $dataArr['is_widget'] = isset($dataArr['is_widget']) ? 1 : 0;
         $dataArr['display_order'] = Helper::getNextOrder('cate', ['parent_id' => $dataArr['parent_id']]);
-
+         if($dataArr['is_widget'] == 1){
+            DB::table('cate_parent')->update(['is_widget' => 0]);
+            DB::table('cate')->update(['is_widget' => 0]);
+        }
         $rs = Cate::create($dataArr);        
         $id = $rs->id;
 
@@ -173,7 +176,10 @@ class CateController extends Controller
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;   
         
         $dataArr['is_widget'] = isset($dataArr['is_widget']) ? 1 : 0;
-
+         if($dataArr['is_widget'] == 1){
+            DB::table('cate_parent')->update(['is_widget' => 0]);
+            DB::table('cate')->update(['is_widget' => 0]);
+        }
         $model->update($dataArr);
 
         $this->storeMeta( $dataArr['id'], $dataArr['meta_id'], $dataArr);

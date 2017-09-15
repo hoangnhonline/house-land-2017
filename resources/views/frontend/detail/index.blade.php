@@ -59,7 +59,8 @@
 						<div class="share-item">
 							<div class="addthis_inline_share_toolbox"></div>
 						</div>
-					</div><!-- /block-share-->				
+					</div><!-- /block-share-->			
+					
 					@if($detail->content != '' || $detail->thong_so != '' || $detail->tien_do != '' || $detail->hoi_dap != '')
 					<div class="block block-tabs">
 					 	<!-- Nav tabs -->
@@ -119,7 +120,7 @@
 				</div>
 			</div><!-- /block-ct-news -->
 		</div><!-- /block-col-left -->
-		@include('frontend.news.sidebar')
+		@include('frontend.detail.sidebar')
 	</div>
 </div><!-- /block_big-title -->
 @stop

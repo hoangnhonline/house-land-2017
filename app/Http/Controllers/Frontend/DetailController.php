@@ -16,10 +16,12 @@ use App\Models\MetaData;
 use App\Models\ProductImg;
 use App\Models\Tag;
 use App\Models\TagObjects;
-use App\Models\Direction;
-use App\Models\PriceUnit;
 use App\Models\Articles;
 use App\Models\ThongSo;
+use App\Models\Settings;
+use App\Models\CateParent;
+use App\Models\Cate;
+
 
 use Helper, File, Session, Auth, Image;
 
@@ -41,8 +43,8 @@ class DetailController extends Controller
     */
     public function index(Request $request)
     {  
-        $slug = $request->slug;
-        $detail = Product::where('slug', $slug)->first();
+        $id = $request->id;
+        $detail = Product::find($id);
         if(!$detail){
             return redirect()->route('home');
         }
@@ -61,6 +63,7 @@ class DetailController extends Controller
         if($detail->thumbnail_id > 0){
             $socialImage = ProductImg::find($detail->thumbnail_id)->image_url;
         }
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
         $otherList = Product::where('product.slug', '<>', '')
                     ->where('product.cate_id', $detail->cate_id)                    
@@ -68,16 +71,34 @@ class DetailController extends Controller
                     ->select('product_img.image_url as image_url', 'product.*')                    
                     ->where('product.id', '<>', $detail->id)  
                     ->orderBy('product.id', 'desc')
-                    ->limit(6)
+                    ->limit($settingArr['product_related'])
                     ->get();        
+
+        //widget
+        $widgetProduct = (object) [];
+        $wParent = CateParent::where('is_widget', 1)->first();
+        if($wParent){
+
+            $widgetProduct = Product::where('product.slug', '<>', '')
+                    ->where('product.parent_id', $wParent->id)                    
+                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                    ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+            
+        }else{
+            $wCate = Cate::where('is_widget', 1)->first();
+            $widgetProduct = Product::where('product.slug', '<>', '')
+                    ->where('product.cate_id', $wCate->id)                    
+                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                    ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+        }
         $tagSelected = Product::getListTag($detail->id);
         if($detail->layout == 2){
             $thongsoList = ThongSo::orderBy('display_order')->get();
 
             $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
-            return view('frontend.detail.index-thong-so-rieng', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'thongsoList', 'arrThongSo'));
+            return view('frontend.detail.index-thong-so-rieng', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'thongsoList', 'arrThongSo', 'widgetProduct'));
         }else{
-            return view('frontend.detail.index', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected'));    
+            return view('frontend.detail.index', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'widgetProduct'));    
         }
         
     }
@@ -88,6 +109,7 @@ class DetailController extends Controller
         if(!$detail){
             return redirect()->route('home');
         }
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         if($detail->type == 1 || $detail->type == 3){        
             $productList = (object)[];
             $listId = [];
@@ -104,7 +126,23 @@ class DetailController extends Controller
                 $productList  = $query->paginate(15);
 
             }
-            
+            //widget
+            $widgetProduct = (object) [];
+            $wParent = CateParent::where('is_widget', 1)->first();
+            if($wParent){
+
+                $widgetProduct = Product::where('product.slug', '<>', '')
+                        ->where('product.parent_id', $wParent->id)                    
+                        ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                        ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+                
+            }else{
+                $wCate = Cate::where('is_widget', 1)->first();
+                $widgetProduct = Product::where('product.slug', '<>', '')
+                        ->where('product.cate_id', $wCate->id)                    
+                        ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                        ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+            }    
             if( $detail->meta_id > 0){
                $seo = MetaData::find( $detail->meta_id )->toArray();
                $seo['title'] = $seo['title'] != '' ? $seo['title'] : 'Tag - '. $detail->name;
@@ -116,7 +154,7 @@ class DetailController extends Controller
                 $seo['custom_text'] = "";
             }
             
-            return view('frontend.cate.tag', compact('productList', 'socialImage', 'seo', 'detail'));
+            return view('frontend.cate.tag', compact('productList', 'socialImage', 'seo', 'detail', 'widgetProduct'));
         }elseif($detail->type == 2){ // articles
             $articlesArr = (object)[];
             $listId = [];
@@ -136,8 +174,24 @@ class DetailController extends Controller
             }else{
                 $seo['title'] = $seo['description'] = $seo['keywords'] = 'Tag - '. $detail->name;
             }  
-                  
-            return view('frontend.news.tag', compact('title', 'articlesArr', 'seo', 'socialImage', 'detail'));
+            //widget
+            $widgetProduct = (object) [];
+            $wParent = CateParent::where('is_widget', 1)->first();
+            if($wParent){
+
+                $widgetProduct = Product::where('product.slug', '<>', '')
+                        ->where('product.parent_id', $wParent->id)                    
+                        ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                        ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+                
+            }else{
+                $wCate = Cate::where('is_widget', 1)->first();
+                $widgetProduct = Product::where('product.slug', '<>', '')
+                        ->where('product.cate_id', $wCate->id)                    
+                        ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                        ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+            }         
+            return view('frontend.news.tag', compact('title', 'articlesArr', 'seo', 'socialImage', 'detail', 'widgetProduct'));
         }
     }
     public function ajaxTab(Request $request){

@@ -44,7 +44,7 @@
 			</div>
 		</div><!-- /block-ct-news -->
 	</div><!-- /block-col-left -->
-    @include('frontend.news.sidebar')
+    @include('frontend.news.sidebar-detail')
   </div>
 </div><!-- /block_big-title -->
   

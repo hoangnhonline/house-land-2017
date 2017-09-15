@@ -71,7 +71,13 @@
                       <input type="checkbox" name="is_hot" value="1" {{ $detail->is_hot == 1 ? "checked" : "" }}>
                       HOT
                     </label>
-                  </div>                  
+                  </div>  
+                  <div class="checkbox col-md-3" >
+                    <label>
+                      <input type="checkbox" name="is_widget" value="1" {{ $detail->is_widget == 1 ? "checked" : "" }}>
+                      WIDGET
+                    </label>
+                  </div>                 
                 </div>
                 <div class="clearfix"></div>
               <!-- textarea -->
@@ -152,6 +158,11 @@
   </section>
   <!-- /.content -->
 </div>
+<style type="text/css">
+  .checkbox+.checkbox, .radio+.radio{
+    margin-top: 10px !important;
+  }
+</style>
 <input type="hidden" id="route_upload_tmp_image" value="{{ route('image.tmp-upload') }}">
 @stop
 @section('javascript_page')

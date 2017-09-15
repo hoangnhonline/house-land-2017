@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CateParent;
 use App\Models\MetaData;
 
-use Helper, File, Session, Auth;
+use Helper, File, Session, Auth, DB;
 
 class CateParentController  extends Controller
 {
@@ -54,7 +54,12 @@ class CateParentController  extends Controller
             'slug.required' => 'Bạn chưa nhập slug',           
         ]);
 
-        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
+        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0; 
+        $dataArr['is_widget'] = isset($dataArr['is_widget']) ? 1 : 0;    
+         if($dataArr['is_widget'] == 1){
+            DB::table('cate_parent')->update(['is_widget' => 0]);
+            DB::table('cate')->update(['is_widget' => 0]);
+        }
            
         $dataArr['created_user'] = Auth::user()->id;
         $dataArr['updated_user'] = Auth::user()->id;
@@ -120,7 +125,11 @@ class CateParentController  extends Controller
 
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
-       
+        $dataArr['is_widget'] = isset($dataArr['is_widget']) ? 1 : 0;
+        if($dataArr['is_widget'] == 1){
+            DB::table('cate_parent')->update(['is_widget' => 0]);
+            DB::table('cate')->update(['is_widget' => 0]);
+        }
 
         $model = CateParent::find($dataArr['id']);
         $model->update($dataArr);
