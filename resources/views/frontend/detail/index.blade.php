@@ -59,15 +59,15 @@
 						<div class="share-item">
 							<div class="addthis_inline_share_toolbox"></div>
 						</div>
-					</div><!-- /block-share-->
-					@if($detail->content != '' || $detail->thong_so_chung != '' || $detail->tien_do != '' || $detail->hoi_dap != '')
+					</div><!-- /block-share-->				
+					@if($detail->content != '' || $detail->thong_so != '' || $detail->tien_do != '' || $detail->hoi_dap != '')
 					<div class="block block-tabs">
 					 	<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							@if($detail->content != '')
 							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Mô tả chi tiết</a></li>
 							@endif
-							@if($detail->thong_so_chung != '')
+							@if($detail->thong_so != '')
 							<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Thông số dự án</a></li>
 							@endif
 							@if($detail->tien_do != '')
@@ -86,8 +86,8 @@
 								<div class="clearfix"></div>
 							</div>
 							@endif
-							@if($detail->thong_so_chung != '')
-							<div role="tabpanel" class="tab-pane" id="tab2">{!! $detail->thong_so_chung !!}
+							@if($detail->thong_so != '')
+							<div role="tabpanel" class="tab-pane" id="tab2">{!! $detail->thong_so !!}
 								<div class="clearfix"></div>
 							</div>
 							@endif

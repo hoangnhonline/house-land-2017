@@ -71,7 +71,7 @@ class DetailController extends Controller
                     ->limit(6)
                     ->get();        
         $tagSelected = Product::getListTag($detail->id);
-        if($detail->layout == 1){
+        if($detail->layout == 2){
             $thongsoList = ThongSo::orderBy('display_order')->get();
 
             $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
