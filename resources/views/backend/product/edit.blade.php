@@ -127,7 +127,7 @@
                                         </button>
                                         </span>
                                     </div>
-                                    <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
+                                    <div class="form-group" style="margin-top:10px">
                                         <label>Mô tả chi tiết</label>
                                         <textarea class="form-control" rows="5" name="content" id="content">{{ old('content', $detail->content ) }}</textarea>
                                     </div>              

@@ -125,16 +125,16 @@
                                         </button>
                                         </span>
                                     </div>
-                                    <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
+                                    <div class="form-group" style="margin-top:10px">
                                         <label>Mô tả chi tiết</label>
                                         <textarea class="form-control" rows="5" name="content" id="content">{{ old('content') }}</textarea>
                                     </div>                                    
                                     <div class="clearfix"></div>
-                                    <div class="form-group form-group col-md-6 none-padding" style="margin-top:10px">
+                                    <div class="form-group col-md-6 none-padding" style="margin-top:10px">
                                         <label>Tiến độ</label>
                                         <textarea class="form-control" rows="6" name="tien_do" id="tien_do">{{ old('tien_do') }}</textarea>
                                     </div>
-                                    <div class="form-group form-group col-md-6" style="margin-top:10px">
+                                    <div class="form-group col-md-6" style="margin-top:10px">
                                         <label>Hỏi đáp</label>
                                         <textarea class="form-control" rows="6" name="hoi_dap" id="hoi_dap">{{ old('hoi_dap') }}</textarea>
                                     </div>
