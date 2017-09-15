@@ -99,7 +99,7 @@ class DetailController extends Controller
            
             return view('frontend.detail.index-thong-so-rieng', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'thongsoList', 'arrThongSo', 'widgetProduct'));
         }else{
-            return view('frontend.detail.index', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'widgetProduct', 'arrThongSo'));    
+            return view('frontend.detail.index', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'widgetProduct', 'arrThongSo', 'thongsoList'));    
         }
         
     }
