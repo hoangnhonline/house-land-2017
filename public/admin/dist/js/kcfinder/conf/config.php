@@ -43,7 +43,7 @@ $_CONFIG = array(
 // IMAGE SETTINGS
 
     'imageDriversPriority' => "imagick gmagick gd",
-    'jpegQuality' => 90,
+    'jpegQuality' => 100,
     'thumbsDir' => ".thumbs",
 
     'maxImageWidth' => 0,
