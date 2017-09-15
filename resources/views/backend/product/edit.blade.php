@@ -143,7 +143,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <!--end thong tin co ban--> 
-                                <div role="tabpanel" class="tab-pane div_thong_so_rieng" id="lien-he">
+                                <div role="tabpanel" class="tab-pane" id="lien-he">
                                     @foreach($thongsoList as $ts)
                                     <?php 
                                     $thongso = isset($arrThongSo[$ts->id]) ? $arrThongSo[$ts->id]  : '';
@@ -298,22 +298,7 @@ function openKCFinder_multipleFiles() {
       window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_multiple','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
 }
     $(document).ready(function(){
-        $('#layout').change(function(){
-            if($(this).val() == 1){
-                $('#div_thong_so_chung').show();
-                $('.div_thong_so_rieng').hide();
-            }else{
-                $('#div_thong_so_chung').hide();
-                $('.div_thong_so_rieng').show();
-            }
-        });
-        @if($detail->layout == 1)
-        $('#div_thong_so_chung').show();
-        $('.div_thong_so_rieng').hide();
-        @else
-        $('#div_thong_so_chung').hide();
-        $('.div_thong_so_rieng').show();
-        @endif
+        
       $('#btnAddTag').click(function(){
           $('#tagModal').modal('show');
       });
