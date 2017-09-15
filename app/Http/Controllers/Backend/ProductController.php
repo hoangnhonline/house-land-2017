@@ -171,7 +171,17 @@ class ProductController extends Controller
         $dataArr['status'] = 1;
         $dataArr['created_user'] = Auth::user()->id;
         $dataArr['updated_user'] = Auth::user()->id;              
-        $dataArr['thong_so_chi_tiet'] = json_encode($dataArr['thong_so_chi_tiet']);
+        $is_have = 0;
+        foreach($dataArr['thong_so_chi_tiet'] as $a){
+            if($a != ''){
+                $is_have = 1;
+            }
+        }      
+        if($is_have == 1){
+            $dataArr['thong_so_chi_tiet'] = json_encode($dataArr['thong_so_chi_tiet']);
+        }else{
+            $dataArr['thong_so_chi_tiet'] = '';
+        }
 
         $rs = Product::create($dataArr);
         $product_id = $rs->id;       
@@ -375,8 +385,18 @@ class ProductController extends Controller
         $dataArr['alias'] = Helper::stripUnicode($dataArr['title']);
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;     
         $dataArr['is_slider'] = isset($dataArr['is_slider']) ? 1 : 0;             
-        $dataArr['updated_user'] = Auth::user()->id;              
-        $dataArr['thong_so_chi_tiet'] = json_encode($dataArr['thong_so_chi_tiet']);
+        $dataArr['updated_user'] = Auth::user()->id;        
+        $is_have = 0;
+        foreach($dataArr['thong_so_chi_tiet'] as $a){
+            if($a != ''){
+                $is_have = 1;
+            }
+        }      
+        if($is_have == 1){
+            $dataArr['thong_so_chi_tiet'] = json_encode($dataArr['thong_so_chi_tiet']);
+        }else{
+            $dataArr['thong_so_chi_tiet'] = '';
+        }
 
         $model = Product::find($dataArr['id']);
 
