@@ -87,7 +87,8 @@ class CateController extends Controller
 
         $dataArr['updated_user'] = Auth::user()->id;
         
-        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
+        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;
+        $dataArr['is_widget'] = isset($dataArr['is_widget']) ? 1 : 0;
         $dataArr['display_order'] = Helper::getNextOrder('cate', ['parent_id' => $dataArr['parent_id']]);
 
         $rs = Cate::create($dataArr);        
@@ -169,8 +170,10 @@ class CateController extends Controller
 
         $dataArr['updated_user'] = Auth::user()->id;
         
-        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;    
-       
+        $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;   
+        
+        $dataArr['is_widget'] = isset($dataArr['is_widget']) ? 1 : 0;
+
         $model->update($dataArr);
 
         $this->storeMeta( $dataArr['id'], $dataArr['meta_id'], $dataArr);

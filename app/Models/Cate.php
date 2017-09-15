@@ -23,8 +23,7 @@ class Cate extends Model  {
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'parent_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user'];
-
+    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'parent_id', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user', 'is_widget'];
     public function product()
     {
         return $this->hasMany('App\Models\Product', 'cate_id');

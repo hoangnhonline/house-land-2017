@@ -80,8 +80,16 @@
                   <input type="text" class="form-control" name="admin_email" id="admin_email" value="{{ $settingArr['admin_email'] }}">
                 </div>
                 <div class="form-group col-md-6">
-                  <label>Số sản phẩm 1 trang </label>
+                  <label>Số sản phẩm liên quan </label>
                   <input type="text" class="form-control" name="product_per_page" id="product_per_page" value="{{ $settingArr['product_per_page'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số tin liên quan </label>
+                  <input type="text" class="form-control" name="article_related" id="article_related" value="{{ $settingArr['article_related'] }}">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Số sản phẩm widget </label>
+                  <input type="text" class="form-control" name="product_widget" id="product_widget" value="{{ $settingArr['product_widget'] }}">
                 </div>
                 <div class="form-group col-md-6">
                   <label>Số bài viết liên quan</label>
