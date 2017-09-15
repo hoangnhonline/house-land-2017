@@ -4,7 +4,7 @@
           <div class="block-title">
             <h2>
               <i class="fa fa-home"></i>
-              BIỆT THỰ HIỆN ĐẠI
+              TIN LIÊN QUAN
             </h2>
           </div>
           <div class="block-content">
