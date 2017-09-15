@@ -67,8 +67,10 @@
 						<ul class="nav nav-tabs" role="tablist">
 							@if($detail->content != '')
 							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Mô tả chi tiết</a></li>
-							@endif							
+							@endif			
+							@if(!empty($arrThongSo))				
 							<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Thông số dự án</a></li>							
+							@endif
 							@if($detail->tien_do != '')
 							<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Tiến độ xây dựng</a></li>
 							@endif
@@ -85,7 +87,7 @@
 								<div class="clearfix"></div>
 							</div>
 							@endif
-							
+							@if(!empty($arrThongSo))
 							<div role="tabpanel" class="tab-pane" id="tab2">
 							@foreach($thongsoList as $ts)                        
 							@if(isset($arrThongSo[$ts->id]) && $arrThongSo[$ts->id] != '')
