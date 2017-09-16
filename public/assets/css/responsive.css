@@ -77,6 +77,13 @@
   .block-tabs iframe{
     width: 100% !important;
   }
+  .block-tabs img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .block-tabs iframe{
+    width: 100% !important;
+  }
 }
 
 /*----------------
