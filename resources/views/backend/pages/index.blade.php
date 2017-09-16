@@ -64,7 +64,7 @@
                   <a href="{{ route( 'pages.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
                   
                   @if( $item->is_hot == 1 )
-                  <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
+                  <label class="label label-danger">HOT</label>
                   @endif
 
                   <p>{{ $item->description }}</p>

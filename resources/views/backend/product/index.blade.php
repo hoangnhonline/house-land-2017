@@ -128,9 +128,10 @@
                   </td>
                   <td>                  
                     <a style="color:#444;font-weight:bold" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a> 
-                  @if( $item->is_hot == 1 )
-                  <img class="img-thumbnail" src="{{ URL::asset('public/admin/dist/img/star.png')}}" alt="Nổi bật" title="Nổi bật" />
-                  @endif 
+                    @if( $item->is_hot == 1 )
+                    <label class="label label-danger">HOT</label>
+                    @endif
+                 
                   <br>
                   <p style="color:#00acd6;font-weight:bold;margin-top:10px">{{ $item->cateParent->name }} / {{ $item->cate->name }}</p>
                     
