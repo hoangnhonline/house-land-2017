@@ -134,7 +134,8 @@ class HomeController extends Controller
     {
         $tu_khoa = $request->keyword;
         $parent_id = $request->cid ? $request->cid : null;
-        $query = Product::where('product.alias', 'LIKE', '%'.$tu_khoa.'%');
+        $tu_khoa_find = Helper::stripUnicode($tu_khoa);
+        $query = Product::where('product.alias', 'LIKE', '%'.$tu_khoa_find.'%')->orWhere('product.code', 'LIKE', '%'.$tu_khoa_find.'%');
             if($parent_id > 0){
                 $query->where('parent_id', $parent_id);
             }
