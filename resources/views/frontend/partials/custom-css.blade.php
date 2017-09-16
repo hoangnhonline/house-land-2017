@@ -26,4 +26,16 @@ footer .footer-bot{
 .block-title-commom .block-title h2:before{
 	content: url({{ Helper::showImage($settingArr['icon_tieu_de']) }});
 }
+.block-header-bottom{
+	background-color: {{ $settingArr['mau_nen_header'] }};
+}
+.block-info .hotline p span.title, .block-info .email p span.title{
+	color: {{ $settingArr['mau_header_title'] }};
+}
+.block-info .hotline p span.info, .block-info .email p span.info{
+	color: {{ $settingArr['mau_header_value'] }};	
+}
+.block-info i{
+	color: {{ $settingArr['mau_header_icon'] }};;
+}
 </style>

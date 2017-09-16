@@ -311,6 +311,34 @@
                     <span class="input-group-addon"><i></i></span>
                 </div>
               </div>  
+              <div class="form-group col-md-6">
+                <label>Màu nền header</label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_nen_header'] }}" class="form-control" name="mau_nen_header" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu header title</label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_header_title'] }}" class="form-control" name="mau_header_title" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu header value</label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_header_value'] }}" class="form-control" name="mau_header_value" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
+              <div class="form-group col-md-6">
+                <label>Màu header icon</label>
+                <div class="input-group colorpicker-component mau">
+                    <input type="text" value="{{ $settingArr['mau_header_icon'] }}" class="form-control" name="mau_header_icon" />
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+              </div>  
         </div>
         <!-- /.box -->     
 
