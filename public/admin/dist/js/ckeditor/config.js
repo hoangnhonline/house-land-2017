@@ -28,4 +28,5 @@ CKEDITOR.editorConfig = function( config )
 	CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
 	CKEDITOR.config.language = 'vi';
 	CKEDITOR.config.height = 500;
+	CKEDITOR.config.allowedContent = true;
 };
