@@ -70,6 +70,13 @@
   .block-info .hotline p span.info, .block-info .email p span.info {
     font-size: 11px;
   }
+  .block-tabs img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .block-tabs iframe{
+    width: 100% !important;
+  }
 }
 
 /*----------------
