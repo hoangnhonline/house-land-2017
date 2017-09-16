@@ -25,10 +25,24 @@
 				<div class="block block-aritcle">
 					<h2 class="title">{!! $detail->title !!}</h2>
 					<p class="text">{!! $detail->content !!}</p>					
+					
 				</div>
-				<!--<div class="block block-share">
-					Share
-				</div><!-- /block-share -->				
+				<div class="block block-share" id="share-buttons">
+					<div class="share-item">
+						<div class="fb-like" data-href="{{ url()->current() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+					</div>
+					<div class="share-item" style="max-width: 65px;">
+						<div class="g-plus" data-action="share"></div>
+					</div>
+					<div class="share-item">
+						<a class="twitter-share-button"
+					  href="https://twitter.com/intent/tweet?text={!! $detail->title !!}">
+					Tweet</a>
+					</div>
+					<div class="share-item">
+						<div class="addthis_inline_share_toolbox"></div>
+					</div>
+				</div><!-- /block-share-->		
 			    @if($tagSelected->count() > 0)
 				<div class="block-tags">
 					<ul>
