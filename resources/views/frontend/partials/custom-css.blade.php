@@ -36,6 +36,12 @@ footer .footer-bot{
 	color: {{ $settingArr['mau_header_value'] }};	
 }
 .block-info i{
-	color: {{ $settingArr['mau_header_icon'] }};;
+	color: {{ $settingArr['mau_header_icon'] }};
+}
+.block-header-top{
+	background-color: {{ $settingArr['mau_nen_header_top'] }};
+}
+.block-intro{
+	color: {{ $settingArr['mau_chu_header_top'] }};
 }
 </style>
