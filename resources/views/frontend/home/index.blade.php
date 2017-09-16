@@ -15,33 +15,38 @@
 </div><!-- /block_big-title -->
 @if($cateParentHot)
 @foreach($cateParentHot as $parent)
-<div class="block block-product block-title-commom">
-  <div class="container">
-    <div class="block block-title">
-      <h2>
-        <i class="fa fa-home"></i>
-        <a href="{{ route('cate-parent', [$parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
-      </h2>
-    </div>
-    <div class="block-content">
-      <ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
-          @if($productParentHot[$parent->id])
-          @foreach($productParentHot[$parent->id] as $product)         
-          <li class="item">
-            <div class="thumb">
-              <a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">
+<div class="block block-btn-slide block-ct-pro block-title-commom">
+      <div class="container">
+        <div class="block block-title">
+          <h2>
+            
+              <i class="fa fa-home"></i>
+              <a href="{{ route('cate-parent', [$parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+            
+          </h2>
+        </div>
+        <div class="block-content">
+          <div class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
+            @if($productParentHot[$parent->id])
+            @foreach($productParentHot[$parent->id] as $product) 
+            <div class="item">
+              <div class="thumb">
+                <a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">
                 <img src="{{ Helper::showImageThumb($product->image_url) }}" alt="{!! $product->title !!}">
               </a>
-            </div>
-            <div class="title">
-              <h2><a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">{!! $product->title !!}</a></h2>
-            </div>
-          </li>
-          @endforeach
-          @endif
-    </div>
-  </div>
-</div><!-- /block_big-title -->
+              </div>
+              <div class="des">
+                <a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">{!! $product->title !!}</a>
+                <p class="code"><span>Mã sản phẩm: </span>{!! $product->code !!}</p>
+              </div>
+            </div><!-- /item -->
+            @endforeach
+            @endif 
+          </div>
+        </div>
+      </div>
+    </div><!-- /block_big-title -->
+
 @endforeach
 @endif
 <?php 

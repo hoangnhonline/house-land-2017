@@ -106,6 +106,9 @@
   .block-logo img {
     margin: 0 auto;
   }
+  .block-info {
+    display: none;
+  }
   body.menu-open {
     overflow: hidden;
     left: 0;
