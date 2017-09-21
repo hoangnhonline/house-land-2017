@@ -16,10 +16,10 @@
     <div class="col-sm-9 col-xs-12 block-col-left">
       <div class="block-title-commom block-ct-news">
         <div class="block block-title">
-          <h2>
+          <h1>
             <i class="fa fa-home"></i>
             {!! $cateDetail->name !!}
-          </h2>
+          </h1>
         </div>
         <div class="block-content">            
           @foreach( $articlesArr as $articles )

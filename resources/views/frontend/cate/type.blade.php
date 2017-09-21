@@ -22,10 +22,10 @@
 <div class="block block-product block-title-commom">
   <div class="container">
     <div class="block block-title">
-      <h2>
+      <h1>
         <i class="fa fa-home"></i>
         <a href="{{ route('cate-parent', [$parent->type->slug, $parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
-      </h2>
+      </h1>
     </div>
     <div class="block-content">
       <ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":4}}'>

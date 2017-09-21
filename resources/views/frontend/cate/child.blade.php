@@ -15,10 +15,10 @@
 <div class="block block-ct-pro block-title-commom">
 	<div class="container">
 		<div class="block block-title">
-			<h2>
+			<h1>
 				<i class="fa fa-home"></i>
 				{!! $cateDetail->name !!}
-			</h2>	
+			</h1>	
 		</div>
 		<div class="block-content">
 			<div class="row">

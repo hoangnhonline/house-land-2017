@@ -82,7 +82,7 @@
 						<div class="tab-content">
 							@if($detail->content != '')
 							<div role="tabpanel" class="tab-pane active" id="tab1">
-								<h3 class="title">{!! $detail->title !!}</h3>
+								<h1 class="title">{!! $detail->title !!}</h1>
 								<p class="text">{!! $detail->content !!}</p>
 								<div class="clearfix"></div>
 							</div>

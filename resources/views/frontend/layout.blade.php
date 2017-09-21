@@ -34,8 +34,6 @@
 	<link rel="icon" href="{{ URL::asset('assets/images/favicon.ico') }}" type="image/x-icon">
 	<!-- ===== Style CSS ===== -->
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/style.css') }}">
-	<!-- ===== Style Color CSS ===== -->
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/style_color.css') }}">
 	<!-- ===== Responsive CSS ===== -->
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/responsive.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/sweetalert2.min.css') }}"/>

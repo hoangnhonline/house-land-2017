@@ -15,10 +15,10 @@
 			<div class="block-page-about">
 				<div class="block-title-commom">
 					<div class="block block-title">
-						<h2>
+						<h1>
 							<i class="fa fa-home"></i>
 							{!! $detailPage->title !!}
-						</h2>
+						</h1>
 					</div>
 				</div>
 				<div class="block-article">

@@ -23,7 +23,7 @@
 			</div>
 			<div class="block-content">
 				<div class="block block-aritcle">
-					<h2 class="title">{!! $detail->title !!}</h2>
+					<h1 class="title">{!! $detail->title !!}</h1>
 					<p class="text">{!! $detail->content !!}</p>					
 					
 				</div>

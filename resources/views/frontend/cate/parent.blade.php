@@ -12,7 +12,7 @@
 </div><!-- /block-breadcrumb -->
 <div class="block block_big-title">
 	<div class="container">
-		<h2>{!! $parentDetail->name !!}</h2>
+		<h1>{!! $parentDetail->name !!}</h1>
 		<p class="desc">{!! $parentDetail->description !!}</p>
 	</div>
 </div><!-- /block_big-title -->

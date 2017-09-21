@@ -17,10 +17,10 @@
 			<div class="col-sm-9 col-xs-12 block-col-left">
 				<div class="block-title-commom block-service clearfix">
 					<div class="block block-title">
-						<h2>
+						<h1>
 							<i class="fa fa-home"></i>
 							{!! $detail->title !!}
-						</h2>
+						</h1>
 					</div>
 					<div class="block-content">
 						<div class="block-article">

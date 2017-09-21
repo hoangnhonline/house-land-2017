@@ -13,10 +13,10 @@
 <div class="block block-title-commom">
 	<div class="container">
 		<div class="block block-title">
-			<h2>
+			<h1>
 				<i class="fa fa-home"></i>
 				Tags
-			</h2>
+			</h1>
 		</div>
 		<div class="block-content block-ct-pro">
 			<h2 class="tit-page3">HIỂN THỊ KẾT QUẢ CHO “{!! $detail->name !!}”</h2>
