@@ -134,6 +134,11 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   display: block;
 }
+.block2 {
+  margin-bottom: 20px;
+  position: relative;
+  display: block;
+}
 .block-breadcrumb .breadcrumb {
   background: transparent;
   margin-bottom: 0;
@@ -245,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Block Header Bot */
 .block-header-bottom {
-  padding: 25px 0;
+  padding: 10px 0;
 }
 .block-header-bottom .block-info {
   margin-top: 15px;
@@ -465,6 +470,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Block Big Title
   ========================================================================== */
+.block_big-title h1 {
+  font-size: 18px;
+  color: #ff6600;
+  display: block;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
 .block_big-title h2 {
   font-size: 18px;
   color: #ff6600;
@@ -486,6 +499,41 @@ h1, h2, h3, h4, h5, h6 {
 .block-title-commom .block-title {
   background: #eaeaea;
 }
+
+
+.block-title-commom .block-title h1 {
+  line-height: 40px;
+  background: #ff6600;
+  color: #fff;
+  padding-left: 20px;
+  font-size: 15px;
+  text-transform: uppercase;
+  max-width: 360px;
+  position: relative;
+}
+.block-title-commom .block-title h1 a {
+  color: #fff;
+}
+.block-title-commom .block-title h1 a:hover {
+  color: #eaeaea;
+}
+.block-title-commom .block-title h1 i {
+  font-size: 18px;
+}
+.block-title-commom .block-title h1:before {
+  position: absolute;
+  content: url("../images/triangle.png");
+  bottom: -24px;
+  left: -10px;
+}
+.block-title-commom .block-title h1:after {
+  position: absolute;
+  content: url("../images/arrow.png");
+  top: 0;
+  bottom: 0;
+  right: -20px;
+}
+
 .block-title-commom .block-title h2 {
   line-height: 40px;
   background: #ff6600;
@@ -584,6 +632,9 @@ h1, h2, h3, h4, h5, h6 {
   -ms-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
+}
+.block-btn-slide.block-ct-pro .item {
+  margin-bottom: 0;
 }
 .block-product .owl-nav .owl-prev,
 .block-product .owl-nav .owl-next,
@@ -1133,7 +1184,7 @@ footer .footer-bot .container {
 
 /* Block News Detail
   ========================================================================== */
-.block-dt-news h2.title {
+.block-dt-news .title {
   color: #ff6600;
   font-size: 18px;
   display: block;
