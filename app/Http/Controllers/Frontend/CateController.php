@@ -129,7 +129,7 @@ class CateController extends Controller
             
             $productList = Product::where('cate_id', $cate_id)
                                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
-                                    ->select('product_img.image_url', 'product.*')                                                   
+                                    ->select('product_img.image_url', 'product.*')        
                                     ->orderBy('product.id', 'desc')
                                     ->paginate(15);
             if( $cateDetail->meta_id > 0){
@@ -188,7 +188,7 @@ class CateController extends Controller
 
     public function newsList(Request $request)
     {
-        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+
         $layout_name = "main-news";
         
         $page_name = "page-news";
@@ -200,12 +200,12 @@ class CateController extends Controller
 
         $articlesArr = Articles::where('cate_id', 1)->orderBy('id', 'desc')->paginate(10);
         $hotArr = Articles::where( ['cate_id' => 1, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
-        return view('frontend.news-list', compact('title','settingArr', 'hotArr', 'layout_name', 'page_name', 'articlesArr'));
+        return view('frontend.news-list', compact('title', 'hotArr', 'layout_name', 'page_name', 'articlesArr'));
     }
 
     public function newsDetail(Request $request)
     {
-        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+       
         $layout_name = "main-news";
         
         $page_name = "page-news";
@@ -227,7 +227,7 @@ class CateController extends Controller
 
             $hotArr = Articles::where( ['cate_id' => 1, 'is_hot' => 1] )->where('id', '<>', $id)->orderBy('id', 'desc')->limit(5)->get();
 
-            return view('frontend.news-detail', compact('title', 'settingArr', 'hotArr', 'layout_name', 'page_name', 'detail'));
+            return view('frontend.news-detail', compact('title', 'hotArr', 'layout_name', 'page_name', 'detail'));
         }else{
             return view('erros.404');
         }     

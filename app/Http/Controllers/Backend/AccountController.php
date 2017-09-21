@@ -95,29 +95,33 @@ class AccountController extends Controller
          
         $this->validate($request,[
             'full_name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'email|required|unique:users,email',
+            'password' => 'required|digits_between:6,30',
+            're_password' => 'required|same:password|digits_between:6,30',
+            'role' => 'required'
         ],
         [
-            'name.required' => 'Bạn chưa nhập họ tên',
+            'full_name.required' => 'Bạn chưa nhập họ tên',
             'email.required' => 'Bạn chưa nhập email',
-            'email.unique' => 'Email đã được sử dụng.'
+            'email.unique' => 'Email đã được sử dụng.',
+            'email.email' => 'Bạn nhập email không hợp lệ',
+            'password.required' => 'Bạn chưa nhập mật khẩu',
+            're_password.required' => 'Bạn chưa nhập lại mật khẩu',
+            're_password.digits_between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
+            're_password.same' => 'Mật khẩu nhập lại không giống',
+            'password.digits_between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
+            'role.required' => 'Bạn chưa chọn role'
         ]);       
         
         $tmpPassword = str_random(10);
                 
-        $dataArr['password'] = Hash::make('123465@');
+        $dataArr['password'] = Hash::make($dataArr['password']);
         
         $dataArr['created_user'] = Auth::user()->id;
 
         $dataArr['updated_user'] = Auth::user()->id;
 
-        $rs = Account::create($dataArr);
-
-        if(!empty($dataArr['mod_id'])){
-            foreach($dataArr['mod_id'] as $mod_id){
-                UserMod::create(['user_id' => $rs->id, 'mod_id' => $mod_id]);
-            }
-        }
+        $rs = Account::create($dataArr);       
         /*
         if ( $rs->id > 0 ){
             Mail::send('backend.account.mail', ['full_name' => $request->full_name, 'password' => $tmpPassword, 'email' => $request->email], function ($message) use ($request) {
@@ -127,7 +131,7 @@ class AccountController extends Controller
             });   
         }*/
 
-        Session::flash('message', 'Tạo mới tài khoản thành công. Mật khẩu mặc định là : 123465@');
+        Session::flash('message', 'Tạo mới thành công');
 
         return redirect()->route('account.index');
     }
@@ -141,7 +145,7 @@ class AccountController extends Controller
         $model->delete();
 
         // redirect
-        Session::flash('message', 'Xóa tài khoản thành công');
+        Session::flash('message', 'Xóa thành công');
         return redirect()->route('account.index');
     }
     public function edit($id)
@@ -150,18 +154,8 @@ class AccountController extends Controller
             return redirect()->route('product.index');
         }
         $detail = Account::find($id);
-        $modList = Account::where(['role' => 2, 'status' => 1])->get();
-        $modSelected = [];
-        if($detail->role == 1){
-            $tmp = UserMod::where('user_id', $id)->get();
-            
-            if($tmp){
-                foreach($tmp as $mod){
-                    $modSelected[] = $mod->mod_id;
-                }
-            }        
-        }
-        return view('backend.account.edit', compact( 'detail', 'modList', 'modSelected'));
+        
+        return view('backend.account.edit', compact( 'detail'));
     }
     public function update(Request $request)
     {
@@ -171,26 +165,21 @@ class AccountController extends Controller
         $dataArr = $request->all();
         
         $this->validate($request,[
-            'full_name' => 'required'            
+            'full_name' => 'required',            
+            'role' => 'required'
         ],
         [
-            'name.required' => 'Bạn chưa nhập họ tên'           
+            'full_name.required' => 'Bạn chưa nhập họ tên',            
+            'role.required' => 'Bạn chưa chọn role'
         ]);      
 
         $model = Account::find($dataArr['id']);
 
         $dataArr['updated_user'] = Auth::user()->id;
 
-        $model->update($dataArr);
+        $model->update($dataArr);       
 
-        UserMod::where('user_id', $dataArr['id'])->delete();
-        if(!empty($dataArr['mod_id'])){
-            foreach($dataArr['mod_id'] as $mod_id){
-                UserMod::create(['user_id' => $dataArr['id'], 'mod_id' => $mod_id]);
-            }
-        }
-
-        Session::flash('message', 'Cập nhật tài khoản thành công');
+        Session::flash('message', 'Cập nhật thành công');
 
         return redirect()->route('account.index');
     }
@@ -206,7 +195,7 @@ class AccountController extends Controller
         $model->status = $request->status;
 
         $model->save();
-        $mess = $request->status == 1 ? "Mở khóa tài khoản thành công" : "Khóa tài khoản thành công";
+        $mess = $request->status == 1 ? "Mở khóa thành công" : "Khóa thành công";
         Session::flash('message', $mess);
 
         return redirect()->route('account.index');

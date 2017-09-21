@@ -144,19 +144,7 @@
                     <button class="btn btn-default btn-sm btnUpload" data-value="logo"  data-choose="file-logo" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
-                </div>
-                <div style="clear:both"></div> 
-                <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
-                  <label class="col-md-4 row">Favicon </label>    
-                  <div class="col-md-8 div-upload">
-                    <img class="show_thumbnail favicon" src="{{ $settingArr['favicon'] ? Helper::showImage($settingArr['favicon']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="50">
-                    
-                    <input type="file" id="file-favicon" data-value="favicon" class="click-choose-file" style="display:none" />
-                 
-                    <button class="btn btn-default btn-sm btnUpload" data-value="favicon"  type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
-                  </div>
-                  <div style="clear:both"></div>
-                </div>
+                </div>                
                 <div style="clear:both"></div> 
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Banner ( og:image ) </label>    
@@ -235,6 +223,19 @@
                   </div>
                   <div style="clear:both"></div>
                 </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
+                  <label class="col-md-4 row">Icon mũi tên ( 20 x 40 px )</label>    
+                  <div class="col-md-8 div-upload">
+                    <img class="show_thumbnail icon_mui_ten" src="{{ $settingArr['icon_mui_ten'] ? Helper::showImage($settingArr['icon_mui_ten']) : URL::asset('public/admin/dist/img/img.png') }}" class="img-favicon" width="20">
+                    
+                    <input type="file" data-value="icon_mui_ten" class="click-choose-file" style="display:none" />
+                 
+                    <button class="btn btn-default btn-sm btnUpload"  data-value="icon_mui_ten" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                  <div style="clear:both"></div>
+                </div>
+                <div class="clearfix"></div>
             </div>                        
             <div class="box-footer">
               <button type="submit" class="btn btn-primary btn-sm">Lưu</button>         
@@ -252,103 +253,27 @@
           <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group col-md-6">
-                <label>Màu nền menu </label>
+                <label>Màu chủ đạo </label>
                 <div  class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_menu'] }}" class="form-control" name="mau_nen_menu" />
+                    <input type="text" value="{{ $settingArr['mau_chu_dao'] }}" class="form-control" name="mau_chu_dao" />
                     <span class="input-group-addon"><i></i></span>
                 </div>
               </div> 
               <div class="form-group col-md-6">
                 <label>Màu menu hover</label>
                 <div  class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_menu_hover'] }}" class="form-control" name="mau_menu_hover" />
+                    <input type="text" value="{{ $settingArr['hover_parent'] }}" class="form-control" name="hover_parent" />
                     <span class="input-group-addon"><i></i></span>
                 </div>
               </div>             
               <div class="form-group col-md-6">
-                <label>Màu nền footer </label>
+                <label>Màu border menu </label>
                 <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_footer'] }}" class="form-control" name="mau_nen_footer" />
+                    <input type="text" value="{{ $settingArr['menu_border'] }}" class="form-control" name="menu_border" />
                     <span class="input-group-addon"><i></i></span>
                 </div>
               </div> 
-              <div class="form-group col-md-6">
-                <label>Màu nền khung tìm kiếm </label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_search'] }}" class="form-control" name="mau_nen_search" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu nền copyright </label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_copyright'] }}" class="form-control" name="mau_nen_copyright" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu nền tiêu đề danh mục </label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_block'] }}" class="form-control" name="mau_nen_block" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu nút đăng ký </label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nut_dang_ky'] }}" class="form-control" name="mau_nut_dang_ky" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu nút Back to top</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nut_top'] }}" class="form-control" name="mau_nut_top" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu nền header</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_header'] }}" class="form-control" name="mau_nen_header" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu header title</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_header_title'] }}" class="form-control" name="mau_header_title" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu header value</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_header_value'] }}" class="form-control" name="mau_header_value" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu header icon</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_header_icon'] }}" class="form-control" name="mau_header_icon" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu nền header TOP</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_nen_header_top'] }}" class="form-control" name="mau_nen_header_top" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
-              <div class="form-group col-md-6">
-                <label>Màu chữ header TOP</label>
-                <div class="input-group colorpicker-component mau">
-                    <input type="text" value="{{ $settingArr['mau_chu_header_top'] }}" class="form-control" name="mau_chu_header_top" />
-                    <span class="input-group-addon"><i></i></span>
-                </div>
-              </div>  
+              <div class="clearfix"></div>
         </div>
         <!-- /.box -->     
 
@@ -394,6 +319,7 @@
 <input type="hidden" name="icon_cong_nhan" id="icon_cong_nhan" value="{{ $settingArr['icon_cong_nhan'] }}"/>
 <input type="hidden" name="icon_cong_trinh" id="icon_cong_trinh" value="{{ $settingArr['icon_cong_trinh'] }}"/>          
 <input type="hidden" name="icon_tieu_de" id="icon_tieu_de" value="{{ $settingArr['icon_tieu_de'] }}"/>
+<input type="hidden" name="icon_mui_ten" id="icon_mui_ten" value="{{ $settingArr['icon_mui_ten'] }}"/>
 
     </form>
     <!-- /.row -->

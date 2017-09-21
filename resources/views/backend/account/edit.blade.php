@@ -59,21 +59,7 @@
                     <option value="3" {{ old('role', $detail->role) == 3 ? "selected" : "" }}>Admin</option>
                     @endif                    
                   </select>
-                </div>
-                @if(Auth::user()->role == 3)
-                <div class="form-group col-md-12" style="display:none" id="chon_mod">
-                  <p class="clearfix"><strong>Mod</strong></p>
-                  <div style="clear:both"></div>     
-                    @if($modList)
-                      @foreach($modList as $mod)
-                      <div class="checkbox col-md-4" style="margin-top:0px !important;">
-                        <input type="checkbox" id="mod{{$mod->id}}" name="mod_id[]" value="{{ $mod->id }}" {{ in_array($mod->id, $modSelected) ? "checked=checked" : "" }}>
-                        <label for="mod{{$mod->id}}">{{ $mod->full_name }}</label>
-                      </div>
-                      @endforeach
-                    @endif
-                </div> 
-                @endif                   
+                </div>                        
                 <div class="form-group">
                   <label>Trạng thái</label>
                   <select class="form-control" name="status" id="status">                                      
@@ -82,8 +68,7 @@
                   </select>
                 </div>
             </div>
-            <div class="box-footer">
-              <button type="button" class="btn btn-default btn-sm" id="btnLoading" style="display:none"><i class="fa fa-spin fa-spinner"></i></button>
+            <div class="box-footer">             
               <button type="submit" class="btn btn-primary btn-sm" id="btnSave">Lưu</button>
               <a class="btn btn-default btn-sm" class="btn btn-primary btn-sm" href="{{ route('account.index')}}">Hủy</a>
             </div>
@@ -105,23 +90,8 @@
 <script type="text/javascript">
      $(document).ready(function(){
       $('#formData').submit(function(){
-        $('#btnSave').hide();
-        $('#btnLoading').show();
-      });
-      @if(Auth::user()->role == 3)
-      $('#role').change(function(){
-        if($(this).val() == 1){
-          $('#chon_mod').show();
-        }else{
-          $('#chon_mod').hide();
-        }
-      });
-      @endif
-      if($('#role').val() == 1){
-        $('#chon_mod').show();
-      }else{
-        $('#chon_mod').hide();
-      }
+        $('#btnSave').html('<i class="fa fa-spinner fa-spin">').attr('disabled', 'disabled');
+      });      
     });
 </script>
 @stop
