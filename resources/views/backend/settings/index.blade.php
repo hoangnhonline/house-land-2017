@@ -250,8 +250,15 @@
           <div class="box-header with-border">
             <h3 class="box-title">Màu sắc</h3>
           </div>
+          <input type="hidden" name="" id="default_mau_chu_dao" value="#ff6600">
+          <input type="hidden" name="" id="default_hover_parent" value="#ff781e">
+          <input type="hidden" name="" id="default_menu_border" value="#b94a00">
           <!-- /.box-header -->
             <div class="box-body">
+            <div class="form-group col-md-12">
+                <button style="display:none" id="btnSetDefaultColor" type="button" class="btn btn-default">Default Color</button>
+                </div>
+                <div class="clearfix"></div>
               <div class="form-group col-md-6">
                 <label>Màu chủ đạo </label>
                 <div  class="input-group colorpicker-component mau">
@@ -344,6 +351,13 @@ function openKCFinder_singleFile(obj_str) {
       window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
   }
     $(document).ready(function(){
+      $('#btnSetDefaultColor').click(function(){
+          if(confirm('Bạn chắc chắn chọn màu mặc định?')){
+            $('#mau_chu_dao').val($('#default_mau_chu_dao').val());
+            $('#hover_parent').val($('#default_hover_parent').val());
+            $('#menu_border').val($('#default_menu_border').val());
+          }
+      });
       var editor = CKEDITOR.replace( 'chi_nhanh_phia_bac',{
           language : 'vi',       
           height : 200,
