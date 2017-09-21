@@ -38,20 +38,23 @@
                           @endforeach
                       </ul>
                   </div>
-              @endif
-                 
+              @endif                 
                  <!-- text input -->
-                <div class="form-group">
-                  <label>Họ tên <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="full_name" id="full_name" value="{{ $detail->full_name }}">
-                </div>
+                
                  <div class="form-group">
                   <label>Email <span class="red-star">*</span></label>
                   <input type="text" class="form-control" readonly="true" name="email" id="email" value="{{ $detail->email }}">
                 </div>
-                                         
                 <div class="form-group">
-                  <label>Role</label>
+                  <label>Tên hiển thị <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="display_name" id="display_name" value="{{ $detail->display_name }}">
+                </div>
+                <div class="form-group">
+                  <label>Họ tên</label>
+                  <input type="text" class="form-control" name="full_name" id="full_name" value="{{ $detail->full_name }}">
+                </div>                         
+                <div class="form-group">
+                  <label>Phân loại</label>
                   <select class="form-control" name="role" id="role">                             
                     <option value="1" {{ old('role', $detail->role) == 1 ? "selected" : "" }}>Editor</option>
                     @if(Auth::user()->role == 3)                  
@@ -59,7 +62,8 @@
                     <option value="3" {{ old('role', $detail->role) == 3 ? "selected" : "" }}>Admin</option>
                     @endif                    
                   </select>
-                </div>                        
+                </div>   
+
                 <div class="form-group">
                   <label>Trạng thái</label>
                   <select class="form-control" name="status" id="status">                                      

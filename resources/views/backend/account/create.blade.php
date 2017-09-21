@@ -41,12 +41,9 @@
               @endif
                  
                  <!-- text input -->
-                <div class="form-group">
-                  <label>Họ tên <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="full_name" id="full_name" value="{{ old('full_name') }}">
-                </div>
+                
                  <div class="form-group">
-                  <label>Email <span class="red-star">*</span></label>
+                  <label>Email truy cập <span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="email" id="email" value="{{ old('email') }}">
                 </div>   
                 <div class="form-group">
@@ -56,9 +53,17 @@
                 <div class="form-group">
                   <label>Nhập lại mật khẩu <span class="red-star">*</span></label>
                   <input type="password" class="form-control" name="re_password" id="re_password" value="{{ old('re_password') }}">
-                </div>                
+                </div>   
                 <div class="form-group">
-                  <label>Role</label>
+                  <label>Tên hiển thị<span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="display_name" id="display_name" value="{{ old('display_name') }}">
+                </div>
+                <div class="form-group">
+                  <label>Họ tên</label>
+                  <input type="text" class="form-control" name="full_name" id="full_name" value="{{ old('full_name') }}">
+                </div>             
+                <div class="form-group">
+                  <label>Phân loại</label>
                   <select class="form-control" name="role" id="role">      
                     <option value="" >--Chọn role--</option>                       
                     <option value="1" {{ old('role') == 1 ? "selected" : "" }}>Editor</option>                  

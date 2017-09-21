@@ -25,7 +25,7 @@ class AccountController extends Controller
         }
         $role = $leader_id = 0;
         $role = Auth::user()->role;
-        $query = Account::where('status', '>', 0);
+        $query = Account::where('status', '>', 0)->where('role', '<', 3);
 
         if( $role == 2){
             $leader_id = Auth::user()->id;
@@ -66,6 +66,20 @@ class AccountController extends Controller
         $old_pass = $request->old_pass;
         $new_pass = $request->new_pass;
         $new_pass_re = $request->new_pass_re;
+        
+         $this->validate($request,[ 
+            'old_pass' => 'required',
+            'new_pass' => 'required|digits_between:6,30',
+            'new_pass_re' => 'required|same:new_pass|digits_between:6,30'
+        ],
+        [   
+            'old_pass.required' => 'Bạn chưa nhập mật khẩu hiện tại',     
+            'new_pass.required' => 'Bạn chưa nhập mật khẩu',
+            'new_pass.digits_between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
+            'new_pass_re.required' => 'Bạn chưa nhập lại mật khẩu',
+            'new_pass_re.digits_between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
+            'new_pass_re.same' => 'Mật khẩu nhập lại không giống'                     
+        ]);      
         if( $old_pass == '' || $new_pass == "" || $new_pass_re == ""){
             return redirect()->back()->withErrors(["Chưa nhập đủ thông tin bắt buộc!"])->withInput();
         }
@@ -77,6 +91,7 @@ class AccountController extends Controller
         if($new_pass != $new_pass_re ){
             return redirect()->back()->withErrors("Xác nhận mật khẩu mới không đúng!")->withInput();   
         }
+
 
         $detail->password = Hash::make($new_pass);
         $detail->save();
@@ -93,24 +108,25 @@ class AccountController extends Controller
         }
         $dataArr = $request->all();
          
-        $this->validate($request,[
-            'full_name' => 'required',
+        $this->validate($request,[            
             'email' => 'email|required|unique:users,email',
             'password' => 'required|digits_between:6,30',
             're_password' => 'required|same:password|digits_between:6,30',
+            'display_name' => 'required',
             'role' => 'required'
         ],
         [
-            'full_name.required' => 'Bạn chưa nhập họ tên',
-            'email.required' => 'Bạn chưa nhập email',
+            
+            'email.required' => 'Bạn chưa nhập email truy cập',
             'email.unique' => 'Email đã được sử dụng.',
             'email.email' => 'Bạn nhập email không hợp lệ',
             'password.required' => 'Bạn chưa nhập mật khẩu',
+            'password.digits_between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
             're_password.required' => 'Bạn chưa nhập lại mật khẩu',
             're_password.digits_between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
-            're_password.same' => 'Mật khẩu nhập lại không giống',
-            'password.digits_between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
-            'role.required' => 'Bạn chưa chọn role'
+            're_password.same' => 'Mật khẩu nhập lại không giống',            
+            'display_name.required' => 'Bạn chưa nhập tên hiển thị',
+            'role.required' => 'Bạn chưa chọn phân loại'
         ]);       
         
         $tmpPassword = str_random(10);
@@ -165,11 +181,11 @@ class AccountController extends Controller
         $dataArr = $request->all();
         
         $this->validate($request,[
-            'full_name' => 'required',            
+            'display_name' => 'required',            
             'role' => 'required'
         ],
         [
-            'full_name.required' => 'Bạn chưa nhập họ tên',            
+            'display_name.required' => 'Bạn chưa nhập tên hiển thị',            
             'role.required' => 'Bạn chưa chọn role'
         ]);      
 

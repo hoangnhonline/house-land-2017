@@ -29,27 +29,14 @@
       <div class="panel-body">
         <form class="form-inline" role="form" method="GET" action="{{ route('account.index') }}">
         <div class="form-group">
-            <label>Role</label>
+            <label>Phân loại</label>
             <select class="form-control" name="role" id="role">      
               <option value="" >--Tất cả--</option>                       
               <option value="1" {{ $role == 1 ? "selected" : "" }}>Editor</option>
               <option value="2" {{ $role == 2 ? "selected" : "" }}>Mod</option> 
               <option value="3" {{ $role == 3 ? "selected" : "" }}>Admin</option>
             </select>
-          </div>
-          @if($role == 1)
-          <div class="form-group">
-              <label>Mod</label>
-              <select class="form-control" name="leader_id" id="leader_id">
-                <option value="">--Tất cả--</option>
-                @if($modList)
-                  @foreach($modList as $mod)
-                <option value="{{ $mod->id }}" {{ $leader_id == $mod->id ? "selected" : "" }}>{{ $mod->full_name }}</option> 
-                  @endforeach
-                @endif                                
-              </select>
-            </div> 
-            @endif
+          </div>          
           </form>
       </div>
       </div>
@@ -66,9 +53,9 @@
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">#</th>              
-              <th>Họ Tên</th>
-              <th>Email</th>
-              <th>Role</th>
+              <th>Tên hiển thị</th>
+              <th>Email truy cập</th>
+              <th>Phân loại</th>
               <th>Trạng thái</th>
               <th width="1%" style="white-space:nowrap">Thao tác</th>
             </tr>
@@ -81,7 +68,7 @@
                   <td><span class="order">{{ $i }}</span></td>
                  
                   <td>                  
-                    <a href="{{ route( 'account.edit', [ 'id' => $item->id ]) }}">{{ $item->full_name }}</a>                                
+                    <a href="{{ route( 'account.edit', [ 'id' => $item->id ]) }}">{{ $item->display_name }}</a>                                
                   </td>
                   <td>{{ $item->email }}</td>
                   <td>{{ $item->role == 1 ? "Editor"  : ($item->role == 2 ? "Mod" : "Admin" ) }}</td>
@@ -136,7 +123,7 @@ function callDelete(name, url){
   return flag;
 }
 $(document).ready(function(){
-  $('#role, #leader_id').change(function(){
+  $('#role').change(function(){
     $(this).parents('form').submit();
   });
   $('#table-list-data tbody').sortable({
