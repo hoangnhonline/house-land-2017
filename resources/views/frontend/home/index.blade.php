@@ -13,22 +13,26 @@
     </p>
   </div>
 </div><!-- /block_big-title -->
-@if($cateParentHot)
-@foreach($cateParentHot as $parent)
+@if($hotCateList)
+@foreach($hotCateList as $hotCate)
 <div class="block block-btn-slide block-ct-pro block-title-commom">
       <div class="container">
         <div class="block block-title">
           <h2>
             
               <i class="fa fa-home"></i>
-              <a href="{{ route('cate-parent', [$parent->slug]) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+              @if($hotCate->type == 1)
+              <a href="{{ route('cate-parent', [$parentArr[$hotCate->object_id]->slug]) }}" title="{!! $hotCate->title !!}">{!! $hotCate->title !!}</a>
+              @else
+              <a href="{{ route('cate', [$cateArr[$hotCate->object_id]->cateParent->slug, $cateArr[$hotCate->object_id]->slug]) }}" title="{!! $hotCate->title !!}">{!! $hotCate->title !!}</a>
+              @endif
             
           </h2>
         </div>
         <div class="block-content">
           <div class="owl-carousel owl-theme owl-style2" data-nav="true" data-dots="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
-            @if($productParentHot[$parent->id])
-            @foreach($productParentHot[$parent->id] as $product) 
+            @if($productHot[$hotCate->id])
+            @foreach($productHot[$hotCate->id] as $product) 
             <div class="item">
               <div class="thumb">
                 <a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">

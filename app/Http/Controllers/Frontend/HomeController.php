@@ -13,7 +13,7 @@ use App\Models\ArticlesCate;
 use App\Models\Customer;
 use App\Models\Newsletter;
 use App\Models\Settings;
-
+use App\Models\HotCate;
 use App\Models\CateParent;
 use App\Models\Cate;
 use App\Models\Pages;
@@ -54,28 +54,29 @@ class HomeController extends Controller
 
         $cateParentHot = CateParent::where('is_hot', 1)->orderBy('display_order')->get();
         $cateHot = Cate::where('is_hot', 1)->orderBy('display_order')->get();
-        if($cateParentHot){
-            foreach($cateParentHot as $parent)
-            {
-                $productParentHot[$parent->id] =Product::where('parent_id', $parent->id)
-                                    ->where('is_hot', 1)
-                                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
-                                    ->select('product_img.image_url', 'product.*')        
-                                    ->orderBy('product.display_order')
-                                    ->limit(10)->get();
+
+        //hotCate
+        $parentArr = $cateArr = [];
+        $hotCateList = HotCate::orderBy('display_order')->get();
+        if($hotCateList){
+            foreach($hotCateList as $hotCate)
+            {                
+                $query = Product::where('is_hot', 1);
+                    if($hotCate->type == 1){
+                        $parentArr[$hotCate->object_id] = CateParent::find($hotCate->object_id);
+                        $query->where('parent_id', $hotCate->object_id);
+                    }else{
+                        $cateArr[$hotCate->object_id] = Cate::find($hotCate->object_id);
+                        $query->where('cate_id', $hotCate->object_id);
+                    }                                 
+                    $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
+                    ->select('product_img.image_url', 'product.*')        
+                    ->orderBy('product.display_order');
+                                    
+                $productHot[$hotCate->id]  = $query->limit(10)->get();
             }
         }
-        if($cateHot){
-            foreach($cateHot as $cate)
-            {
-                $productCateHot[$cate->id] =Product::where('cate_id', $cate->id)
-                                    ->where('is_hot', 1)
-                                    ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
-                                    ->select('product_img.image_url', 'product.*')        
-                                    ->orderBy('product.display_order')
-                                    ->limit(10)->get();
-            }
-        }
+        
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $seo = $settingArr;
         $seo['title'] = $settingArr['site_title'];
@@ -83,7 +84,7 @@ class HomeController extends Controller
         $seo['keywords'] = $settingArr['site_keywords'];
         $socialImage = $settingArr['banner'];
 
-        return view('frontend.home.index', compact('articlesCateHot', 'articlesArr', 'socialImage', 'seo', 'cateParentHot', 'cateHot', 'productParentHot', 'productCateHot'));
+        return view('frontend.home.index', compact('articlesCateHot', 'articlesArr', 'socialImage', 'seo', 'productHot', 'hotCateList', 'parentArr', 'cateArr'));
 
     }
     public function getChild(Request $request){

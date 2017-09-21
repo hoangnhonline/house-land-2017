@@ -37,6 +37,15 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
          Route::get('load-create',   ['as' => 'menu.load-create', 'uses' => 'MenuController@loadCreate']);       
         Route::get('{id}/destroy', ['as' => 'menu.destroy', 'uses' => 'MenuController@destroy']);
     });
+    Route::group(['prefix' => 'hot-cate'], function () {
+        Route::get('/', ['as' => 'hot-cate.index', 'uses' => 'HotCateController@index']);
+        Route::get('/create', ['as' => 'hot-cate.create', 'uses' => 'HotCateController@create']);
+        Route::post('/store', ['as' => 'hot-cate.store', 'uses' => 'HotCateController@store']);
+        Route::post('/store-order', ['as' => 'hot-cate.store-order', 'uses' => 'HotCateController@storeOrder']);
+        Route::get('{id}/edit',   ['as' => 'hot-cate.edit', 'uses' => 'HotCateController@edit']); 
+         Route::get('load-create',   ['as' => 'hot-cate.load-create', 'uses' => 'HotCateController@loadCreate']);       
+        Route::get('{id}/destroy', ['as' => 'hot-cate.destroy', 'uses' => 'HotCateController@destroy']);
+    });
     Route::group(['prefix' => 'bao-gia'], function () {
         Route::get('/', ['as' => 'bao-gia.index', 'uses' => 'BaoGiaController@index']);
         Route::get('/create', ['as' => 'bao-gia.create', 'uses' => 'BaoGiaController@create']);

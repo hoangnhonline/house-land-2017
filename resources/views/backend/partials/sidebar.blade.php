@@ -78,6 +78,12 @@
           </a>       
         </li>
       @if(Auth::user()->role > 1)
+        <li {{ in_array(\Request::route()->getName(), ['hot-cate.edit', 'hot-cate.index']) ? "class=active" : "" }}>
+          <a href="{{ route('hot-cate.index') }}">
+            <i class="fa fa-pencil-square-o"></i> 
+            <span>Danh mục trang chủ</span>          
+          </a>       
+        </li>
         <li {{ in_array(\Request::route()->getName(), ['bao-gia.edit', 'bao-gia.index']) ? "class=active" : "" }}>
           <a href="{{ route('bao-gia.index') }}">
             <i class="fa fa-pencil-square-o"></i> 
