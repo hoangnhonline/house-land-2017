@@ -21,7 +21,9 @@
 						{!! $detail->title !!}
 					</h2>
 				</div>
-				<div class="block-content">					
+				<div class="block-content">	
+					{!! $detail->content !!}				
+					<div class="clearfix" style="margin-bottom:20px"></div>
 					@if(Session::has('message'))
                         
                     <p class="alert alert-info" >{{ Session::get('message') }}</p>
