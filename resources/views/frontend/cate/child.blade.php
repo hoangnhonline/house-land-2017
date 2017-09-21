@@ -30,8 +30,8 @@
 							<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
 						</div>
 						<div class="des">
-							<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">{!! $product->title !!}</a>
 							<p class="code"><span>Mã sản phẩm: </span>{!! $product->code !!}</p>
+							<a href="{{ route('product', [$product->slug, $product->id ])}}" title="{!! $product->title !!}">{!! $product->title !!}</a>							
 						</div>
 					</div><!-- /item -->
 				</div>

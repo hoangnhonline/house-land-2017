@@ -6,6 +6,7 @@ Route::get('backend/logout', ['as' => 'backend.logout', 'uses' => 'Backend\UserC
 Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => 'isAdmin'], function()
 {    
     Route::get('dashboard', ['as' => 'dashboard.index', 'uses' => "SettingsController@dashboard"]);
+    Route::post('save-content', ['as' => 'save-content', 'uses' => "SettingsController@saveContent"]);
     Route::group(['prefix' => 'compare'], function () {
         Route::get('/', ['as' => 'compare.index', 'uses' => 'CompareController@index']);
     });

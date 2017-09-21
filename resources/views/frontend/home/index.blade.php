@@ -7,7 +7,7 @@
 @section('content')
 <div class="block block_big-title">
   <div class="container">
-    <h2>BẤT ĐỘNG SẢN HOUSELAND</h2>
+    <h2 data-text="2" @if($isEdit) class="edit" @endif>{!! $textList[2] !!}</h2>
     <p class="desc">
       {!! $settingArr['gioi_thieu_chung'] !!}
     </p>
@@ -36,8 +36,8 @@
               </a>
               </div>
               <div class="des">
-                <a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">{!! $product->title !!}</a>
                 <p class="code"><span>Mã sản phẩm: </span>{!! $product->code !!}</p>
+                <a href="{{ route('product', [$product->slug, $product->id ]) }}" title="{!! $product->title !!}">{!! $product->title !!}</a>                
               </div>
             </div><!-- /item -->
             @endforeach
@@ -69,7 +69,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
 @endif
 <div class="block block_big-title">
   <div class="container">
-    <h2>TIN TỨC BẤT ĐỘNG SẢN</h2>
+    <h2 data-text="3" @if($isEdit) class="edit" @endif>{!! $textList[3] !!}</h2>
     <p class="desc">
       {!! $settingArr['gioi_thieu_tin_tuc'] !!}
     </p>
@@ -121,10 +121,8 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
 <div class="block-number">
   <div class="container">
     <div class="block-content">
-      <h3><span>CHÚNG TÔI LÀ SỰ LỰA CHỌN ĐÚNG ĐẮN</span></h3>
-      <div class="desc">
-        {!! $settingArr['su_lua_chon_dung_dan'] !!}
-      </div>
+      <h3><span @if($isEdit) class="edit" @endif data-text="8">{!! $textList[8] !!}</span></h3>
+      <div class="desc @if($isEdit) edit @endif" data-text="9">{!! $textList[9] !!}</div>
       <div class="row">
         <ul class="list">
           <li class="col-sm-3 col-xs-12">

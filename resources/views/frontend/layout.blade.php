@@ -83,7 +83,30 @@
 	</div><!-- /wrapper-->
 
 	@include('frontend.partials.footer')
+	<div id="editContentModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
 
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Cập nhật nội dung</h4>
+	      </div>
+	      <form method="POST" action="{{ route('save-content') }}">
+	      {{ csrf_field() }}
+	      <input type="hidden" name="id" id="txtId" value="">
+	      <div class="modal-body">
+	        <textarea rows="5" class="form-control" name="content" id="txtContent"></textarea>
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" id="btnSaveContent">Save</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	      </form>
+	    </div>
+
+	  </div>
+	</div>
 	<!-- ===== JS ===== -->
 	<script src="{{ URL::asset('public/assets/js/jquery.min.js') }}""></script>
 	<!-- ===== JS Bootstrap ===== -->
@@ -187,7 +210,58 @@
 	@yield('js')
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59b215c2a2658a8a"></script> 	
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajaxSetup({
+			      headers: {
+			          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			      }
+			  });
 
+			$('.edit').click(function(){
+				$('#txtId').val($(this).data('text'));
+				$('#txtContent').val($(this).html());
+				$('#editContentModal').modal('show');
+			});
+			$('#btnSaveContent').click(function(){
+				$.ajax({
+					url : '{{ route('save-content') }}',
+					type : "POST",
+					data : {
+						id : $('#txtId').val(),
+						content : $('#txtContent').val()
+					},
+					success:  function(){
+						window.location.reload();
+					}
+
+				});
+			});
+		});
+	</script>
+<style type="text/css">
+	.edit {  
+	position: relative;
+	border: 1px dashed transparent;
+	min-height: 20px;
+	}
+	.edit:hover {
+	border: 1px dashed #c70f19;\
+	}
+	.edit:hover:before {
+	content: "\f040";
+	font-family: "FontAwesome";
+	font-size: 13px;
+	color: #ffffff;
+	width: 20px;
+	height: 20px;
+	display: block;
+	background: #c70f19;
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	}
+</style>
 </body>
 </html>

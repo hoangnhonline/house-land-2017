@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-xs-12 ft-link ft-information ft-title">
-                    <div class="block-title">THÔNG TIN CÔNG TY</div>
+                    <div class="block-title @if($isEdit) edit @endif" data-text="4">{!! $textList[4] !!}</div>
                     <div class="block-cotent">
                         <ul class="list">
                             @if($footerLink1)
@@ -16,7 +16,7 @@
                 </div><!-- /ft-information-->
                 <div class="col-sm-4 col-xs-12 ft-link ft-links ft-title">
                     <div class="item">
-                        <div class="block-title">DỊCH VỤ BẤT ĐỘNG SẢN</div>
+                        <div class="block-title @if($isEdit) edit @endif" data-text="5">{!! $textList[5] !!}</div>
                         <div class="block-cotent">
                             <ul class="list">
                                 @if($footerLink2)
@@ -28,7 +28,7 @@
                         </div>
                     </div><!-- /item-->
                     <div class="item">
-                        <div class="block-title">NHẬN THÔNG TIN VỀ HOUSELAND</div>
+                        <div class="block-title @if($isEdit) edit @endif" data-text="7">{!! $textList[7] !!}</div>
                         <div class="block-cotent">
                             <div class="resgis-form">
                                 
@@ -40,7 +40,7 @@
                     </div><!-- /item-->
                 </div><!-- /ft-links-->
                 <div class="col-sm-4 col-xs-12 ft-contact ft-title">
-                    <div class="block-title">LIÊN HỆ VỚI CHÚNG TÔI</div>
+                    <div class="block-title @if($isEdit) edit @endif" data-text="6">{!! $textList[6] !!}</div>
                     <div class="block-content">
                         <address>
                            {!! $settingArr['chi_nhanh_phia_nam'] !!}
@@ -54,8 +54,7 @@
         </div>
     </div><!-- /footer-top-->
     <div class="footer-bot">
-        <div class="container">
-            <p>2017 Designed by iWeb247.vn</p>     
+        <div class="container">            
             <div class="fbchatbox hidden-xs">
                 <div class="fb-page fb-page1" data-href="{{ $settingArr['facebook_fanpage'] }}" data-small-header="true" data-adapt-container-width="false" data-height="300" data-width="300" data-hide-cover="true" data-show-facepile="true" data-show-posts="false" data-tabs="messages"><div class="fb-xfbml-parse-ignore"></div></div>
                 <span id="closefbchat" style="white-space: nowrap; position: absolute; right: 2px; bottom: 0px; padding: 5px 25px; background: #f46602; color: rgb(255, 255, 255); cursor: pointer; border-radius: 4px 4px 0 0;">Tắt Chat</span>

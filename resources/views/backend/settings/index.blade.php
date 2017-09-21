@@ -132,11 +132,7 @@
                 <div class="form-group col-md-6">
                   <label>Nội dung giới thiệu tin tức </label>
                   <textarea name="gioi_thieu_tin_tuc" id="gioi_thieu_tin_tuc" rows="7" class="form-control">{{ $settingArr['gioi_thieu_tin_tuc'] }}</textarea>
-                </div>  
-                <div class="form-group col-md-12">
-                  <label>Chúng tôi là sự lựa chọn đúng đắn </label>
-                  <textarea name="su_lua_chon_dung_dan" id="su_lua_chon_dung_dan" rows="7" class="form-control">{{ $settingArr['su_lua_chon_dung_dan'] }}</textarea>
-                </div>   
+                </div>                    
                 <div class="clearfix"></div>
                 <div class="form-group col-md-12" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-4 row">Logo ( 250 x 70 px )</label>    
