@@ -18,6 +18,9 @@ class NewsletterController extends Controller
     */
     public function index(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $status = isset($request->status) ? $request->status : 0;
 
         $email = isset($request->email) && $request->email != '' ? $request->email : '';
@@ -39,6 +42,9 @@ class NewsletterController extends Controller
     }    
     public function download()
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $contents = [];
         $query = Newsletter::orderBy('id', 'desc')->get();
         $i = 0;
@@ -99,6 +105,9 @@ class NewsletterController extends Controller
     */
     public function update(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[                              

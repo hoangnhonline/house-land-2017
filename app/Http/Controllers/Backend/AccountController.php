@@ -20,7 +20,7 @@ class AccountController extends Controller
     */
     public function index(Request $request)
     {         
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role < 3){
             return redirect()->route('product.index');
         }
         $role = $leader_id = 0;
@@ -49,7 +49,7 @@ class AccountController extends Controller
     }
     public function create()
     {        
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role < 3){
             return redirect()->route('product.index');
         }
         $modList = Account::where(['role' => 2, 'status' => 1])->get();
@@ -88,6 +88,9 @@ class AccountController extends Controller
     public function store(Request $request)
     {
        
+        if(Auth::user()->role < 3){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
          
         $this->validate($request,[
@@ -130,7 +133,7 @@ class AccountController extends Controller
     }
     public function destroy($id)
     {
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role < 3){
             return redirect()->route('product.index');
         }
         // delete
@@ -143,7 +146,7 @@ class AccountController extends Controller
     }
     public function edit($id)
     {
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role < 3){
             return redirect()->route('product.index');
         }
         $detail = Account::find($id);
@@ -162,6 +165,9 @@ class AccountController extends Controller
     }
     public function update(Request $request)
     {
+        if(Auth::user()->role < 3){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[
@@ -190,7 +196,9 @@ class AccountController extends Controller
     }
     public function updateStatus(Request $request)
     {       
-
+        if(Auth::user()->role < 3){
+            return redirect()->route('product.index');
+        }
         $model = Account::find( $request->id );
 
         

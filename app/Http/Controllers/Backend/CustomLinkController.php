@@ -19,6 +19,9 @@ class CustomLinkController extends Controller
     */
     public function index(Request $request)
     {
+        if(Auth::user()->role < 3 ){
+            return redirect()->route('product.index');
+        }
         $block_id = isset($request->block_id) ? $request->block_id : 1;
 
         if($block_id == 1){
@@ -44,7 +47,9 @@ class CustomLinkController extends Controller
     */
     public function create(Request $request)
     {
-
+        if(Auth::user()->role < 3 ){
+            return redirect()->route('product.index');
+        }
         $block_id = isset($request->block_id) ? $request->block_id : 1;
         if($block_id == 1){
             $name = "Liên kết nổi bật";
@@ -62,6 +67,9 @@ class CustomLinkController extends Controller
     */
     public function store(Request $request)
     {
+        if(Auth::user()->role < 3 ){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[            
@@ -99,6 +107,9 @@ class CustomLinkController extends Controller
     */
     public function edit($id)
     {
+        if(Auth::user()->role < 3 ){
+            return redirect()->route('product.index');
+        }
         $detail = CustomLink::find($id);
         $block_id = $detail->block_id;
         if($block_id == 1){
@@ -118,6 +129,9 @@ class CustomLinkController extends Controller
     */
     public function update(Request $request)
     {
+        if(Auth::user()->role < 3 ){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[            

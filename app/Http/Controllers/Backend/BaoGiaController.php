@@ -20,7 +20,9 @@ class BaoGiaController extends Controller
     */
     public function index(Request $request)
     {     
-        
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $type = isset($request->type) ? $request->type : 1;
 
         $query = BaoGia::where('type', $type);        
@@ -48,7 +50,10 @@ class BaoGiaController extends Controller
     * @return Response
     */
     public function edit($id)
-    {        
+    {     
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }   
         $detail = BaoGia::find($id);
         $meta = (object) [];
         if ( $detail->meta_id > 0){
@@ -66,6 +71,9 @@ class BaoGiaController extends Controller
     */
     public function destroy($id)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         // delete
         $model = BaoGia::find($id);
         $model->delete();

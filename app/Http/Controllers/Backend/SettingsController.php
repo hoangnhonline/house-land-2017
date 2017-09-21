@@ -17,7 +17,7 @@ class SettingsController  extends Controller
 {
     public function index(Request $request)
     {              
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role < 3){
             return redirect()->route('product.index');
         }
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
@@ -33,7 +33,7 @@ class SettingsController  extends Controller
     }
      public function noti(Request $request)
     {           
-        if(Auth::user()->role == 1){
+        if(Auth::user()->role < 3){
             return redirect()->route('product.index');
         }   
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
@@ -42,6 +42,9 @@ class SettingsController  extends Controller
     }
     public function dashboard(Request $request)
     {              
+        if(Auth::user()->role < 3){
+            return redirect()->route('product.index');
+        }
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $query = Product::where('product.status', 2);
         
@@ -74,6 +77,9 @@ class SettingsController  extends Controller
     }
     public function update(Request $request){
 
+        if(Auth::user()->role < 3){
+            return redirect()->route('product.index');
+        }
     	$dataArr = $request->all();
 
     	$this->validate($request,[            

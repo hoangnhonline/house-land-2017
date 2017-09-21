@@ -18,6 +18,9 @@ class ContactController extends Controller
     */
     public function index(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $status = isset($request->status) ? $request->status : 0;
         $type = isset($request->type) ? $request->type : 0;
         $email = isset($request->email) && $request->email != '' ? $request->email : '';
@@ -49,6 +52,9 @@ class ContactController extends Controller
     }    
     public function download()
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $contents = [];
         $query = Contact::whereRaw('1')->orderBy('id', 'DESC')->get();
         $i = 0;
@@ -95,6 +101,9 @@ class ContactController extends Controller
     */
     public function edit($id)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $tagSelected = [];
 
         $detail = Contact::find($id);
@@ -111,6 +120,9 @@ class ContactController extends Controller
     */
     public function update(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[                              
@@ -140,6 +152,9 @@ class ContactController extends Controller
     */
     public function destroy($id)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         // delete
         $model = Contact::find($id);
         $model->delete();

@@ -18,6 +18,9 @@ class ThongSoController extends Controller
     */
     public function index(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $items = ThongSo::all()->sortBy('display_order');
         return view('backend.thong-so.index', compact( 'items' ));
     }
@@ -29,6 +32,9 @@ class ThongSoController extends Controller
     */
     public function create()
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         return view('backend.thong-so.create');
     }
 
@@ -40,6 +46,9 @@ class ThongSoController extends Controller
     */
     public function store(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[
@@ -75,6 +84,9 @@ class ThongSoController extends Controller
     */
     public function edit($id)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $detail = ThongSo::find($id);
 
         return view('backend.thong-so.edit', compact( 'detail' ));
@@ -89,6 +101,9 @@ class ThongSoController extends Controller
     */
     public function update(Request $request)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         $dataArr = $request->all();
         
         $this->validate($request,[
@@ -116,6 +131,9 @@ class ThongSoController extends Controller
     */
     public function destroy($id)
     {
+        if(Auth::user()->role == 1 ){
+            return redirect()->route('product.index');
+        }
         // delete
         $model = ThongSo::find($id);
         $model->delete();
