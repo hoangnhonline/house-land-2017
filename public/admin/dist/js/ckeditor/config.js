@@ -5,9 +5,11 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 var strPlugins = 'uploadimage';
 var toolbar = [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
-    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: ['Image', 'Bold', 'Italic', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Underline', 'Subscript', 'Superscript', 'NumberedList', 'BulletedList', 'Link', 'Unlink' ] },                             
-    { name: 'styles', items: [ 'Format' ] },
-    { name: 'tools', items: [ 'Maximize' ] },                      
+    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: ['Image', 'Bold', 'Italic', 'Strike',  'Underline', 'Subscript', 'Superscript', 'NumberedList', 'BulletedList', 'Link', 'Unlink' ] },
+    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Undo', 'Redo', 'HorizontalRule', 'Outdent', 'Indent', 'SpecialChar'] },                                 
+    { name: 'styles', items: ['TextColor', 'BGColor', 'Styles', 'Format' ] },
+    { name: 'tools', items: [ 'Maximize' ] },      
+    { name: 'about', items: [ 'About' ] }                
 ];
 CKEDITOR.editorConfig = function( config )
 {
@@ -29,4 +31,5 @@ CKEDITOR.editorConfig = function( config )
 	CKEDITOR.config.language = 'vi';
 	CKEDITOR.config.height = 500;
 	CKEDITOR.config.allowedContent = true;
+	CKEDITOR.config.colorButton_enableMore = true;
 };
