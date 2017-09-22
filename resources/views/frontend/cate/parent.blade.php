@@ -10,7 +10,7 @@
 		</ul>
 	</div>
 </div><!-- /block-breadcrumb -->
-<div class="block block_big-title">
+<div class="block block_big-title" style="margin-bottom:0px">
 	<div class="container">
 		<h1>{!! $parentDetail->name !!}</h1>
 		<p class="desc">{!! $parentDetail->description !!}</p>
