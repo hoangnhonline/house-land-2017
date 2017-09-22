@@ -19,7 +19,7 @@
 @foreach($hotCateList as $hotCate)
 <div class="block2 block-btn-slide block-ct-pro block-title-commom">
       <div class="container">
-        <div class="block block-title">
+        <div class="block2 block-title">
           <h2>
             
               <i class="fa fa-home"></i>
