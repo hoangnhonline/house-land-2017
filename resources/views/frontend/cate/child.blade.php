@@ -12,9 +12,9 @@
 	</div>
 </div><!-- /block-breadcrumb -->
 
-<div class="block block-ct-pro block-title-commom">
+<div class="block2 block-ct-pro block-title-commom">
 	<div class="container">
-		<div class="block block-title">
+		<div class="block2 block-title">
 			<h1>
 				<i class="fa fa-home"></i>
 				{!! $cateDetail->name !!}

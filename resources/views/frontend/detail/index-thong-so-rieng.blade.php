@@ -59,7 +59,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="block block-share" id="share-buttons">
+			<div class="block block-share" id="share-buttons" style="margin-bottom:10px">
 				<div class="share-item">
 					<div class="fb-like" data-href="{{ url()->current() }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
 				</div>
@@ -76,11 +76,11 @@
 				</div>
 			</div><!-- /block-share-->
 			@if($detail->content != '' || $detail->tien_do != '' || $detail->hoi_dap != '')
-			<div class="block block-tabs">
+			<div class="block block-tabs"  style="margin-bottom:15px">
 			 	<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
 					@if($detail->content != '')
-					<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Mô tả chi tiết</a></li>
+					<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Thông tin dự án</a></li>
 					@endif
 					@if($detail->tien_do != '')
 					<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Tiến độ xây dựng</a></li>
