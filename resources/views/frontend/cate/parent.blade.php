@@ -19,9 +19,9 @@
 @if($cateList)
 @foreach($cateList as $cate)
 @if(isset($productArr[$cate->id]) && count($productArr[$cate->id]) > 0 )
-<div class="block block-btn-slide block-ct-pro block-title-commom">
+<div class="block2 block-btn-slide block-ct-pro block-title-commom">
 	<div class="container">
-		<div class="block block-title">
+		<div class="block2 block-title">
 			<h2>
 				<i class="fa fa-home"></i>
 				<a href="{{ route('cate', [$parentDetail->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a>
