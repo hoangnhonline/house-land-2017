@@ -22,7 +22,7 @@
 				</h2>
 			</div>
 			<div class="block-content">
-				<div class="block block-aritcle">
+				<div class="block block-article">
 					<h1 class="title">{!! $detail->title !!}</h1>
 					<p class="text">{!! $detail->content !!}</p>					
 					
