@@ -2,7 +2,7 @@
 
 @include('frontend.partials.meta')
 @section('content')
-<div class="block block-breadcrumb">
+<div class="block2 block-breadcrumb">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="{{ route('home') }}">Trang chủ</a></li>			
@@ -16,7 +16,7 @@
 	<div class="row">
 		<div class="col-sm-9 col-xs-12 block-col-left">
 			<div class="block-title-commom block-detail">
-				<div class="block2 block-title">
+				<div class="block2 block-title"  style="margin-bottom:15px">
 					<h2>
 						<i class="fa fa-home"></i>
 						{!! $detail->cate->name !!}

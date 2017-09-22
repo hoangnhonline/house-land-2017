@@ -3,7 +3,7 @@
 @include('frontend.partials.meta')
 @section('content')
 <div class="wrapper">
-    <div class="block block-breadcrumb">
+    <div class="block2 block-breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="{{ route('home') }}">Trang chủ</a></li>

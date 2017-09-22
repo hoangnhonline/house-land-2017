@@ -84,13 +84,13 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
   </div>
 </div><!-- /block_big-title -->
 
-<div class="block block-news block-title-commom">
+<div class="block2 block-news block-title-commom">
   <div class="container">
     <div class="block-content row">
       @if($articlesCateHot->count() > 0)
       @foreach($articlesCateHot as $cateHot)
       <div class="col-sm-6 col-xs-12 block-news-left">
-        <div class="block block-title">
+        <div class="block2 block-title">
           <h2>
             <i class="fa fa-home"></i>
             {!! $cateHot->name !!}
