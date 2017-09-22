@@ -5,7 +5,7 @@
 @include('frontend.home.slider')
 
 @section('content')
-<div class="block block_big-title">
+<div class="block block_big-title" style="margin-bottom:0px">
   <div class="container">
     <h1 data-text="2" @if($isEdit) class="edit" @endif>{!! $textList[2] !!}</h1>
     @if($settingArr['gioi_thieu_chung'] != '')
@@ -73,7 +73,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
 </div><!-- item-slide -->
 @endforeach
 @endif
-<div class="block block_big-title">
+<div class="block block_big-title" style="margin-bottom:0px">
   <div class="container">
     <h2 data-text="3" @if($isEdit) class="edit" @endif>{!! $textList[3] !!}</h2>
     @if($settingArr['gioi_thieu_tin_tuc'] != '')
