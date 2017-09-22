@@ -8,9 +8,11 @@
 <div class="block block_big-title">
   <div class="container">
     <h1 data-text="2" @if($isEdit) class="edit" @endif>{!! $textList[2] !!}</h1>
+    @if($settingArr['gioi_thieu_chung'] != '')
     <p class="desc">
       {!! $settingArr['gioi_thieu_chung'] !!}
     </p>
+    @endif
   </div>
 </div><!-- /block_big-title -->
 @if($hotCateList)
@@ -73,10 +75,12 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
 @endif
 <div class="block block_big-title">
   <div class="container">
-    <h1 data-text="3" @if($isEdit) class="edit" @endif>{!! $textList[3] !!}</h1>
+    <h2 data-text="3" @if($isEdit) class="edit" @endif>{!! $textList[3] !!}</h2>
+    @if($settingArr['gioi_thieu_tin_tuc'] != '')
     <p class="desc">
       {!! $settingArr['gioi_thieu_tin_tuc'] !!}
     </p>
+    @endif
   </div>
 </div><!-- /block_big-title -->
 
