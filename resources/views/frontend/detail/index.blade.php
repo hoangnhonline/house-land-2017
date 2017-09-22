@@ -12,18 +12,18 @@
 		</ul>
 	</div>
 </div><!-- /block-breadcrumb -->
-<div class="block block-two-col container">
+<div class="block2 block-two-col container" style="margin-bottom:10px">
 	<div class="row">
 		<div class="col-sm-9 col-xs-12 block-col-left">
 			<div class="block-title-commom block-detail">
-				<div class="block block-title">
+				<div class="block2 block-title">
 					<h2>
 						<i class="fa fa-home"></i>
 						{!! $detail->cate->name !!}
 					</h2>
 				</div>
 				<div class="block-content">
-					<div class="block block-slide-detail">
+					<div class="block block-slide-detail" style="margin-bottom:10px">
 						<!-- Place somewhere in the <body> of your page -->
 						@if($detail->is_slider == 1)
 						<div id="slider" class="flexslider">

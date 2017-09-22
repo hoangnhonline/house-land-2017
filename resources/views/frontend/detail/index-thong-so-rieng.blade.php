@@ -12,8 +12,8 @@
 		</ul>
 	</div>
 </div><!-- /block-breadcrumb -->
-<div class="block block-two-col container">
-	<div class="block block-title-commom block-detail">
+<div class="block2 block-two-col container" style="margin-bottom:10px">
+	<div class="block2 block-title-commom block-detail">
 		<div class="block block-title">
 			<h2>
 				<i class="fa fa-home"></i>
@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-sm-7">
 					@if($detail->is_slider == 1)
-					<div class="block block-slide-detail">
+					<div class="block block-slide-detail" style="margin-bottom:10px">
 						<!-- Place somewhere in the <body> of your page -->
 						<div id="slider" class="flexslider">
 							<ul class="slides">
