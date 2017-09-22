@@ -12,7 +12,7 @@
 	</div>
 </div><!-- /block-breadcrumb -->
 
-<div class="block2 block-ct-pro block-title-commom">
+<div class="block2 block-ct-pro block-title-commom block-repadding">
 	<div class="container">
 		<div class="block2 block-title">
 			<h1>
@@ -24,7 +24,7 @@
 			<div class="row">
 				@if($productList)
 			  	@foreach($productList as $product)				
-				<div class="col-sm-4 col-xs-6">
+				<div class="col-sm-4 col-xs-6 box-item">
 					<div class="item">
 						<div class="thumb">
 							<a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
