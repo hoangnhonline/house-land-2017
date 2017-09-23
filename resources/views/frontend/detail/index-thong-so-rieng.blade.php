@@ -122,7 +122,7 @@
 		</div>
 	</div><!-- /block-detail -->
 	@if($otherList->count() > 0)
-	<div class="block-title-commom block-relative">
+	<div class="block-title-commom block-relative block-btn-slide block-ct-pro">
 		<div class="block block-title">
 			<h2>
 				<i class="fa fa-home"></i>
@@ -130,7 +130,7 @@
 			</h2>
 		</div>
 		<div class="block-content">
-			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-loop="false" data-margin="30" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
+			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-loop="false" data-margin="15" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
 			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">
