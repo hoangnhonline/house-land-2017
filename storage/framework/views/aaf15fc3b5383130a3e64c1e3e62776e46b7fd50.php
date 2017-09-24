@@ -2,7 +2,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>thanhphuthinhland - Đăng nhập hệ thống</title>
+    <title>HOUSELAND - Đăng nhập hệ thống</title>
     
     
     <link rel="stylesheet" href="css/reset.css">
