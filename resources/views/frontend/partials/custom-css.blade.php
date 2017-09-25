@@ -1,5 +1,5 @@
 <style>
-.block-breadcrumb .breadcrumb li.active {
+.block-breadcrumb .breadcrumb li.active, .block-breadcrumb .breadcrumb li.active a {
     color: {{ $settingArr['mau_chu_dao'] }};
 }
 .block-search .block-search-inner {
