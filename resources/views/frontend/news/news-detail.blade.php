@@ -7,7 +7,7 @@
   <div class="container">
     <ul class="breadcrumb">
       <li><a href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>            
-      <li class="active">{!! $cateDetail->name !!}</li>
+      <li class="active"><a href="{{ route('news-list', $cateDetail->slug ) }}" title="{!! $cateDetail->name !!}">{!! $cateDetail->name !!}</a></li>
     </ul>
   </div>
 </div><!-- /block-breadcrumb -->

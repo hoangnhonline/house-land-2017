@@ -123,7 +123,7 @@
 	</div><!-- /block-detail -->
 	@if($otherList->count() > 0)
 	<div class="block-title-commom block-relative block-btn-slide block-ct-pro">
-		<div class="block block-title">
+		<div class="block2 block-title">
 			<h2>
 				<i class="fa fa-home"></i>
 				DỰ ÁN LIÊN QUAN
