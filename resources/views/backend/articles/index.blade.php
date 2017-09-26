@@ -87,10 +87,16 @@
                           <span class="name">{!! $item->createdUser->display_name !!}</span>
                         </li>
                         <li>
-                          {!! date('d/m/Y', strtotime($item->created_at)) !!}
+                            <span>Ngày tạo:</span>
+                          <span class="name">{!! date('d/m/Y H:i', strtotime($item->created_at)) !!}</span>
+                          
                         </li>
+                         <li>
+                            <span>Cập nhật lần cuối:</span>
+                          <span class="name">{!! $item->updatedUser->display_name !!} ( {!! date('d/m/Y H:i', strtotime($item->updated_at)) !!} )</span>          
+                        </li>  
                         <li>
-                          {!! Helper::view($item->id, 1) !!} lượt xem
+                          {!! Helper::view($item->id, 2) !!} lượt xem
                         </li>
                       </ul>
                     </div>
