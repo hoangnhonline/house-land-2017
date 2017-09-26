@@ -33,8 +33,7 @@
             <select class="form-control" name="role" id="role">      
               <option value="" >--Tất cả--</option>                       
               <option value="1" {{ $role == 1 ? "selected" : "" }}>Editor</option>
-              <option value="2" {{ $role == 2 ? "selected" : "" }}>Mod</option> 
-              <option value="3" {{ $role == 3 ? "selected" : "" }}>Admin</option>
+              <option value="2" {{ $role == 2 ? "selected" : "" }}>Mod</option>               
             </select>
           </div>          
           </form>

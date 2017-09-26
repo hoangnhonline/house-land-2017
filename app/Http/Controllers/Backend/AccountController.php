@@ -69,15 +69,15 @@ class AccountController extends Controller
         
          $this->validate($request,[ 
             'old_pass' => 'required',
-            'new_pass' => 'required|digits_between:6,30',
-            'new_pass_re' => 'required|same:new_pass|digits_between:6,30'
+            'new_pass' => 'required|between:6,30',
+            'new_pass_re' => 'required|same:new_pass|between:6,30'
         ],
         [   
             'old_pass.required' => 'Bạn chưa nhập mật khẩu hiện tại',     
             'new_pass.required' => 'Bạn chưa nhập mật khẩu',
-            'new_pass.digits_between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
+            'new_pass.between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
             'new_pass_re.required' => 'Bạn chưa nhập lại mật khẩu',
-            'new_pass_re.digits_between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
+            'new_pass_re.between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
             'new_pass_re.same' => 'Mật khẩu nhập lại không giống'                     
         ]);      
         if( $old_pass == '' || $new_pass == "" || $new_pass_re == ""){
@@ -110,8 +110,8 @@ class AccountController extends Controller
          
         $this->validate($request,[            
             'email' => 'email|required|unique:users,email',
-            'password' => 'required|digits_between:6,30',
-            're_password' => 'required|same:password|digits_between:6,30',
+            'password' => 'required|between:6,30',
+            're_password' => 'required|same:password|between:6,30',
             'display_name' => 'required',
             'role' => 'required'
         ],
@@ -121,9 +121,9 @@ class AccountController extends Controller
             'email.unique' => 'Email đã được sử dụng.',
             'email.email' => 'Bạn nhập email không hợp lệ',
             'password.required' => 'Bạn chưa nhập mật khẩu',
-            'password.digits_between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
+            'password.between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
             're_password.required' => 'Bạn chưa nhập lại mật khẩu',
-            're_password.digits_between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
+            're_password.between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
             're_password.same' => 'Mật khẩu nhập lại không giống',            
             'display_name.required' => 'Bạn chưa nhập tên hiển thị',
             'role.required' => 'Bạn chưa chọn phân loại'

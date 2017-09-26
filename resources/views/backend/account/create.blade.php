@@ -68,8 +68,7 @@
                     <option value="" >--Chọn role--</option>                       
                     <option value="1" {{ old('role') == 1 ? "selected" : "" }}>Editor</option>                  
                     @if(Auth::user()->role == 3)
-                    <option value="2" {{ old('role') == 2 ? "selected" : "" }}>Mod</option> 
-                    <option value="3" {{ old('role') == 3 ? "selected" : "" }}>Admin</option>                  
+                    <option value="2" {{ old('role') == 2 ? "selected" : "" }}>Mod</option>                            
                     @endif
                   </select>
                 </div>                 
