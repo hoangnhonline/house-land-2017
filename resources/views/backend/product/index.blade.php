@@ -131,10 +131,23 @@
                     @if( $item->is_hot == 1 )
                     <label class="label label-danger">HOT</label>
                     @endif
-                 
+                    
                   <br>
                   <p style="color:#00acd6;font-weight:bold;margin-top:10px">{{ $item->cateParent->name }} / {{ $item->cate->name }}</p>
-                    
+                    <div class="block-author">
+                      <ul>
+                        <li>
+                          <span>Tác giả:</span>
+                          <span class="name">{!! $item->createdUser->display_name !!}</span>
+                        </li>
+                        <li>
+                          {!! date('d/m/Y', strtotime($item->created_at)) !!}
+                        </li>
+                        <li>
+                          {!! Helper::view($item->id, 1) !!} lượt xem
+                        </li>
+                      </ul>
+                    </div>
                   </td>
                  
                   <td style="white-space:nowrap; text-align:right">

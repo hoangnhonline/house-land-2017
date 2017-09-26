@@ -75,12 +75,25 @@
                   <img class="img-thumbnail lazy" data-original="{{ Helper::showImage($item->image_url)}}" width="145">
                 </td>        
                 <td>                  
-                  <a href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
+                  <a style="font-size:17px" href="{{ route( 'articles.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a>
                   
                   @if( $item->is_hot == 1 )
                   <label class="label label-danger">HOT</label>
                   @endif
-
+                  <div class="block-author">
+                      <ul>
+                        <li>
+                          <span>Tác giả:</span>
+                          <span class="name">{!! $item->createdUser->display_name !!}</span>
+                        </li>
+                        <li>
+                          {!! date('d/m/Y', strtotime($item->created_at)) !!}
+                        </li>
+                        <li>
+                          {!! Helper::view($item->id, 1) !!} lượt xem
+                        </li>
+                      </ul>
+                    </div>
                   <p>{{ $item->description }}</p>
                 </td>
                 <td style="white-space:nowrap"> 
