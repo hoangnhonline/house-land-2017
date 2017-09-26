@@ -18,6 +18,7 @@ use App\Models\CateParent;
 use App\Models\Cate;
 use App\Models\Pages;
 use App\Models\Member;
+use App\Models\Rating;
 
 use Helper, File, Session, Auth, Hash, Response;
 
@@ -28,7 +29,10 @@ class HomeController extends Controller
 
     public function __construct(){
         
-       
+       $a = Articles::all();
+       foreach ($a  as $ar) {
+           
+       }
 
     }    
     public function rss(Request $request){
@@ -37,7 +41,20 @@ class HomeController extends Controller
         $articlesList = Articles::where('status', 1)->where('cate_id', '<>', 7)->orderBy('id', 'desc')->get();  
         return Response::view('frontend.home.rss', compact('productList', 'settingArr', 'articlesList'))->header('Content-Type', 'text/xml');
     }
-    
+    public function insertRating(Request $request){
+        $score = $request->score;
+        $object_id = $request->object_id;
+        $object_type = $request->object_type;
+
+        $rs = Rating::where(['score' => $score, 'object_id' => $object_id, 'object_type' => $object_type])->first();
+        if($rs){
+            $rs->amount = $rs->amount + 1;
+            $rs->save();
+        }else{
+            Rating::create(['score' => $score, 'object_id' => $object_id, 'object_type' => $object_type, 'amount' => 1]);
+        }
+
+    }
     public function index(Request $request)
     {         
         $articlesArr = [];

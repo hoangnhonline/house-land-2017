@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Frontend'], function()
 {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);   
     Route::get('/rss', ['as' => 'rss', 'uses' => 'HomeController@rss']);
+    Route::post('/rating', ['as' => 'rating', 'uses' => 'HomeController@insertRating']);    
     Route::post('/send-contact', ['as' => 'send-contact', 'uses' => 'ContactController@store']);
     Route::post('/send-bao-gia', ['as' => 'send-thi-cong', 'uses' => 'ContactController@storeThiCong']);
     Route::post('/send-thiet-ke', ['as' => 'send-thiet-ke', 'uses' => 'ContactController@storeThietKe']);

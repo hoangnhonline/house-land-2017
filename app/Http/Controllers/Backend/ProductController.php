@@ -28,15 +28,7 @@ class ProductController extends Controller
     */
     public function index(Request $request)
     {        
-        $a = Product::all();
-        foreach($a as $ar){
-            $object_id = $ar->id;
-            // store Rating
-            for($i = 1; $i <= 5 ; $i++ ){
-                $amount = $i == 5 ? 1 : 0;
-                Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 1, 'amount' => $amount]);
-            }
-        }
+        
         $arrSearch['status'] = $status = isset($request->status) ? $request->status : 1; 
         $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;                   
         $arrSearch['parent_id'] = $parent_id = isset($request->parent_id) ? $request->parent_id : null;

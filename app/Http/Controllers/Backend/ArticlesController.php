@@ -23,7 +23,16 @@ class ArticlesController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {        
+    {   
+        $a = Articles::all();
+        foreach($a as $ar){
+            $object_id = $ar->id;
+            // store Rating
+            for($i = 1; $i <= 5 ; $i++ ){
+                $amount = $i == 5 ? 1 : 0;
+                Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 2, 'amount' => $amount]);
+            }
+        }     
         $cate_id = isset($request->cate_id) ? $request->cate_id : null;
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';

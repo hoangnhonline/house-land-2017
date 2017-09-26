@@ -33,7 +33,17 @@ var __slice = [].slice;
                 return _this.syncRating();
             });
             this.$el.on('click.starrr', 'i', function(e) {
-                console.log(_this.$el.find('i').index(e.currentTarget) + 1);
+                
+                var score = _this.$el.find('i').index(e.currentTarget) + 1;
+                $('#rating-form #score').val(score);
+                $.ajax({
+                    url : $('#rating-route').val(),
+                    type : 'POST',
+                    data : $('#rating-form').serialize(),
+                    success : function(data){
+                        console.log(data);
+                    }
+                });
                 //return _this.setRating(_this.$el.find('i').index(e.currentTarget) + 1);
             });
             this.$el.on('starrr:change', this.options.change);

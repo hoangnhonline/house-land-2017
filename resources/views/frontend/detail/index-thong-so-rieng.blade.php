@@ -171,6 +171,13 @@
 	</div><!-- /block-title-commom -->
 	@endif
 </div><!-- /block_big-title -->
+<input type="hidden" id="rating-route" value="{{ route('rating') }}">
+<form id="rating-form">
+	{{ csrf_field() }}
+	<input type="hidden" id="object_id" name="object_id" value="{{ $detail->id }}">
+	<input type="hidden" id="object_type" name="object_type" value="1">
+	<input type="hidden" id="score" name="score" value="">
+</form>
 @stop
 @section('js')
 <!-- Flexslider -->
