@@ -56,14 +56,8 @@
                     <button class="btn btn-default btn-sm" id="btnUploadImage" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                   </div>
                   <div style="clear:both"></div>
-                </div>  
-                <div class="form-group">
-                  <label>Ẩn / Hiện</label>
-                  <select name="status" class="form-control" id="status">
-                  	<option value="1" {{ $detailBanner->status == 1  ? "selected" : "" }}>Hiện</option>
-                  	<option value="2" {{ $detailBanner->status == 2  ? "selected" : "" }}>Ẩn</option>
-                  </select>
-                </div>           
+                </div>        
+                <input type="hidden" name="status" value="1">       
                 <!-- textarea -->
                 <div class="form-group">
                   <label>Loại banner</label>
