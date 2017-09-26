@@ -24,14 +24,8 @@
 			<div class="block-content">
 				<div class="block block-article">
 					<h1 class="title">{!! $detail->title !!}</h1>
-					<div class="reviews-summary">
-						<div class="rating-title">Đánh giá bài viết:</div>
-                        <div class="rating-summary">
-                            <div id="stars-existing" class="starrr" data-rating='4'></div>
-                        </div>
-                        <div class="rating-action dot">
-                       		<span>Xếp hạng 3.5 - 150 Phiếu bầu</span>
-                        </div>
+					<div class="reviews-summary" id="rating-summary">
+						
                     </div><!-- /reviews-summary -->
                     <div class="block-author">
                     	<ul>
@@ -93,5 +87,22 @@
 </form>
 @stop
 @section('js')
-<script src="{{ URL::asset('public/assets/js/rating.js') }}"></script>
+<script src="{{ URL::asset('public/assets/lib/starrating/js/star-rating.js') }}"></script>  
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+	        url : $('#rating-route').val(),
+	        type : 'POST',
+	        dataType : 'html',
+	        data : $('#rating-form').serialize(),
+	        success : function(data){
+	            $('#rating-summary').html(data);
+	            var $input = $('input.rating');
+	            if ($input.length) {
+	                $input.removeClass('rating-loading').addClass('rating-loading').rating();
+	            }
+	        }
+   		});
+	});
+</script>  
 @stop

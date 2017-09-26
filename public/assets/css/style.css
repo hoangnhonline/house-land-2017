@@ -22,6 +22,7 @@
 @import url(../lib/font-awesome/font-awesome.min.css);
 @import url(../lib/carousel/owl.carousel.min.css);
 @import url(../lib/flexslider/flexslider.css);
+@import url(../lib/starrating/css/star-rating.css);
 /* Fonts */
 
 @font-face {
@@ -1827,21 +1828,25 @@ h2.tit-page3 {
 .reviews-summary .rating-title {
   font-weight: bold;
 }
-.rating-summary #stars-existing .fa-star-o {
+.rating-summary .rating-xs {
   font-size: 18px;
-  position: relative;
-  display: inline-block;
-  color: #a5a5a5;
-  letter-spacing: 3px;
-  cursor: pointer;
 }
-.rating-summary #stars-existing .fa-star {
-  font-size: 18px;
-  position: relative;
-  display: inline-block;
-  color: #f60;
-  letter-spacing: 3px;
-  cursor: pointer;
+.rating-summary .clear-rating,
+.rating-summary .caption {
+  display: none;
+}
+.rating-summary .rating-container .star {
+  margin: 0 2px;
+}
+.rating-summary .rating-container .star .glyphicon {
+  top: 0;
+}
+.rating-summary .rating-container .filled-stars {
+  color: #ff6600;
+  -webkit-text-stroke: transparent;
+}
+.rating-summary #kartik {
+  display: none;
 }
 .rating-action span {
   position: relative;

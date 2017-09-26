@@ -42,15 +42,16 @@ class HomeController extends Controller
         $score = $request->score;
         $object_id = $request->object_id;
         $object_type = $request->object_type;
-
-        $rs = Rating::where(['score' => $score, 'object_id' => $object_id, 'object_type' => $object_type])->first();
-        if($rs){
-            $rs->amount = $rs->amount + 1;
-            $rs->save();
-        }else{
-            Rating::create(['score' => $score, 'object_id' => $object_id, 'object_type' => $object_type, 'amount' => 1]);
+        if($score){
+            $rs = Rating::where(['score' => $score, 'object_id' => $object_id, 'object_type' => $object_type])->first();
+            if($rs){
+                $rs->amount = $rs->amount + 1;
+                $rs->save();
+            }else{
+                Rating::create(['score' => $score, 'object_id' => $object_id, 'object_type' => $object_type, 'amount' => 1]);
+            }
         }
-
+        return view('frontend.partials.rating', compact('object_id', 'object_type'));
     }
     public function index(Request $request)
     {         

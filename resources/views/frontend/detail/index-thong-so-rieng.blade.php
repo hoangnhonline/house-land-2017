@@ -94,14 +94,8 @@
 					@if($detail->content != '')
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<h1 class="title">{!! $detail->title !!}</h1>
-						<div class="reviews-summary">
-							<div class="rating-title">Đánh giá bài viết:</div>
-	                        <div class="rating-summary">
-	                            <div id="stars-existing" class="starrr" data-rating='4'></div>
-	                        </div>
-	                        <div class="rating-action dot">
-	                       		<span>Xếp hạng 3.5 - 150 Phiếu bầu</span>
-	                        </div>
+						<div class="reviews-summary" id="rating-summary">
+							
 	                    </div><!-- /reviews-summary -->
 	                    <div class="block-author">
 	                    	<ul>
@@ -182,8 +176,23 @@
 @section('js')
 <!-- Flexslider -->
     <script src="{{ URL::asset('public/assets/lib/flexslider/jquery.flexslider-min.js') }}"></script>    
-    <script src="{{ URL::asset('public/assets/js/rating.js') }}"></script>    
-	<script>
+    <script src="{{ URL::asset('public/assets/lib/starrating/js/star-rating.js') }}"></script>        
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+		        url : $('#rating-route').val(),
+		        type : 'POST',
+		        dataType : 'html',
+		        data : $('#rating-form').serialize(),
+		        success : function(data){
+		            $('#rating-summary').html(data);
+		            var $input = $('input.rating');
+		            if ($input.length) {
+		                $input.removeClass('rating-loading').addClass('rating-loading').rating();
+		            }
+		        }
+	   		});
+		});
 		$(window).load(function() {
 			// The slider being synced must be initialized first
 			$('#carousel').flexslider({
