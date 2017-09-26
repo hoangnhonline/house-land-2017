@@ -59,9 +59,7 @@ class NewsController extends Controller
     { 
         $id = $request->id;
 
-        $detail = Articles::where( 'id', $id )
-                ->select('id', 'title', 'slug', 'description', 'image_url', 'content', 'meta_id', 'created_at', 'cate_id', 'type')
-                ->first();
+        $detail = Articles::find($id);
         
         if( $detail ){           
 
@@ -75,7 +73,7 @@ class NewsController extends Controller
           
             $tagSelected = Articles::getListTag($id);
             $cateDetail = ArticlesCate::find($detail->cate_id);
-           
+            Helper::counter($id, 2);
             if($detail->type == 1){
                  $widgetProduct = (object) [];
                     $settingArr = Settings::whereRaw('1')->lists('value', 'name');

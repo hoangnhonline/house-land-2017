@@ -1814,3 +1814,79 @@ h2.tit-page3 {
   padding-right: 7.5px;
   padding-left: 7.5px;
 }
+
+.reviews-summary {
+  margin-bottom: 10px;
+}
+.reviews-summary .rating-title,
+.reviews-summary .rating-summary,
+.reviews-summary .rating-action {
+  display: inline-block;
+  margin-right: 5px;
+}
+.reviews-summary .rating-title {
+  font-weight: bold;
+}
+.rating-summary #stars-existing .fa-star-o {
+  font-size: 18px;
+  position: relative;
+  display: inline-block;
+  color: #a5a5a5;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+.rating-summary #stars-existing .fa-star {
+  font-size: 18px;
+  position: relative;
+  display: inline-block;
+  color: #f60;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+.rating-action span {
+  position: relative;
+  color: #898989;
+  padding-left: 15px;
+}
+.dot>span {
+  position: relative;
+  padding-left: 15px;
+}
+.dot>span:after {
+  content: "\f111";
+  font-family: "FontAwesome";
+  color: #898989;
+  font-size: 5px;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
+.block-author {
+  margin-bottom: 15px;
+}
+.block-author ul {
+  padding-left: 0 !important;
+}
+.block-author ul li {
+  display: inline-block;
+  list-style-type: none;
+  padding-right: 25px;
+  color: #898989;
+  position: relative;
+}
+.block-author ul li .name {
+  color: #f60;
+}
+.block-author ul li:before {
+  content: "\f111";
+  font-family: "FontAwesome";
+  color: #898989;
+  font-size: 5px;
+  position: absolute;
+  top: 8px;
+  left: -17px;
+}
+.block-author ul li:first-child:before {
+  display: none;
+}

@@ -44,5 +44,13 @@ class Articles extends Model  {
             ->join('tag', 'tag.id', '=', 'tag_objects.tag_id')            
             ->get();
         return $query;
-   }
+    }
+    public function createdUser()
+    {
+        return $this->belongsTo('App\Models\Account', 'created_user');
+    }
+     public function updatedUser()
+    {
+        return $this->belongsTo('App\Models\Account', 'updated_user');
+    }
 }

@@ -94,6 +94,29 @@
 					@if($detail->content != '')
 					<div role="tabpanel" class="tab-pane active" id="tab1">
 						<h1 class="title">{!! $detail->title !!}</h1>
+						<div class="reviews-summary">
+							<div class="rating-title">Đánh giá bài viết:</div>
+	                        <div class="rating-summary">
+	                            <div id="stars-existing" class="starrr" data-rating='4'></div>
+	                        </div>
+	                        <div class="rating-action dot">
+	                       		<span>Xếp hạng 3.5 - 150 Phiếu bầu</span>
+	                        </div>
+	                    </div><!-- /reviews-summary -->
+	                    <div class="block-author">
+	                    	<ul>
+	                    		<li>
+	                    			<span>Tác giả:</span>
+	                    			<span class="name">{!! $detail->createdUser->display_name !!}</span>
+	                    		</li>
+	                    		<li>
+	                    			{!! date('d/m/Y', strtotime($detail->created_at)) !!}
+	                    		</li>
+	                    		<li>
+	                    			{!! Helper::view($detail->id, 1) !!} lượt xem
+	                    		</li>
+	                    	</ul>
+	                    </div>
 						<p class="text">{!! $detail->content !!}</p>
 						<div class="clearfix"></div>
 					</div>
@@ -152,7 +175,7 @@
 @section('js')
 <!-- Flexslider -->
     <script src="{{ URL::asset('public/assets/lib/flexslider/jquery.flexslider-min.js') }}"></script>    
-
+    <script src="{{ URL::asset('public/assets/js/rating.js') }}"></script>    
 	<script>
 		$(window).load(function() {
 			// The slider being synced must be initialized first

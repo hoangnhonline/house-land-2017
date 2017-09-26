@@ -95,6 +95,7 @@ class DetailController extends Controller
          $thongsoList = ThongSo::orderBy('display_order')->get();
 
             $arrThongSo = json_decode($detail->thong_so_chi_tiet, true);
+        Helper::counter($detail->id, 1);
         if($detail->layout == 2){
            
             return view('frontend.detail.index-thong-so-rieng', compact('detail', 'hinhArr', 'seo', 'socialImage', 'otherList', 'tagSelected', 'thongsoList', 'arrThongSo', 'widgetProduct'));

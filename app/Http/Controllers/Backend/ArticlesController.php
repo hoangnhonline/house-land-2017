@@ -11,6 +11,7 @@ use App\Models\Tag;
 use App\Models\TagObjects;
 use App\Models\Articles;
 use App\Models\MetaData;
+use App\Models\Rating;
 
 use Helper, File, Session, Auth, Image;
 
@@ -22,7 +23,7 @@ class ArticlesController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {
+    {        
         $cate_id = isset($request->cate_id) ? $request->cate_id : null;
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
@@ -113,7 +114,13 @@ class ArticlesController extends Controller
             }
         }
 
-        Session::flash('message', 'Tạo mới tin tức thành công');
+        // store Rating
+        for($i = 1; $i <= 5 ; $i++ ){
+            $amount = $i == 5 ? 1 : 0;
+            Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 2, 'amount' => $amount]);
+        }
+
+        Session::flash('message', 'Tạo mới thành công');
 
         return redirect()->route('articles.index',['cate_id' => $dataArr['cate_id']]);
     }
@@ -226,7 +233,7 @@ class ArticlesController extends Controller
                 $modelTagObject->save();
             }
         }
-        Session::flash('message', 'Cập nhật tin tức thành công');        
+        Session::flash('message', 'Cập nhật thành công');        
 
         return redirect()->route('articles.edit', $dataArr['id']);
     }
@@ -244,7 +251,7 @@ class ArticlesController extends Controller
         $model->delete();
 
         // redirect
-        Session::flash('message', 'Xóa tin tức thành công');
+        Session::flash('message', 'Xóa thành công');
         return redirect()->route('articles.index');
     }
 }

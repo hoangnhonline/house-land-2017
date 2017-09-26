@@ -72,5 +72,12 @@ class Product extends Model  {
     {
         return $this->belongsTo('App\Models\Cate', 'cate_id');
     }
-    
+    public function createdUser()
+    {
+        return $this->belongsTo('App\Models\Account', 'created_user');
+    }
+     public function updatedUser()
+    {
+        return $this->belongsTo('App\Models\Account', 'updated_user');
+    }
 }

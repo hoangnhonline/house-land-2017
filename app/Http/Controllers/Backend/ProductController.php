@@ -15,6 +15,7 @@ use App\Models\MetaData;
 use App\Models\Tag;
 use App\Models\TagObjects;
 use App\Models\ThongSo;
+use App\Models\Rating;
 
 use Helper, File, Session, Auth, Hash, URL, Image;
 
@@ -27,6 +28,15 @@ class ProductController extends Controller
     */
     public function index(Request $request)
     {        
+        $a = Product::all();
+        foreach($a as $ar){
+            $object_id = $ar->id;
+            // store Rating
+            for($i = 1; $i <= 5 ; $i++ ){
+                $amount = $i == 5 ? 1 : 0;
+                Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 1, 'amount' => $amount]);
+            }
+        }
         $arrSearch['status'] = $status = isset($request->status) ? $request->status : 1; 
         $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;                   
         $arrSearch['parent_id'] = $parent_id = isset($request->parent_id) ? $request->parent_id : null;
@@ -189,6 +199,13 @@ class ProductController extends Controller
         $this->storeImage( $product_id, $dataArr);
         $this->storeMeta($product_id, 0, $dataArr);
         $this->processRelation($dataArr, $product_id);
+
+        // store Rating
+        for($i = 1; $i <= 5 ; $i++ ){
+            $amount = $i == 5 ? 1 : 0;
+            Rating::create(['score' => $i, 'object_id' => $product_id, 'object_type' => 1, 'amount' => $amount]);
+        }
+
         Session::flash('message', 'Tạo mới thành công');
 
         return redirect()->route('product.index', ['parent_id' => $dataArr['parent_id'], 'cate_id' => $dataArr['cate_id']]);
