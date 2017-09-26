@@ -27,7 +27,7 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::get('/tin-tuc/{slug}-p{id}.html', ['as' => 'news-detail', 'uses' => 'NewsController@newsDetail']);
     Route::get('/dich-vu/{slug}-s{id}.html', ['as' => 'services-detail', 'uses' => 'NewsController@newsDetail']);
 
-    Route::get('san-pham/{slug}-{id}.html', ['as' => 'product', 'uses' => 'DetailController@index']);
+    Route::get('{slug}-{id}.html', ['as' => 'product', 'uses' => 'DetailController@index']);
     
     
     
