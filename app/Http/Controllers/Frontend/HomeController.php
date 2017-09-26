@@ -29,10 +29,7 @@ class HomeController extends Controller
 
     public function __construct(){
         
-       $a = Articles::all();
-       foreach ($a  as $ar) {
-           
-       }
+       
 
     }    
     public function rss(Request $request){
