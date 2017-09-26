@@ -1805,7 +1805,7 @@ h2.tit-page3 {
     text-align: center;
     line-height: 40px;
 }
-.block-article ul,.block-article ol, .block-content ul, .block-content ol { padding-left: 30px; }
+.block-article ul,.block-article ol, .block-quote .block-content ul, .block-quote .block-content ol { padding-left: 30px; }
 .block-repadding .row {
   margin-right: -7.5px;
   margin-left: -7.5px;
