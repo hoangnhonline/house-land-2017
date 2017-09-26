@@ -127,7 +127,7 @@
                     <img class="img-thumbnail lazy" width="80" data-original="{{ $item->image_urls ? Helper::showImage($item->image_urls) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="Nổi bật" title="Nổi bật" />
                   </td>
                   <td>                  
-                    <a style="color:#444;font-weight:bold" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a> 
+                    <a style="color:#444;font-weight:bold;font-size:16px" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->title }}</a> 
                     @if( $item->is_hot == 1 )
                     <label class="label label-danger">HOT</label>
                     @endif
@@ -141,8 +141,14 @@
                           <span class="name">{!! $item->createdUser->display_name !!}</span>
                         </li>
                         <li>
-                          {!! date('d/m/Y', strtotime($item->created_at)) !!}
+                            <span>Ngày tạo:</span>
+                          <span class="name">{!! date('d/m/Y H:i', strtotime($item->created_at)) !!}</span>
+                          
                         </li>
+                         <li>
+                            <span>Cập nhật lần cuối:</span>
+                          <span class="name">{!! $item->updatedUser->display_name !!} ( {!! date('d/m/Y H:i', strtotime($item->updated_at)) !!} )</span>          
+                        </li>  
                         <li>
                           {!! Helper::view($item->id, 1) !!} lượt xem
                         </li>

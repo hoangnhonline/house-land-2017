@@ -4974,6 +4974,9 @@ img.move{
   margin-bottom: 15px;
   margin-top: 5px;
 }
+.block-author.edit{
+  font-size: 17px;
+}
 .block-author ul {
   padding-left: 0 !important;
 }
