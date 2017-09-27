@@ -92,7 +92,7 @@ class HomeController extends Controller
                     $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                     ->select('product_img.image_url', 'product.*')        
                     ->orderBy('product.is_hot', 'desc')
-                    ->orderBy('product.id')
+                    ->orderBy('product.id', 'desc')
                     ->orderBy('product.display_order');
                                     
                 $productHot[$hotCate->id]  = $query->limit($settingArr['hot_homepage'])->get();
