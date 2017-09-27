@@ -90,7 +90,7 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <script type="text/javascript">
-  var public_url = '{{ env('APP_URL') }}/public/';
+  var public_url = '{{ env('APP_URL') }}/public';
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ URL::asset('public/admin/bootstrap/js/bootstrap.min.js') }}"></script>
