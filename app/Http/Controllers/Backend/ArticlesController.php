@@ -41,7 +41,7 @@ class ArticlesController extends Controller
             $query->where('alias', 'LIKE', '%'.$title.'%');
         }
 
-        $items = $query->orderBy('id', 'desc')->paginate(20);
+        $items = $query->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(20);
         
         $cateArr = ArticlesCate::where('type', 1)->get();
         

@@ -66,6 +66,7 @@ class ProductController extends Controller
         if($is_hot == 1){
             $query->orderBy('product.display_order', 'asc'); 
         }        
+        $query->orderBy('product.is_hot', 'desc');
         $query->orderBy('product.id', 'desc');   
         $items = $query->select(['product_img.image_url as image_urls','product.*'])->paginate(50);
 
