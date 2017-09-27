@@ -76,6 +76,10 @@
                   <input type="text" class="form-control" name="articles_per_page" id="articles_per_page" value="{{ $settingArr['articles_per_page'] }}">
                 </div>
                 <div class="form-group col-md-6">
+                  <label>Số sản phẩm 1 trang</label>
+                  <input type="text" class="form-control" name="product_per_page" id="product_per_page" value="{{ $settingArr['product_per_page'] }}">
+                </div>
+                <div class="form-group col-md-6">
                   <label>Email nhận thông báo</label>
                   <input type="text" class="form-control" name="admin_email" id="admin_email" value="{{ $settingArr['admin_email'] }}">
                 </div>
@@ -95,7 +99,7 @@
                   <label>Số bài viết liên quan</label>
                   <input type="text" class="form-control" name="so_tin_lien_quan" id="so_tin_lien_quan" value="{{ $settingArr['so_tin_lien_quan'] }}">
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
                   <label>Số sản phẩm mỗi mục trang chủ</label>
                   <input type="text" class="form-control" name="hot_homepage" id="hot_homepage" value="{{ $settingArr['hot_homepage'] }}">
                 </div>          

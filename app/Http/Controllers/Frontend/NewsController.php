@@ -26,8 +26,8 @@ class NewsController extends Controller
         $cateDetail = ArticlesCate::where('slug' , $slug)->first();
 
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
-
-        $articlesArr = Articles::where('cate_id', $cateDetail->id)->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(10);
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        $articlesArr = Articles::where('cate_id', $cateDetail->id)->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate($settingArr['articles_per_page']);
 
         $hotArr = Articles::where( ['cate_id' => $cateDetail->id, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
         $seo['title'] = $cateDetail->meta_title ? $cateDetail->meta_title : $cateDetail->title;
@@ -35,8 +35,7 @@ class NewsController extends Controller
         $seo['keywords'] = $cateDetail->meta_keywords ? $cateDetail->meta_keywords : $cateDetail->title;
         $socialImage = $cateDetail->image_url; 
          //widget
-        $widgetProduct = (object) [];
-        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        $widgetProduct = (object) [];        
         $wParent = CateParent::where('is_widget', 1)->first();
         if($wParent){
 

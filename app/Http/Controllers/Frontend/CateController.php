@@ -10,6 +10,7 @@ use App\Models\CateParent;
 use App\Models\Product;
 use App\Models\ProductImg;
 use App\Models\MetaData;
+use App\Models\Settings;
 use Helper, File, Session, Auth, DB;
 
 class CateController extends Controller
@@ -78,13 +79,13 @@ class CateController extends Controller
         $cateDetail = Cate::where('slug', $slugCateChild)->first();
         if($cateDetail){
             $cate_id = $cateDetail->id;
-            
+            $settingArr = Settings::whereRaw('1')->lists('value', 'name');
             $productList = Product::where('cate_id', $cate_id)
                                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                                     ->select('product_img.image_url', 'product.*')   
                                     ->orderBy('product.is_hot', 'desc')     
                                     ->orderBy('product.id', 'desc')
-                                    ->paginate(15);
+                                    ->paginate($settingArr['product_per_page']);
 			
             if( $cateDetail->meta_id > 0){
                $seo = MetaData::find( $cateDetail->meta_id )->toArray();
