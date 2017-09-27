@@ -6,10 +6,10 @@ var strPlugins = 'uploadimage';
 var toolbar = [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
     { name: 'basicstyles', groups: [ 'basicstyles' ], items: ['Image', 'FontSize', 'Bold', 'Italic', 'Strike',  'Underline', 'Subscript', 'Superscript', 'NumberedList', 'BulletedList', 'Link', 'Unlink' ] },
-    { name: 'cleanup', groups: [ 'cleanup' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Undo', 'Redo', 'HorizontalRule', 'Outdent', 'Indent', 'SpecialChar'] },                                 
-    { name: 'styles', items: ['TextColor', 'BGColor', 'Styles', 'Format' ] },
-    { name: 'tools', items: [ 'Table', 'Maximize' ] },      
-    { name: 'about', items: [ 'About' ] }                
+    { name: 'cleanup', groups: [ 'cleanup' ], items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },                                 
+    { name: 'tools', items: [ 'Undo', 'Redo', 'HorizontalRule', 'Outdent', 'Indent', 'SpecialChar'] },      
+    { name: 'styles', items: ['TextColor', 'BGColor', 'Styles', 'Format', 'Table', 'Maximize',  'About' ] },
+    
 ];
 CKEDITOR.editorConfig = function( config )
 {
