@@ -1622,9 +1622,10 @@ h2.tit-page3 {
     color: #333;
     line-height: 1.6;
     /*margin-bottom: 25px;*/
+    
     text-align: justify;
 }
-/*.block-tabs .tab-content ul,
+.block-tabs .tab-content ul,
 .block-tabs .tab-content ol {
     padding-left: 30px;
 }
@@ -1633,7 +1634,7 @@ h2.tit-page3 {
 }
 .block-tabs p.image {
     margin: 0 auto;
-}*/
+}
 /* Block Relative 
   ========================================================================== */
 
@@ -1894,16 +1895,4 @@ h2.tit-page3 {
 .block-author ul li:first-child:before {
   display: none;
 }
-/*.block-tabs img {  display: unset;}*/
-
-.block-editor-content ul,
-.block-editor-content ol {
-  padding-left: 30px;
-}
-.block-editor-content ul li,
-.block-editor-content ol li {
-  list-style-type: inherit;
-}
-.block-editor-content img {
-  display: unset;
-}
+.block-tabs img {  display: unset;}

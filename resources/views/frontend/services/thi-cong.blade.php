@@ -22,7 +22,7 @@
 					</h1>
 				</div>
 				<div class="block-content">	
-					{!! $detail->content !!}				
+					<div class="block-editor-content">{!! $detail->content !!}</div>
 					<div class="clearfix" style="margin-bottom:20px"></div>
 					@if(Session::has('message'))
                         

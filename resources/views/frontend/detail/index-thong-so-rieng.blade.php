@@ -111,15 +111,26 @@
 	                    		</li>
 	                    	</ul>
 	                    </div>
-						<p class="text">{!! $detail->content !!}</p>
+	                    <div class="block-editor-content">
+							{!! $detail->content !!}
+						</div>
 						<div class="clearfix"></div>
 					</div>
 					@endif
 					@if($detail->tien_do != '')					
-					<div role="tabpanel" class="tab-pane" id="tab3">{!! $detail->tien_do !!}<div class="clearfix"></div></div>
+					<div role="tabpanel" class="tab-pane" id="tab3">
+						<div class="block-editor-content">
+							{!! $detail->tien_do !!}
+						</div>
+
+					<div class="clearfix"></div></div>
 					@endif
 					@if($detail->hoi_dap != '')
-					<div role="tabpanel" class="tab-pane" id="tab4">{!! $detail->hoi_dap !!}<div class="clearfix"></div></div>
+					<div role="tabpanel" class="tab-pane" id="tab4">
+						<div class="block-editor-content">
+						{!! $detail->hoi_dap !!}
+						</div>
+					<div class="clearfix"></div></div>
 					@endif
 				</div>
 			</div><!-- /block-tabs-->

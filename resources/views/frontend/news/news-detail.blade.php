@@ -41,7 +41,7 @@
                     		</li>
                     	</ul>
                     </div>
-					<p class="text">{!! $detail->content !!}</p>					
+					<div class="block-editor-content">{!! $detail->content !!}</div>
 					
 				</div>
 				<div class="block block-share" id="share-buttons">
