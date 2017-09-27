@@ -18,7 +18,7 @@ class VideoController extends Controller
     */
     public function index(Request $request)
     {
-        object_id
+        
         $items = Video::all()->sortBy('display_order');
         return view('backend.video.index', compact( 'items' ));
     }
@@ -30,7 +30,7 @@ class VideoController extends Controller
     */
     public function create()
     {
-        object_id
+        
         return view('backend.video.create');
     }
 
@@ -80,7 +80,7 @@ class VideoController extends Controller
     */
     public function edit($id)
     {
-        object_id
+        
         $detail = Video::find($id);
 
         return view('backend.video.edit', compact( 'detail' ));

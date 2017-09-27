@@ -19,7 +19,7 @@ class CustomLinkController extends Controller
     */
     public function index(Request $request)
     {
-        object_id
+        
         if(Auth::user()->role < 3 ){
             return redirect()->route('product.index');
         }

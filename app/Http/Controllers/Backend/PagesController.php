@@ -21,7 +21,7 @@ class PagesController extends Controller
     public function index(Request $request)
     {
         
-        object_id
+        
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
         $created_user = isset($request->created_user) ? $request->created_user : null;
         $userList = (object) [];

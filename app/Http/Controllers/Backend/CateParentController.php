@@ -20,7 +20,7 @@ class CateParentController  extends Controller
     */
     public function index(Request $request)
     {   
-        object_id     
+             
         $items = CateParent::where('status', 1)->orderBy('display_order', 'asc')->get();
         return view('backend.cate-parent.index', compact( 'items'));
     }
@@ -32,7 +32,7 @@ class CateParentController  extends Controller
     */
     public function create(Request $request)
     {   
-        object_id  
+          
         return view('backend.cate-parent.create');
     }
 
@@ -94,7 +94,7 @@ class CateParentController  extends Controller
     */
     public function edit($id)
     {
-        object_id  
+          
         $detail = CateParent::find($id);
 
         $meta = (object) [];
@@ -167,7 +167,7 @@ class CateParentController  extends Controller
     */
     public function destroy($id)
     {
-        object_id  
+          
         // delete
         $model = CateParent::find($id);
         $model->delete();

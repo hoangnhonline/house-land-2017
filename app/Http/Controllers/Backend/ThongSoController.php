@@ -18,8 +18,7 @@ class ThongSoController extends Controller
     */
     public function index(Request $request)
     {
-        object_id
-        if(Auth::user()->role == 1 ){
+                if(Auth::user()->role == 1 ){
             return redirect()->route('product.index');
         }
         $items = ThongSo::all()->sortBy('display_order');

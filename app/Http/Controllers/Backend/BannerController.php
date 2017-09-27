@@ -21,7 +21,7 @@ class BannerController extends Controller
     */
     public function index(Request $request)
     {      
-        object_id  
+          
         $arrSearch['status'] = $status = isset($request->status) ? $request->status : null;
         $arrSearch['object_id'] = $object_id = $request->object_id;
         $arrSearch['object_type'] = $object_type = $request->object_type;
@@ -59,7 +59,7 @@ class BannerController extends Controller
         return view('backend.banner.index', compact( 'items', 'detail', 'arrSearch'));
     }
     public function lists(Request $request){
-        object_id  
+          
         return view('backend.banner.list');   
     }
     /**
@@ -69,7 +69,7 @@ class BannerController extends Controller
     */
     public function create(Request $request)
     {
-        object_id  
+          
         $detail = (object) [];
         $object_id = $request->object_id;
         $object_type = $request->object_type;
@@ -149,7 +149,7 @@ class BannerController extends Controller
     */
     public function edit(Request $request)
     {
-        object_id  
+          
         $id = $request->id;
         $detailBanner = Banner::find($id);
         $detail = Banner::find($id);
@@ -201,7 +201,7 @@ class BannerController extends Controller
     */
     public function destroy($id)
     {
-        object_id  
+          
         // delete
         $model = Banner::find($id);
         $model->delete();

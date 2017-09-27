@@ -24,7 +24,7 @@ class ArticlesController extends Controller
     */
     public function index(Request $request)
     {   
-        object_id
+        
         $cate_id = isset($request->cate_id) ? $request->cate_id : null;
 
         $title = isset($request->title) && $request->title != '' ? $request->title : '';
@@ -56,7 +56,7 @@ class ArticlesController extends Controller
     */
     public function create(Request $request)
     {
-        object_id
+        
         $cateArr = ArticlesCate::where('type', 1)->get();
         
         $cate_id = $request->cate_id;
@@ -160,7 +160,7 @@ class ArticlesController extends Controller
     */
     public function edit($id)
     {
-        object_id
+        
         $tagSelected = [];
 
         $detail = Articles::find($id);
