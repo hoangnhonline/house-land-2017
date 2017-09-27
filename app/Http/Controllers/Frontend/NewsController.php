@@ -27,7 +27,7 @@ class NewsController extends Controller
 
         $title = trim($cateDetail->meta_title) ? $cateDetail->meta_title : $cateDetail->name;
 
-        $articlesArr = Articles::where('cate_id', $cateDetail->id)->orderBy('id', 'desc')->paginate(10);
+        $articlesArr = Articles::where('cate_id', $cateDetail->id)->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate(10);
 
         $hotArr = Articles::where( ['cate_id' => $cateDetail->id, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
         $seo['title'] = $cateDetail->meta_title ? $cateDetail->meta_title : $cateDetail->title;
@@ -65,7 +65,7 @@ class NewsController extends Controller
 
             $title = trim($detail->meta_title) ? $detail->meta_title : $detail->title;
             $settingArr = Settings::whereRaw('1')->lists('value', 'name');
-            $otherList = Articles::where( ['cate_id' => $detail->cate_id] )->where('id', '<>', $id)->orderBy('id', 'desc')->limit($settingArr['article_related'])->get();            
+            $otherList = Articles::where( ['cate_id' => $detail->cate_id] )->where('id', '<>', $id)->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['article_related'])->get();            
             $seo['title'] = $detail->meta_title ? $detail->meta_title : $detail->title;
             $seo['description'] = $detail->meta_description ? $detail->meta_description : $detail->title;
             $seo['keywords'] = $detail->meta_keywords ? $detail->meta_keywords : $detail->title;

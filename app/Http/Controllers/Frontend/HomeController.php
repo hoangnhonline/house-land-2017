@@ -59,12 +59,17 @@ class HomeController extends Controller
         $articlesCateHot = (object) [];
         $productCateHot = $productParentHot = [];
         $bannerArr = [];          
+        
+        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+
         $articlesCateHot = ArticlesCate::where('is_hot', 1)->orderBy('display_order')->get();
         foreach($articlesCateHot as $cateHot){
-            $articlesArr[$cateHot->id] = Articles::where('is_hot', 1)
+            $articlesArr[$cateHot->id] = Articles::where('status', 1)
                                     ->where('cate_id', $cateHot->id)
+                                    ->orderBy('is_hot', 'desc')
+                                    ->orderBy('id', 'desc')
                                     ->orderBy('display_order')
-                                    ->orderBy('id', 'desc')->limit(5)->get();
+                                    ->limit(5)->get();
         }
 
         $cateParentHot = CateParent::where('is_hot', 1)->orderBy('display_order')->get();
@@ -76,7 +81,7 @@ class HomeController extends Controller
         if($hotCateList){
             foreach($hotCateList as $hotCate)
             {                
-                $query = Product::where('is_hot', 1);
+                $query = Product::where('status', 1);
                     if($hotCate->type == 1){
                         $parentArr[$hotCate->object_id] = CateParent::find($hotCate->object_id);
                         $query->where('parent_id', $hotCate->object_id);
@@ -86,13 +91,15 @@ class HomeController extends Controller
                     }                                 
                     $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                     ->select('product_img.image_url', 'product.*')        
+                    ->orderBy('product.is_hot', 'desc')
+                    ->orderBy('product.id')
                     ->orderBy('product.display_order');
                                     
-                $productHot[$hotCate->id]  = $query->limit(10)->get();
+                $productHot[$hotCate->id]  = $query->limit($settingArr['hot_homepage'])->get();
             }
         }
         
-        $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        
         $seo = $settingArr;
         $seo['title'] = $settingArr['site_title'];
         $seo['description'] = $settingArr['site_description'];
