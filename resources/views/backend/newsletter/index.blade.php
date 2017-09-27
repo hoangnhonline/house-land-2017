@@ -42,7 +42,7 @@
         
         <!-- /.box-header -->
         <div class="box-body">
-        <a href="{{ route('newsletter.export') }}" class="btn btn-info btn-sm" style="margin-bottom:5px;float:right" target="_blank">Export</a>
+        <!--<a href="{{ route('newsletter.export') }}" class="btn btn-info btn-sm" style="margin-bottom:5px;float:right" target="_blank">Export</a>-->
           <div style="text-align:center">
             {{ $items->appends( ['status' => $status, 'email' => $email] )->links() }}
           </div>  
