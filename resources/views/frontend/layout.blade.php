@@ -122,7 +122,7 @@
 	<script src="{{ URL::asset('public/assets/js/lazy.js') }}"></script>
     <input type="hidden" id="route-newsletter" value="{{ route('register.newsletter') }}">
 	
-	
+	{!! $settingArr['google_analystic'] !!}
 	<script type="text/javascript">
 	@if(\Request::route()->getName() == "home")
 	var eventFired = false,
