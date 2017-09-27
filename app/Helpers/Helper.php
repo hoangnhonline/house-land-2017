@@ -6,7 +6,7 @@ use App\Models\Price;
 use App\Models\Area;
 use App\Models\CounterValues;
 use App\Models\CounterIps;
-use DB, Image;
+use DB, Image, Auth;
 
 class Helper
 {
@@ -15,6 +15,11 @@ class Helper
     public static function shout(string $string)
     {
         return strtoupper($string);
+    }
+    public static function accountAvai(){        
+        if( Auth::user()->status == 2 ){
+            echo "Tài khoản đã bị khóa. ";die();
+        }
     }
     public static function getChild($table, $column, $parent_id){
         $listData = DB::table($table)->where($column, $parent_id)->get();

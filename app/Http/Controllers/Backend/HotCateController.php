@@ -15,7 +15,7 @@ use DB, Session;
 class HotCateController extends Controller
 {    
     public function index(Request $request){
-   
+        object_id
         $items = HotCate::orderBy('display_order')->get();
         
         return view('backend.hot-cate.index', compact('items'));

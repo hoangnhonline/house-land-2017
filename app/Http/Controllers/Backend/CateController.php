@@ -20,6 +20,7 @@ class CateController extends Controller
     */
     public function index(Request $request)
     {     
+        object_id
         $is_hot = isset($request->is_hot) ? $request->is_hot : null;                   
         $parent_id = isset($request->parent_id) ? $request->parent_id : null;        
         if( $parent_id ){
@@ -53,6 +54,7 @@ class CateController extends Controller
     */
     public function create(Request $request)
     {
+        object_id  
         $parent_id = isset($request->parent_id) ? $request->parent_id : 0;               
         
         $cateList = Cate::whereRaw('1=2')->get();
@@ -138,6 +140,7 @@ class CateController extends Controller
     */
     public function edit($id)
     {
+        object_id  
         $detail = Cate::find($id);                
         $cateParentList = CateParent::orderBy('display_order')->get();
         $meta = (object) [];

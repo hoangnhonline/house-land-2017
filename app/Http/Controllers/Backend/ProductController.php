@@ -27,8 +27,7 @@ class ProductController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {        
-        
+    {   
         $arrSearch['status'] = $status = isset($request->status) ? $request->status : 1; 
         $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;                   
         $arrSearch['parent_id'] = $parent_id = isset($request->parent_id) ? $request->parent_id : null;

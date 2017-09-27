@@ -55,20 +55,17 @@ class UserController extends Controller
         $dataArr = [
             'email' => $request->email,
             'password' => $request->password,
+            'status' => 1,
         ];
         if (Auth::validate($dataArr)) {
             
                 if (Auth::attempt($dataArr)) {
-
-                    if(Auth::user()->status == 2){
-                    
-                        return "Tài khoản đã bị khóa. ";die();
-                    
-                    }else{
               
-                        return redirect()->route('product.index');
-                  
-                    }    
+                    return redirect()->route('product.index');                  
+                    
+                }else{
+                    Session::flash('error', 'Tài khoản đã bị khóa.'); 
+                    return redirect()->route('backend.login-form'); 
                 }
             
 

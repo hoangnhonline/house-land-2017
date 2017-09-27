@@ -18,6 +18,7 @@ class ArticlesCateController extends Controller
     */
     public function index(Request $request)
     {
+        object_id
         $items = ArticlesCate::where('type', 1)->orderBy('display_order')->get();
         return view('backend.articles-cate.index', compact( 'items' ));
     }

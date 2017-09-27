@@ -20,6 +20,7 @@ class BaoGiaController extends Controller
     */
     public function index(Request $request)
     {     
+        object_id
         if(Auth::user()->role == 1 ){
             return redirect()->route('product.index');
         }
@@ -51,6 +52,7 @@ class BaoGiaController extends Controller
     */
     public function edit($id)
     {     
+        object_id  
         if(Auth::user()->role == 1 ){
             return redirect()->route('product.index');
         }   
@@ -71,6 +73,7 @@ class BaoGiaController extends Controller
     */
     public function destroy($id)
     {
+        object_id  
         if(Auth::user()->role == 1 ){
             return redirect()->route('product.index');
         }
