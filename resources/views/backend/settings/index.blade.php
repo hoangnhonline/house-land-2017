@@ -95,7 +95,7 @@
                   <label>Số bài viết liên quan</label>
                   <input type="text" class="form-control" name="so_tin_lien_quan" id="so_tin_lien_quan" value="{{ $settingArr['so_tin_lien_quan'] }}">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-12">
                   <label>Số sản phẩm mỗi mục trang chủ</label>
                   <input type="text" class="form-control" name="hot_homepage" id="hot_homepage" value="{{ $settingArr['hot_homepage'] }}">
                 </div>          
