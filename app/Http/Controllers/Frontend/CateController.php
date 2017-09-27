@@ -60,6 +60,7 @@ class CateController extends Controller
         }else{
             $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
         }  
+        
             return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo'));
         }else{
             return redirect()->route('home');       
@@ -90,7 +91,8 @@ class CateController extends Controller
             }else{
                 $seo['title'] = $seo['description'] = $seo['keywords'] = $cateDetail->name;
             }  
-            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo'));
+            $page = $request->page ? $request->page : 1;        
+            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page'));
             
         }else{
             return redirect()->route('home');   
