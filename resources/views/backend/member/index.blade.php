@@ -39,9 +39,7 @@
               <th style="width: 1%">#</th>              
               <th>Hình ảnh</th>
               <th>Tên</th>
-              <th>Chức danh</th>
-              <th>Điện thoại</th>
-              <th>Email</th>             
+              <th>Chức danh</th>                         
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
             <tbody>
@@ -59,13 +57,7 @@
                 </td>
                 <td>                  
                   {{ $item->chuc_vu }}                  
-                </td>
-                <td>                  
-                  {{ $item->phone }}                  
-                </td>
-                <td>                  
-                  {{ $item->email }}                  
-                </td>                
+                </td>                          
                 <td style="white-space:nowrap"> 
                                
                   <a href="{{ route( 'member.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>                 

@@ -82,7 +82,7 @@
                           
                         </li>
                          <li>
-                            <span>Cập nhật lần cuối:</span>
+                            <span>Cập nhật:</span>
                           <span class="name">{!! $item->updatedUser->display_name !!} ( {!! date('d/m/Y H:i', strtotime($item->updated_at)) !!} )</span>          
                         </li>  
                         <li>
