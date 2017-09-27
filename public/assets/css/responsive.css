@@ -434,19 +434,7 @@
   }
   .block-number h3 span:before,
   .block-number h3 span:after {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translate(0, 50%);
-    -ms-transform: translate(0, 50%);
-    transform: translate(0, 50%);
-  }
-  .block-number h3 span:before {
-    content: url(../images/Ellipse1.png);
-    left: 0;
-  }
-  .block-number h3 span:after {
-    content: url(../images/Ellipse2.png);
-    right: 0;
+    display: none;
   }
 }
 
