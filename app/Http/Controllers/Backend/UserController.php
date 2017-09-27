@@ -54,13 +54,12 @@ class UserController extends Controller
         ]);
         $dataArr = [
             'email' => $request->email,
-            'password' => $request->password,
-            'status' => 1,
+            'password' => $request->password            
         ];
         if (Auth::validate($dataArr)) {
-            
+                $dataArr['status'] = 1;
                 if (Auth::attempt($dataArr)) {
-              
+                    
                     return redirect()->route('product.index');                  
                     
                 }else{
