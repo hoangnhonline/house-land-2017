@@ -1229,7 +1229,6 @@ footer .footer-bot .container {
     padding-left: 15px;
     font-size: 15px;
     text-transform: uppercase;
-    max-width: 360px;
     position: relative;
 }
 .block-module .block-title h2 i {
@@ -1650,7 +1649,7 @@ h2.tit-page3 {
     box-shadow: 0px 0px 5px 1px rgba(176, 176, 176, 1);
 }
 .block-relative .item .des {
-    padding: 15px 10px;
+  
     overflow: hidden;
 }
 .block-relative .item .des a {
@@ -1659,7 +1658,7 @@ h2.tit-page3 {
     max-height: 40px;
     overflow: hidden;
     display: block;
-    margin-bottom: 10px;
+    
     font-weight: bold;
 }
 .block-relative .item .des .code {

@@ -12,7 +12,7 @@
 		</ul>
 	</div>
 </div><!-- /block-breadcrumb -->
-<div class="block2 block-two-col container" style="margin-bottom:10px">
+<div class="block2 block-two-col container" >
 	<div class="block2 block-title-commom block-detail">
 		<div class="block2 block-title" style="margin-bottom:15px">
 			<h2>
@@ -147,7 +147,7 @@
 			</h2>
 		</div>
 		<div class="block-content">
-			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-loop="false" data-margin="15" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
+			<ul class="owl-carousel owl-theme owl-style2" data-nav="true" data-loop="false" data-margin="12" data-responsive='{"0":{"items":1},"480":{"items":2},"600":{"items":2},"768":{"items":3},"800":{"items":3},"992":{"items":3}}'>
 			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">

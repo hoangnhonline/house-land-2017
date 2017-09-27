@@ -84,6 +84,7 @@ class CateController extends Controller
                                     ->orderBy('product.is_hot', 'desc')     
                                     ->orderBy('product.id', 'desc')
                                     ->paginate(15);
+			
             if( $cateDetail->meta_id > 0){
                $seo = MetaData::find( $cateDetail->meta_id )->toArray();
             }else{

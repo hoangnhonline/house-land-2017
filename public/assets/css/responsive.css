@@ -413,6 +413,13 @@
   .block-search .input-serach {
     width: 48%;
   }
+   .block-repadding .box-item {
+	  width: 100%;
+  }
+  .block-repadding .box-item .item img {
+    margin: 0 auto;
+    width: 100%;
+  }
 }
 
 /*----------------
@@ -426,6 +433,7 @@
   .block-info .hotline {
     margin-bottom: 25px;
   }
+ 
 }
 
 /*----------------

@@ -16,7 +16,7 @@
     <meta name="google-site-verification" content="IFz-d9V8jZLB1iDG8BfKsKwhPB-FkpsacHLqk5Mpyzk" />
     <meta name="wot-verification" content="b5ae556432dab929c4bb"/>
     <meta property="article:author" content="https://www.facebook.com/HOUSELAND"/>
-    <link rel="shortcut icon" href="@yield('favicon')" type="image/x-icon"/>
+   
     <link rel="canonical" href="{{ url()->current() }}"/>        
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:type" content="website" />
@@ -31,7 +31,7 @@
     <meta name="twitter:description" content="@yield('site_description')" />
     <meta name="twitter:title" content="@yield('title')" />     
     <meta name="twitter:image" content="{{ Helper::showImage($socialImage) }}" />
-	<link rel="icon" href="{{ URL::asset('assets/images/favicon.ico') }}" type="image/x-icon">
+	<link rel="icon" href="{{ URL::asset('public/assets/favicon.ico') }}" type="image/x-icon">
 	<!-- ===== Style CSS ===== -->
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/style.css') }}">
 	<!-- ===== Responsive CSS ===== -->
