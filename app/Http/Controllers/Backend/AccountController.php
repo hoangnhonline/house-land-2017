@@ -128,8 +128,6 @@ class AccountController extends Controller
             'display_name.required' => 'Bạn chưa nhập tên hiển thị',
             'role.required' => 'Bạn chưa chọn phân loại'
         ]);       
-        
-        $tmpPassword = str_random(10);
                 
         $dataArr['password'] = Hash::make($dataArr['password']);
         
@@ -181,14 +179,21 @@ class AccountController extends Controller
         $dataArr = $request->all();
         
         $this->validate($request,[
+            'password' => 'required|between:6,30',
+            're_password' => 'required|same:password|between:6,30',
             'display_name' => 'required',            
             'role' => 'required'
         ],
         [
+            'password.required' => 'Bạn chưa nhập mật khẩu',
+            'password.between' => 'Nhập lại mật khẩu phải từ 6 đến 30 ký tự',
+            're_password.required' => 'Bạn chưa nhập lại mật khẩu',
+            're_password.between' => 'Mật khẩu phải từ 6 đến 30 ký tự',
+            're_password.same' => 'Mật khẩu nhập lại không giống',         
             'display_name.required' => 'Bạn chưa nhập tên hiển thị',            
-            'role.required' => 'Bạn chưa chọn role'
+            'role.required' => 'Bạn chưa chọn phân loại'
         ]);      
-
+        $dataArr['password'] = Hash::make($dataArr['password']);
         $model = Account::find($dataArr['id']);
 
         $dataArr['updated_user'] = Auth::user()->id;

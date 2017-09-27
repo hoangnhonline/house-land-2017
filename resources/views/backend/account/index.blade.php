@@ -81,8 +81,9 @@
                     @endif
                     >{{ $item->status == 1 ? "Khóa TK" : "Mở khóa TK" }}</a>                
                     <a href="{{ route( 'account.edit', [ 'id' => $item->id ]) }}" class="btn-sm btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>                 
-                    
+                    @if($item->articles->count() == 0 && $item->products->count() == 0)
                     <a onclick="return callDelete('{{ $item->full_name }}','{{ route( 'account.destroy', [ 'id' => $item->id ]) }}');" class="btn-sm btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                    @endif
                     
                   </td>
                 </tr> 

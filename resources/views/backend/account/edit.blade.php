@@ -42,9 +42,17 @@
                  <!-- text input -->
                 
                  <div class="form-group">
-                  <label>Email <span class="red-star">*</span></label>
+                  <label>Email truy cập<span class="red-star">*</span></label>
                   <input type="text" class="form-control" readonly="true" name="email" id="email" value="{{ $detail->email }}">
                 </div>
+                <div class="form-group">
+                  <label>Mật khẩu <span class="red-star">*</span></label>
+                  <input type="password" class="form-control" name="password" id="password" value="{{ old('password') }}">
+                </div>   
+                <div class="form-group">
+                  <label>Nhập lại mật khẩu <span class="red-star">*</span></label>
+                  <input type="password" class="form-control" name="re_password" id="re_password" value="{{ old('re_password') }}">
+                </div>  
                 <div class="form-group">
                   <label>Tên hiển thị <span class="red-star">*</span></label>
                   <input type="text" class="form-control" name="display_name" id="display_name" value="{{ $detail->display_name }}">

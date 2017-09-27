@@ -27,7 +27,9 @@ class UserController extends Controller
             'status' => 1
         ));*/      
         if(Auth::check()){
+
             return redirect()->route('product.index');
+            
         } 
         return view('backend.login');
     }
@@ -55,12 +57,20 @@ class UserController extends Controller
             'password' => $request->password,
         ];
         if (Auth::validate($dataArr)) {
+            
+                if (Auth::attempt($dataArr)) {
 
-            if (Auth::attempt($dataArr)) {
+                    if(Auth::user()->status == 2){
+                    
+                        return "Tài khoản đã bị khóa. ";die();
+                    
+                    }else{
               
-                return redirect()->route('product.index');
-              
-            }
+                        return redirect()->route('product.index');
+                  
+                    }    
+                }
+            
 
         }else {
             // if any error send back with message.
