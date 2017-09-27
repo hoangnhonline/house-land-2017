@@ -1895,3 +1895,4 @@ h2.tit-page3 {
 .block-author ul li:first-child:before {
   display: none;
 }
+.block-tabs img {  display: unset;}
