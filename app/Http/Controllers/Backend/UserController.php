@@ -18,14 +18,7 @@ class UserController extends Controller
     * @return Response
     */
     public function loginForm()
-    {
-        /*User::create(array(
-            'full_name'     => 'Andy',            
-            'email'    => 'andy2016@gmail.com',
-            'password' => Hash::make('matkhaucuatui'),
-            'role' => 1,
-            'status' => 1
-        ));*/      
+    {        
         if(Auth::check()){
 
             return redirect()->route('product.index');
@@ -57,17 +50,13 @@ class UserController extends Controller
             'password' => $request->password            
         ];
         if (Auth::validate($dataArr)) {
-                $dataArr['status'] = 1;
-                if (Auth::attempt($dataArr)) {
-                    
-                    return redirect()->route('product.index');                  
-                    
-                }else{
-                    Session::flash('error', 'Tài khoản đã bị khóa.'); 
-                    return redirect()->route('backend.login-form'); 
-                }
-            
-
+            $dataArr['status'] = 1;
+            if (Auth::attempt($dataArr)) {                    
+                return redirect()->route('product.index'); 
+            }else{
+                Session::flash('error', 'Tài khoản đã bị khóa.'); 
+                return redirect()->route('backend.login-form'); 
+            }
         }else {
             // if any error send back with message.
             Session::flash('error', 'Email hoặc mật khẩu không đúng.'); 
@@ -81,6 +70,5 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect()->route('backend.login-form');
-    }
-   
+    }   
 }
