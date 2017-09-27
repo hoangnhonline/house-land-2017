@@ -154,7 +154,7 @@ h6 {
   ========================================================================== */
 
 .block {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
     display: block;
 }
@@ -1120,7 +1120,7 @@ footer .footer-bot .container {
     float: left;
     width: 100%;
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     overflow: hidden;
 }
 .block-ct-news .thumb {
