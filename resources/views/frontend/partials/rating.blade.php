@@ -8,10 +8,10 @@ foreach($rs as $rating){
 }
 $star = ceil($total/$totalRating);
 ?>
-<div class="rating-title">Đánh giá bài viết:</div>
+<div class="rating-title" itemprop="name">Đánh giá bài viết:</div>
 <div class="rating-summary">
     <input id="kartik" class="rating" data-stars="5" data-step="1" data-size="xs" title="" value="{{ $star }}" />
 </div>
-<div class="rating-action dot">
-		<span>Xếp hạng {{ $star }} - {{ $totalRating }} phiếu bầu</span>
+<div class="rating-action dot"  itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+		<span >Xếp hạng <span itemprop="ratingValue">{{ $star }}</span> - {{ $totalRating }} phiếu bầu</span>
 </div>

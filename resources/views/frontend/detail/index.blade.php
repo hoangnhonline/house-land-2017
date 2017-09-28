@@ -83,7 +83,7 @@
 							@if($detail->content != '')
 							<div role="tabpanel" class="tab-pane active" id="tab1">
 								<h1 class="title">{!! $detail->title !!}</h1>
-								<div class="reviews-summary" id="rating-summary">
+								<div class="reviews-summary" id="rating-summary" itemscope itemtype="http://schema.org/Review">
 									
 			                    </div><!-- /reviews-summary -->
 			                    <div class="block-author">

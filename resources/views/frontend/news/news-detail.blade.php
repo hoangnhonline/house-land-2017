@@ -24,7 +24,7 @@
 			<div class="block-content">
 				<div class="block block-article">
 					<h1 class="title">{!! $detail->title !!}</h1>
-					<div class="reviews-summary" id="rating-summary">
+					<div class="reviews-summary" id="rating-summary" itemscope itemtype="http://schema.org/Review">
 						
                     </div><!-- /reviews-summary -->
                     <div class="block-author">
