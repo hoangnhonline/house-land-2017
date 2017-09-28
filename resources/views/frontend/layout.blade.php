@@ -261,7 +261,7 @@
 	cursor: pointer;
 	}
 </style>
-@if(!in_array($routeName, ['news-detail', 'product'])
+@if(!in_array($routeName, ['news-detail', 'product']))
 <div class="reviews-summary" id="rating-summary" itemscope="" itemtype="http://schema.org/Review" style="display:none">
    <div class="rating-title" itemprop="name">Đánh giá :</div>  
    <div class="rating-action dot" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
