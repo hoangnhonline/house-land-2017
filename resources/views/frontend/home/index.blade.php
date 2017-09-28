@@ -66,7 +66,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 5, 'object_type' => 3])-
   @if($banner->ads_url !='')
   <a href="{{ $banner->ads_url }}" title="banner ads {{ $i }}">
   @endif
-  <img class="lazy" data-original="{{ Helper::showImage($banner->image_url) }}" alt="banner ads {{ $i }}">
+  <img src="{{ Helper::showImage($banner->image_url) }}" alt="banner ads {{ $i }}">
   @if($banner->ads_url !='')
   </a>
   @endif
