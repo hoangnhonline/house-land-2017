@@ -13,7 +13,6 @@
     </div>
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
-    {{ var_dump(Auth::user()->role ) }}
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
      
