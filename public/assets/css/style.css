@@ -1917,3 +1917,7 @@ h2.tit-page3 {
 .block-btn-slide .block-content {
     overflow: hidden;
 }
+.Recipepod{
+    display: none;
+    height: 0;
+}
