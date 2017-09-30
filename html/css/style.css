@@ -39,10 +39,10 @@ html {
     box-sizing: border-box;
     font-family: sans-serif;
     line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
+/*    -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -ms-overflow-style: scrollbar;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;*/
 }
 * {
     margin: 0;
@@ -150,6 +150,11 @@ h6 {
 .clearfix {
     clear: both;
 }
+.wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
 /* Commom
   ========================================================================== */
 
@@ -1906,4 +1911,9 @@ h2.tit-page3 {
 }
 .block-editor-content img {
   display: unset;
+}
+
+.block-product .block-content,
+.block-btn-slide .block-content {
+    overflow: hidden;
 }

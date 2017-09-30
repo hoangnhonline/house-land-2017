@@ -434,6 +434,7 @@
   }
   .block-number h3 span:before,
   .block-number h3 span:after {
+    display: none;
     position: absolute;
     top: 50%;
     -webkit-transform: translate(0, 50%);
