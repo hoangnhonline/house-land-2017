@@ -74,20 +74,7 @@
 
 	@include('frontend.partials.header')
 
-	<div class="wrapper">	
-	<div class="Recipepods">
-	 	<div itemscope itemtype="http://schema.org/Recipe">
-		    <span itemprop="name">@yield('title')</span>
-		    <span itemprop="description">@yield('site_description')</span>
-		    <img itemprop="image" src="{{ Helper::showImage($socialImage) }}" alt="@yield('title')">
-		    @if(!in_array($routeName, ['news-detail', 'product']))
-		    <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-		        <span itemprop="ratingValue">9</span>/<span itemprop="bestRating">10</span>
-		        <span itemprop="reviewCount">199</span> bài đánh giá
-		    </div>
-		    @endif
-		</div>
-	</div>
+	<div class="wrapper">
 		@yield('slider')
 
 		@yield('content')
@@ -274,7 +261,19 @@
 	cursor: pointer;
 	}
 </style>
-
+<div class="Recipepod">
+ 	<div itemscope itemtype="http://schema.org/Recipe">
+	    <span itemprop="name">@yield('title')</span>
+	    <span itemprop="description">@yield('site_description')</span>
+	    <img itemprop="image" src="{{ Helper::showImage($socialImage) }}" alt="@yield('title')">
+	    @if(!in_array($routeName, ['news-detail', 'product']))
+	    <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+	        <span itemprop="ratingValue">9</span>/<span itemprop="bestRating">10</span>
+	        <span itemprop="reviewCount">199</span> bài đánh giá
+	    </div>
+	    @endif
+	</div>
+</div>
 
 </body>
 </html>
