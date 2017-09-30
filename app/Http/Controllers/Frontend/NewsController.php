@@ -20,6 +20,7 @@ class NewsController extends Controller
 {
     public function newsList(Request $request)
     {
+        $socialImage = null;
         $slug = $request->slug;
         $cateArr = $cateActiveArr = $moviesActiveArr = [];
        
@@ -33,7 +34,9 @@ class NewsController extends Controller
         $seo['title'] = $cateDetail->meta_title ? $cateDetail->meta_title : $cateDetail->title;
         $seo['description'] = $cateDetail->meta_description ? $cateDetail->meta_description : $cateDetail->title;
         $seo['keywords'] = $cateDetail->meta_keywords ? $cateDetail->meta_keywords : $cateDetail->title;
-        $socialImage = $cateDetail->image_url; 
+        if($cateDetail->image_url){
+            $socialImage = $cateDetail->image_url; 
+        }
          //widget
         $widgetProduct = (object) [];        
         $wParent = CateParent::where('is_widget', 1)->first();
@@ -56,6 +59,7 @@ class NewsController extends Controller
 
      public function newsDetail(Request $request)
     { 
+        $socialImage = null;
         $id = $request->id;
 
         $detail = Articles::find($id);
@@ -68,7 +72,9 @@ class NewsController extends Controller
             $seo['title'] = $detail->meta_title ? $detail->meta_title : $detail->title;
             $seo['description'] = $detail->meta_description ? $detail->meta_description : $detail->title;
             $seo['keywords'] = $detail->meta_keywords ? $detail->meta_keywords : $detail->title;
-            $socialImage = $detail->image_url; 
+            if($detail->image_url){
+                $socialImage = str_replace("images/", "images/thumbs/", $detail->image_url);
+            }
           
             $tagSelected = Articles::getListTag($id);
             $cateDetail = ArticlesCate::find($detail->cate_id);

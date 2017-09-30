@@ -126,10 +126,10 @@ class HomeController extends Controller
         $seo['title'] = $detailPage->meta_title ? $detailPage->meta_title : $detailPage->title;
         $seo['description'] = $detailPage->meta_description ? $detailPage->meta_description : $detailPage->title;
         $seo['keywords'] = $detailPage->meta_keywords ? $detailPage->meta_keywords : $detailPage->title;      
-        
+        $socialImage = $detailPage->image_url ? $detailPage->image_url : null;
         $memberList = Member::orderBy('display_order', 'asc')->get();
 
-        return view('frontend.pages.index', compact('detailPage', 'seo', 'memberList', 'slug'));    
+        return view('frontend.pages.index', compact('detailPage', 'seo', 'memberList', 'slug', 'socialImage'));    
     }
 
     public function services(Request $request){
@@ -183,7 +183,7 @@ class HomeController extends Controller
         $seo['title'] = 'Liên hệ';
         $seo['description'] = 'Liên hệ';
         $seo['keywords'] = 'Liên hệ';
-        $socialImage = '';
+        $socialImage = null;
         $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
         return view('frontend.contact.index', compact('seo', 'socialImage', 'servicesList'));
     }

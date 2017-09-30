@@ -23,7 +23,7 @@ class CateParent extends Model  {
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'alias', 'slug', 'description', 'image_url', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user', 'is_widget'];
+    protected $fillable = [ 'name', 'alias', 'slug', 'description','image_url', 'display_order', 'meta_id', 'is_hot', 'status', 'created_user', 'updated_user', 'is_widget'];
 
     public function cates()
     {

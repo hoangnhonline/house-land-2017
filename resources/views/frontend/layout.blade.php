@@ -75,6 +75,19 @@
 	@include('frontend.partials.header')
 
 	<div class="wrapper">	
+	<div class="Recipepods">
+	 	<div itemscope itemtype="http://schema.org/Recipe">
+		    <span itemprop="name">@yield('title')</span>
+		    <span itemprop="description">@yield('site_description')</span>
+		    <img itemprop="image" src="{{ Helper::showImage($socialImage) }}" alt="@yield('title')">
+		    @if(!in_array($routeName, ['news-detail', 'product']))
+		    <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+		        <span itemprop="ratingValue">9</span>/<span itemprop="bestRating">10</span>
+		        <span itemprop="reviewCount">199</span> bài đánh giá
+		    </div>
+		    @endif
+		</div>
+	</div>
 		@yield('slider')
 
 		@yield('content')
@@ -261,13 +274,7 @@
 	cursor: pointer;
 	}
 </style>
-@if(!in_array($routeName, ['news-detail', 'product']))
-<div class="reviews-summary" id="rating-summary" itemscope="" itemtype="http://schema.org/Review" style="display:none">
-   <div class="rating-title" itemprop="name">Đánh giá :</div>  
-   <div class="rating-action dot" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-      <span>Xếp hạng <span itemprop="ratingValue">5</span> - 180 phiếu bầu</span>
-   </div>
-</div>
-@endif
+
+
 </body>
 </html>

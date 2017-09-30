@@ -31,6 +31,7 @@
           <form role="form" method="POST" action="{{ route('cate-parent.update') }}">
             {!! csrf_field() !!}
             <input type="hidden" name="id" value="{{ $detail->id }}">
+            <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url'. $detail->image_url) }}"/>          
             <div class="box-body">
               @if(Session::has('message'))
               <p class="alert alert-info" >{{ Session::get('message') }}</p>
@@ -83,7 +84,16 @@
                   <option value="1" {{ $detail->status == 1 ? "selected" : "" }}>Hiện</option>
                 </select>
               </div>
-              
+              <div class="form-group" style="margin-top:10px">  
+                <label class="col-md-3 row">Ảnh đại diện (265 x 150px)</label>    
+                <div class="col-md-9">
+                    <img id="thumbnail_image" src="{{ $detail->image_url ? Helper::showImage($detail->image_url ) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
+                    
+                    <input type="file" id="file-image" style="display:none" />
+                 
+                    <button class="btn btn-default btn-sm" id="btnUploadImage" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+              </div> 
             </div>         
               
             <div class="box-footer">
@@ -144,7 +154,26 @@
 @stop
 @section('javascript_page')
 <script type="text/javascript">
+var h = screen.height;
+var w = screen.width;
+var left = (screen.width/2)-((w-300)/2);
+var top = (screen.height/2)-((h-100)/2);
+function openKCFinder_singleFile() {
+      window.KCFinder = {};
+      window.KCFinder.callBack = function(url) {
+         $('#image_url').val(url);
+         $('#thumbnail_image').attr('src', $('#app_url').val() + url);
+          window.KCFinder = null;
+      };
+      window.open('{{ URL::asset("public/admin/dist/js/kcfinder/browse.php?type=images") }}', 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+  }
+
     $(document).ready(function(){
+      
+      $('#btnUploadImage').click(function(){        
+        //('#file-image').click();
+        openKCFinder_singleFile();
+      }); 
       $('#name').change(function(){
          var name = $.trim( $(this).val() );
          

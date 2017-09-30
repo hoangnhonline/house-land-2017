@@ -34,6 +34,7 @@ class CateController extends Controller
 
     }   
     public function cateParent(Request $request){
+        $socialImage = null;
         $productArr = [];
         $cateList = (object) [];
         
@@ -58,17 +59,21 @@ class CateController extends Controller
             }
         if( $parentDetail->meta_id > 0){
            $seo = MetaData::find( $parentDetail->meta_id )->toArray();
+           if($parentDetail->image_url){
+                $socialImage = $parentDetail->image_url;
+           }
         }else{
             $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
         }  
         
-            return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo'));
+            return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo', 'socialImage'));
         }else{
             return redirect()->route('home');       
         }
         
     }
     public function cateChild(Request $request){
+        $socialImage = null;
         $productArr = [];
         $cateList = (object) [];
         $slugCateChild = $request->slugCateChild;
@@ -88,12 +93,15 @@ class CateController extends Controller
                                     ->paginate($settingArr['product_per_page']);
 			
             if( $cateDetail->meta_id > 0){
-               $seo = MetaData::find( $cateDetail->meta_id )->toArray();
+               $seo = MetaData::find( $cateDetail->meta_id )->toArray();               
+               if($cateDetail->image_url){
+                    $socialImage = $cateDetail->image_url;
+               }
             }else{
                 $seo['title'] = $seo['description'] = $seo['keywords'] = $cateDetail->name;
             }  
             $page = $request->page ? $request->page : 1;        
-            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page'));
+            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page','socialImage'));
             
         }else{
             return redirect()->route('home');   
