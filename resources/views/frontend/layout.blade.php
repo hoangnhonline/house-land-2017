@@ -33,9 +33,9 @@
     <meta name="twitter:image" content="{{ Helper::showImage($socialImage) }}" />
 	<link rel="icon" href="{{ URL::asset('public/assets/favicon.ico') }}" type="image/x-icon">
 	<!-- ===== Style CSS ===== -->
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/style.min.css') }}">
 	<!-- ===== Responsive CSS ===== -->
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/responsive.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/responsive.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/sweetalert2.min.css') }}"/>
   	<!-- HTML5 Shim and Respond.js" IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js" doesn't work if you view the page via file:// -->
@@ -237,30 +237,6 @@
 			});
 		});
 	</script>
-<style type="text/css">
-	.edit {  
-	position: relative;
-	border: 1px dashed transparent;
-	min-height: 20px;
-	}
-	.edit:hover {
-	border: 1px dashed #c70f19;\
-	}
-	.edit:hover:before {
-	content: "\f040";
-	font-family: "FontAwesome";
-	font-size: 13px;
-	color: #ffffff;
-	width: 20px;
-	height: 20px;
-	display: block;
-	background: #c70f19;
-	position: absolute;
-	top: 0;
-	right: 0;
-	cursor: pointer;
-	}
-</style>
 <div class="Recipepod">
  	<div itemscope itemtype="http://schema.org/Recipe">
 	    <span itemprop="name">@yield('title')</span>
