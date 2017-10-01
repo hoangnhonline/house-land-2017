@@ -65,6 +65,6 @@
         <i class="fa fa-angle-up" aria-hidden="true"></i>
     </a><!-- return to top -->
     <div class="block-hotline-mb" href="javascript:void(0)">
-            <p><a href="tel:{{ $settingArr['hotline'] }}">{{ $settingArr['hotline'] }}</p>
+            <p><a href="tel:{{ $settingArr['hotline'] }}">{{ $settingArr['hotline'] }}</a></p>
         </div><!-- return to top -->
     </footer><!-- footer -->
