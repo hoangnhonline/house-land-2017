@@ -41,8 +41,8 @@
 	<!-- WARNING: Respond.js" doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
 		<link href='css/animations-ie-fix.css' rel='stylesheet'>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js""></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js') }}"/1.4.2/respond.min.js""></script>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js') }}"/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body style="background-color: #fff;">
@@ -106,18 +106,18 @@
 	  </div>
 	</div>
 	<!-- ===== JS ===== -->
-	<script src="{{ URL::asset('public/assets/js/jquery.min.js') }}""></script>
+	<script src="{{ URL::asset('public/assets/js/jquery.min.js') }}"></script>
 	<!-- ===== JS Bootstrap ===== -->
-	<script src="{{ URL::asset('public/assets/lib/bootstrap/bootstrap.min.js') }}""></script>
+	<script src="{{ URL::asset('public/assets/lib/bootstrap/bootstrap.min.js') }}"></script>
 	<!-- carousel -->
-	<script src="{{ URL::asset('public/assets/lib/carousel/owl.carousel.min.js') }}""></script>
+	<script src="{{ URL::asset('public/assets/lib/carousel/owl.carousel.min.js') }}"></script>
 	<!-- sticky -->
-    <script src="{{ URL::asset('public/assets/lib/sticky/jquery.sticky.js') }}""></script>
+    <script src="{{ URL::asset('public/assets/lib/sticky/jquery.sticky.js') }}"></script>
     <!-- countUp -->    	
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 	<script src="{{ URL::asset('public/assets/lib/counterUp/jquery.counterup.min.js') }}"></script>
     <!-- Js Common -->
-	<script src="{{ URL::asset('public/assets/js/common.js') }}""></script>
+	<script src="{{ URL::asset('public/assets/js/common.js') }}"></script>
 	<script src="{{ URL::asset('public/assets/js/sweetalert2.min.js') }}"></script>
 	<script src="{{ URL::asset('public/assets/js/lazy.js') }}"></script>
     <input type="hidden" id="route-newsletter" value="{{ route('register.newsletter') }}">
