@@ -86,10 +86,14 @@ class DetailController extends Controller
             
         }else{
             $wCate = Cate::where('is_widget', 1)->first();
-            $widgetProduct = Product::where('product.slug', '<>', '')
+            if($wCate){
+                $widgetProduct = Product::where('product.slug', '<>', '')
                     ->where('product.cate_id', $wCate->id)                    
                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                     ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
+            }else{
+                $widgetProduct = (object) [];
+            }
         }
         $tagSelected = Product::getListTag($detail->id);
          $thongsoList = ThongSo::orderBy('display_order')->get();
