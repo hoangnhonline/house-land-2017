@@ -291,11 +291,11 @@ class ProductController extends Controller
 
                             Image::make($origin_img)->resize(354, null, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(354, 236)->save($new_img);
+                            })->crop(354, 236)->save($new_img, 70);
                         }else{
                             Image::make($origin_img)->resize(null, 236, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(354, 236)->save($new_img); 
+                            })->crop(354, 236)->save($new_img, 70);
                         }                                        
 
                         $imageArr['name'][] = $image_url;
