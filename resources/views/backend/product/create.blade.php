@@ -289,9 +289,16 @@ function openKCFinder_multipleFiles() {
       });
     });
     $(document).on('click', '.remove-image', function(){
-      if( confirm ("Bạn có chắc chắn không ?")){
-        $(this).parents('.col-md-3').remove();
-      }
+        var parent = $(this).parents('.col-md-3');
+        if(parent.find('input.thumb').prop('checked') == true){
+            alert('Chọn hình đại diện khác trước khi xóa.'); return true;
+        }else{
+            if( confirm ("Bạn có chắc chắn không ?")){        
+        
+                $(this).parents('.col-md-3').remove();
+            }
+
+        }
     });
     $(document).on('click', '#btnSaveTagAjax', function(){
         $.ajax({
