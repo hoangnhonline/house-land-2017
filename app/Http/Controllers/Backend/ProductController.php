@@ -282,8 +282,10 @@ class ProductController extends Controller
                         $w_img = $img->width();
                         $h_img = $img->height();
                         $tile1 = 354/236;        
-                        //dd('b', $origin_img);                  
-                        $new_img = str_replace('/uploads/images/', '/uploads/images/thumbs/', $origin_img);
+                        //dd('b', $origin_img);  
+                        $tmpArrImg = explode('/', $origin_img);
+                        
+                        $new_img = config('houseland.upload_thumbs_path').end($tmpArrImg);
                        
                         if($w_img/$h_img <= $tile1){
 

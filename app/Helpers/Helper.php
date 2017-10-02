@@ -191,8 +191,10 @@ class Helper
     }
     public static function showImageThumb($image_url, $object_type = 1, $folder = ''){             
         // type = 1 : original 2 : thumbs
-        //object_type = 1 : product, 2 :article  3: project 
-         $image_url = str_replace('/uploads/images/', '/uploads/images/thumbs/', $image_url);            
+        //object_type = 1 : product, 2 :article  3: project          
+        $tmpArrImg = explode('/', $image_url);
+                        
+        $image_url = config('houseland.upload_url_thumbs').end($tmpArrImg);           
         if(strpos($image_url, 'http') === false){
             if($object_type == 1){
                 return env('APP_URL') . $folder. $image_url;

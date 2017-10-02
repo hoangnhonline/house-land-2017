@@ -13,6 +13,7 @@ return [
     'upload_thumbs_path_articles' => public_path() . '/uploads/images/thumbs/articles/', // media_upload_path  
     'upload_thumbs_path_cate' => public_path() . '/uploads/images/thumbs/cate/', // media_upload_path  
     'upload_url' => config('app.url') . '/public/uploads/images/', // image path,
+    'upload_url_thumbs' => config('app.url') . '/public/uploads/images/thumbs/', // image path,
     'max_size_upload' => 8000000    
 ];
 
