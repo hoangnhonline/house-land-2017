@@ -364,15 +364,7 @@ function openKCFinder_multipleFiles() {
                 return false;
               }
               if( $('#div-image img.img-thumbnail').length == 0){
-                if(confirm('Bạn chưa upload hình sản phẩm. Vẫn tiếp tục lưu ?')){
-                  return true;
-                }else{
-                  $('html, body').animate({
-                      scrollTop: $("#dataForm").offset().top
-                  }, 500);
-                  $('a[href="#settings"]').click();            
-                   return false;
-                }
+                alert('Bạn chưa upload hình sản phẩm');return false;
               }
             });
           $('#type').change(function(){

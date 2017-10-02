@@ -363,10 +363,16 @@ function openKCFinder_multipleFiles() {
          
         });
     $(document).on('click', '.remove-image', function(){
-    
-      if( confirm ("Bạn có chắc chắn không ?")){
-        $(this).parents('.col-md-3').remove();
-      }
+        var parent = $(this).parents('.col-md-3');
+        if(parent.find('input.thumb').prop('checked') == true){
+            alert('Chọn hình đại diện khác trước khi xóa.'); return true;
+        }else{
+            if( confirm ("Bạn có chắc chắn không ?")){        
+        
+                $(this).parents('.col-md-3').remove();
+            }
+
+        }
     });
     
     $(document).on('click', '#btnSearchAjax', function(){
@@ -405,15 +411,7 @@ function openKCFinder_multipleFiles() {
                 return false;
               }
               if( $('#div-image img.img-thumbnail').length == 0){
-                if(confirm('Bạn chưa upload hình sản phẩm. Vẫn tiếp tục lưu ?')){
-                  return true;
-                }else{
-                  $('html, body').animate({
-                      scrollTop: $("#dataForm").offset().top
-                  }, 500);
-                  $('a[href="#settings"]').click();            
-                   return false;
-                }
+                alert('Bạn chưa upload hình sản phẩm');return false;
               }
             });
           $('#type').change(function(){
