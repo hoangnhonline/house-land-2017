@@ -313,7 +313,27 @@ class ProductController extends Controller
                             Image::make($origin_img)->resize(null, 117, function ($constraint) {
                                     $constraint->aspectRatio();
                             })->crop(175, 117)->save($new_img);
-                        }                                       
+                        }               
+
+
+                        $tile3 = 231/154;        
+                        //dd('b', $origin_img);  
+                        $tmpArrImg = explode('/', $origin_img);
+                        
+                        $new_img = config('houseland.upload_thumbs_path_3').end($tmpArrImg);
+                       
+                        if($w_img/$h_img <= $tile3){
+
+                            Image::make($origin_img)->resize(231, null, function ($constraint) {
+                                    $constraint->aspectRatio();
+                            })->crop(231, 154)->save($new_img);
+                        }else{
+                            Image::make($origin_img)->resize(null, 154, function ($constraint) {
+                                    $constraint->aspectRatio();
+                            })->crop(231, 154)->save($new_img);
+                        }                  
+
+
 
                         $imageArr['name'][] = $image_url;
                         
