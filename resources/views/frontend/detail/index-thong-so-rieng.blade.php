@@ -162,7 +162,7 @@
 			  	@foreach($otherList as $product)
 			  	<li class="item">
 			  		<div class="thumb">
-						<a href="{{ route('product', [$product->slug, $product->id ])}}"><img src="{{ $product->image_url ? Helper::showImageThumb2($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
+						<a href="{{ route('product', [$product->slug, $product->id ])}}"><img src="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
 					</div>
 					<div class="des">
 						<p class="code"><span>Mã sản phẩm: </span>{!! $product->code !!}</p>
