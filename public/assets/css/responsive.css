@@ -368,6 +368,10 @@
 [Styles for devices max 480px
 */
 @media (max-width: 480px) {
+  .owl-carousel .owl-item img{
+    margin: 0 auto !important;
+    width: unset !important;    
+  }
   .block-header-bottom {
     padding: 20px 0;
   }
@@ -382,9 +386,6 @@
     width: 45%;
     padding: 25px 15px 10px;
     text-align: center;
-  }
-  .block-ct-news .thumb img {
-    margin: 0 auto;
   }
   .block-info i {
     margin-right: 0;
@@ -432,7 +433,8 @@
 	  width: 100%;
   }
   .block-repadding .box-item .item img {
-    margin: 0 auto;    
+    margin: 0 auto;
+    width: 100%;
   }
   .block-number h3 span:before,
   .block-number h3 span:after {
@@ -450,9 +452,6 @@
   }
   .block-info .hotline {
     margin-bottom: 25px;
-  }
-  .block-ct-news .thumb img {
-    margin: 0 auto;
   }
 }
 
@@ -480,8 +479,5 @@
   }
   .block-search .input-serach {
     width: 86%;
-  }
-  .block-ct-news .thumb img {
-    margin: 0 auto;
   }
 }
