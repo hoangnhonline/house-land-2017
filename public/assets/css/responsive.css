@@ -308,6 +308,10 @@
 [Styles for devices max 767px
 */
 @media (max-width: 767px) {
+  .owl-carousel .owl-item img{
+    margin: 0 auto !important;
+    width: unset !important;    
+  }
   .block-news .block-news-left,
   .block-news .block-news-right {
     width: 50%;
