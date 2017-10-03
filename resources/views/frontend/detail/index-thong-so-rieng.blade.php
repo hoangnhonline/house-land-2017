@@ -37,7 +37,7 @@
 							<ul class="slides">
 								<?php $i = 0; ?>
 								@foreach( $hinhArr as $hinh )							
-								<li><img src="{{ Helper::showImageThumb($hinh['image_url']) }}" alt="{!! $detail->title !!}" /></li>
+								<li><img src="{{ Helper::showImageThumb2($hinh['image_url']) }}" alt="{!! $detail->title !!}" /></li>
 								<?php $i++; ?>
 								@endforeach
 							</ul>

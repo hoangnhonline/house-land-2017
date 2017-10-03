@@ -281,7 +281,7 @@ class ProductController extends Controller
                         $img = Image::make($origin_img);
                         $w_img = $img->width();
                         $h_img = $img->height();
-                        $tile1 = 472/315;        
+                        $tile1 = 370/247;        
                         //dd('b', $origin_img);  
                         $tmpArrImg = explode('/', $origin_img);
                         
@@ -289,14 +289,31 @@ class ProductController extends Controller
                        
                         if($w_img/$h_img <= $tile1){
 
-                            Image::make($origin_img)->resize(472, null, function ($constraint) {
+                            Image::make($origin_img)->resize(370, null, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(472, 315)->save($new_img);
+                            })->crop(370, 247)->save($new_img);
                         }else{
-                            Image::make($origin_img)->resize(null, 315, function ($constraint) {
+                            Image::make($origin_img)->resize(null, 247, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(472, 315)->save($new_img);
-                        }                                        
+                            })->crop(370, 247)->save($new_img);
+                        }   
+
+                        $tile2 = 175/117;        
+                        //dd('b', $origin_img);  
+                        $tmpArrImg = explode('/', $origin_img);
+                        
+                        $new_img = config('houseland.upload_thumbs_path_2').end($tmpArrImg);
+                       
+                        if($w_img/$h_img <= $tile2){
+
+                            Image::make($origin_img)->resize(175, null, function ($constraint) {
+                                    $constraint->aspectRatio();
+                            })->crop(175, 117)->save($new_img);
+                        }else{
+                            Image::make($origin_img)->resize(null, 117, function ($constraint) {
+                                    $constraint->aspectRatio();
+                            })->crop(175, 117)->save($new_img);
+                        }                                       
 
                         $imageArr['name'][] = $image_url;
                         

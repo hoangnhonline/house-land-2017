@@ -208,6 +208,25 @@ class Helper
         }
         
     }
+    public static function showImageThumb2($image_url, $object_type = 1, $folder = ''){             
+        // type = 1 : original 2 : thumbs
+        //object_type = 1 : product, 2 :article  3: project          
+        $tmpArrImg = explode('/', $image_url);
+                        
+        $image_url = config('houseland.upload_url_thumbs_2').end($tmpArrImg);           
+        if(strpos($image_url, 'http') === false){
+            if($object_type == 1){
+                return env('APP_URL') . $folder. $image_url;
+            }elseif($object_type == 2){
+                return env('APP_URL') . $folder. $image_url;
+            }else{
+                return env('APP_URL') . $folder. $image_url;
+            }    
+        }else{
+            return $image_url;
+        }
+        
+    }
     public static function seo(){
         $seo = [];
         $arrTmpSeo = DB::table('info_seo')->get();
