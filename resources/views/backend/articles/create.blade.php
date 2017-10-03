@@ -67,8 +67,7 @@
                   <div class="col-md-9">
                     <img id="thumbnail_image" src="{{ old('image_url') ? Helper::showImage(old('image_url')) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="145" height="85">
                     
-                    <input type="file" id="file-image" style="display:none" />
-                    <input type="hidden" name="image_url" id="image_url">
+                    <input type="file" id="file-image" style="display:none" />                    
                     <button class="btn btn-default btn-sm" id="btnUploadImage" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
                     <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>
                   </div>
