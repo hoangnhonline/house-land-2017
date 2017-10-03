@@ -339,6 +339,10 @@
 [Styles for devices max 600px
 */
 @media (max-width: 600px) {
+  .owl-carousel .owl-item img{
+    margin: 0 auto !important;
+    width: unset !important;    
+  }
   .block-ct-news .item {
     margin-bottom: 15px;
     padding-bottom: 15px;
