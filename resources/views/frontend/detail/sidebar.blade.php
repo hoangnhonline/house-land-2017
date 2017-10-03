@@ -12,7 +12,7 @@
             @foreach($otherList as $product)
             <li class="item">
               <div class="thumb">
-                <a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
+                <a href="{{ route('product', [$product->slug, $product->id ])}}"><img src="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
               </div>
               <div class="description">
                 <h2>{!! $product->title !!}</h2>
@@ -34,7 +34,7 @@
             @foreach($widgetProduct as $product)
             <li class="item">
               <div class="thumb">
-                <a href="{{ route('product', [$product->slug, $product->id ])}}"><img class="lazy" data-original="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
+                <a href="{{ route('product', [$product->slug, $product->id ])}}"><img src="{{ $product->image_url ? Helper::showImageThumb($product->image_url) : URL::asset('public/assets/images/no-img.png') }}" alt="{!! $product->title !!}"></a>
               </div>
               <div class="description">
                 <h2>{!! $product->title !!}</h2>
