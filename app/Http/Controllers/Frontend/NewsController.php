@@ -30,7 +30,7 @@ class NewsController extends Controller
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $articlesArr = Articles::where('cate_id', $cateDetail->id)->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->paginate($settingArr['articles_per_page']);
 
-        $hotArr = Articles::where( ['cate_id' => $cateDetail->id, 'is_hot' => 1] )->orderBy('id', 'desc')->limit(5)->get();
+        $hotArr = Articles::where( ['cate_id' => $cateDetail->id, 'is_hot' => 1] )->where('status', 1)->orderBy('id', 'desc')->limit(5)->get();
         $seo['title'] = $cateDetail->meta_title ? $cateDetail->meta_title : $cateDetail->title;
         $seo['description'] = $cateDetail->meta_description ? $cateDetail->meta_description : $cateDetail->title;
         $seo['keywords'] = $cateDetail->meta_keywords ? $cateDetail->meta_keywords : $cateDetail->title;
@@ -42,7 +42,7 @@ class NewsController extends Controller
         $wParent = CateParent::where('is_widget', 1)->first();
         if($wParent){
 
-            $widgetProduct = Product::where('product.slug', '<>', '')
+            $widgetProduct = Product::where('product.slug', '<>', '')->where('status', 1)
                     ->where('product.parent_id', $wParent->id)                    
                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                     ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
@@ -50,7 +50,7 @@ class NewsController extends Controller
         }else{
             $wCate = Cate::where('is_widget', 1)->first();
             if($wCate){
-                $widgetProduct = Product::where('product.slug', '<>', '')
+                $widgetProduct = Product::where('product.slug', '<>', '')->where('status', 1)
                     ->where('product.cate_id', $wCate->id)                    
                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                     ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
@@ -89,7 +89,7 @@ class NewsController extends Controller
                     $wParent = CateParent::where('is_widget', 1)->first();
                     if($wParent){
 
-                        $widgetProduct = Product::where('product.slug', '<>', '')
+                        $widgetProduct = Product::where('product.slug', '<>', '')->where('status', 1)
                                 ->where('product.parent_id', $wParent->id)                    
                                 ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                                 ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
@@ -97,7 +97,7 @@ class NewsController extends Controller
                     }else{
                         $wCate = Cate::where('is_widget', 1)->first();
                         if($wCate){
-                            $widgetProduct = Product::where('product.slug', '<>', '')
+                            $widgetProduct = Product::where('product.slug', '<>', '')->where('status', 1)
                                 ->where('product.cate_id', $wCate->id)                    
                                 ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                                 ->select('product_img.image_url as image_url', 'product.*')->orderBy('is_hot', 'desc')->orderBy('id', 'desc')->limit($settingArr['product_widget'])->get();
