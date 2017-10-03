@@ -46,7 +46,7 @@ class CateController extends Controller
 
         if($parentDetail){
             $parent_id = $parentDetail->id;
-            $cateList = Cate::where('parent_id', $parent_id)->orderBy('display_order')->get();
+            $cateList = Cate::where('parent_id', $parent_id)->where('status', 1)->orderBy('display_order')->get();
             if($cateList){
                 foreach($cateList as $cate){
                     $productArr[$cate->id] = Product::where('cate_id', $cate->id)
@@ -85,7 +85,7 @@ class CateController extends Controller
         if($cateDetail){
             $cate_id = $cateDetail->id;
             $settingArr = Settings::whereRaw('1')->lists('value', 'name');
-            $productList = Product::where('cate_id', $cate_id)
+            $productList = Product::where('cate_id', $cate_id)->where('status', 1)
                                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                                     ->select('product_img.image_url', 'product.*')   
                                     ->orderBy('product.is_hot', 'desc')     
@@ -106,46 +106,6 @@ class CateController extends Controller
         }else{
             return redirect()->route('home');   
         }
-    }
-    
-
-    public function cate(Request $request)
-    {
-
-        $productArr = [];
-        $slugEstateType = $request->slugEstateType;
-        $slug = $request->slug;
-        $rs = EstateType::where('slug', $slugEstateType)->first();
-        if(!$rs){
-            return redirect()->route('home');
-        }
-        $estate_type_id = $rs->id;
-        $rsCate = Cate::where(['estate_type_id' => $estate_type_id, 'slug' => $slug])->first();
-        $cate_id = $rsCate->id;
-
-        $cateArr = Cate::where('status', 1)->where('estate_type_id', $estate_type_id)->get();
-
-        
-        $query = SanPham::where('cate_id', $rsCate->id)->where('estate_type_id', $estate_type_id)->where('so_luong_ton', '>', 0)->where('price', '>', 0)
-                ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
-                ->leftJoin('sp_thuoctinh', 'sp_thuoctinh.sp_id', '=','product.id')
-                ->select('product_img.image_url', 'product.*', 'thuoc_tinh');
-                    if($rs->price_sort == 0){
-                        $query->where('price', '>', 0)->orderBy('product.price', 'asc');
-                    }else{
-                        $query->where('price', '>', 0)->orderBy('product.price', 'desc');
-                    }
-                $query->orderBy('product.id', 'desc');
-                $productArr = $query->paginate(24);
-        $hoverInfo = HoverInfo::where('estate_type_id', $rs->id)->orderBy('display_order', 'asc')->orderBy('id', 'asc')->get();  
-        $socialImage = $rsCate->icon_url;
-        if( $rsCate->meta_id > 0){            
-           $seo = MetaData::find( $rsCate->meta_id )->toArray();           
-        }else{
-            $seo['title'] = $seo['description'] = $seo['keywords'] = $rsCate->name;
-        }
-        
-        return view('frontend.cate.child', compact('productArr', 'cateArr', 'rs', 'rsCate', 'hoverInfo', 'socialImage', 'seo'));
-    }    
+    }   
     
 }
