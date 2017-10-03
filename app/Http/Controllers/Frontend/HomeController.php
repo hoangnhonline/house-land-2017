@@ -133,7 +133,7 @@ class HomeController extends Controller
     }
 
     public function services(Request $request){
-        $servicesList = Articles::where('cate_id', 7)->orderBy('display_order')->orderBy('id')->get();
+        $servicesList = Articles::where('cate_id', 7)->where('status', 1)->orderBy('display_order')->orderBy('id')->get();
         
         $seo['title'] =  $seo['description'] = $seo['keywords'] = "Dịch vụ";           
 
