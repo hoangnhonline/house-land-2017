@@ -62,7 +62,7 @@ class HomeController extends Controller
         
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
 
-        $articlesCateHot = ArticlesCate::where('is_hot', 1)->orderBy('display_order')->get();
+        $articlesCateHot = ArticlesCate::where('is_hot', 1)->where('status', 1)->orderBy('display_order')->get();
         foreach($articlesCateHot as $cateHot){
             $articlesArr[$cateHot->id] = Articles::where('status', 1)
                                     ->where('cate_id', $cateHot->id)
