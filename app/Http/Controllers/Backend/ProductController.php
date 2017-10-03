@@ -281,7 +281,7 @@ class ProductController extends Controller
                         $img = Image::make($origin_img);
                         $w_img = $img->width();
                         $h_img = $img->height();
-                        $tile1 = 354/236;        
+                        $tile1 = 472/315;        
                         //dd('b', $origin_img);  
                         $tmpArrImg = explode('/', $origin_img);
                         
@@ -289,13 +289,13 @@ class ProductController extends Controller
                        
                         if($w_img/$h_img <= $tile1){
 
-                            Image::make($origin_img)->resize(354, null, function ($constraint) {
+                            Image::make($origin_img)->resize(472, null, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(354, 236)->save($new_img);
+                            })->crop(472, 315)->save($new_img);
                         }else{
-                            Image::make($origin_img)->resize(null, 236, function ($constraint) {
+                            Image::make($origin_img)->resize(null, 315, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(354, 236)->save($new_img);
+                            })->crop(472, 315)->save($new_img);
                         }                                        
 
                         $imageArr['name'][] = $image_url;
