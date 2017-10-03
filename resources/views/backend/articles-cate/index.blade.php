@@ -49,8 +49,11 @@
                 <td>                  
                   <a href="{{ route( 'articles-cate.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a>
                   
-                 @if( $item->is_hot == 1 )
+                  @if( $item->is_hot == 1 )
                   <label class="label label-danger">HOT</label>
+                  @endif
+                  @if( $item->status == 0 )
+                  <label class="label label-warning">Ẩn</label>
                   @endif
 
                   <p>{{ $item->description }}</p>

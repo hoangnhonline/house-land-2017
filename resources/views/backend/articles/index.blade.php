@@ -80,6 +80,9 @@
                   @if( $item->is_hot == 1 )
                   <label class="label label-danger">HOT</label>
                   @endif
+                  @if( $item->status == 0 )
+                  <label class="label label-warning">Ẩn</label>
+                  @endif
                   <div class="block-author">
                       <ul>
                         <li>

@@ -87,6 +87,9 @@
                                           @if($item->is_widget == 1)
                                           <label class="label label-primary">WIDGET</label>
                                           @endif
+                                          @if( $item->status == 0 )
+                                          <label class="label label-warning">Ẩn</label>
+                                          @endif
                                         <p>{{ $item->description }}</p>
                                     </td>                                   
                                     <td style="white-space:nowrap; text-align:right">
