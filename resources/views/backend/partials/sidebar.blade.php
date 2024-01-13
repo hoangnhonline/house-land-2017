@@ -137,8 +137,8 @@
         <ul class="treeview-menu">
           @if(Auth::user()->role == 3)
         
-          <li {{ \Request::route()->getName() == "settings.index" ? "class=active" : "" }}><a href="{{ route('settings.index') }}"><i class="fa fa-circle-o"></i> Thông tin houseland</a></li>
-          <li><a target="_blank" href="{{ route('rss') }}"><i class="fa fa-circle-o"></i> RSS</a></li>
+          <li {{ \Request::route()->getName() == "settings.index" ? "class=active" : "" }}><a href="{{ route('settings.index') }}"><i class="fa fa-circle-o"></i> Thông tin</a></li>
+          <!-- <li><a target="_blank" href="{{ route('rss') }}"><i class="fa fa-circle-o"></i> RSS</a></li> -->
           <li {{ (in_array(\Request::route()->getName(), ['custom-link.edit', 'custom-link.index', 'custom-link.create']) && isset($block_id) && $block_id == 1 )? "class=active" : "" }}>
             <a href="{{ route('custom-link.index', ['block_id' => 1 ]) }}">
               <i class="fa fa-circle-o"></i>
