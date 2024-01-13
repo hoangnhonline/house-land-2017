@@ -33,7 +33,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-xs-12 block-logo">
 					<a href="{{ route('home') }}" title="Logo Kiến Gia An">
-						<img height="90" src="{{ Helper::showImage($settingArr['logo']) }}" alt="Logo Kiến Gia An">
+						<img src="{{ Helper::showImage($settingArr['logo']) }}" alt="Logo Kiến Gia An" style="height: 90px">
 					</a>
 				</div><!-- /block-logo -->
 				<div class="col-sm-6 col-xs-12 block-info">
