@@ -31,7 +31,7 @@
     <meta name="twitter:description" content="@yield('site_description')" />
     <meta name="twitter:title" content="@yield('title')" />     
     <meta name="twitter:image" content="{{ Helper::showImage($socialImage) }}" />
-	<link rel="icon" href="{{ URL::asset('public/assets/favicon.ico') }}" type="image/x-icon">
+	<link rel="icon" href="{{ URL::asset('public/assets/images/favicon.png') }}" type="image/x-icon">
 	<!-- ===== Style CSS ===== -->
 	<link rel="stylesheet" type="text/css" href="{{ URL::asset('public/assets/css/style.min.css') }}">
 	<!-- ===== Responsive CSS ===== -->
