@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
     <meta name="google-site-verification" content="IFz-d9V8jZLB1iDG8BfKsKwhPB-FkpsacHLqk5Mpyzk" />
     <meta name="wot-verification" content="b5ae556432dab929c4bb"/>
-    <meta property="article:author" content="https://www.facebook.com/HOUSELAND"/>
+    <meta property="article:author" content="https://www.facebook.com/kiengiaan"/>
    
     <link rel="canonical" href="{{ url()->current() }}"/>        
     <meta property="og:locale" content="vi_VN" />
@@ -23,7 +23,7 @@
     <meta property="og:title" content="@yield('title')" />
     <meta property="og:description" content="@yield('site_description')" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:site_name" content="HOUSELAND.vn" />
+    <meta property="og:site_name" content="kiengiaan.vn" />
     <?php $socialImage = isset($socialImage) ? $socialImage : $settingArr['banner']; ?>
     <meta property="og:image" content="{{ Helper::showImage($socialImage) }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />

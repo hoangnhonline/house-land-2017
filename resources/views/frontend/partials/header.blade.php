@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-xs-12 block-intro">
-					<p>Chào mừng bạn đến với bất động sản Houseland!</p>
+					<p>Chào mừng bạn đến với Kiến Gia An!</p>
 				</div><!-- /block-intro -->
 				<div class="col-sm-6 col-xs-12 block-search">
 					<div class="block-search-inner clearfix">
@@ -32,8 +32,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-xs-12 block-logo">
-					<a href="{{ route('home') }}" title="Logo">
-						<img src="{{ Helper::showImage($settingArr['logo']) }}" alt="Logo Houseland">
+					<a href="{{ route('home') }}" title="Logo Kiến Gia An">
+						<img height="90" src="{{ Helper::showImage($settingArr['logo']) }}" alt="Logo Kiến Gia An">
 					</a>
 				</div><!-- /block-logo -->
 				<div class="col-sm-6 col-xs-12 block-info">
@@ -104,7 +104,7 @@
 							<div class="block-search-inner clearfix">
 								<form class="form-inline" action="{{ route('search') }}" method="GET">
 						            <div class="form-group input-serach">
-										<input type="text" class="txtSearch" value="{!! isset($tu_khoa) ? $tu_khoa : "" !!}" name="keyword"  placeholder="Từ khóa bạn cần tìm...">
+										<input type="text" class="txtSearch" value="{!! isset($tu_khoa) ? $tu_khoa : "" !!}" name="keyword" autocomplete="off" placeholder="Từ khóa bạn cần tìm...">
 						            </div><!-- /input-serach -->
 						            <div class="form-group select-choice">
 						            	<div class="form-group form-category">
