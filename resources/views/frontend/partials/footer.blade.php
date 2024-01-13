@@ -53,14 +53,7 @@
             </div>
         </div>
     </div><!-- /footer-top-->
-    <div class="footer-bot">
-        <div class="container">            
-            <div class="fbchatbox hidden-xs">
-                <div class="fb-page fb-page1" data-href="{{ $settingArr['facebook_fanpage'] }}" data-small-header="true" data-adapt-container-width="false" data-height="300" data-width="300" data-hide-cover="true" data-show-facepile="true" data-show-posts="false" data-tabs="messages"><div class="fb-xfbml-parse-ignore"></div></div>
-                <span id="closefbchat" style="white-space: nowrap; position: absolute; right: 2px; bottom: 0px; padding: 5px 25px; background: #f46602; color: rgb(255, 255, 255); cursor: pointer; border-radius: 4px 4px 0 0;">Tắt Chat</span>
-            </div>       
-        </div>
-    </div><!-- /footer-bot-->
+   
     <a id="return-to-top" class="td-scroll-up" href="javascript:void(0)">
         <i class="fa fa-angle-up" aria-hidden="true"></i>
     </a><!-- return to top -->
