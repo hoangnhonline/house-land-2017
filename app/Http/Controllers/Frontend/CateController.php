@@ -84,6 +84,7 @@ class CateController extends Controller
         $cateDetail = Cate::where('slug', $slugCateChild)->first();
         if($cateDetail){
             $cate_id = $cateDetail->id;
+            $parent_id = $cateDetail->parent_id;
             $settingArr = Settings::whereRaw('1')->lists('value', 'name');
             $productList = Product::where('cate_id', $cate_id)->where('status', 1)
                                     ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
